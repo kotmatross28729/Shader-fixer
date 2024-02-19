@@ -1,0 +1,31 @@
+{
+  "required": true,
+  "minVersion": "0.8.5-GTNH",
+  "package": "com.kotmatross.fixer.mixins",
+  "plugin": "com.kotmatross.fixer.asm.OptimizedMixinPlugin",
+  "refmap": "mixins.fixer.refmap.json",
+  "target": "@env(DEFAULT)",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [],
+  "client": [
+    "client.FiskHeroes.MixinBeamRendererLightning",
+    "client.FiskHeroes.MixinBeamRendererLine",
+    "client.FiskHeroes.MixinBulletProjectileRenderer",
+    "client.FiskHeroes.MixinEffectTentacles",
+    "client.FiskHeroes.MixinEntitySHSpellWaveFX",
+    "client.FiskHeroes.MixinProjectileRenderHandler",
+    "client.FiskHeroes.MixinRenderEarthCrack",
+    "client.FiskHeroes.MixinRenderEnergyBolt",
+    "client.FiskHeroes.MixinRenderGrappleRope",
+    "client.FiskHeroes.MixinRenderGrapplingHook",
+    "client.FiskHeroes.MixinRenderGravityWave",
+    "client.FiskHeroes.MixinRenderSonicWave",
+    "client.FiskHeroes.MixinRenderSpellWhip",
+    "client.FiskHeroes.MixinRenderSuitFabricator",
+    "client.FiskHeroes.MixinShapeFormatCircles",
+    "client.FiskHeroes.MixinShapeFormatLines",
+    "client.FiskHeroes.MixinShapeFormatWireframe",
+    "client.FiskHeroes.MixinSHRenderHooks"
+  ],
+  "server": []
+}
