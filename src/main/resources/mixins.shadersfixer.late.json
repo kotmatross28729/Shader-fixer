@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8.5-GTNH",
-  "package": "com.kotmatross.shadersfixer.mixins",
+  "package": "com.kotmatross.shadersfixer.mixins.late",
   "refmap": "mixins.shadersfixer.refmap.json",
   "target": "@env(DEFAULT)",
   "compatibilityLevel": "JAVA_8",
