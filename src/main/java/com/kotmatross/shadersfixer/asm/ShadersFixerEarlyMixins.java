@@ -40,6 +40,18 @@ public class ShadersFixerEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLo
                 ShadersFixer.logger.info("Integrating MixinRenderFish...");
                 mixins.add("client.minecraft.client.renderer.entity.MixinRenderFish");
             }
+            if(ShaderFixerConfig.FixMinecraftLeashRender) {
+                ShadersFixer.logger.info("Integrating MixinRenderLiving...");
+                mixins.add("client.minecraft.client.renderer.entity.MixinRenderLiving");
+            }
+            if(ShaderFixerConfig.FixMinecraftEnderdragonDeathEffectsRender) {
+                ShadersFixer.logger.info("Integrating MixinRenderDragon...");
+                mixins.add("client.minecraft.client.renderer.entity.MixinRenderDragon");
+            }
+            if(ShaderFixerConfig.FixMinecraftLightningBoltRender) {
+                ShadersFixer.logger.info("Integrating MixinRenderLightningBolt...");
+                mixins.add("client.minecraft.client.renderer.entity.MixinRenderLightningBolt");
+            }
         }
 
         return mixins;

@@ -5,12 +5,12 @@
 A mod that adds more compatibility with shaders.
 ### For now, it fixes:
 + **1) all bugs with shaders in Fisk Superheroes mod**
-+ **2) some vanilla bugs with minecraft (fishing line, hitbox rendering (F3+B), more is possible in the future)**
++ **2) some vanilla bugs with minecraft (fishing line, hitbox rendering (F3+B), lightning bolt, and some others)**
 
 
 ## TODO?
 #### 1) more shaders fixes for closed source mods (but find them first)
-#### 2) more shaders fixes for vanilla minecraft (but find them first too)
+#### ~~2) more shaders fixes for vanilla minecraft~~ **Done in 1.3**
 
 # Credits:
 
