@@ -7,6 +7,22 @@ A mod that adds more compatibility with shaders.
 + **1) all bugs with shaders in Fisk Superheroes mod**
 + **2) some vanilla bugs with minecraft (fishing line, hitbox rendering (F3+B), lightning bolt, and some others)**
 
+ <details>
+
+ <summary>Some demonstrations of fixes:</summary>
+
+![Fisk Superheroes Fix](https://github.com/kotmatross28729/Shader-fixer/assets/110309314/42952fa3-8744-4df0-a60b-0baae7e30057)
+![Fisk Superheroes Fix 2](https://github.com/kotmatross28729/Shader-fixer/assets/110309314/404cd29f-9a25-4ea1-b5f7-d51d446b8cb7)
+![fishing line fix](https://github.com/kotmatross28729/Shader-fixer/assets/110309314/a2b03df7-aa67-49b9-915f-28f52ea75877)
+![hitboxes fix](https://github.com/kotmatross28729/Shader-fixer/assets/110309314/0b2616eb-b473-4c78-b977-ce093e7bda00)
+![leash line fix](https://github.com/kotmatross28729/Shader-fixer/assets/110309314/4532c38b-a2b8-41c7-82d0-a86da8225df1)
+![lightning bolt fix 2](https://github.com/kotmatross28729/Shader-fixer/assets/110309314/9dffa4e7-4561-47d2-b2f0-14dba3507b9b)
+![lightning bolt fix](https://github.com/kotmatross28729/Shader-fixer/assets/110309314/59728e9c-6c39-4d66-a524-10443105bbaf)
+![ender dragon death effects fix day](https://github.com/kotmatross28729/Shader-fixer/assets/110309314/ac979179-3d1d-4bd1-b516-47da62bfd621)
+![ender dragon death effects fix](https://github.com/kotmatross28729/Shader-fixer/assets/110309314/0d476068-cb99-4700-8821-15a1645c3599)
+
+ </details>
+ 
 
 ## TODO?
 #### 1) more shaders fixes for closed source mods (but find them first)
