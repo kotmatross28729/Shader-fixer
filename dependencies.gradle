@@ -34,8 +34,11 @@
  * For more details, see https://docs.gradle.org/8.0.1/userguide/java_library_plugin.html#sec:java_library_configurations_graph
  */
 dependencies {
+    compileOnly name: 'NotEnoughItems-2.5.21-GTNH-dev'
+    compileOnly name: 'CodeChickenCore-1.2.1-dev'
+    compileOnly name: 'CodeChickenCore-1.2.1-dev'
     compileOnly name: 'lombok'
-    implementation name: 'FiskHeroes-1.7.10-2.3.1'
+    compileOnly name: 'FiskHeroes-1.7.10-2.3.1'
 
     compileOnly fileTree(dir: 'libs', include: '*.jar')
     compileOnly fileTree(dir: 'libs', include: '*.zip')

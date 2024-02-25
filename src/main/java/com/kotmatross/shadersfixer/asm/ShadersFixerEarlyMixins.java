@@ -52,6 +52,12 @@ public class ShadersFixerEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLo
                 ShadersFixer.logger.info("Integrating MixinRenderLightningBolt...");
                 mixins.add("client.minecraft.client.renderer.entity.MixinRenderLightningBolt");
             }
+            if(ShaderFixerConfig.FixMinecraftNameTagsRender) {
+                ShadersFixer.logger.info("Integrating MixinRender...");
+                mixins.add("client.minecraft.client.renderer.entity.MixinRender");
+                ShadersFixer.logger.info("Integrating MixinRendererLivingEntity...");
+                mixins.add("client.minecraft.client.renderer.entity.MixinRendererLivingEntity");
+            }
         }
 
         return mixins;
