@@ -11,6 +11,10 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Slice;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import javax.vecmath.Point3f;
 
@@ -18,47 +22,16 @@ import static com.kotmatross.shadersfixer.utils.shaders_fix;
 
 @Mixin(value = ProjectileRenderHandler.class, priority = 999)
 public abstract class MixinProjectileRenderHandler {
-    @Shadow
-    @Final
-    private Minecraft mc;
-
-    @Shadow
-    @Final
-    private ICamera camera;
-
-    /**
-     * @author kotmatross
-     * @reason yes
-     */
-    @Overwrite(remap = false)
-    private void renderTrail(ProjectileTrail trail) {
-        if (this.camera.isBoundingBoxInFrustum(trail.computeRenderBounds())) {
-            Tessellator tessellator = Tessellator.instance;
-                int i = trail.getBrightnessForRender(this.mc.theWorld, trail.origin);
-            float a = Math.max((1.0F - trail.getProgress()) * 0.5F, 0.0F);
-            float gs = 0.5F;
-            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)(i % 65536), (float)i / 65536.0F);
-            tessellator.startDrawingQuads();
-            Minecraft.getMinecraft().renderEngine.bindTexture(shaders_fix);
-            tessellator.setTranslation(trail.origin.xCoord - TileEntityRendererDispatcher.staticPlayerX, trail.origin.yCoord - TileEntityRendererDispatcher.staticPlayerY, trail.origin.zCoord - TileEntityRendererDispatcher.staticPlayerZ);
-            tessellator.setColorRGBA_F(gs, gs, gs, a);
-            Point3f[][] var6 = trail.vertices;
-            int var7 = var6.length;
-
-            for(int var8 = 0; var8 < var7; ++var8) {
-                Point3f[] ap = var6[var8];
-                Point3f[] var10 = ap;
-                int var11 = ap.length;
-
-                for(int var12 = 0; var12 < var11; ++var12) {
-                    Point3f p = var10[var12];
-                        tessellator.addVertex((double)p.x, (double)p.y, (double)p.z);
-                }
-            }
-
-            tessellator.draw();
-            tessellator.setTranslation(0.0, 0.0, 0.0);
-        }
-
+    @Inject(method = "renderTrail",
+        slice = @Slice(from = @At(value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
+            ordinal = 0),
+            to = @At(value = "INVOKE",
+                target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
+                ordinal = 0)),
+        at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
+    private void renderTrail(ProjectileTrail trail, CallbackInfo ci) {
+        Minecraft.getMinecraft().renderEngine.bindTexture(shaders_fix);
     }
 }

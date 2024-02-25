@@ -39,7 +39,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 ShadersFixer.logger.info("Integrating Shaderfixer late client mixins...");
 
                 if (ShaderFixerConfig.FixFisksuperheroesShaders) {
-                    ShadersFixer.logger.info("Trying to integrate fiskheroes mixins");
+                    ShadersFixer.logger.info("Trying to integrate fiskheroes mixins...");
                     mixins.add("client.FiskHeroes.client.pack.json.beam.MixinBeamRendererLightning");
                     mixins.add("client.FiskHeroes.client.pack.json.beam.MixinBeamRendererLine");
                     mixins.add("client.FiskHeroes.client.pack.json.shape.MixinShapeFormatCircles");
@@ -60,7 +60,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.FiskHeroes.client.MixinSHRenderHooks");
                 }
                 if (ShaderFixerConfig.FixNEIShaders) {
-                    ShadersFixer.logger.info("Trying to integrate NotEnoughItems mixins");
+                    ShadersFixer.logger.info("Trying to integrate NotEnoughItems mixins...");
                     mixins.add("client.NotEnoughItems.client.MixinWorldOverlayRenderer");
                 }
             }

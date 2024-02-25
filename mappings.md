@@ -1,4 +1,4 @@
-// Tessellator FUNCTIONS
+## Tessellator FUNCTIONS
 tessellator.func_78382_b --> startDrawingQuads
 tessellator.func_78371_b --> startDrawing
 tessellator.func_78373_b --> setTranslation
@@ -8,10 +8,10 @@ tessellator.func_78377_a --> addVertex
 tessellator.func_78374_a --> addVertexWithUV
 tessellator.func_78384_a --> setColorRGBA_I
 
-// Tessellator FIELDS
-Tessellator.field_78398_a --> instance 
+## Tessellator FIELDS
+Tessellator.field_78398_a --> instance
 
-// FUNCTIONS
+## FUNCTIONS
 func_78546_a --> isBoundingBoxInFrustum
 
 Vec3.func_72443_a --> createVectorHelper
@@ -45,7 +45,7 @@ MathHelper.func_76131_a --> clamp_float
 
 RenderManager.func_147940_a --> renderEntityWithPosYaw
 
-// FIELDS
+## FIELDS
 field_72450_a --> xCoord
 field_72448_b	 --> yCoord
 field_72449_c --> zCoord
@@ -85,7 +85,7 @@ entity.field_70167_r --> prevPosY
 entity.field_70166_s --> prevPosZ
 
 
-//OpenGlHelper stuff
+## OpenGlHelper stuff
 OpenGlHelper.func_77475_a --> setLightmapTextureCoords
 OpenGlHelper.func_148821_a --> glBlendFunc
 OpenGlHelper.func_77473_a --> setActiveTexture

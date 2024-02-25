@@ -20,9 +20,12 @@ A mod that adds more compatibility with shaders.
 ![lightning bolt fix](https://github.com/kotmatross28729/Shader-fixer/assets/110309314/59728e9c-6c39-4d66-a524-10443105bbaf)
 ![ender dragon death effects fix day](https://github.com/kotmatross28729/Shader-fixer/assets/110309314/ac979179-3d1d-4bd1-b516-47da62bfd621)
 ![ender dragon death effects fix](https://github.com/kotmatross28729/Shader-fixer/assets/110309314/0d476068-cb99-4700-8821-15a1645c3599)
+![name tag fix](https://github.com/kotmatross28729/Shader-fixer/assets/110309314/c42cb62c-0a31-43af-b1bc-9b4a4b9ebb11)
+![NotEnoughItems render fix](https://github.com/kotmatross28729/Shader-fixer/assets/110309314/9b5e2b69-81d9-40d1-a628-8ad9cee41616)
+
 
  </details>
- 
+
 
 ## TODO?
 #### 1) more shaders fixes for closed source mods (but find them first)
