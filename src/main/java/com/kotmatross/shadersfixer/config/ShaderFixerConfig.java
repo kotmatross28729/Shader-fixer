@@ -12,6 +12,8 @@ public class ShaderFixerConfig {
     public static boolean FixFisksuperheroesShaders;
     public static boolean FixNEIShaders;
 
+    public static boolean FixTechgunsShaders;
+
     //Category
     static final String categoryShadersfixes = "Shaders fixes";
 
@@ -20,7 +22,7 @@ public class ShaderFixerConfig {
 
         FixFisksuperheroesShaders = config.getBoolean("FixFisksuperheroesShaders", categoryShadersfixes, true, "Fixes rendering errors in Fisk's Superheroes mod when using shaders.");
         FixNEIShaders = config.getBoolean("FixNEIShaders", categoryShadersfixes, true, "Fixes rendering errors in NotEnoughItems mod when using shaders.");
-
+        FixTechgunsShaders = config.getBoolean("FixTechgunsShaders", categoryShadersfixes, true, "Fixes errors and crashes in Techguns mod when using shaders.");
 
         if(config.hasChanged()) {
             config.save();
@@ -31,11 +33,9 @@ public class ShaderFixerConfig {
 
     public static boolean FixMinecraftHitboxesRender;
     public static boolean FixMinecraftFishinglineRender;
-
     public static boolean FixMinecraftLeashRender;
     public static boolean FixMinecraftEnderdragonDeathEffectsRender;
     public static boolean FixMinecraftLightningBoltRender;
-
     public static boolean FixMinecraftNameTagsRender;
     public static void loadEarlyMixinConfig(File configFile) {
         Configuration config = new Configuration(configFile);

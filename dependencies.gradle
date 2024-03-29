@@ -39,6 +39,7 @@ dependencies {
     compileOnly name: 'CodeChickenCore-1.2.1-dev'
     compileOnly name: 'lombok'
     compileOnly name: 'FiskHeroes-1.7.10-2.3.1'
+    compileOnly name: 'Techguns 1.7.10 fixed'
 
     compileOnly fileTree(dir: 'libs', include: '*.jar')
     compileOnly fileTree(dir: 'libs', include: '*.zip')

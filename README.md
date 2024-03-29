@@ -6,10 +6,46 @@ A mod that adds more compatibility with shaders.
 ### For now, it fixes:
 + **1) all bugs with shaders in Fisk Superheroes mod**
 + **2) some vanilla bugs with minecraft (fishing line, hitbox rendering (F3+B), lightning bolt, and some others)**
++ **3) NEI overlay render**
++ **4) Techguns chest crash if shaders are enabled. Water rendering issues caused by techguns particles**
 
- <details>
 
- <summary>Some demonstrations of fixes:</summary>
+<details>
+
+<summary>Some demonstrations of fixes </summary>
+
+
+<details>
+
+<summary>1.5 - Techguns:</summary>
+
+
+
+<details>
+<summary>Before: </summary>
+
+
+https://github.com/kotmatross28729/Shader-fixer/assets/110309314/ec8f83be-fe2e-4b77-a01b-0ecf634338e6
+
+
+https://github.com/kotmatross28729/Shader-fixer/assets/110309314/926e7e9c-c276-42ff-9cee-922275b14fb5
+
+</details>
+
+<details>
+<summary>After: </summary>
+
+
+https://github.com/kotmatross28729/Shader-fixer/assets/110309314/a252bc23-7bb5-4aeb-9bc8-cf94b10cd42d
+
+
+
+https://github.com/kotmatross28729/Shader-fixer/assets/110309314/6ce72f2f-9cc2-41c0-bc41-8db76c10b837
+
+</details>
+
+</details>
+
 
 ![Fisk Superheroes Fix](https://github.com/kotmatross28729/Shader-fixer/assets/110309314/42952fa3-8744-4df0-a60b-0baae7e30057)
 ![Fisk Superheroes Fix 2](https://github.com/kotmatross28729/Shader-fixer/assets/110309314/404cd29f-9a25-4ea1-b5f7-d51d446b8cb7)
@@ -23,12 +59,14 @@ A mod that adds more compatibility with shaders.
 ![name tag fix](https://github.com/kotmatross28729/Shader-fixer/assets/110309314/c42cb62c-0a31-43af-b1bc-9b4a4b9ebb11)
 ![NotEnoughItems render fix](https://github.com/kotmatross28729/Shader-fixer/assets/110309314/9b5e2b69-81d9-40d1-a628-8ad9cee41616)
 
+</details>
 
- </details>
+
+
 
 
 ## TODO?
-#### 1) more shaders fixes for closed source mods (but find them first)
+#### 1) MORE shaders fixes for closed source mods
 #### ~~2) more shaders fixes for vanilla minecraft~~ **Done in 1.3**
 
 # Credits:

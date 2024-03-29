@@ -58,6 +58,8 @@ public class ShadersFixerEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLo
                 ShadersFixer.logger.info("Integrating MixinRendererLivingEntity...");
                 mixins.add("client.minecraft.client.renderer.entity.MixinRendererLivingEntity");
             }
+            //TODO test mixin
+            mixins.add("client.minecraft.client.renderer.entity.MixinRenderManager");
         }
 
         return mixins;

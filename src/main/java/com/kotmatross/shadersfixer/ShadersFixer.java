@@ -15,8 +15,7 @@ import org.apache.logging.log4j.Logger;
     name = Tags.MODNAME,
     acceptedMinecraftVersions = Tags.MCVERSION,
     dependencies =
-        "required-after:gtnhmixins@[2.0.0,);" +
-        "required-after:fiskheroes@[2.3.1,);")
+        "required-after:gtnhmixins@[2.0.0,);")
 public class ShadersFixer {
 
     @Mod.Instance(Tags.MODID)
