@@ -69,7 +69,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 if (ShaderFixerConfig.FixTechgunsShaders) {
                     ShadersFixer.logger.info("Trying to integrate TechGuns mixins...");
                     mixins.add("client.Techguns.client.renderer.tileentity.MixinRenderTGChest");
-                    mixins.add("client.Techguns.client.particle.MixinEntityParticleAnimated");
+                    mixins.add("client.Techguns.client.renderer.MixinTGRenderHelper");
                 }
             }
 
