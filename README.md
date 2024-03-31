@@ -75,4 +75,8 @@ https://github.com/kotmatross28729/Shader-fixer/assets/110309314/6ce72f2f-9cc2-4
 
 ### [FiskFille](https://github.com/FiskFille) - [Fisk Superheroes mod](https://www.curseforge.com/minecraft/mc-mods/fiskheroes)
 
+### [JinGames](https://www.curseforge.com/members/jingames/projects) - [Dragon Block C mod](https://www.curseforge.com/minecraft/mc-mods/jingames-dragon-block-c)
+
+
+
 ### [GTNH](https://github.com/orgs/GTNewHorizons/repositories) - [ExampleMod1.7.10](https://github.com/GTNewHorizons/ExampleMod1.7.10)

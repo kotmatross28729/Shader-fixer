@@ -14,6 +14,8 @@ public class ShaderFixerConfig {
 
     public static boolean FixTechgunsShaders;
 
+    public static boolean FixDragonBlockCShaders;
+
     //Category
     static final String categoryShadersfixes = "Shaders fixes";
 
@@ -23,6 +25,7 @@ public class ShaderFixerConfig {
         FixFisksuperheroesShaders = config.getBoolean("FixFisksuperheroesShaders", categoryShadersfixes, true, "Fixes rendering errors in Fisk's Superheroes mod when using shaders.");
         FixNEIShaders = config.getBoolean("FixNEIShaders", categoryShadersfixes, true, "Fixes rendering errors in NotEnoughItems mod when using shaders.");
         FixTechgunsShaders = config.getBoolean("FixTechgunsShaders", categoryShadersfixes, true, "Fixes errors and crashes in Techguns mod when using shaders.");
+        FixDragonBlockCShaders = config.getBoolean("FixDragonBlockCShaders", categoryShadersfixes, true, "Fixes rendering errors in DragonBlockC mod when using shaders.");
 
         if(config.hasChanged()) {
             config.save();

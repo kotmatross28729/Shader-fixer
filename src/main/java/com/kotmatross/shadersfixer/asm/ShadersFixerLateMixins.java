@@ -36,6 +36,10 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
         if(!loadedMods.contains("Techguns")) {
             ShaderFixerConfig.FixTechgunsShaders = false;
         }
+        if(!loadedMods.contains("jinryuubetterrenderaddon") && !loadedMods.contains("jinryuudragonblockc")) {
+            ShaderFixerConfig.FixDragonBlockCShaders = false;
+        }
+
         List<String> mixins = new ArrayList<>();
 
             if (side == MixinEnvironment.Side.CLIENT) {
@@ -60,16 +64,23 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.FiskHeroes.client.render.projectile.MixinBulletProjectileRenderer");
                     mixins.add("client.FiskHeroes.client.render.projectile.MixinProjectileRenderHandler");
                     mixins.add("client.FiskHeroes.client.render.tile.MixinRenderSuitFabricator");
-                    mixins.add("client.FiskHeroes.client.MixinSHRenderHooks");
+                    mixins.add("client.FiskHeroes.client.MixinRenderPlayerJBRA");
                 }
                 if (ShaderFixerConfig.FixNEIShaders) {
                     ShadersFixer.logger.info("Trying to integrate NotEnoughItems mixins...");
                     mixins.add("client.NotEnoughItems.client.MixinWorldOverlayRenderer");
                 }
                 if (ShaderFixerConfig.FixTechgunsShaders) {
-                    ShadersFixer.logger.info("Trying to integrate TechGuns mixins...");
+                    ShadersFixer.logger.info("Trying to integrate Techguns mixins...");
                     mixins.add("client.Techguns.client.renderer.tileentity.MixinRenderTGChest");
                     mixins.add("client.Techguns.client.renderer.MixinTGRenderHelper");
+                }
+                if (ShaderFixerConfig.FixDragonBlockCShaders) {
+                    ShadersFixer.logger.info("Trying to integrate DragonBlockC mixins...");
+                    mixins.add("client.DragonBlockC.client.MixinRenderPlayerJBRA");
+                    mixins.add("client.DragonBlockC.client.MixinRenderAura");
+                    mixins.add("client.DragonBlockC.client.MixinRenderAura2");
+                    mixins.add("client.DragonBlockC.client.MixinRenderDBC");
                 }
             }
 
