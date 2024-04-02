@@ -39,6 +39,9 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
         if(!loadedMods.contains("jinryuubetterrenderaddon") && !loadedMods.contains("jinryuudragonblockc")) {
             ShaderFixerConfig.FixDragonBlockCShaders = false;
         }
+        if(!loadedMods.contains("zeldaswordskills")) {
+            ShaderFixerConfig.FixZeldaSwordSkillsShaders = false;
+        }
 
         List<String> mixins = new ArrayList<>();
 
@@ -81,6 +84,10 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.DragonBlockC.client.MixinRenderAura");
                     mixins.add("client.DragonBlockC.client.MixinRenderAura2");
                     mixins.add("client.DragonBlockC.client.MixinRenderDBC");
+                }
+                if (ShaderFixerConfig.FixZeldaSwordSkillsShaders) {
+                    ShadersFixer.logger.info("Trying to integrate ZeldaSwordSkills mixins...");
+                    mixins.add("client.Zeldaswordskills.client.render.entity.MixinRenderEntityWhip");
                 }
             }
 

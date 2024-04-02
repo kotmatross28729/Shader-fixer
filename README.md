@@ -8,6 +8,8 @@ A mod that adds more compatibility with shaders.
 + **2) some vanilla bugs with minecraft (fishing line, hitbox rendering (F3+B), lightning bolt, and some others)**
 + **3) NEI overlay render**
 + **4) Techguns chest crash if shaders are enabled. Water rendering issues caused by techguns particles**
++ **5) Dragon Block C's electric auras with shaders**
++ **6) Zelda Sword Skills whip render**
 
 
 <details>
@@ -76,7 +78,5 @@ https://github.com/kotmatross28729/Shader-fixer/assets/110309314/6ce72f2f-9cc2-4
 ### [FiskFille](https://github.com/FiskFille) - [Fisk Superheroes mod](https://www.curseforge.com/minecraft/mc-mods/fiskheroes)
 
 ### [JinGames](https://www.curseforge.com/members/jingames/projects) - [Dragon Block C mod](https://www.curseforge.com/minecraft/mc-mods/jingames-dragon-block-c)
-
-
 
 ### [GTNH](https://github.com/orgs/GTNewHorizons/repositories) - [ExampleMod1.7.10](https://github.com/GTNewHorizons/ExampleMod1.7.10)
