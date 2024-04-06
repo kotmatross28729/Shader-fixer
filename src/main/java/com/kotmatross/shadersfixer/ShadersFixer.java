@@ -1,14 +1,24 @@
 package com.kotmatross.shadersfixer;
 
+import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
 import com.kotmatross.shadersfixer.proxy.CommonProxy;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import techguns.client.GoreData;
+import techguns.client.models.ModelGibs;
+import techguns.client.models.ModelGibsBiped;
+
+import static techguns.client.DeathEffect.goreStats;
 
 @Mod(modid = Tags.MODID,
     version = Tags.VERSION,
@@ -35,5 +45,6 @@ public class ShadersFixer {
     }
 
     @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event) {}
+    public void postInit(FMLPostInitializationEvent event) {
+    }
 }

@@ -77,6 +77,10 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     ShadersFixer.logger.info("Trying to integrate Techguns mixins...");
                     mixins.add("client.Techguns.client.renderer.tileentity.MixinRenderTGChest");
                     mixins.add("client.Techguns.client.renderer.MixinTGRenderHelper");
+                    mixins.add("client.Techguns.utils.MixinEntityDeathUtils");
+//                    mixins.add("client.Techguns.utils.MixinDeathEffect");
+//                    mixins.add("client.Techguns.utils.MixinRenderFlyingGibs");
+
                 }
                 if (ShaderFixerConfig.FixDragonBlockCShaders) {
                     ShadersFixer.logger.info("Trying to integrate DragonBlockC mixins...");
