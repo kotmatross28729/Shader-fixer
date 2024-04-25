@@ -41,6 +41,7 @@ dependencies {
     compileOnly name: 'FiskHeroes-1.7.10-2.3.1'
     compileOnly name: 'Techguns 1.7.10 fixed'
     compileOnly name: 'zeldaswordskills-1.7.10-v2.5.3.6'
+    compileOnly name: 'MCHELIO'
 
     compileOnly fileTree(dir: 'libs', include: '*.jar')
     compileOnly fileTree(dir: 'libs', include: '*.zip')

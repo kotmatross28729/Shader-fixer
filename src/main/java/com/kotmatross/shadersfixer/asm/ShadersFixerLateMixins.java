@@ -43,6 +43,10 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
             ShaderFixerConfig.FixZeldaSwordSkillsShaders = false;
         }
 
+        if(!loadedMods.contains("mcheli")) {
+            ShaderFixerConfig.FixMcheliOShaders = false;
+        }
+
         List<String> mixins = new ArrayList<>();
 
             if (side == MixinEnvironment.Side.CLIENT) {
@@ -93,6 +97,14 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     ShadersFixer.logger.info("Trying to integrate ZeldaSwordSkills mixins...");
                     mixins.add("client.Zeldaswordskills.client.render.entity.MixinRenderEntityWhip");
                 }
+                if (ShaderFixerConfig.FixMcheliOShaders) {
+                    ShadersFixer.logger.info("Trying to integrate Mcheli Overdrive mixins...");
+                    mixins.add("client.mchelio.MixinMCH_Gui");
+                    mixins.add("client.mchelio.MixinMCH_GuiTargetMarker");
+                    mixins.add("client.mchelio.MixinMCH_HudItem");
+                    mixins.add("client.mchelio.MixinMCH_RenderAircraft");
+                }
+
             }
 
         return mixins;
