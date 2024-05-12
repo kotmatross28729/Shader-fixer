@@ -72,6 +72,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.FiskHeroes.client.render.projectile.MixinBulletProjectileRenderer");
                     mixins.add("client.FiskHeroes.client.render.projectile.MixinProjectileRenderHandler");
                     mixins.add("client.FiskHeroes.client.render.tile.MixinRenderSuitFabricator");
+                    mixins.add("client.FiskHeroes.client.render.tile.MixinRenderSuitDatabase");
                     mixins.add("client.FiskHeroes.client.MixinSHRenderHooks");
                 }
                 if (ShaderFixerConfig.FixNEIShaders) {
