@@ -63,6 +63,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.FiskHeroes.client.render.effect.MixinEffectTentacles");
                     mixins.add("client.FiskHeroes.client.render.entity.effect.MixinRenderEarthCrack");
                     mixins.add("client.FiskHeroes.client.render.entity.effect.MixinRenderGravityWave");
+                    mixins.add("client.FiskHeroes.client.render.entity.effect.MixinRenderSpeedBlur");
                     mixins.add("client.FiskHeroes.client.render.entity.projectile.MixinRenderEnergyBolt");
                     mixins.add("client.FiskHeroes.client.render.entity.projectile.MixinRenderGrapplingHook");
                     mixins.add("client.FiskHeroes.client.render.entity.projectile.MixinRenderSonicWave");
