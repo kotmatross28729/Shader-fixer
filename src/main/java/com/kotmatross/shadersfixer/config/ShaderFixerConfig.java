@@ -53,6 +53,8 @@ public class ShaderFixerConfig {
     public static boolean FixMinecraftEnderdragonDeathEffectsRender;
     public static boolean FixMinecraftLightningBoltRender;
     public static boolean FixMinecraftNameTagsRender;
+
+    public static boolean enableNotifications;
     public static void loadEarlyMixinConfig(File configFile) {
         Configuration config = new Configuration(configFile);
 
@@ -62,6 +64,7 @@ public class ShaderFixerConfig {
         FixMinecraftEnderdragonDeathEffectsRender = config.getBoolean("FixMinecraftEnderdragonDeathEffectsRender", categoryShadersfixes, true, "Fixes rendering of dragon death effects (purple flashes) with shaders.");
         FixMinecraftLightningBoltRender = config.getBoolean("FixMinecraftLightningBoltRender", categoryShadersfixes, true, "Fixes rendering of lightning bolt with shaders.");
         FixMinecraftNameTagsRender = config.getBoolean("FixMinecraftNameTagsRender", categoryShadersfixes, true, "Fixes rendering of name tags with shaders.");
+        enableNotifications = config.getBoolean("enableNotifications", categorytweaks, true, "Turns on a notification in the chat when detected mods for which I (kotmatross) have useful forks.");
 
         if(config.hasChanged()) {
             config.save();

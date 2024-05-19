@@ -1,0 +1,10 @@
+kotmatross.Lightsabers=[Shader fixer]: Обнаружена старая версия Advanced Lightsabers, рекомендуем обновится до
+kotmatross.Neat=[Shader fixer]: Обнаружена старая версия Neat, рекомендуем обновится до
+kotmatross.WorldTooltips=[Shader fixer]: Обнаружена старая версия WorldTooltips, рекомендуем обновится до
+kotmatross.Minechem=[Shader fixer]: Обнаружена старая версия Minechem, рекомендуем обновится до
+kotmatross.ItemPhysic=[Shader fixer]: Обнаружена старая версия ItemPhysic, рекомендуем обновится до
+kotmatross.EnviroMine=[Shader fixer]: Обнаружена старая версия EnviroMine, рекомендуем обновится до
+kotmatross.MatterMegadrive=[Shader fixer]: Обнаружена старая версия MatterMegadrive, рекомендуем обновится до
+kotmatross.endMSG=Текст, помеченный синим (Aqua) кликабелен и введет на страницу загрузки github. Не забудьте прочитать список изменений прежде, чем использовать любой из этих форков. Вы также можете отключить это оповещение в .minecraft\config\shadersfixer\mixinsEarly.cfg\enableNotifications=false.
+
+kotmatross.fork=последней версии его форка

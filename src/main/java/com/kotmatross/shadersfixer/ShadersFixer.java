@@ -32,6 +32,7 @@ public class ShadersFixer {
     public static ShadersFixer instance;
     @SidedProxy(clientSide = Tags.CLIENTPROXY, serverSide = Tags.SERVERPROXY)
     public static CommonProxy proxy;
+
     public static Configuration config;
     public static final Logger logger = LogManager.getLogger();
 
@@ -42,6 +43,7 @@ public class ShadersFixer {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+        proxy.registerEvents();
     }
 
     @Mod.EventHandler
