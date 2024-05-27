@@ -44,6 +44,13 @@ public class ShadersFixer {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         proxy.registerEvents();
+        if(ShaderFixerConfig.FixRivalRebelsShaders) {
+            if (Loader.isModLoaded("rivalrebels")) {
+                if (!Loader.instance().getIndexedModList().get("rivalrebels").getVersion().contains(" fixed")) {
+                    throw new RuntimeException("You are using a version of Rival Rebels that is not compatible with ShadersFixer, please update to: https://github.com/kotmatross28729/Rival-Rebels-Mod/releases");
+                }
+            }
+        }
     }
 
     @Mod.EventHandler

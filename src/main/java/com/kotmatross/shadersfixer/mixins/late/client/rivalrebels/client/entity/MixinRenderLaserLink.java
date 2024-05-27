@@ -1,8 +1,8 @@
 package com.kotmatross.shadersfixer.mixins.late.client.rivalrebels.client.entity;
 
-import assets.rivalrebels.client.renderentity.RenderLaserLink;
-import assets.rivalrebels.common.entity.EntityLaserBurst;
-import assets.rivalrebels.common.entity.EntityLaserLink;
+import rivalrebels.client.renderentity.RenderLaserLink;
+import rivalrebels.common.entity.EntityLaserBurst;
+import rivalrebels.common.entity.EntityLaserLink;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;

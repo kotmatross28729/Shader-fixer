@@ -1,8 +1,8 @@
 package com.kotmatross.shadersfixer.mixins.late.client.rivalrebels.client.entity;
 
-import assets.rivalrebels.client.renderentity.RenderLightningBolt2;
-import assets.rivalrebels.common.entity.EntityLaserBurst;
-import assets.rivalrebels.common.entity.EntityLightningBolt2;
+import rivalrebels.client.renderentity.RenderLightningBolt2;
+import rivalrebels.common.entity.EntityLaserBurst;
+import rivalrebels.common.entity.EntityLightningBolt2;
 import com.fiskmods.heroes.common.projectile.TrackingProjectile;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;

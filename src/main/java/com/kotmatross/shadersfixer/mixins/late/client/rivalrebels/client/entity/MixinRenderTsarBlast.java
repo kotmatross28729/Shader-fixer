@@ -1,6 +1,6 @@
 package com.kotmatross.shadersfixer.mixins.late.client.rivalrebels.client.entity;
 
-import assets.rivalrebels.client.renderentity.RenderTsarBlast;
+import rivalrebels.client.renderentity.RenderTsarBlast;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;

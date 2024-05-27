@@ -1,7 +1,7 @@
 package com.kotmatross.shadersfixer.mixins.late.client.rivalrebels.client.entity;
 
-import assets.rivalrebels.client.renderentity.RenderPlasmoid;
-import assets.rivalrebels.common.entity.EntityPlasmoid;
+import rivalrebels.client.renderentity.RenderPlasmoid;
+import rivalrebels.common.entity.EntityPlasmoid;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;

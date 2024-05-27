@@ -42,7 +42,7 @@ dependencies {
     compileOnly name: 'Techguns 1.7.10 fixed'
     compileOnly name: 'zeldaswordskills-1.7.10-v2.5.3.6'
     compileOnly name: 'MCHELIO'
-    compileOnly name: 'rivalrebels-yo-1.7.10Z1'
+    compileOnly name: 'rivalrebels-3.0'
 
     compileOnly fileTree(dir: 'libs', include: '*.jar')
     compileOnly fileTree(dir: 'libs', include: '*.zip')

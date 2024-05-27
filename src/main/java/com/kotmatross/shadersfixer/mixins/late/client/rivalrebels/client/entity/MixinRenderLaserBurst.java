@@ -1,7 +1,7 @@
 package com.kotmatross.shadersfixer.mixins.late.client.rivalrebels.client.entity;
 
-import assets.rivalrebels.client.renderentity.RenderLaserBurst;
-import assets.rivalrebels.common.entity.EntityLaserBurst;
+import rivalrebels.client.renderentity.RenderLaserBurst;
+import rivalrebels.common.entity.EntityLaserBurst;
 import com.fiskmods.heroes.common.entity.projectile.EntityEnergyBolt;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;

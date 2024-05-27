@@ -1,6 +1,6 @@
 package com.kotmatross.shadersfixer.mixins.late.client.rivalrebels.client.model;
 
-import assets.rivalrebels.client.model.ModelAstroBlasterBody;
+import rivalrebels.client.model.ModelAstroBlasterBody;
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

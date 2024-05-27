@@ -1,6 +1,6 @@
 package com.kotmatross.shadersfixer.mixins.late.client.rivalrebels.client.model;
 
-import assets.rivalrebels.client.itemrenders.AstroBlasterRenderer;
+import rivalrebels.client.itemrenders.AstroBlasterRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
