@@ -46,6 +46,9 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
         if(!loadedMods.contains("mcheli")) {
             ShaderFixerConfig.FixMcheliOShaders = false;
         }
+        if(!loadedMods.contains("rivalrebels")) {
+            ShaderFixerConfig.FixRivalRebelsShaders = false;
+        }
 
         List<String> mixins = new ArrayList<>();
 
@@ -105,6 +108,29 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.mchelio.MixinMCH_GuiTargetMarker"); //?
                     mixins.add("client.mchelio.MixinMCH_HudItem"); //?
                     mixins.add("client.mchelio.MixinMCH_RenderAircraft"); //<--
+                }
+
+                //Huh
+                if (ShaderFixerConfig.FixRivalRebelsShaders) {
+                    //THIS
+                    ShadersFixer.logger.info("Trying to integrate Rival Rebels mixins...");
+                    mixins.add("client.rivalrebels.client.entity.MixinRenderLaserBurst");
+                    mixins.add("client.rivalrebels.client.entity.MixinRenderLaserLink");
+                    mixins.add("client.rivalrebels.client.entity.MixinRenderLightningBolt2");
+                    mixins.add("client.rivalrebels.client.entity.MixinRenderLightningLink");
+                    mixins.add("client.rivalrebels.client.entity.MixinRenderPlasmoid");
+                    //SHOULD
+                    mixins.add("client.rivalrebels.client.model.MixinModelAstroBlasterBody");
+                    mixins.add("client.rivalrebels.client.model.MixinAstroBlasterRenderer");
+                    mixins.add("client.rivalrebels.client.model.MixinModelBlastRing");
+                    //WORK
+                    mixins.add("client.rivalrebels.client.entity.MixinRenderSphereBlast");
+                    mixins.add("client.rivalrebels.client.entity.MixinRenderTachyonBombBlast");
+                    mixins.add("client.rivalrebels.client.entity.MixinRenderTheoreticalTsarBlast");
+                    mixins.add("client.rivalrebels.client.entity.MixinRenderTsarBlast");
+                    mixins.add("client.rivalrebels.client.entity.MixinRenderAntimatterBombBlast");
+                           //mixins.add("client.rivalrebels.client.");
+                    //MAYBE?
                 }
             }
 
