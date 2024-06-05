@@ -10,6 +10,8 @@ A mod that adds more compatibility with shaders.
 + **4) Techguns chest crash if shaders are enabled. Water rendering issues caused by techguns particles**
 + **5) Dragon Block C's electric auras with shaders**
 + **6) Zelda Sword Skills whip render**
++ **7) rendering in mcheli Overdrive with shaders**
++ **8) rendering in RivalRebels with shaders**
 
 
 <details>
