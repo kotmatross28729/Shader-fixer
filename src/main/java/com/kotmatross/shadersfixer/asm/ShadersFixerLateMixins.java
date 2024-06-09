@@ -49,7 +49,9 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
         if(!loadedMods.contains("rivalrebels")) {
             ShaderFixerConfig.FixRivalRebelsShaders = false;
         }
-
+        if(!loadedMods.contains("Schematica")) {
+            ShaderFixerConfig.FixSchematicaShaders = false;
+        }
         List<String> mixins = new ArrayList<>();
 
             if (side == MixinEnvironment.Side.CLIENT) {
@@ -125,7 +127,13 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.rivalrebels.client.entity.MixinRenderTheoreticalTsarBlast");
                     mixins.add("client.rivalrebels.client.entity.MixinRenderTsarBlast");
                     mixins.add("client.rivalrebels.client.entity.MixinRenderAntimatterBombBlast");
-                           //mixins.add("client.rivalrebels.client.");
+                    //mixins.add("client.rivalrebels.client.");
+                }
+                if (ShaderFixerConfig.FixSchematicaShaders) {
+                    ShadersFixer.logger.info("Trying to integrate Schematica mixins...");
+                    mixins.add("client.Schematica.client.MixinRendererSchematicChunk");
+                    mixins.add("client.Schematica.client.MixinRendererSchematicGlobal");
+                    mixins.add("client.Schematica.client.MixinRenderHelper");
                 }
             }
 

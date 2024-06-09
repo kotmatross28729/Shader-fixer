@@ -43,6 +43,8 @@ dependencies {
     compileOnly name: 'zeldaswordskills-1.7.10-v2.5.3.6'
     compileOnly name: 'MCHELIO'
     compileOnly name: 'rivalrebels-3.0'
+	compileOnly name: 'Schematica-1.11.1-GTNH'
+    compileOnly name: 'LunatriusCore-1.2.0-GTNH'
 
     compileOnly fileTree(dir: 'libs', include: '*.jar')
     compileOnly fileTree(dir: 'libs', include: '*.zip')
