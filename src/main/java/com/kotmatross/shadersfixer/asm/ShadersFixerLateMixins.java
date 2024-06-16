@@ -52,6 +52,9 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
         if(!loadedMods.contains("Schematica")) {
             ShaderFixerConfig.FixSchematicaShaders = false;
         }
+        if(!loadedMods.contains("journeymap")) {
+            ShaderFixerConfig.FixJourneymapShaders = false;
+        }
         List<String> mixins = new ArrayList<>();
 
             if (side == MixinEnvironment.Side.CLIENT) {
