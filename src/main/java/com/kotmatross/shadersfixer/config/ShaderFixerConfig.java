@@ -21,10 +21,10 @@ public class ShaderFixerConfig {
 
     public static boolean FixRivalRebelsShaders;
     public static boolean FixSchematicaShaders;
+    public static boolean FixJourneymapShaders;
 
     public static boolean TechgunsGoreLogger;
     public static List<String> TechgunsGoreList = new ArrayList<>();
-
 
     //Category
     static final String categoryShadersfixes = "Shaders fixes";
@@ -41,6 +41,7 @@ public class ShaderFixerConfig {
         FixMcheliOShaders = config.getBoolean("FixMcheliOShaders", categoryShadersfixes, true, "Fixes rendering errors in Mcheli Overdrive mod when using shaders.");
         FixRivalRebelsShaders = config.getBoolean("FixRivalRebelsShaders", categoryShadersfixes, true, "Fixes rendering errors in Rival Rebels mod when using shaders.");
         FixSchematicaShaders = config.getBoolean("FixSchematicaShaders", categoryShadersfixes, true, "Fixes rendering errors in Schematica mod when using shaders.");
+        FixJourneymapShaders = config.getBoolean("FixJourneymapShaders", categoryShadersfixes, true, "Fixes rendering errors in Journeymap mod when using shaders.");
 
         TechgunsGoreLogger = config.getBoolean("TechgunsGoreLogger", categorytweaks, false, "Prints the name of the killed mob( using techguns weapons) in the log, useful for TechgunsGoreList, where 1 parameter is the name of the mob.");
 //        TechgunsGoreList = new ArrayList<>(Arrays.asList(config.getStringList("TechgunsGoreList", categorytweaks, new String[]{"entity_glyphid:6:0.66:85:156:17"}, "Adds an entity to the gore Techguns entity list. The syntax is: mobname:GibsNumber:GibsScale:BloodСolorR:BloodColorG:BloodColorBlue . Please note that Blood R-G-B colors can only be integers up to 255")));

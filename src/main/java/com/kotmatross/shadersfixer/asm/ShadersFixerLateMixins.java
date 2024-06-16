@@ -135,6 +135,11 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.Schematica.client.MixinRendererSchematicGlobal");
                     mixins.add("client.Schematica.client.MixinRenderHelper");
                 }
+
+                if (ShaderFixerConfig.FixJourneymapShaders) {
+                    ShadersFixer.logger.info("Trying to integrate Journeymap mixins...");
+                    mixins.add("client.Journeymap.MixinDrawUtil");
+                }
             }
 
         return mixins;

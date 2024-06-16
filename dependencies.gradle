@@ -45,6 +45,7 @@ dependencies {
     compileOnly name: 'rivalrebels-3.0'
 	compileOnly name: 'Schematica-1.11.1-GTNH'
     compileOnly name: 'LunatriusCore-1.2.0-GTNH'
+	compileOnly name: 'journeymap-1.7.10-5.2.3-unlimited'
 
     compileOnly fileTree(dir: 'libs', include: '*.jar')
     compileOnly fileTree(dir: 'libs', include: '*.zip')
