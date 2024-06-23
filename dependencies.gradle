@@ -42,7 +42,7 @@ dependencies {
     compileOnly name: 'Techguns 1.7.10 fixed'
     compileOnly name: 'zeldaswordskills-1.7.10-v2.5.3.6'
     compileOnly name: 'MCHELIO'
-    compileOnly name: 'rivalrebels-3.0'
+    compileOnly name: 'rivalrebels-2.2'
 	compileOnly name: 'Schematica-1.11.1-GTNH'
     compileOnly name: 'LunatriusCore-1.2.0-GTNH'
 	compileOnly name: 'journeymap-1.7.10-5.2.3-unlimited'

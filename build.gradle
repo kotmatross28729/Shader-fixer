@@ -545,7 +545,6 @@ configurations {
     for (config in [compileClasspath, runtimeClasspath, testCompileClasspath, testRuntimeClasspath]) {
         if (usesShadowedDependencies.toBoolean()) {
             config.extendsFrom(shadowImplementation)
-            // TODO: remove Compile after all uses are refactored to Implementation
             config.extendsFrom(shadeCompile)
             config.extendsFrom(shadowCompile)
         }
@@ -1432,7 +1431,7 @@ static String getVersionHash(String buildScriptContent) {
 tasks.register('deobfParams') {
     group = 'GTNH Buildscript'
     description = 'Rename all obfuscated parameter names inherited from Minecraft classes'
-    doLast { // TODO
+    doLast {
 
         String mcpDir = "$project.gradle.gradleUserHomeDir/caches/minecraft/de/oceanlabs/mcp/mcp_$channel/$mappingsVersion"
         String mcpZIP = "$mcpDir/mcp_$channel-$mappingsVersion-${minecraftVersion}.zip"
