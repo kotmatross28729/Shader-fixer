@@ -1,8 +1,10 @@
 package com.kotmatross.shadersfixer.WIP;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class EntityLightingFix extends EntityCreature {
@@ -12,6 +14,31 @@ public class EntityLightingFix extends EntityCreature {
         this.isImmuneToFire = true;
         this.ignoreFrustumCheck = true;
         this.setSize(0.0F, 0.0F);
+        this.noClip = true;
+        this.boundingBox.setBounds(0D, 0D, 0D, 0D, 0D, 0D);
+    }
+
+    @Override
+    public void setPosition(double x, double y, double z) {
+        this.posX = x;
+        this.posY = y;
+        this.posZ = z;
+    }
+
+    @Override
+    public AxisAlignedBB getBoundingBox()
+    {
+        return null;
+    }
+    @Override
+    public AxisAlignedBB getCollisionBox(Entity entityIn)
+    {
+        return null;
+    }
+    @Override
+    public float getCollisionBorderSize()
+    {
+        return 0.0F;
     }
 
     @Override
@@ -25,6 +52,12 @@ public class EntityLightingFix extends EntityCreature {
     {
         return true;
     }
+
+//    @Override
+//    protected boolean isMovementBlocked()
+//    {
+//        return true;
+//    }
 
     @Override
     protected void applyEntityAttributes()

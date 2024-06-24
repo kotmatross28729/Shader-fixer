@@ -1,19 +1,13 @@
 package com.kotmatross.shadersfixer.WIP;
 
-import com.kotmatross.shadersfixer.Tags;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.client.model.ModelCreeper;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 
 @SideOnly(Side.CLIENT)
 public class RenderEntityLightingFix extends RenderLiving {
@@ -36,7 +30,6 @@ public class RenderEntityLightingFix extends RenderLiving {
     {
         return this.shouldRenderPass((EntityLightingFix)p_77032_1_, p_77032_2_, p_77032_3_);
     }
-
     protected int inheritRenderPass(EntityLivingBase p_77035_1_, int p_77035_2_, float p_77035_3_)
     {
         return this.inheritRenderPass((EntityLightingFix)p_77035_1_, p_77035_2_, p_77035_3_);
@@ -49,9 +42,12 @@ public class RenderEntityLightingFix extends RenderLiving {
     }
     */
 
+    private static final ResourceLocation creeperTextures = new ResourceLocation("textures/entity/creeper/creeper.png");
+
     @Override
-    protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
-        return new ResourceLocation("textures/entity/creeper/creeper.png");
+    protected ResourceLocation getEntityTexture(Entity p_110775_1_)
+    {
+        return creeperTextures;
     }
 
 }

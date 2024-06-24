@@ -1,32 +1,26 @@
 package com.kotmatross.shadersfixer;
 
-import com.kotmatross.shadersfixer.WIP.EntityLightingFix;
 import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
+import com.kotmatross.shadersfixer.handlers.EventHandler;
 import com.kotmatross.shadersfixer.proxy.CommonProxy;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.FMLLaunchHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.launchwrapper.Launch;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import techguns.client.GoreData;
-import techguns.client.models.ModelGibs;
-import techguns.client.models.ModelGibsBiped;
 
-import static techguns.client.DeathEffect.goreStats;
+import java.io.File;
+import java.io.IOException;
 
 @Mod(modid = Tags.MODID,
     version = Tags.VERSION,
@@ -47,11 +41,19 @@ public class ShadersFixer {
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
+        String configFolder = "config" + File.separator + Tags.MODID + File.separator;
+        ShaderFixerConfig.loadWIPConfig(new File(Launch.minecraftHome, configFolder + "WIP.cfg"));
+
+
+        EventHandler EHandler = new EventHandler();
+        FMLCommonHandler.instance().bus().register(EHandler);
+        MinecraftForge.EVENT_BUS.register(EHandler);
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         proxy.registerEvents();
+        proxy.init(this);
         if(ShaderFixerConfig.FixRivalRebelsShaders) {
             if (Loader.isModLoaded("rivalrebels")) {
                 if (!Loader.instance().getIndexedModList().get("rivalrebels").getVersion().contains(" fixed")) {
@@ -61,93 +63,38 @@ public class ShadersFixer {
         }
     }
 
+
+
+    public static boolean isPsychedelicraftLoaded() {
+        return Loader.isModLoaded("psychedelicraft");
+    }
+    private static final boolean IS_SHADERS_MOD_PRESENT;
+    static {
+        boolean shadersModPresent = false;
+        try {
+            shadersModPresent = Launch.classLoader.getClassBytes("shadersmod.client.Shaders") != null;
+        } catch (
+            IOException ignored) {}
+        IS_SHADERS_MOD_PRESENT = shadersModPresent;
+    }
+    @SideOnly(Side.CLIENT)
+    public static boolean SHADERS_MOD() {
+        return IS_SHADERS_MOD_PRESENT;
+    }
+    public static boolean LightingFix() {
+        return SHADERS_MOD() || isPsychedelicraftLoaded();
+    }
+
     @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event) {}
-
-    //TODO:
-    //  1) Server-side config option
-    //  2) Accurate player tracking
-    //  3) Accurate Fix-Entity Positioning
-    //  4) In-game GUI menu with explanation about this fix
-    //  5)
-    //  if( TodoList("4)").checkStatus() == StatusEnum.DONE)
-    //  {
-    //      Kotmatross.getOffAssAndDo(Action a = new Action(Const.read("Pictures (that explain and show difference between fix) in the GUI")));
-    //  }
-    // ,
-    //                     █
-    //                    ███
-    //                   █████
-    //                  ███████
-    //                 █████████
-    //                ███████████
-    //               █████████████
-    //              ███████████████
-    //             █████████████████
-    //            ███████████████████
-    //           █████████████████████
-    //          ███████████████████████
-    //         █████████████████████████
-    //        ███████████████████████████
-    //       █████████████████████████████
-    //      ███████████████████████████████
-    //                  ██████
-    //                  ██████
-    //                  ██████
-    //                  ██████
-    //                  ██████
-    //                  ██████
-    //                  ██████
-    //                  ██████
-    //                  ██████
-    //                  ██████
-    //                  ██████
-    //                  ██████
-    //                  ██████
-    //                  Cringe.
-
-    @SubscribeEvent
-    public static void onWorldJoinEvent(EntityJoinWorldEvent event) {
-        if ((event.entity instanceof EntityPlayer)) {
-            ((EntityPlayer) event.entity).addChatComponentMessage(new ChatComponentText("Joined :  " + event.entity)); //TODO: remove when complete
-
-            double height = event.entity.lastTickPosY - (double)event.entity.yOffset + 0.0D; //TODO: check event.entity.yOffset
-
-            EntityLightingFix E_L_F = new EntityLightingFix(event.entity.worldObj); //TODO: check worldObj != null?
-
-            //E_L_F.setPosition(event.entity.posX, height, event.entity.posZ);
-            E_L_F.setPosition(event.entity.lastTickPosX, height, event.entity.lastTickPosZ); //TODO: check lastTick
-
-            event.entity.worldObj.spawnEntityInWorld(E_L_F); //TODO: null checks maybe?
-        }
-    }
-
-    @SubscribeEvent
-    public void tickServer(TickEvent.ServerTickEvent event) {
-        if (event.phase == TickEvent.Phase.START) {
-            instance.onTick(MinecraftServer.getServer()); //TODO: check
-        }
-    }
-    public void onTick(MinecraftServer var1) {
-        onTickInGame(var1); //TODO: Useless? Direct `instance.onTickInGame(MinecraftServer.getServer());` ???
-    }
-    public static MinecraftServer mc;
-    public static World world;
-    public void onTickInGame(MinecraftServer var1) {
-        mc = var1;
-        World worldT = world; //TODO: check
-        if (worldT != null) {
-            worldT = mc.worldServerForDimension(0); //TODO: other dimensions? Maybe Shaders.shaderPackDimensions based? If so, then force other mods detection based system (Psychedelicraft or smt)?
-            if (worldT != null) {
-                worldTick(worldT); //TODO
+    public void postInit(FMLPostInitializationEvent event) {
+        if (FMLLaunchHandler.side().isClient()) {
+            if (!LightingFix()) {
+                LogManager.getLogger().info("ShadersMod or Psychedelicraft loaded, lighting fix = true ");
+            } else {
+                if (!SHADERS_MOD() && !isPsychedelicraftLoaded()) {
+                    LogManager.getLogger().warn("ShadersMod and Psychedelicraft is not loaded, skip lighting fix ");
+                }
             }
         }
     }
-
-    /**
-     * TODO: main thing
-     * @author Kotmatross
-     */
-    public void worldTick(World world) {} //TODO: teleport (setPosition) to player (and track)
-
 }

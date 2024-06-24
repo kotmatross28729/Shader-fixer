@@ -2,9 +2,9 @@ package com.kotmatross.shadersfixer.config;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import com.kotmatross.shadersfixer.utils;
 import net.minecraftforge.common.config.Configuration;
 
 public class ShaderFixerConfig {
@@ -71,6 +71,27 @@ public class ShaderFixerConfig {
         FixMinecraftLightningBoltRender = config.getBoolean("FixMinecraftLightningBoltRender", categoryShadersfixes, true, "Fixes rendering of lightning bolt with shaders.");
         FixMinecraftNameTagsRender = config.getBoolean("FixMinecraftNameTagsRender", categoryShadersfixes, true, "Fixes rendering of name tags with shaders.");
         enableNotifications = config.getBoolean("enableNotifications", categorytweaks, true, "Turns on a notification in the chat when detected mods for which I (kotmatross) have useful forks.");
+
+        if(config.hasChanged()) {
+            config.save();
+        }
+    }
+
+
+//WIP
+
+    static final String categoryExperimentalFixes = "Experimental fixes";
+    public static boolean LightingFix = true;
+    public static int tickRatePlayerLoop = 1;
+
+    public static int tickRateLightingFix = 200;
+
+    public static void loadWIPConfig(File configFile) {
+        Configuration config = new Configuration(configFile);
+
+        LightingFix = config.getBoolean("LightingFix", categoryExperimentalFixes, true, "Test");
+        tickRatePlayerLoop = config.getInt("tickRatePlayerLoop", categoryExperimentalFixes, 1,1, utils.INT_MAX_VALUE, "How frequently the mod iterates all players, effects rates, less is more frequent");
+        tickRateLightingFix = config.getInt("tickRateLightingFix", categoryExperimentalFixes, 200,1, utils.INT_MAX_VALUE, "Test");
 
         if(config.hasChanged()) {
             config.save();
