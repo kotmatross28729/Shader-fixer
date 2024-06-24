@@ -2,6 +2,7 @@ package com.kotmatross.shadersfixer.proxy;
 
 import com.kotmatross.shadersfixer.ShadersFixer;
 import com.kotmatross.shadersfixer.WIP.EntityLightingFix;
+import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
 import cpw.mods.fml.common.registry.EntityRegistry;
 
 public class CommonProxy {
@@ -11,6 +12,6 @@ public class CommonProxy {
     public void init(ShadersFixer Tmod)
     {
         mod = Tmod;
-        EntityRegistry.registerModEntity(EntityLightingFix.class, "EntityLightingFix", entityId++, Tmod, 100, 16, true);
+        EntityRegistry.registerModEntity(EntityLightingFix.class, "EntityLightingFix", entityId++, Tmod, ShaderFixerConfig.LightingFixRange, 16, false);
     }
 }

@@ -1,5 +1,6 @@
 package com.kotmatross.shadersfixer.WIP;
 
+import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -109,5 +110,10 @@ public class EntityLightingFix extends EntityCreature {
     @Override
     public void onUpdate() {
         //super.onUpdate();
+
+        if(this.ticksExisted >= ShaderFixerConfig.tickLightingFixDespawn){
+            this.setDead();
+        }
+
     }
 }

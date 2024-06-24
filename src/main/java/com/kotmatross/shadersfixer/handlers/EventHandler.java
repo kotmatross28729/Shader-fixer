@@ -100,5 +100,6 @@ public class EventHandler {
         if(player.ticksExisted % ShaderFixerConfig.tickRateLightingFix == 0) {
                 spawnLightingFix(player);
         }
+
     }
 }

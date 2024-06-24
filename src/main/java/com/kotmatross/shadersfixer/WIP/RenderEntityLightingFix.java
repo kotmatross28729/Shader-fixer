@@ -1,5 +1,7 @@
 package com.kotmatross.shadersfixer.WIP;
 
+import com.kotmatross.shadersfixer.Tags;
+import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelCreeper;
@@ -34,20 +36,14 @@ public class RenderEntityLightingFix extends RenderLiving {
     {
         return this.inheritRenderPass((EntityLightingFix)p_77035_1_, p_77035_2_, p_77035_3_);
     }
-
-    /**
+    private static final ResourceLocation creeperTextures = new ResourceLocation("textures/entity/creeper/creeper.png");
     @Override
     protected ResourceLocation getEntityTexture(Entity entity) {
-        return new ResourceLocation(Tags.MODID, "textures/LightingFix.png"); // invisible texture, dirty hack 2
+
+        if(ShaderFixerConfig.LightingFixCreeper){
+            return creeperTextures;
+        } else {
+            return new ResourceLocation(Tags.MODID, "textures/LightingFix.png"); // invisible texture, dirty hack 2
+        }
     }
-    */
-
-    private static final ResourceLocation creeperTextures = new ResourceLocation("textures/entity/creeper/creeper.png");
-
-    @Override
-    protected ResourceLocation getEntityTexture(Entity p_110775_1_)
-    {
-        return creeperTextures;
-    }
-
 }
