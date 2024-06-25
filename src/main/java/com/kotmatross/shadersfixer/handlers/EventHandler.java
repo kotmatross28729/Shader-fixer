@@ -3,17 +3,27 @@ package com.kotmatross.shadersfixer.handlers;
 import com.kotmatross.shadersfixer.ShadersFixer;
 import com.kotmatross.shadersfixer.WIP.EntityLightingFix;
 import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
+import cpw.mods.fml.common.network.FMLNetworkEvent;
 import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.server.FMLServerHandler;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraftforge.client.event.GuiOpenEvent;
+import net.minecraftforge.event.world.ChunkDataEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -68,55 +78,136 @@ public class EventHandler {
 
 public static Logger logger = LogManager.getLogger();
 
-public void mylogger (String s){
+public static void mylogger (String s){
     logger.fatal(s);
 }
-
-    public static EntityZombie Zombie;
-
-    private static final HashMap<UUID, EntityZombie> zombies = new HashMap<>();
+    public static final HashMap<UUID, EntityLightingFix> Entities = new HashMap<>();
 
     @SubscribeEvent
     public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         if (!event.player.worldObj.isRemote) {
             EntityPlayer player = event.player;
             UUID playerID = player.getUniqueID();
-            
-            if (zombies.containsKey(playerID)) {
-                EntityZombie oldZombie = zombies.get(playerID);
-                if (oldZombie != null) {
-                    oldZombie.setDead();
-                    event.player.worldObj.removeEntity(oldZombie);
+
+            if (Entities.containsKey(playerID)) {
+                EntityLightingFix oldEnt = Entities.get(playerID);
+                if (oldEnt != null) {
+                    mylogger("1) " + oldEnt);
+                    oldEnt.setDead();
+                    event.player.worldObj.removeEntity(oldEnt);
+
+                    Chunk chunk = event.player.worldObj.getChunkFromBlockCoords((int) oldEnt.posX, (int) oldEnt.posZ);
+                    chunk.isModified = true;
                 }
-                zombies.remove(playerID);
+                Entities.remove(playerID);
             }
+            mylogger("2) ");
+            mylogger(Entities.toString());
 
-            EntityZombie newZombie = new EntityZombie(player.worldObj);
-            newZombie.setPosition(player.posX, player.posY, player.posZ);
-            player.worldObj.spawnEntityInWorld(newZombie);
-            zombies.put(playerID, newZombie);
-
+            EntityLightingFix newEnt = new EntityLightingFix(player.worldObj);
+            newEnt.setPosition(player.posX, player.posY, player.posZ);
+            player.worldObj.spawnEntityInWorld(newEnt);
+            Entities.put(playerID, newEnt);
+            mylogger("3) ");
+            mylogger(Entities.toString());
         }
     }
-
+/*
     @SubscribeEvent
-    public void onWorldSave(WorldEvent.Save event) {
+    public void onWorldUnload(WorldEvent.Unload event) {
         if (!event.world.isRemote) {
+            for ( EntityPlayer player : event.world.loadedEntityList) {
+                UUID playerID = player.getUniqueID();
+                EntityLightingFix ent = Entities.remove(playerID);
+                if (ent != null) {
+                    ent.setDead();
+                    event.world.removeEntity(ent);
 
-            for (Map.Entry<UUID, EntityZombie> entry : zombies.entrySet()) {
-                EntityZombie zombie = entry.getValue();
-                if (zombie != null) {
-                    zombie.setDead();
-                    event.world.removeEntity(zombie);
-
-                    // Get the chunk and mark it as modified
-                    Chunk chunk = event.world.getChunkFromBlockCoords((int)zombie.posX, (int)zombie.posZ);
+                    Chunk chunk = event.world.getChunkFromBlockCoords((int) ent.posX, (int) ent.posZ);
                     chunk.isModified = true;
                 }
             }
-            zombies.clear();
+        }
+    }*/
+
+    /**
+    @SubscribeEvent
+    public void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
+            if (event.player.worldObj != null) {
+                if (!event.player.worldObj.isRemote) {
+                    if (event.player.worldObj.getWorldTime() % ShaderFixerConfig.tickRatePlayerLoop == 0) {
+                        for (int i = 0; i < event.player.worldObj.playerEntities.size(); i++) {
+                            EntityPlayer player = (EntityPlayer) event.player.worldObj.playerEntities.get(i);
+                            if (player != null) {
+                                if(var1 != null){
+                                    var1.setDead();
+                                    ShadersFixer.logger.fatal("Entity removed: " + var1);
+                                }
+                                //playerTick(player, false);
+                                height = player.posY - (double) player.yOffset + 0.0D;
+                                var1 = new EntityLightingFix(player.worldObj);
+                                var1.setPositionAndUpdate(player.posX, height, player.posZ);
+                                ShadersFixer.logger.fatal("SPAWNED : " + var1);
+                                player.worldObj.spawnEntityInWorld(var1);
+                            }
+                        }
+                    }
+                }
         }
     }
+    */
+
+/**
+    @SubscribeEvent
+    public void onWorldSave(WorldEvent.Save event) {
+        if (!event.world.isRemote) {
+                for (Map.Entry<UUID, EntityLightingFix> entry : aab.entrySet()) {
+                    EntityLightingFix acac = entry.getValue();
+                    if (acac != null) {
+                        acac.setDead();
+                        event.world.removeEntity(acac);
+
+                        // Get the chunk and mark it as modified
+                        Chunk chunk = event.world.getChunkFromBlockCoords((int) acac.posX, (int) acac.posZ);
+                        chunk.isModified = true;
+                    }
+                }
+                aab.clear();
+        }
+    }
+*/
+
+
+/**
+    @SubscribeEvent
+    public void onWorldUnload(WorldEvent.Unload event) {
+        mylogger("a");
+        if (!event.world.isRemote) {
+            mylogger("b");
+            for (Map.Entry<UUID, EntityLightingFix> entry : aab.entrySet()) {
+                mylogger("c");
+                EntityLightingFix acac = entry.getValue();
+                mylogger("d");
+                if (acac != null) {
+                    mylogger("e");
+                    acac.setDead();
+                    mylogger("f");
+                    event.world.removeEntity(acac);
+                    mylogger("g");
+                    // Get the chunk and mark it as modified
+                    Chunk chunk = event.world.getChunkFromBlockCoords((int) acac.posX, (int) acac.posZ);
+                    mylogger("h");
+                    chunk.isModified = true;
+                    mylogger("i");
+                }
+                mylogger("u");
+            }
+            mylogger("y");
+            aab.clear();
+        }
+    }
+
+*/
 
 /*
     @SubscribeEvent
@@ -153,16 +244,17 @@ public void mylogger (String s){
     }
 */
 
-
+/**
     @SubscribeEvent
     public void playerLoggedOutEvent (PlayerEvent.PlayerLoggedOutEvent event)
     {
         Side side = FMLCommonHandler.instance().getEffectiveSide();
         if (side == Side.SERVER)
         {
+
         }
     }
-
+*/
 
 
 
@@ -215,35 +307,6 @@ public void mylogger (String s){
                                 } else {
                                     ShadersFixer.logger.warn("var1 = null?");
                                 }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-*/
-
-    /**
-    @SubscribeEvent
-    public void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
-        if(ShaderFixerConfig.LightingFix) {
-            if (event.player.worldObj != null) {
-                if (!event.player.worldObj.isRemote) {
-                    if (event.player.worldObj.getWorldTime() % ShaderFixerConfig.tickRatePlayerLoop == 0) {
-                        for (int i = 0; i < event.player.worldObj.playerEntities.size(); i++) {
-                            EntityPlayer player = (EntityPlayer) event.player.worldObj.playerEntities.get(i);
-                            if (player != null) {
-                                if(var1 != null){
-                                    var1.setDead();
-                                    ShadersFixer.logger.fatal("Entity removed: " + var1);
-                                }
-                                //playerTick(player, false);
-                                height = player.posY - (double) player.yOffset + 0.0D;
-                                var1 = new EntityLightingFix(player.worldObj);
-                                var1.setPositionAndUpdate(player.posX, height, player.posZ);
-                                ShadersFixer.logger.fatal("SPAWNED : " + var1);
-                                player.worldObj.spawnEntityInWorld(var1);
                             }
                         }
                     }
