@@ -91,6 +91,8 @@ public class ShaderFixerConfig {
                                                      // |
     public static int tickLightingFixDespawn = 1200; // |
 
+
+    public static boolean LightingFixDespawn = true;
     public static boolean LightingFixCreeper = false;
 
     public static int LightingFixRange = 2147483647;
@@ -104,6 +106,7 @@ public class ShaderFixerConfig {
         tickLightingFixDespawn = config.getInt("tickLightingFixDespawn", categoryExperimentalFixes, 1200,1, utils.INT_65536, "Test");
         LightingFixCreeper = config.getBoolean("LightingFixCreeper", categoryExperimentalFixes, false, "Test");
         LightingFixRange = config.getInt("LightingFixRange", categoryExperimentalFixes, 2147483647,1, utils.INT_MAX_VALUE, "Test");
+        LightingFixDespawn = config.getBoolean("LightingFixDespawn", categoryExperimentalFixes, true, "Test");
 
         if(config.hasChanged()) {
             config.save();

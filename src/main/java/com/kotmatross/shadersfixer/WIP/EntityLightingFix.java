@@ -25,6 +25,19 @@ public class EntityLightingFix extends EntityCreature {
         this.posY = y;
         this.posZ = z;
     }
+    @Override
+    public void setPositionAndUpdate(double p_70634_1_, double p_70634_3_, double p_70634_5_)
+    {
+        this.setLocationAndAngles(p_70634_1_, p_70634_3_, p_70634_5_, this.rotationYaw, this.rotationPitch);
+    }
+    @Override
+    public void setLocationAndAngles(double x, double y, double z, float yaw, float pitch)
+    {
+        this.lastTickPosX = this.prevPosX = this.posX = x;
+        this.lastTickPosY = this.prevPosY = this.posY = y + (double)this.yOffset;
+        this.lastTickPosZ = this.prevPosZ = this.posZ = z;
+        this.setPosition(this.posX, this.posY, this.posZ);
+    }
 
     @Override
     public AxisAlignedBB getBoundingBox()
@@ -111,8 +124,10 @@ public class EntityLightingFix extends EntityCreature {
     public void onUpdate() {
         //super.onUpdate();
 
-        if(this.ticksExisted >= ShaderFixerConfig.tickLightingFixDespawn){
-            this.setDead();
+        if(ShaderFixerConfig.LightingFixDespawn){
+            if(this.ticksExisted >= ShaderFixerConfig.tickLightingFixDespawn){
+                this.setDead();
+            }
         }
 
     }
