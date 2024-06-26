@@ -114,7 +114,6 @@ public class ShadersFixer {
             for (String allName : allNames) {
                 // For 1.7.10, func_152612_a = getPlayerForUsername
                 EntityPlayerMP playerS = MinecraftServer.getServer().getConfigurationManager().func_152612_a(allName); //event.player
-                logger.fatal("player: " + playerS);
                 if(playerS != null) {
                     if(playerS.worldObj != null){
                         if (!playerS.worldObj.isRemote) {
@@ -125,7 +124,6 @@ public class ShadersFixer {
                                         while (iterator.hasNext()) {
                                                 Map.Entry<UUID, EntityLightingFix> entry = iterator.next();
                                                         if (entry.getKey().equals(playerID)) {
-                                                            logger.warn("entry.getKey().equals(playerID)");
                                                             EntityLightingFix entity = entry.getValue();
                                                             if (entity != null) {
                                                                 entity.setDead();

@@ -7,9 +7,12 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.chunk.Chunk;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.lwjgl.input.Keyboard;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -20,8 +23,8 @@ public class EventHandler {
 
     //TODO:
     //  -1) Server-side config option - 100% DONE
-    //  2) Accurate player tracking - ~66.6%
-    //  3) Accurate Fix-Entity Positioning - 0%
+    //  -2) Accurate player tracking - 100% DONE
+    //  -3) Accurate Fix-Entity Positioning - 100% DONE
     //  4) In-game github wiki link - 0%
 
 
@@ -37,7 +40,6 @@ public class EventHandler {
                 if (event.player.worldObj.getWorldTime() % ShaderFixerConfig.tickRatePlayerLoop == 0) {
                             EntityPlayer player = event.player;
                             UUID playerID = player.getUniqueID();
-
                             EntityLightingFix Entity = new EntityLightingFix(player.worldObj);
                             Entity.setPosition(player.posX, player.posY, player.posZ);
                             player.worldObj.spawnEntityInWorld(Entity);
@@ -73,12 +75,13 @@ public class EventHandler {
         }
     }
 
-    //todo 0% - APT
+    //100% - APT
     @SubscribeEvent
     public void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
         if (event.player.worldObj != null) {
             if (!event.player.worldObj.isRemote) {
                 if (event.player.worldObj.getWorldTime() % ShaderFixerConfig.tickRatePlayerLoop == 0) {
+                    boolean alpha = false;
                     EntityPlayer player = event.player;
                     UUID playerID = player.getUniqueID();
                     Iterator<Map.Entry<UUID, EntityLightingFix>> iterator = Entities.entrySet().iterator();
@@ -90,15 +93,23 @@ public class EventHandler {
                                 entity.setDead();
                                 event.player.worldObj.removeEntity(entity);
                                 iterator.remove();
+                                alpha = true;
                             }
                         }
+                    }
+                    if(alpha) {
+                        EntityLightingFix Entity = new EntityLightingFix(player.worldObj);
+                        Entity.setPosition(player.posX, player.posY, player.posZ);
+                        player.worldObj.spawnEntityInWorld(Entity);
+                        Entities.put(playerID, Entity);
+                        alpha = false;
                     }
                 }
             }
         }
     }
 
-    //todo 0% - AEP
+    //100% - AEP
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if(ShaderFixerConfig.LightingFix) {
@@ -107,7 +118,20 @@ public class EventHandler {
                     if (event.player.worldObj.getWorldTime() % ShaderFixerConfig.tickRatePlayerLoop == 0) {
                         for (int i = 0; i < event.player.worldObj.playerEntities.size(); i++) {
                             EntityPlayer player = (EntityPlayer) event.player.worldObj.playerEntities.get(i);
-                            if (player != null) {}
+                            if (player != null) {
+                                //TODO
+                                UUID playerID = player.getUniqueID();
+                                Iterator<Map.Entry<UUID, EntityLightingFix>> iterator = Entities.entrySet().iterator();
+                                while (iterator.hasNext()) {
+                                    Map.Entry<UUID, EntityLightingFix> entry = iterator.next();
+                                    if (entry.getKey().equals(playerID)) {
+                                        EntityLightingFix entity = entry.getValue();
+                                        if (entity != null) {
+                                            entity.setLocationAndAngles(player.posX,player.posY,player.posZ, entity.rotationYaw, entity.rotationPitch);
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
