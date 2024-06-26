@@ -46,6 +46,8 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
         if(!loadedMods.contains("mcheli")) {
             ShaderFixerConfig.FixMcheliOShaders = false;
         }
+
+        //TODO
         if(!loadedMods.contains("rivalrebels")) {
             ShaderFixerConfig.FixRivalRebelsShaders = false;
         }

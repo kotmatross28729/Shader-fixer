@@ -1,14 +1,4 @@
 package com.kotmatross.shadersfixer.WIP;
-
-import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
-import cpw.mods.fml.relauncher.Side;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.event.world.WorldEvent;
-
 public class TEMP {
 
 /*

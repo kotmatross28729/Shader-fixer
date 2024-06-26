@@ -1,6 +1,5 @@
 package com.kotmatross.shadersfixer.WIP;
 
-import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;

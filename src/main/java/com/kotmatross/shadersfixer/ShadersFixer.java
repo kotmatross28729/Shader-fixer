@@ -13,20 +13,15 @@ import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.relauncher.FMLLaunchHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.multiplayer.WorldClient;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
@@ -98,10 +93,12 @@ public class ShadersFixer {
     public void postInit(FMLPostInitializationEvent event) {
         if (FMLLaunchHandler.side().isClient()) {
             if (!LightingFix()) {
-                LogManager.getLogger().info("ShadersMod or Psychedelicraft loaded, lighting fix = true ");
+                logger.info("ShadersMod or Psychedelicraft loaded, lighting fix = true ");
+                //TODO conf?
             } else {
                 if (!SHADERS_MOD() && !isPsychedelicraftLoaded()) {
-                    LogManager.getLogger().warn("ShadersMod and Psychedelicraft is not loaded, skip lighting fix ");
+                    logger.warn("ShadersMod and Psychedelicraft is not loaded, skip lighting fix ");
+                    //TODO conf?
                 }
             }
         }
@@ -117,7 +114,7 @@ public class ShadersFixer {
             for (String allName : allNames) {
                 // For 1.7.10, func_152612_a = getPlayerForUsername
                 EntityPlayerMP playerS = MinecraftServer.getServer().getConfigurationManager().func_152612_a(allName); //event.player
-                LogManager.getLogger().fatal("player: " + playerS);
+                logger.fatal("player: " + playerS);
                 if(playerS != null) {
                     if(playerS.worldObj != null){
                         if (!playerS.worldObj.isRemote) {
@@ -128,7 +125,7 @@ public class ShadersFixer {
                                         while (iterator.hasNext()) {
                                                 Map.Entry<UUID, EntityLightingFix> entry = iterator.next();
                                                         if (entry.getKey().equals(playerID)) {
-                                                            LogManager.getLogger().warn("entry.getKey().equals(playerID)");
+                                                            logger.warn("entry.getKey().equals(playerID)");
                                                             EntityLightingFix entity = entry.getValue();
                                                             if (entity != null) {
                                                                 entity.setDead();

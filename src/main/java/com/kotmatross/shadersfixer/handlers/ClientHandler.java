@@ -1,7 +1,6 @@
 package com.kotmatross.shadersfixer.handlers;
 
 import com.kotmatross.shadersfixer.ShadersFixer;
-import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -13,7 +12,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.event.ClickEvent;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
