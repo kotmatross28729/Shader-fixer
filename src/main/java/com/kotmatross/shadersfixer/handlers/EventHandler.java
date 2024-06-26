@@ -119,7 +119,6 @@ public class EventHandler {
                         for (int i = 0; i < event.player.worldObj.playerEntities.size(); i++) {
                             EntityPlayer player = (EntityPlayer) event.player.worldObj.playerEntities.get(i);
                             if (player != null) {
-                                //TODO
                                 UUID playerID = player.getUniqueID();
                                 Iterator<Map.Entry<UUID, EntityLightingFix>> iterator = Entities.entrySet().iterator();
                                 while (iterator.hasNext()) {

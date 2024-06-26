@@ -92,18 +92,17 @@ public class ShadersFixer {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         if (FMLLaunchHandler.side().isClient()) {
-            if (!LightingFix()) {
+            if (LightingFix()) {
                 logger.info("ShadersMod or Psychedelicraft loaded, lighting fix = true ");
-                //TODO conf?
+                ShaderFixerConfig.LightingFix = true;
             } else {
                 if (!SHADERS_MOD() && !isPsychedelicraftLoaded()) {
                     logger.warn("ShadersMod and Psychedelicraft is not loaded, skip lighting fix ");
-                    //TODO conf?
+                    ShaderFixerConfig.LightingFix = false;
                 }
             }
         }
     }
-
 
     @Mod.EventHandler
     public void onServerStopping(FMLServerStoppingEvent event) {

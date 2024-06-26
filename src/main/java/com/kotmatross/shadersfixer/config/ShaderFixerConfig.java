@@ -78,31 +78,20 @@ public class ShaderFixerConfig {
     }
 
 
-//WIP
-
-    static final String categoryExperimentalFixes = "Experimental fixes";
+//Lighting Fix
+    static final String categoryLightingFix = "Lighting Fix";
     public static boolean LightingFix = true;
     public static int tickRatePlayerLoop = 1;
-    public static int tickRateLightingFix = 200;
-
-    //public static int tickLightingFixDespawn = 1200;
-
-
-    //public static boolean LightingFixDespawn = true;
     public static boolean LightingFixCreeper = false;
 
     public static int LightingFixRange = 2147483647;
 
     public static void loadWIPConfig(File configFile) {
         Configuration config = new Configuration(configFile);
-
-        LightingFix = config.getBoolean("LightingFix", categoryExperimentalFixes, true, "Test");
-        tickRatePlayerLoop = config.getInt("tickRatePlayerLoop", categoryExperimentalFixes, 1,1, utils.INT_65536, "How frequently the mod iterates all players, effects rates, less is more frequent");
-        tickRateLightingFix = config.getInt("tickRateLightingFix", categoryExperimentalFixes, 200,1, utils.INT_65536, "Test");
-        //tickLightingFixDespawn = config.getInt("tickLightingFixDespawn", categoryExperimentalFixes, 1200,1, utils.INT_65536, "Test");
-        LightingFixCreeper = config.getBoolean("LightingFixCreeper", categoryExperimentalFixes, false, "Test");
-        LightingFixRange = config.getInt("LightingFixRange", categoryExperimentalFixes, 2147483647,1, utils.INT_MAX_VALUE, "Test");
-        //LightingFixDespawn = config.getBoolean("LightingFixDespawn", categoryExperimentalFixes, true, "Test");
+        LightingFix = config.getBoolean("LightingFix", categoryLightingFix, false, "Enables LightingFix - a special mob that, due to its rendering features, fixes the “Infamous lighting bug” (more details on the mod wiki)");
+        tickRatePlayerLoop = config.getInt("tickRatePlayerLoop", categoryLightingFix, 1,1, utils.INT_65536, "How frequently the mod iterates all players?, less is more frequent. Default - every tick");
+        LightingFixCreeper = config.getBoolean("LightingFixCreeper", categoryLightingFix, false, "Test function that displays LightingFix mob as a creeper");
+        LightingFixRange = config.getInt("LightingFixRange", categoryLightingFix, 2147483647,1, utils.INT_MAX_VALUE, "\"trackingRange\" of the LightingFix mob, I recommend not touching it");
 
         if(config.hasChanged()) {
             config.save();
