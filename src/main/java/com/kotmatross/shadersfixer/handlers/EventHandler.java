@@ -110,26 +110,30 @@ public static void mylogger (String s){
     }
 
     @SubscribeEvent
-    public void playerLoggedOutEvent (PlayerEvent.PlayerLoggedOutEvent event)
-    {
+    public void playerLoggedOutEvent(PlayerEvent.PlayerLoggedOutEvent event) {
         Side side = FMLCommonHandler.instance().getEffectiveSide();
-        if (side == Side.SERVER)
-        {
+        if (side == Side.SERVER) {
             if (!event.player.worldObj.isRemote) {
                 if (event.player.worldObj.getWorldTime() % ShaderFixerConfig.tickRatePlayerLoop == 0) {
-                            EntityPlayer player = event.player;
-                            UUID playerID = player.getUniqueID();
-                            for (Map.Entry<UUID, EntityLightingFix> entry : Entities.entrySet()) {
-                                 EntityLightingFix Entity = entry.getValue();
-                                    if (Entity != null) {
-                                        Entity.setDead();
-                                        event.player.worldObj.removeEntity(Entity);
-                                        Entities.remove(playerID, Entity);
-                                    }
-                                }
+                    EntityPlayer player = event.player;
+                    UUID playerID = player.getUniqueID();
+                    Iterator<Map.Entry<UUID, EntityLightingFix>> iterator = Entities.entrySet().iterator();
+                    while (iterator.hasNext()) {
+                        Map.Entry<UUID, EntityLightingFix> entry = iterator.next();
+                        if (entry.getKey().equals(playerID)) {
+                            EntityLightingFix entity = entry.getValue();
+                            if (entity != null) {
+                                entity.setDead();
+                                event.player.worldObj.removeEntity(entity);
+                                iterator.remove();
+                            }
+                        }
+                    }
                 }
             }
         }
+    }
+
 //            if (!event.player.worldObj.isRemote) {
 //                for (Map.Entry<UUID, EntityLightingFix> entry : Entities.entrySet()) {
 //                    EntityLightingFix acac = entry.getValue();
@@ -392,4 +396,3 @@ public static void mylogger (String s){
         }
     }
 */
-}
