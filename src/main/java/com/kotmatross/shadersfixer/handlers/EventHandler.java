@@ -23,13 +23,19 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.client.event.GuiOpenEvent;
+import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.world.ChunkDataEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 
+import javax.management.relation.RelationSupport;
 import java.util.*;
+
+import static cpw.mods.fml.common.eventhandler.Event.Result.ALLOW;
+import static cpw.mods.fml.common.eventhandler.Event.Result.DENY;
 
 public class EventHandler {
     //TODO:
@@ -81,37 +87,108 @@ public static Logger logger = LogManager.getLogger();
 public static void mylogger (String s){
     logger.fatal(s);
 }
+
+//EntityZombie
+//EntityLightingFix
     public static final HashMap<UUID, EntityLightingFix> Entities = new HashMap<>();
+
+    //public static EntityLightingFix Entity;
 
     @SubscribeEvent
     public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         if (!event.player.worldObj.isRemote) {
-            EntityPlayer player = event.player;
-            UUID playerID = player.getUniqueID();
+            if (event.player.worldObj.getWorldTime() % ShaderFixerConfig.tickRatePlayerLoop == 0) {
+                        EntityPlayer player = event.player;
+                        UUID playerID = player.getUniqueID();
 
-            if (Entities.containsKey(playerID)) {
-                EntityLightingFix oldEnt = Entities.get(playerID);
-                if (oldEnt != null) {
-                    mylogger("1) " + oldEnt);
-                    oldEnt.setDead();
-                    event.player.worldObj.removeEntity(oldEnt);
-
-                    Chunk chunk = event.player.worldObj.getChunkFromBlockCoords((int) oldEnt.posX, (int) oldEnt.posZ);
-                    chunk.isModified = true;
-                }
-                Entities.remove(playerID);
-            }
-            mylogger("2) ");
-            mylogger(Entities.toString());
-
-            EntityLightingFix newEnt = new EntityLightingFix(player.worldObj);
-            newEnt.setPosition(player.posX, player.posY, player.posZ);
-            player.worldObj.spawnEntityInWorld(newEnt);
-            Entities.put(playerID, newEnt);
-            mylogger("3) ");
-            mylogger(Entities.toString());
+                        EntityLightingFix Entity = new EntityLightingFix(player.worldObj);
+                        Entity.setPosition(player.posX, player.posY, player.posZ);
+                        player.worldObj.spawnEntityInWorld(Entity);
+                        Entities.put(playerID, Entity);
+                    }
         }
     }
+
+    @SubscribeEvent
+    public void playerLoggedOutEvent (PlayerEvent.PlayerLoggedOutEvent event)
+    {
+        Side side = FMLCommonHandler.instance().getEffectiveSide();
+        if (side == Side.SERVER)
+        {
+            if (!event.player.worldObj.isRemote) {
+                if (event.player.worldObj.getWorldTime() % ShaderFixerConfig.tickRatePlayerLoop == 0) {
+                            EntityPlayer player = event.player;
+                            UUID playerID = player.getUniqueID();
+                            for (Map.Entry<UUID, EntityLightingFix> entry : Entities.entrySet()) {
+                                 EntityLightingFix Entity = entry.getValue();
+                                    if (Entity != null) {
+                                        Entity.setDead();
+                                        event.player.worldObj.removeEntity(Entity);
+                                        Entities.remove(playerID, Entity);
+                                    }
+                                }
+                }
+            }
+        }
+//            if (!event.player.worldObj.isRemote) {
+//                for (Map.Entry<UUID, EntityLightingFix> entry : Entities.entrySet()) {
+//                    EntityLightingFix acac = entry.getValue();
+//                    if (acac != null) {
+//                        acac.setDead();
+//                        event.player.worldObj.removeEntity(acac);
+//
+//                        //Chunk chunk = event.player.worldObj.getChunkFromBlockCoords((int) acac.posX, (int) acac.posZ);
+//                        //chunk.isModified = true;
+//                    }
+//                }
+//                Entities.clear();
+//            }
+//        }
+    }
+
+
+//    @SubscribeEvent
+//    public void LivingSpawnEvent(LivingSpawnEvent.AllowDespawn event) {
+//        event.setResult(ALLOW);
+//    }
+
+//    public boolean alpha = false;
+
+//    @SubscribeEvent
+//    public void ButtonClick(GuiScreenEvent.ActionPerformedEvent.Pre event) {
+//        mylogger("BUTTON PRESSED");
+//        if(event.button.id == 1){
+//            alpha = true;
+//            mylogger("YE");
+//        } else {
+//            alpha = false;
+//            mylogger("NO");
+//        }
+//    }
+
+/**
+    @SubscribeEvent
+    public void onWorldSave(WorldEvent.Save event) {
+        if (!event.world.isRemote) {
+  //          mylogger("alpha - " + alpha);
+  //          if (alpha){
+                for (Map.Entry<UUID, EntityLightingFix> entry : Entities.entrySet()) {
+                    EntityLightingFix acac = entry.getValue();
+                    if (acac != null) {
+                        acac.setDead();
+                        event.world.removeEntity(acac);
+
+                        Chunk chunk = event.world.getChunkFromBlockCoords((int) acac.posX, (int) acac.posZ);
+                        chunk.isModified = true;
+                    }
+                }
+                Entities.clear();
+            }
+  //      }
+    }
+*/
+
+
 /*
     @SubscribeEvent
     public void onWorldUnload(WorldEvent.Unload event) {
