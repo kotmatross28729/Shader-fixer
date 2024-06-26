@@ -1,7 +1,5 @@
 package com.kotmatross.shadersfixer.mixins.early.client.minecraft.client.renderer.entity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderLiving;

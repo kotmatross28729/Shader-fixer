@@ -1,8 +1,5 @@
 package com.kotmatross.shadersfixer.mixins.late.client.mchelio;
 
-import mcheli.aircraft.MCH_AircraftInfo;
-import mcheli.aircraft.MCH_BoundingBox;
-import mcheli.aircraft.MCH_EntityAircraft;
 import mcheli.gui.MCH_Gui;
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;

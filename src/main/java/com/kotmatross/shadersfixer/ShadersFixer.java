@@ -1,6 +1,6 @@
 package com.kotmatross.shadersfixer;
 
-import com.kotmatross.shadersfixer.WIP.EntityLightingFix;
+import com.kotmatross.shadersfixer.LightingFix.EntityLightingFix;
 import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
 import com.kotmatross.shadersfixer.handlers.EventHandler;
 import com.kotmatross.shadersfixer.proxy.CommonProxy;
@@ -48,7 +48,7 @@ public class ShadersFixer {
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
         String configFolder = "config" + File.separator + Tags.MODID + File.separator;
-        ShaderFixerConfig.loadWIPConfig(new File(Launch.minecraftHome, configFolder + "LightingFix.cfg"));
+        ShaderFixerConfig.loadLightingFixConfig(new File(Launch.minecraftHome, configFolder + "LightingFix.cfg"));
 
 
         EventHandler EHandler = new EventHandler();

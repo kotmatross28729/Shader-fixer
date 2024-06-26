@@ -1,6 +1,5 @@
 package com.kotmatross.shadersfixer.mixins.late.client.Techguns.client.renderer;
 
-import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.OpenGlHelper;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;

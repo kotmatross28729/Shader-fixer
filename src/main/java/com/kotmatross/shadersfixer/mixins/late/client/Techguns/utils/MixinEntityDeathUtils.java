@@ -8,19 +8,13 @@ import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
-import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import techguns.entities.npc.*;
 import techguns.util.EntityDeathUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.LogManager;
 
 import static com.kotmatross.shadersfixer.config.ShaderFixerConfig.*;
 

@@ -1,4 +1,4 @@
-package com.kotmatross.shadersfixer.WIP;
+package com.kotmatross.shadersfixer.LightingFix;
 public class TEMP {
 
 /*

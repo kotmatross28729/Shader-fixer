@@ -1,18 +1,15 @@
 package com.kotmatross.shadersfixer.handlers;
 
-import com.kotmatross.shadersfixer.WIP.EntityLightingFix;
+import com.kotmatross.shadersfixer.LightingFix.EntityLightingFix;
 import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.chunk.Chunk;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.lwjgl.input.Keyboard;
 
 import java.util.HashMap;
 import java.util.Iterator;

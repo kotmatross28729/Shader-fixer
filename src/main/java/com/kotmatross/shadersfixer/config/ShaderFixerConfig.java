@@ -86,7 +86,7 @@ public class ShaderFixerConfig {
 
     public static int LightingFixRange = 2147483647;
 
-    public static void loadWIPConfig(File configFile) {
+    public static void loadLightingFixConfig(File configFile) {
         Configuration config = new Configuration(configFile);
         LightingFix = config.getBoolean("LightingFix", categoryLightingFix, false, "Enables LightingFix - a special mob that, due to its rendering features, fixes the “Infamous lighting bug” (more details on the mod wiki)");
         tickRatePlayerLoop = config.getInt("tickRatePlayerLoop", categoryLightingFix, 1,1, utils.INT_65536, "How frequently the mod iterates all players?, less is more frequent. Default - every tick");

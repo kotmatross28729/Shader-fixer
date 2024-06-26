@@ -1,6 +1,5 @@
 package com.kotmatross.shadersfixer.mixins.late.client.Journeymap;
 
-import com.github.lunatrius.schematica.client.world.SchematicWorld;
 import journeymap.client.cartography.RGB;
 import journeymap.client.forge.helper.IRenderHelper;
 import journeymap.client.render.draw.DrawUtil;

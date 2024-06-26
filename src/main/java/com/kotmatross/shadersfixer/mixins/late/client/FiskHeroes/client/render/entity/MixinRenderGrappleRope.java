@@ -2,18 +2,9 @@ package com.kotmatross.shadersfixer.mixins.late.client.FiskHeroes.client.render.
 
 import com.fiskmods.heroes.client.render.entity.RenderGrappleRope;
 import com.fiskmods.heroes.common.entity.EntityGrappleRope;
-import com.fiskmods.heroes.util.SHRenderHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
-import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Slice;

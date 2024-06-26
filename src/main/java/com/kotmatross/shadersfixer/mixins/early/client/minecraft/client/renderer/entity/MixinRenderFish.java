@@ -1,11 +1,9 @@
 package com.kotmatross.shadersfixer.mixins.early.client.minecraft.client.renderer.entity;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderFish;
 import net.minecraft.entity.projectile.EntityFishHook;
-import net.minecraft.util.AxisAlignedBB;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

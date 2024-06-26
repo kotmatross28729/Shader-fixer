@@ -1,7 +1,6 @@
 package com.kotmatross.shadersfixer.mixins.late.client.DragonBlockC.client;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import JinRyuu.DragonBC.common.Npcs.RenderAura;
 import JinRyuu.DragonBC.common.Npcs.EntityAura;

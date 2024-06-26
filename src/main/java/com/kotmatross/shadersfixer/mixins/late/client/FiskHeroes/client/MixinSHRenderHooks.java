@@ -1,20 +1,9 @@
 package com.kotmatross.shadersfixer.mixins.late.client.FiskHeroes.client;
 
 import com.fiskmods.heroes.client.SHRenderHooks;
-import com.fiskmods.heroes.common.config.SHConfig;
-import com.fiskmods.heroes.util.FiskMath;
-import com.fiskmods.heroes.util.SHRenderHelper;
-import com.kotmatross.shadersfixer.ShadersFixer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
-import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Slice;

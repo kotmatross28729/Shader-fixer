@@ -2,9 +2,7 @@ package com.kotmatross.shadersfixer.mixins.early.client.minecraft.client.rendere
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderDragon;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.boss.EntityDragon;
-import net.minecraft.entity.effect.EntityLightningBolt;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

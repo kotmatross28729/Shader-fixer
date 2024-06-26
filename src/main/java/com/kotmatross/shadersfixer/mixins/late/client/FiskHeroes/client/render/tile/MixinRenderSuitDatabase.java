@@ -2,7 +2,6 @@ package com.kotmatross.shadersfixer.mixins.late.client.FiskHeroes.client.render.
 
 import com.fiskmods.heroes.common.tileentity.TileEntitySuitDatabase;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

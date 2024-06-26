@@ -1,7 +1,7 @@
 package com.kotmatross.shadersfixer.proxy;
 
 import com.kotmatross.shadersfixer.ShadersFixer;
-import com.kotmatross.shadersfixer.WIP.EntityLightingFix;
+import com.kotmatross.shadersfixer.LightingFix.EntityLightingFix;
 import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
 import cpw.mods.fml.common.registry.EntityRegistry;
 

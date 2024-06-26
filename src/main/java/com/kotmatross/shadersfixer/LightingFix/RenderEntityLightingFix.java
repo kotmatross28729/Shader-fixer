@@ -1,4 +1,4 @@
-package com.kotmatross.shadersfixer.WIP;
+package com.kotmatross.shadersfixer.LightingFix;
 
 import com.kotmatross.shadersfixer.Tags;
 import com.kotmatross.shadersfixer.config.ShaderFixerConfig;

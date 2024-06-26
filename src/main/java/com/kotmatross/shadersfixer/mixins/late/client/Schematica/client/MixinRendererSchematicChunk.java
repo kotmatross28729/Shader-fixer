@@ -24,10 +24,4 @@ public class MixinRendererSchematicChunk {
     public void updateRenderer(CallbackInfo ci) {
         Minecraft.getMinecraft().renderEngine.bindTexture(shaders_fix);
     }
-
-
-//    @Inject(method = "renderTileEntities", at = @At(value = "HEAD"), remap = false)
-//    public void renderTileEntities(int renderPass, CallbackInfo ci) {
-//        Minecraft.getMinecraft().renderEngine.bindTexture(shaders_fix);
-//    }
 }
