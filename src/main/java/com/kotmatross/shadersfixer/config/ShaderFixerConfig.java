@@ -83,16 +83,12 @@ public class ShaderFixerConfig {
     static final String categoryExperimentalFixes = "Experimental fixes";
     public static boolean LightingFix = true;
     public static int tickRatePlayerLoop = 1;
+    public static int tickRateLightingFix = 200;
 
-    public static int tickRateLightingFix = 200;     // |
-                                                     // |
-                                                     // | - - - - - 6 extra renderers per minute, not good not terrible
-                                                     // |
-                                                     // |
-    public static int tickLightingFixDespawn = 1200; // |
+    //public static int tickLightingFixDespawn = 1200;
 
 
-    public static boolean LightingFixDespawn = true;
+    //public static boolean LightingFixDespawn = true;
     public static boolean LightingFixCreeper = false;
 
     public static int LightingFixRange = 2147483647;
@@ -103,10 +99,10 @@ public class ShaderFixerConfig {
         LightingFix = config.getBoolean("LightingFix", categoryExperimentalFixes, true, "Test");
         tickRatePlayerLoop = config.getInt("tickRatePlayerLoop", categoryExperimentalFixes, 1,1, utils.INT_65536, "How frequently the mod iterates all players, effects rates, less is more frequent");
         tickRateLightingFix = config.getInt("tickRateLightingFix", categoryExperimentalFixes, 200,1, utils.INT_65536, "Test");
-        tickLightingFixDespawn = config.getInt("tickLightingFixDespawn", categoryExperimentalFixes, 1200,1, utils.INT_65536, "Test");
+        //tickLightingFixDespawn = config.getInt("tickLightingFixDespawn", categoryExperimentalFixes, 1200,1, utils.INT_65536, "Test");
         LightingFixCreeper = config.getBoolean("LightingFixCreeper", categoryExperimentalFixes, false, "Test");
         LightingFixRange = config.getInt("LightingFixRange", categoryExperimentalFixes, 2147483647,1, utils.INT_MAX_VALUE, "Test");
-        LightingFixDespawn = config.getBoolean("LightingFixDespawn", categoryExperimentalFixes, true, "Test");
+        //LightingFixDespawn = config.getBoolean("LightingFixDespawn", categoryExperimentalFixes, true, "Test");
 
         if(config.hasChanged()) {
             config.save();

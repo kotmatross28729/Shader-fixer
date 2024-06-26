@@ -124,11 +124,11 @@ public class EntityLightingFix extends EntityCreature {
     public void onUpdate() {
         //super.onUpdate();
 
-        if(ShaderFixerConfig.LightingFixDespawn){
-            if(this.ticksExisted >= ShaderFixerConfig.tickLightingFixDespawn){
-                this.setDead();
-            }
-        }
+       // if(ShaderFixerConfig.LightingFixDespawn){
+       //     if(this.ticksExisted >= ShaderFixerConfig.tickLightingFixDespawn){
+       //         this.setDead();
+       //     }
+       // }
 
     }
 }

@@ -66,4 +66,21 @@ public class TEMP {
         }
     }
  */
+/*
+    @EventHandler
+    public void onServerStopping(FMLServerStoppingEvent event) {
+        if(FMLCommonHandler.instance().getSide() == Side.CLIENT) {
+            // Do stuff only for Single Player / integrated server
+            MinecraftServer mc = FMLClientHandler.instance().getServer();
+            String allNames[] = mc.getAllUsernames().clone();
+            for(int i = 0; i < allNames.length; i++) {
+                // For 1.7.10, func_152612_a = getPlayerForUsername
+                EntityPlayerMP player = MinecraftServer.getServer().getConfigurationManager().func_152612_a(allNames[i]);
+                PlayerData.savePlayerData((EntityPlayerMP)player);
+            }
+        } else {
+            // Do stuff only for dedicated server *shutdown*, for individual players logging out hook PlayerLoggedOutEvent in an EventBus subscription instead
+        }
+    }
+    */
 }

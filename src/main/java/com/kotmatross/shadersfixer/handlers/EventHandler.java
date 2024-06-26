@@ -44,43 +44,6 @@ public class EventHandler {
     //  -3) Accurate Fix-Entity Positioning - ?%
     //  4) In-game GUI menu with explanation about this fix - 0% (Replace with github wiki?)
 
-    public static EntityLightingFix var1;
-
-
-    public static double height;
-
-
-/**
-    @SubscribeEvent
-    public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        if(ShaderFixerConfig.LightingFix) {
-            if (event.player.worldObj != null) {
-                if (!event.player.worldObj.isRemote) {
-                    if (event.player.worldObj.getWorldTime() % ShaderFixerConfig.tickRatePlayerLoop == 0) {
-                        for (int i = 0; i < event.player.worldObj.playerEntities.size(); i++) {
-                            EntityPlayer player = (EntityPlayer) event.player.worldObj.playerEntities.get(i);
-                            if (player != null) {
-                                if(var1 != null){
-                                    var1.setDead(); //5) AFTER LOGOUT, NULL AGAIN
-                                    ShadersFixer.logger.fatal("Entity removed: " + var1);
-                                }
-                                //playerTick(player, false);
-                                height = player.posY - (double) player.yOffset + 0.0D;
-                                var1 = new EntityLightingFix(player.worldObj);
-                                var1.setPositionAndUpdate(player.posX, height, player.posZ);
-                                ShadersFixer.logger.fatal("SPAWNED : " + var1);
-                                player.worldObj.spawnEntityInWorld(var1); //2) NOT NULL , 6)NOT NULL AGAIN
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-*/
-
-
-//public static EntityZombie var2 = null; // null
 
 public static Logger logger = LogManager.getLogger();
 
@@ -88,31 +51,29 @@ public static void mylogger (String s){
     logger.fatal(s);
 }
 
-//EntityZombie
-//EntityLightingFix
     public static final HashMap<UUID, EntityLightingFix> Entities = new HashMap<>();
-
-    //public static EntityLightingFix Entity;
 
     @SubscribeEvent
     public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        if (!event.player.worldObj.isRemote) {
-            if (event.player.worldObj.getWorldTime() % ShaderFixerConfig.tickRatePlayerLoop == 0) {
-                        EntityPlayer player = event.player;
-                        UUID playerID = player.getUniqueID();
+        if (event.player.worldObj != null) {
+            if (!event.player.worldObj.isRemote) {
+                if (event.player.worldObj.getWorldTime() % ShaderFixerConfig.tickRatePlayerLoop == 0) {
+                            EntityPlayer player = event.player;
+                            UUID playerID = player.getUniqueID();
 
-                        EntityLightingFix Entity = new EntityLightingFix(player.worldObj);
-                        Entity.setPosition(player.posX, player.posY, player.posZ);
-                        player.worldObj.spawnEntityInWorld(Entity);
-                        Entities.put(playerID, Entity);
-                    }
+                            EntityLightingFix Entity = new EntityLightingFix(player.worldObj);
+                            Entity.setPosition(player.posX, player.posY, player.posZ);
+                            player.worldObj.spawnEntityInWorld(Entity);
+                            Entities.put(playerID, Entity);
+                        }
+            }
         }
     }
 
     @SubscribeEvent
     public void playerLoggedOutEvent(PlayerEvent.PlayerLoggedOutEvent event) {
         Side side = FMLCommonHandler.instance().getEffectiveSide();
-        if (side == Side.SERVER) {
+        if (side == Side.SERVER) { //For dedicated servers
             if (!event.player.worldObj.isRemote) {
                 if (event.player.worldObj.getWorldTime() % ShaderFixerConfig.tickRatePlayerLoop == 0) {
                     EntityPlayer player = event.player;
