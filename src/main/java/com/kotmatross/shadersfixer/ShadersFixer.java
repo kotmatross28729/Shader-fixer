@@ -28,6 +28,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
+import static com.kotmatross.shadersfixer.config.ShaderFixerConfig.ForceDisableLightingFix;
+
 @Mod(modid = Tags.MODID,
     version = Tags.VERSION,
     name = Tags.MODNAME,
@@ -50,10 +52,11 @@ public class ShadersFixer {
         String configFolder = "config" + File.separator + Tags.MODID + File.separator;
         ShaderFixerConfig.loadLightingFixConfig(new File(Launch.minecraftHome, configFolder + "LightingFix.cfg"));
 
-
-        EventHandler EHandler = new EventHandler();
-        FMLCommonHandler.instance().bus().register(EHandler);
-        MinecraftForge.EVENT_BUS.register(EHandler);
+        if(!ForceDisableLightingFix) {
+            EventHandler EHandler = new EventHandler();
+            FMLCommonHandler.instance().bus().register(EHandler);
+            MinecraftForge.EVENT_BUS.register(EHandler);
+        }
     }
 
     @Mod.EventHandler
@@ -93,45 +96,50 @@ public class ShadersFixer {
     public void postInit(FMLPostInitializationEvent event) {
         if (FMLLaunchHandler.side().isClient()) {
             if (LightingFix()) {
-                logger.info("ShadersMod or Psychedelicraft loaded, lighting fix = true ");
+                logger.info("Client side :  ShadersMod or Psychedelicraft loaded, lighting fix = true ");
                 ShaderFixerConfig.LightingFix = true;
             } else {
                 if (!SHADERS_MOD() && !isPsychedelicraftLoaded()) {
-                    logger.warn("ShadersMod and Psychedelicraft is not loaded, skip lighting fix ");
+                    logger.warn("Client side :  ShadersMod and Psychedelicraft is not loaded, skip lighting fix ");
                     ShaderFixerConfig.LightingFix = false;
                 }
             }
+        } else if(isPsychedelicraftLoaded()){
+            logger.info("Server side : Psychedelicraft loaded, lighting fix = true ");
+            ShaderFixerConfig.LightingFix = true;
         }
     }
 
     @Mod.EventHandler
     public void onServerStopping(FMLServerStoppingEvent event) {
-        if(FMLCommonHandler.instance().getSide() == Side.CLIENT) {  //For integrated servers
-            // Do stuff only for Single Player / integrated server
-            MinecraftServer mc = FMLClientHandler.instance().getServer();
-            String[] allNames = mc.getAllUsernames().clone();
-            for (String allName : allNames) {
-                // For 1.7.10, func_152612_a = getPlayerForUsername
-                EntityPlayerMP playerS = MinecraftServer.getServer().getConfigurationManager().func_152612_a(allName); //event.player
-                if(playerS != null) {
-                    if(playerS.worldObj != null){
-                        if (!playerS.worldObj.isRemote) {
-                            if(playerS.isClientWorld()) {
-                                if (playerS.worldObj.getWorldTime() % ShaderFixerConfig.tickRatePlayerLoop == 0) {
-                                    UUID playerID = playerS.getUniqueID();
-                                        Iterator<Map.Entry<UUID, EntityLightingFix>> iterator = EventHandler.Entities.entrySet().iterator();
-                                        while (iterator.hasNext()) {
-                                                Map.Entry<UUID, EntityLightingFix> entry = iterator.next();
-                                                        if (entry.getKey().equals(playerID)) {
-                                                            EntityLightingFix entity = entry.getValue();
-                                                            if (entity != null) {
-                                                                entity.setDead();
-                                                                Chunk chunk = playerS.worldObj.getChunkFromBlockCoords((int) entity.posX, (int) entity.posZ);
-                                                                chunk.isModified = true;
-                                                                iterator.remove();
+        if(!ForceDisableLightingFix) {
+            if(FMLCommonHandler.instance().getSide() == Side.CLIENT) {  //For integrated servers
+                // Do stuff only for Single Player / integrated server
+                MinecraftServer mc = FMLClientHandler.instance().getServer();
+                String[] allNames = mc.getAllUsernames().clone();
+                for (String allName : allNames) {
+                    // For 1.7.10, func_152612_a = getPlayerForUsername
+                    EntityPlayerMP playerS = MinecraftServer.getServer().getConfigurationManager().func_152612_a(allName); //event.player
+                    if(playerS != null) {
+                        if(playerS.worldObj != null){
+                            if (!playerS.worldObj.isRemote) {
+                                if(playerS.isClientWorld()) {
+                                    if (playerS.worldObj.getWorldTime() % ShaderFixerConfig.tickRatePlayerLoop == 0) {
+                                        UUID playerID = playerS.getUniqueID();
+                                            Iterator<Map.Entry<UUID, EntityLightingFix>> iterator = EventHandler.Entities.entrySet().iterator();
+                                            while (iterator.hasNext()) {
+                                                    Map.Entry<UUID, EntityLightingFix> entry = iterator.next();
+                                                            if (entry.getKey().equals(playerID)) {
+                                                                EntityLightingFix entity = entry.getValue();
+                                                                if (entity != null) {
+                                                                    entity.setDead();
+                                                                    Chunk chunk = playerS.worldObj.getChunkFromBlockCoords((int) entity.posX, (int) entity.posZ);
+                                                                    chunk.isModified = true;
+                                                                    iterator.remove();
+                                                                }
                                                             }
-                                                        }
-                                                }
+                                                    }
+                                    }
                                 }
                             }
                         }
@@ -140,6 +148,4 @@ public class ShadersFixer {
             }
         }
     }
-
-
 }

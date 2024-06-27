@@ -16,54 +16,50 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
+import static com.kotmatross.shadersfixer.config.ShaderFixerConfig.LightingFix;
+
 public class EventHandler {
-
-    //TODO:
-    //  -1) Server-side config option - 100% DONE
-    //  -2) Accurate player tracking - 100% DONE
-    //  -3) Accurate Fix-Entity Positioning - 100% DONE
-    //  4) In-game github wiki link - 0%
-
-
     public static Logger logger = LogManager.getLogger();
-
     public static final HashMap<UUID, EntityLightingFix> Entities = new HashMap<>();
 
     //100% - APT
     @SubscribeEvent
     public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        if (event.player.worldObj != null) {
-            if (!event.player.worldObj.isRemote) {
-                if (event.player.worldObj.getWorldTime() % ShaderFixerConfig.tickRatePlayerLoop == 0) {
-                            EntityPlayer player = event.player;
-                            UUID playerID = player.getUniqueID();
-                            EntityLightingFix Entity = new EntityLightingFix(player.worldObj);
-                            Entity.setPosition(player.posX, player.posY, player.posZ);
-                            player.worldObj.spawnEntityInWorld(Entity);
-                            Entities.put(playerID, Entity);
-                        }
+        if(LightingFix){
+            if (event.player.worldObj != null) {
+                if (!event.player.worldObj.isRemote) {
+                    if (event.player.worldObj.getWorldTime() % ShaderFixerConfig.tickRatePlayerLoop == 0) {
+                                EntityPlayer player = event.player;
+                                UUID playerID = player.getUniqueID();
+                                EntityLightingFix Entity = new EntityLightingFix(player.worldObj);
+                                Entity.setPosition(player.posX, player.posY, player.posZ);
+                                player.worldObj.spawnEntityInWorld(Entity);
+                                Entities.put(playerID, Entity);
+                            }
+                }
             }
         }
     }
-
     //100% - APT
     @SubscribeEvent
     public void playerLoggedOutEvent(PlayerEvent.PlayerLoggedOutEvent event) {
-        Side side = FMLCommonHandler.instance().getEffectiveSide();
-        if (side == Side.SERVER) { //For dedicated servers
-            if (!event.player.worldObj.isRemote) {
-                if (event.player.worldObj.getWorldTime() % ShaderFixerConfig.tickRatePlayerLoop == 0) {
-                    EntityPlayer player = event.player;
-                    UUID playerID = player.getUniqueID();
-                    Iterator<Map.Entry<UUID, EntityLightingFix>> iterator = Entities.entrySet().iterator();
-                    while (iterator.hasNext()) {
-                        Map.Entry<UUID, EntityLightingFix> entry = iterator.next();
-                        if (entry.getKey().equals(playerID)) {
-                            EntityLightingFix entity = entry.getValue();
-                            if (entity != null) {
-                                entity.setDead();
-                                event.player.worldObj.removeEntity(entity);
-                                iterator.remove();
+        if(LightingFix){
+            Side side = FMLCommonHandler.instance().getEffectiveSide();
+            if (side == Side.SERVER) { //For dedicated servers
+                if (!event.player.worldObj.isRemote) {
+                    if (event.player.worldObj.getWorldTime() % ShaderFixerConfig.tickRatePlayerLoop == 0) {
+                        EntityPlayer player = event.player;
+                        UUID playerID = player.getUniqueID();
+                        Iterator<Map.Entry<UUID, EntityLightingFix>> iterator = Entities.entrySet().iterator();
+                        while (iterator.hasNext()) {
+                            Map.Entry<UUID, EntityLightingFix> entry = iterator.next();
+                            if (entry.getKey().equals(playerID)) {
+                                EntityLightingFix entity = entry.getValue();
+                                if (entity != null) {
+                                    entity.setDead();
+                                    event.player.worldObj.removeEntity(entity);
+                                    iterator.remove();
+                                }
                             }
                         }
                     }
@@ -71,35 +67,36 @@ public class EventHandler {
             }
         }
     }
-
     //100% - APT
     @SubscribeEvent
     public void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
-        if (event.player.worldObj != null) {
-            if (!event.player.worldObj.isRemote) {
-                if (event.player.worldObj.getWorldTime() % ShaderFixerConfig.tickRatePlayerLoop == 0) {
-                    boolean alpha = false;
-                    EntityPlayer player = event.player;
-                    UUID playerID = player.getUniqueID();
-                    Iterator<Map.Entry<UUID, EntityLightingFix>> iterator = Entities.entrySet().iterator();
-                    while (iterator.hasNext()) {
-                        Map.Entry<UUID, EntityLightingFix> entry = iterator.next();
-                        if (entry.getKey().equals(playerID)) {
-                            EntityLightingFix entity = entry.getValue();
-                            if (entity != null) {
-                                entity.setDead();
-                                event.player.worldObj.removeEntity(entity);
-                                iterator.remove();
-                                alpha = true;
+        if(LightingFix){
+            if (event.player.worldObj != null) {
+                if (!event.player.worldObj.isRemote) {
+                    if (event.player.worldObj.getWorldTime() % ShaderFixerConfig.tickRatePlayerLoop == 0) {
+                        boolean alpha = false;
+                        EntityPlayer player = event.player;
+                        UUID playerID = player.getUniqueID();
+                        Iterator<Map.Entry<UUID, EntityLightingFix>> iterator = Entities.entrySet().iterator();
+                        while (iterator.hasNext()) {
+                            Map.Entry<UUID, EntityLightingFix> entry = iterator.next();
+                            if (entry.getKey().equals(playerID)) {
+                                EntityLightingFix entity = entry.getValue();
+                                if (entity != null) {
+                                    entity.setDead();
+                                    event.player.worldObj.removeEntity(entity);
+                                    iterator.remove();
+                                    alpha = true;
+                                }
                             }
                         }
-                    }
-                    if(alpha) {
-                        EntityLightingFix Entity = new EntityLightingFix(player.worldObj);
-                        Entity.setPosition(player.posX, player.posY, player.posZ);
-                        player.worldObj.spawnEntityInWorld(Entity);
-                        Entities.put(playerID, Entity);
-                        alpha = false;
+                        if(alpha) {
+                            EntityLightingFix Entity = new EntityLightingFix(player.worldObj);
+                            Entity.setPosition(player.posX, player.posY, player.posZ);
+                            player.worldObj.spawnEntityInWorld(Entity);
+                            Entities.put(playerID, Entity);
+                            alpha = false;
+                        }
                     }
                 }
             }
@@ -109,7 +106,7 @@ public class EventHandler {
     //100% - AEP
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if(ShaderFixerConfig.LightingFix) {
+        if(LightingFix) {
             if (event.player.worldObj != null) {
                 if (!event.player.worldObj.isRemote) {
                     if (event.player.worldObj.getWorldTime() % ShaderFixerConfig.tickRatePlayerLoop == 0) {
@@ -134,7 +131,6 @@ public class EventHandler {
             }
         }
     }
-
 }
 
 

@@ -86,12 +86,17 @@ public class ShaderFixerConfig {
 
     public static int LightingFixRange = 2147483647;
 
+    public static boolean ForceDisableLightingFix = false;
+
     public static void loadLightingFixConfig(File configFile) {
         Configuration config = new Configuration(configFile);
         LightingFix = config.getBoolean("LightingFix", categoryLightingFix, false, "Enables LightingFix - a special mob that, due to its rendering features, fixes the “Infamous lighting bug” (more details on the mod wiki)");
         tickRatePlayerLoop = config.getInt("tickRatePlayerLoop", categoryLightingFix, 1,1, utils.INT_65536, "How frequently the mod iterates all players?, less is more frequent. Default - every tick");
         LightingFixCreeper = config.getBoolean("LightingFixCreeper", categoryLightingFix, false, "Test function that displays LightingFix mob as a creeper");
         LightingFixRange = config.getInt("LightingFixRange", categoryLightingFix, 2147483647,1, utils.INT_MAX_VALUE, "\"trackingRange\" of the LightingFix mob, I recommend not touching it");
+
+        ForceDisableLightingFix = config.getBoolean("ForceDisableLightingFix", categoryLightingFix, false, "By default, LightingFix is automatically enabled when a mod, that changes the shader component, is detected. This option allows you to intentionally turn off LightingFix even if such mods are detected");
+
 
         if(config.hasChanged()) {
             config.save();
