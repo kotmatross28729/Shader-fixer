@@ -47,7 +47,6 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
             ShaderFixerConfig.FixMcheliOShaders = false;
         }
 
-        //TODO
         if(!loadedMods.contains("rivalrebels")) {
             ShaderFixerConfig.FixRivalRebelsShaders = false;
         }
@@ -132,6 +131,12 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.rivalrebels.client.entity.MixinRenderTheoreticalTsarBlast");
                     mixins.add("client.rivalrebels.client.entity.MixinRenderTsarBlast");
                     mixins.add("client.rivalrebels.client.entity.MixinRenderAntimatterBombBlast");
+                    mixins.add("client.rivalrebels.client.entity.MixinRenderRhodes");
+                    mixins.add("client.rivalrebels.client.entity.MixinTileEntityForceFieldNodeRenderer");
+                    mixins.add("client.rivalrebels.client.entity.MixinRenderLibrary");
+                    mixins.add("client.rivalrebels.client.entity.MixinRenderBlood");
+                    mixins.add("client.rivalrebels.client.entity.MixinEntityBloodFX");
+
                     //mixins.add("client.rivalrebels.client.");
                 }
                 if (ShaderFixerConfig.FixSchematicaShaders) {

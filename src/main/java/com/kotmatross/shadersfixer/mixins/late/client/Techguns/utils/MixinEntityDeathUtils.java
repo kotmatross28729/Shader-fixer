@@ -82,13 +82,13 @@ public static boolean hasSpecialDeathAnim(EntityLivingBase entityLiving, EntityD
             bloodColorBlue = Integer.parseInt(parts[5]);
         }
 
-        ShadersFixer.logger.fatal("getEntityString? " + EntityList.getEntityString(entityLiving)); //TODO debug
-        ShadersFixer.logger.fatal("entityname? " + entityname); //TODO debug
+        ShadersFixer.logger.fatal("getEntityString? " + EntityList.getEntityString(entityLiving));
+        ShadersFixer.logger.fatal("entityname? " + entityname);
 
         if (EntityList.getEntityString(entityLiving).equals(entityname)) {
-            ShadersFixer.logger.fatal("bloodColorRed? " + bloodColorRed); //TODO debug
-            ShadersFixer.logger.fatal("bloodColorGreen? " + bloodColorGreen); //TODO debug
-            ShadersFixer.logger.fatal("bloodColorBlue? " + bloodColorBlue); //TODO debug
+            ShadersFixer.logger.fatal("bloodColorRed? " + bloodColorRed);
+            ShadersFixer.logger.fatal("bloodColorGreen? " + bloodColorGreen);
+            ShadersFixer.logger.fatal("bloodColorBlue? " + bloodColorBlue);
             return true;
         }
     }

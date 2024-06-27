@@ -51,12 +51,6 @@ public class ShadersFixer {
     public static void preInit(FMLPreInitializationEvent event) {
         String configFolder = "config" + File.separator + Tags.MODID + File.separator;
         ShaderFixerConfig.loadLightingFixConfig(new File(Launch.minecraftHome, configFolder + "LightingFix.cfg"));
-
-        if(!ForceDisableLightingFix) {
-            EventHandler EHandler = new EventHandler();
-            FMLCommonHandler.instance().bus().register(EHandler);
-            MinecraftForge.EVENT_BUS.register(EHandler);
-        }
     }
 
     @Mod.EventHandler
@@ -107,6 +101,12 @@ public class ShadersFixer {
         } else if(isPsychedelicraftLoaded()){
             logger.info("Server side : Psychedelicraft loaded, lighting fix = true ");
             ShaderFixerConfig.LightingFix = true;
+        }
+
+        if(!ForceDisableLightingFix) {
+            EventHandler EHandler = new EventHandler();
+            FMLCommonHandler.instance().bus().register(EHandler);
+            MinecraftForge.EVENT_BUS.register(EHandler);
         }
     }
 
