@@ -1,10 +1,8 @@
 package com.kotmatross.shadersfixer;
 
-import com.kotmatross.shadersfixer.LightingFix.EntityLightingFix;
 import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
-import com.kotmatross.shadersfixer.handlers.EventHandler;
+import com.kotmatross.shadersfixer.LightingFix.EventHandler;
 import com.kotmatross.shadersfixer.proxy.CommonProxy;
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -13,10 +11,7 @@ import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.relauncher.FMLLaunchHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.launchwrapper.Launch;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.LogManager;
@@ -24,9 +19,6 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.UUID;
 
 import static com.kotmatross.shadersfixer.config.ShaderFixerConfig.ForceDisableLightingFix;
 
@@ -90,61 +82,20 @@ public class ShadersFixer {
     public void postInit(FMLPostInitializationEvent event) {
         if (FMLLaunchHandler.side().isClient()) {
             if (LightingFix()) {
-                logger.info("Client side :  ShadersMod or Psychedelicraft loaded, lighting fix = true ");
+                logger.info("ShadersMod or Psychedelicraft loaded, lighting fix = true ");
                 ShaderFixerConfig.LightingFix = true;
             } else {
                 if (!SHADERS_MOD() && !isPsychedelicraftLoaded()) {
-                    logger.warn("Client side :  ShadersMod and Psychedelicraft is not loaded, skip lighting fix ");
+                    logger.warn("ShadersMod and Psychedelicraft is not loaded, skip lighting fix ");
                     ShaderFixerConfig.LightingFix = false;
                 }
             }
-        } else if(isPsychedelicraftLoaded()){
-            logger.info("Server side : Psychedelicraft loaded, lighting fix = true ");
-            ShaderFixerConfig.LightingFix = true;
         }
-
         if(!ForceDisableLightingFix) {
-            EventHandler EHandler = new EventHandler();
-            FMLCommonHandler.instance().bus().register(EHandler);
-            MinecraftForge.EVENT_BUS.register(EHandler);
-        }
-    }
-
-    @Mod.EventHandler
-    public void onServerStopping(FMLServerStoppingEvent event) {
-        if(!ForceDisableLightingFix) {
-            if(FMLCommonHandler.instance().getSide() == Side.CLIENT) {  //For integrated servers
-                // Do stuff only for Single Player / integrated server
-                MinecraftServer mc = FMLClientHandler.instance().getServer();
-                String[] allNames = mc.getAllUsernames().clone();
-                for (String allName : allNames) {
-                    // For 1.7.10, func_152612_a = getPlayerForUsername
-                    EntityPlayerMP playerS = MinecraftServer.getServer().getConfigurationManager().func_152612_a(allName); //event.player
-                    if(playerS != null) {
-                        if(playerS.worldObj != null){
-                            if (!playerS.worldObj.isRemote) {
-                                if(playerS.isClientWorld()) {
-                                    if (playerS.worldObj.getWorldTime() % ShaderFixerConfig.tickRatePlayerLoop == 0) {
-                                        UUID playerID = playerS.getUniqueID();
-                                            Iterator<Map.Entry<UUID, EntityLightingFix>> iterator = EventHandler.Entities.entrySet().iterator();
-                                            while (iterator.hasNext()) {
-                                                    Map.Entry<UUID, EntityLightingFix> entry = iterator.next();
-                                                            if (entry.getKey().equals(playerID)) {
-                                                                EntityLightingFix entity = entry.getValue();
-                                                                if (entity != null) {
-                                                                    entity.setDead();
-                                                                    Chunk chunk = playerS.worldObj.getChunkFromBlockCoords((int) entity.posX, (int) entity.posZ);
-                                                                    chunk.isModified = true;
-                                                                    iterator.remove();
-                                                                }
-                                                            }
-                                                    }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+            if(ShaderFixerConfig.LightingFix) {
+                EventHandler EHandler = new EventHandler();
+                FMLCommonHandler.instance().bus().register(EHandler);
+                MinecraftForge.EVENT_BUS.register(EHandler);
             }
         }
     }
