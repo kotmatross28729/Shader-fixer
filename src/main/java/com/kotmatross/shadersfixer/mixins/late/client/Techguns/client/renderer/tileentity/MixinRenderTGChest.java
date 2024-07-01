@@ -18,15 +18,15 @@ import techguns.tileentities.TGChestTileEnt;
 
 @Mixin(value = RenderTGChest.class, priority = 999)
 public class MixinRenderTGChest {
-    @Shadow
+    @Shadow(remap = false)
     private ModelChest doubleChest = new ModelLargeChest();
-    @Shadow
+    @Shadow(remap = false)
     private ModelChest singleChest = new ModelChest();
     @Final
-    @Shadow
+    @Shadow(remap = false)
     private static final ResourceLocation[] texture_double = new ResourceLocation[]{new ResourceLocation("techguns:textures/blocks/reinforced_chest_double.png"), new ResourceLocation("techguns:textures/blocks/weapon_chest_double.png")};
     @Final
-    @Shadow
+    @Shadow(remap = false)
     private static final ResourceLocation[] texture_single = new ResourceLocation[]{new ResourceLocation("techguns:textures/blocks/reinforced_chest.png"), new ResourceLocation("techguns:textures/blocks/weapon_chest.png")};
 
     /**

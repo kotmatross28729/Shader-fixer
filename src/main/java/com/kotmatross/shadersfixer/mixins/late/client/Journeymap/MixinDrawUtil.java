@@ -26,7 +26,7 @@ public class MixinDrawUtil {
     }
 
 
-    @Shadow
+    @Shadow(remap = false)
     private static IRenderHelper renderHelper;
 
     /**

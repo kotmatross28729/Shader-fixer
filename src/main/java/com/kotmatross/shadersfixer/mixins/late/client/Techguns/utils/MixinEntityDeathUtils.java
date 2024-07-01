@@ -20,7 +20,7 @@ import static com.kotmatross.shadersfixer.config.ShaderFixerConfig.*;
 
 @Mixin(value = EntityDeathUtils.class, priority = 999)
 public class MixinEntityDeathUtils {
-    @Shadow
+    @Shadow(remap = false)
     public static HashMap<EntityDeathUtils.DeathType, List<Class<? extends EntityLivingBase>>> entityDeathTypes = new HashMap<>();
 
 /**

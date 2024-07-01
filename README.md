@@ -65,20 +65,8 @@ https://github.com/kotmatross28729/Shader-fixer/assets/110309314/6ce72f2f-9cc2-4
 
 </details>
 
-
-
-
-
-## TODO?
-#### 1) MORE shaders fixes for closed source mods
-#### ~~2) more shaders fixes for vanilla minecraft~~ **Done in 1.3**
-
 # Credits:
 
 ### [jss2a98aj](https://github.com/jss2a98aj) - [Early mixins](https://github.com/jss2a98aj/BugTorch/blob/master/src/main/java/jss/bugtorch/mixinplugin/BugTorchEarlyMixins.java) and [config systems](https://github.com/jss2a98aj/BugTorch/blob/master/src/main/java/jss/bugtorch/config/BugTorchConfig.java)
-
-### [FiskFille](https://github.com/FiskFille) - [Fisk Superheroes mod](https://www.curseforge.com/minecraft/mc-mods/fiskheroes)
-
-### [JinGames](https://www.curseforge.com/members/jingames/projects) - [Dragon Block C mod](https://www.curseforge.com/minecraft/mc-mods/jingames-dragon-block-c)
 
 ### [GTNH](https://github.com/orgs/GTNewHorizons/repositories) - [ExampleMod1.7.10](https://github.com/GTNewHorizons/ExampleMod1.7.10)

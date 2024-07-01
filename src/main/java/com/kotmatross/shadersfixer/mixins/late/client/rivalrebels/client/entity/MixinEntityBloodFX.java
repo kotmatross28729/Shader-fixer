@@ -14,7 +14,7 @@ import rivalrebels.common.entity.EntityGore;
 
 @Mixin(value = EntityBloodFX.class, priority = 999)
 public class MixinEntityBloodFX extends EntityFX{
-    @Shadow
+    @Shadow(remap = false)
     boolean isBlood;
 
     public MixinEntityBloodFX(World w, double x, double y, double z, boolean b)

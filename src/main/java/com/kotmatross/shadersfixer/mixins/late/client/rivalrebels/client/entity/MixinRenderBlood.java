@@ -33,7 +33,7 @@ public abstract class MixinRenderBlood extends Render {
         }
     }
 
-    @Shadow
+    @Shadow(remap = false)
     private void renderFaceMe()
     {
         float var7 = 1.0F;
@@ -51,7 +51,7 @@ public abstract class MixinRenderBlood extends Render {
         t.draw();
     }
 
-    @Shadow
+    @Shadow(remap = false)
     protected ResourceLocation func_110775_a(Entity entity)
     {
         return null;

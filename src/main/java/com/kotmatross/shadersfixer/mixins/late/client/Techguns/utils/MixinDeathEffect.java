@@ -29,7 +29,7 @@ import static com.kotmatross.shadersfixer.config.ShaderFixerConfig.*;
 
 @Mixin(value = DeathEffect.class, priority = 999)
 public class MixinDeathEffect {
-@Shadow
+@Shadow(remap = false)
 private static GoreData genericGore;
 
 
