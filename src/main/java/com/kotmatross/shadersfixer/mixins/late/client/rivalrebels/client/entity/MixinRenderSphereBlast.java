@@ -1,14 +1,12 @@
 package com.kotmatross.shadersfixer.mixins.late.client.rivalrebels.client.entity;
 
-import rivalrebels.client.renderentity.RenderSphereBlast;
-import net.minecraft.client.Minecraft;
+import com.kotmatross.shadersfixer.Utils;
 import net.minecraft.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import static com.kotmatross.shadersfixer.utils.shaders_fix;
+import rivalrebels.client.renderentity.RenderSphereBlast;
 
 @Mixin(value = RenderSphereBlast.class, priority = 999)
 public class MixinRenderSphereBlast {
@@ -16,6 +14,6 @@ public class MixinRenderSphereBlast {
     @Inject(method = "func_76986_a*", at = @At(value = "HEAD"), remap = false)
     private void func_76986_a(Entity var1, double x, double y, double z, float var8, float var9, CallbackInfo ci)
     {
-        Minecraft.getMinecraft().renderEngine.bindTexture(shaders_fix);
+        Utils.Fix();
     }
 }

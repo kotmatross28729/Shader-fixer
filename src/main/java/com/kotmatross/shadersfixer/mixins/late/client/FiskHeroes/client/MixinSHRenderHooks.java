@@ -1,18 +1,13 @@
 package com.kotmatross.shadersfixer.mixins.late.client.FiskHeroes.client;
 
 import com.fiskmods.heroes.client.SHRenderHooks;
-import net.minecraft.client.Minecraft;
+import com.kotmatross.shadersfixer.Utils;
 import net.minecraft.util.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import javax.vecmath.Point2f;
-import java.util.Stack;
-
-import static com.kotmatross.shadersfixer.utils.shaders_fix;
 
 @Mixin(value = SHRenderHooks.class, priority = 999)
 public class MixinSHRenderHooks {
@@ -27,7 +22,7 @@ public class MixinSHRenderHooks {
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     private static void drawLightningLine(Vec3 start, Vec3 end, float lineWidth, float innerLineWidth, Vec3 color, float scale, float alphaStart, float alphaEnd, boolean ignoreOld, CallbackInfo ci) {
-        Minecraft.getMinecraft().renderEngine.bindTexture(shaders_fix);
+        Utils.Fix();
     }
     @Inject(method = "drawLightningLine*",
         slice = @Slice(from = @At(value = "INVOKE",
@@ -39,7 +34,7 @@ public class MixinSHRenderHooks {
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     private static void drawLightningLine2(Vec3 start, Vec3 end, float lineWidth, float innerLineWidth, Vec3 color, float scale, float alphaStart, float alphaEnd, boolean ignoreOld, CallbackInfo ci) {
-        Minecraft.getMinecraft().renderEngine.bindTexture(shaders_fix);
+        Utils.Fix();
     }
     @Inject(method = "drawLightningLine*",
         slice = @Slice(from = @At(value = "INVOKE",
@@ -51,7 +46,7 @@ public class MixinSHRenderHooks {
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     private static void drawLightningLine3(Vec3 start, Vec3 end, float lineWidth, float innerLineWidth, Vec3 color, float scale, float alphaStart, float alphaEnd, boolean ignoreOld, CallbackInfo ci) {
-        Minecraft.getMinecraft().renderEngine.bindTexture(shaders_fix);
+        Utils.Fix();
     }
 
     @Inject(method = "drawUntexturedRectInternal",
@@ -64,7 +59,7 @@ public class MixinSHRenderHooks {
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     private static void drawUntexturedRectInternal(float x, float y, float width, float height, float zLevel, int color, int alpha, CallbackInfo ci) {
-        Minecraft.getMinecraft().renderEngine.bindTexture(shaders_fix);
+        Utils.Fix();
     }
 
     @Inject(method = "drawLoadingSquares",
@@ -77,6 +72,6 @@ public class MixinSHRenderHooks {
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     private static void drawLoadingSquares(float x, float y, float width, float height, float zLevel, CallbackInfo ci) {
-        Minecraft.getMinecraft().renderEngine.bindTexture(shaders_fix);
+        Utils.Fix();
     }
 }

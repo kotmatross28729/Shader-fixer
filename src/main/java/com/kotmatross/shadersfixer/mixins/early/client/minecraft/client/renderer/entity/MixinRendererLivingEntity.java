@@ -1,6 +1,6 @@
 package com.kotmatross.shadersfixer.mixins.early.client.minecraft.client.renderer.entity;
 
-import net.minecraft.client.Minecraft;
+import com.kotmatross.shadersfixer.Utils;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.entity.EntityLivingBase;
@@ -9,11 +9,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import javax.vecmath.Point2f;
-import java.util.Stack;
-
-import static com.kotmatross.shadersfixer.utils.shaders_fix;
 
 @Mixin(value = RendererLivingEntity.class, priority = 999)
 public abstract class MixinRendererLivingEntity extends Render {
@@ -28,6 +23,6 @@ public abstract class MixinRendererLivingEntity extends Render {
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     protected void passSpecialRender(EntityLivingBase p_77033_1_, double p_77033_2_, double p_77033_4_, double p_77033_6_, CallbackInfo ci)
     {
-        Minecraft.getMinecraft().renderEngine.bindTexture(shaders_fix);
+        Utils.Fix();
     }
 }

@@ -136,7 +136,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.rivalrebels.client.entity.MixinRenderLibrary");
                     mixins.add("client.rivalrebels.client.entity.MixinRenderBlood");
                     mixins.add("client.rivalrebels.client.entity.MixinEntityBloodFX");
-
+                    mixins.add("client.rivalrebels.client.entity.MixinTileEntityPlasmaExplosionRenderer");
                     //mixins.add("client.rivalrebels.client.");
                 }
                 if (ShaderFixerConfig.FixSchematicaShaders) {

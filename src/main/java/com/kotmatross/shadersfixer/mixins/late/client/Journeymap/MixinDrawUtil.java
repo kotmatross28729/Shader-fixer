@@ -1,10 +1,10 @@
 package com.kotmatross.shadersfixer.mixins.late.client.Journeymap;
 
+import com.kotmatross.shadersfixer.Utils;
 import journeymap.client.cartography.RGB;
 import journeymap.client.forge.helper.IRenderHelper;
 import journeymap.client.render.draw.DrawUtil;
 import journeymap.client.render.texture.TextureImpl;
-import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static com.kotmatross.shadersfixer.utils.shaders_fix;
 import static journeymap.client.render.draw.DrawUtil.zLevel;
 
 @Mixin(value = DrawUtil.class, priority = 999)
@@ -22,7 +21,7 @@ public class MixinDrawUtil {
 
     @Inject(method = "drawRectangle", at = @At(value = "HEAD"), remap = false)
     private static void drawRectangle(double x, double y, double width, double height, int color, int alpha, CallbackInfo ci) {
-        Minecraft.getMinecraft().renderEngine.bindTexture(shaders_fix);
+        Utils.Fix();
     }
 
 

@@ -1,16 +1,13 @@
 package com.kotmatross.shadersfixer.mixins.late.client.FiskHeroes.client.particle;
 
-
 import com.fiskmods.heroes.client.particle.EntitySHSpellWaveFX;
-import net.minecraft.client.Minecraft;
+import com.kotmatross.shadersfixer.Utils;
 import net.minecraft.client.renderer.Tessellator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import static com.kotmatross.shadersfixer.utils.shaders_fix;
 
 @Mixin(value = EntitySHSpellWaveFX.class, priority = 999)
 public class MixinEntitySHSpellWaveFX {
@@ -24,6 +21,7 @@ public class MixinEntitySHSpellWaveFX {
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     public void func_70539_a(Tessellator tessellator, float partialTicks, float f, float f1, float f2, float f3, float f4, CallbackInfo ci) {
-        Minecraft.getMinecraft().renderEngine.bindTexture(shaders_fix);
+        Utils.EnableFullBrightness();
+        Utils.Fix();
     }
 }

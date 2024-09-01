@@ -1,6 +1,7 @@
 package com.kotmatross.shadersfixer.mixins.late.client.DragonBlockC.client;
 
-import net.minecraft.client.Minecraft;
+import JinRyuu.JBRA.RenderPlayerJBRA;
+import com.kotmatross.shadersfixer.Utils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import org.spongepowered.asm.mixin.Mixin;
@@ -8,9 +9,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import JinRyuu.JBRA.RenderPlayerJBRA;
-
-import static com.kotmatross.shadersfixer.utils.shaders_fix;
 
 @Mixin(value = RenderPlayerJBRA.class, priority = 999)
 public class MixinRenderPlayerJBRA {
@@ -25,7 +23,7 @@ public class MixinRenderPlayerJBRA {
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     private void chakra(Entity e, int id, CallbackInfo ci) {
-        Minecraft.getMinecraft().renderEngine.bindTexture(shaders_fix);
+        Utils.Fix();
     }
 
     @Inject(method = "lightning",
@@ -38,7 +36,7 @@ public class MixinRenderPlayerJBRA {
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     private void lightning(Entity e, int id, CallbackInfo ci) {
-        Minecraft.getMinecraft().renderEngine.bindTexture(shaders_fix);
+        Utils.Fix();
     }
 
     @Inject(method = "func_77033_b",
@@ -52,6 +50,6 @@ public class MixinRenderPlayerJBRA {
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     private void func_77033_b (EntityLivingBase p_77033_1_, double p_77033_2_, double p_77033_4_, double p_77033_6_, CallbackInfo ci)
     {
-        Minecraft.getMinecraft().renderEngine.bindTexture(shaders_fix);
+        Utils.Fix();
     }
 }

@@ -1,17 +1,13 @@
 package com.kotmatross.shadersfixer.mixins.late.client.rivalrebels.client.entity;
 
-import net.minecraft.client.Minecraft;
+import com.kotmatross.shadersfixer.Utils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import rivalrebels.client.renderentity.RenderRhodes;
-import rivalrebels.common.entity.EntityLightningLink;
 import rivalrebels.common.entity.EntityRhodes;
-
-import static com.kotmatross.shadersfixer.utils.shaders_fix;
-import static rivalrebels.client.renderentity.RenderRhodes.texture;
 
 @Mixin(value = RenderRhodes.class, priority = 999)
 public class MixinRenderRhodes {
@@ -28,7 +24,7 @@ public class MixinRenderRhodes {
 
     public void renderRhodes(EntityRhodes rhodes, double x, double y, double z, float par8, float tt, CallbackInfo ci)
     {
-        Minecraft.getMinecraft().renderEngine.bindTexture(shaders_fix);
+        Utils.Fix();
     }
 
     @Inject(method = "renderRhodes*",
@@ -43,7 +39,7 @@ public class MixinRenderRhodes {
 
     public void renderRhodes2(EntityRhodes rhodes, double x, double y, double z, float par8, float tt, CallbackInfo ci)
     {
-        Minecraft.getMinecraft().renderEngine.bindTexture(shaders_fix);
+        Utils.Fix();
     }
 
     @Inject(method = "renderRhodes*",
@@ -57,9 +53,6 @@ public class MixinRenderRhodes {
             target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V"), remap = false)
     public void renderRhodes2_5(EntityRhodes rhodes, double x, double y, double z, float par8, float tt, CallbackInfo ci)
     {
-        Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+        Utils.Fix();
     }
-
-
-
 }

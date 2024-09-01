@@ -1,16 +1,14 @@
 package com.kotmatross.shadersfixer.mixins.late.client.rivalrebels.client.entity;
 
-import rivalrebels.client.renderentity.RenderLaserLink;
-import rivalrebels.common.entity.EntityLaserLink;
-import net.minecraft.client.Minecraft;
+import com.kotmatross.shadersfixer.Utils;
 import net.minecraft.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import static com.kotmatross.shadersfixer.utils.shaders_fix;
+import rivalrebels.client.renderentity.RenderLaserLink;
+import rivalrebels.common.entity.EntityLaserLink;
 
 @Mixin(value = RenderLaserLink.class, priority = 999)
 public class MixinRenderLaserLink {
@@ -25,12 +23,12 @@ public class MixinRenderLaserLink {
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     private void renderLaserLink(EntityLaserLink ell, double x, double y, double z, float yaw, float pitch, CallbackInfo ci)
     {
-        Minecraft.getMinecraft().renderEngine.bindTexture(shaders_fix);
+        Utils.Fix();
     }
 
     @Inject(method = "func_76986_a*", at = @At(value = "HEAD"), remap = false)
     private void func_76986_a(Entity entityLaserLink, double x, double y, double z, float yaw, float pitch, CallbackInfo ci)
     {
-        Minecraft.getMinecraft().renderEngine.bindTexture(shaders_fix);
+        Utils.Fix();
     }
 }

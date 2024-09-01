@@ -6,22 +6,22 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import rivalrebels.client.renderentity.RenderPlasmoid;
-import rivalrebels.common.entity.EntityPlasmoid;
-@Mixin(value = RenderPlasmoid.class, priority = 999)
+import rivalrebels.client.tileentityrender.TileEntityPlasmaExplosionRenderer;
+import rivalrebels.common.tileentity.TileEntityPlasmaExplosion;
 
-public class MixinRenderPlasmoid {
+@Mixin(value = TileEntityPlasmaExplosionRenderer.class, priority = 999)
+public class MixinTileEntityPlasmaExplosionRenderer {
 
-    @Inject(method = "renderPlasmoid",
+    @Inject(method = "renderAModelAt",
         slice = @Slice(from = @At(value = "INVOKE",
             target = "Lorg/lwjgl/opengl/GL11;glRotatef(FFFF)V",
-            ordinal = 2),
+            ordinal = 0),
             to = @At(value = "INVOKE",
                 target = "Lorg/lwjgl/opengl/GL11;glPopMatrix()V",
-                ordinal = 0)),
+                ordinal = 1)),
         at = @At(value = "INVOKE",
             target = "Lorg/lwjgl/opengl/GL11;glRotatef(FFFF)V"), remap = false)
-    public void renderPlasmoid(EntityPlasmoid e, double x, double y, double z, float var8, float var9, CallbackInfo ci) {
+    public void renderAModelAt(TileEntityPlasmaExplosion tile, double d, double d1, double d2, float f, CallbackInfo ci) {
         Utils.Fix();
     }
 }
