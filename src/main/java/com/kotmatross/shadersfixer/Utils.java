@@ -29,8 +29,4 @@ public class Utils {
     public static void EnableFullBrightness() {
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)15728880 % 65536.0F, (float)15728880 / 65536.0F);
     }
-
-
-
-
 }

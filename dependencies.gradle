@@ -46,6 +46,8 @@ dependencies {
 	compileOnly name: 'Schematica-1.11.1-GTNH'
     compileOnly name: 'LunatriusCore-1.2.0-GTNH'
 	compileOnly name: 'journeymap-1.7.10-5.2.3-unlimited'
+    compileOnly name: 'ThaumicConcilium-1.0.8'
+    compileOnly name: 'Avaritia-1.51'
 
     compileOnly fileTree(dir: 'libs', include: '*.jar')
     compileOnly fileTree(dir: 'libs', include: '*.zip')

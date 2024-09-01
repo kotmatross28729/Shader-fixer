@@ -56,6 +56,13 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
         if(!loadedMods.contains("journeymap")) {
             ShaderFixerConfig.FixJourneymapShaders = false;
         }
+        if(!loadedMods.contains("Avaritia")) {
+            ShaderFixerConfig.FixAvaritiaShaders = false;
+        }
+        if(!loadedMods.contains("ThaumicConcilium")) {
+            ShaderFixerConfig.FixThaumicConciliumShaders = false;
+        }
+
         List<String> mixins = new ArrayList<>();
 
             if (side == MixinEnvironment.Side.CLIENT) {
@@ -137,7 +144,6 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.rivalrebels.client.entity.MixinRenderBlood");
                     mixins.add("client.rivalrebels.client.entity.MixinEntityBloodFX");
                     mixins.add("client.rivalrebels.client.entity.MixinTileEntityPlasmaExplosionRenderer");
-                    //mixins.add("client.rivalrebels.client.");
                 }
                 if (ShaderFixerConfig.FixSchematicaShaders) {
                     ShadersFixer.logger.info("Trying to integrate Schematica mixins...");
@@ -145,10 +151,28 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.Schematica.client.MixinRendererSchematicGlobal");
                     mixins.add("client.Schematica.client.MixinRenderHelper");
                 }
-
                 if (ShaderFixerConfig.FixJourneymapShaders) {
                     ShadersFixer.logger.info("Trying to integrate Journeymap mixins...");
                     mixins.add("client.Journeymap.MixinDrawUtil");
+                }
+                if (ShaderFixerConfig.FixAvaritiaShaders) {
+                    ShadersFixer.logger.info("Trying to integrate Avaritia mixins...");
+                    mixins.add("client.avaritia.client.MixinCosmicItemRenderer");
+                    mixins.add("client.avaritia.client.MixinModelArmorInfinity");
+                    mixins.add("client.avaritia.client.MixinRenderHeavenArrow");
+                }
+                if (ShaderFixerConfig.FixThaumicConciliumShaders) {
+                    //TODO почему-то работает странно
+                    ShadersFixer.logger.info("Trying to integrate Thaumic Concilium mixins...");
+                    mixins.add("client.ThaumicConcilium.client.MixinAstralMonitorRenderer");
+                    mixins.add("client.ThaumicConcilium.client.MixinCrimsonOrbEntityRenderer");
+                    mixins.add("client.ThaumicConcilium.client.MixinDissolvedRenderer");
+                    mixins.add("client.ThaumicConcilium.client.MixinDistortionEffectRenderer");
+                    mixins.add("client.ThaumicConcilium.client.MixinHexOfPredictabilityTileRenderer");
+                    mixins.add("client.ThaumicConcilium.client.MixinMaterialPeelerRenderer");
+                    mixins.add("client.ThaumicConcilium.client.MixinQuicksilverElementalRenderer");
+                    mixins.add("client.ThaumicConcilium.client.MixinRiftRenderer");
+                    //mixins.add("client.ThaumicConcilium.client.MixinShaderCallback");
                 }
             }
 
