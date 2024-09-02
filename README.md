@@ -4,19 +4,22 @@
 
 A mod that adds more compatibility with shaders.
 ### For now, it fixes:
-+ **1) all bugs with shaders in Fisk Superheroes mod**
-+ **2) some vanilla bugs with minecraft (fishing line, hitbox rendering (F3+B), lightning bolt, and some others)**
-+ **3) NEI overlay render**
-+ **4) Techguns chest crash if shaders are enabled. Water rendering issues caused by techguns particles**
-+ **5) Dragon Block C's electric auras with shaders**
-+ **6) Zelda Sword Skills whip render**
-+ **7) rendering in mcheli Overdrive with shaders**
-+ **8) rendering in RivalRebels with shaders**
-
++ **1) Fisk Superheroes**
++ **2) Vanilla mc (fishing line, hitbox rendering (F3+B), lightning bolt, etc.)**
++ **3) NEI overlay**
++ **4) Techguns chest crash & water rendering issues caused by particles**
++ **5) Dragon Block C's electric auras**
++ **6) Zelda Sword Skills whip**
++ **7) Mcheli Overdrive**
++ **8) RivalRebels**
++ **9) Schematica**
++ **10) Journeymap**
++ **11) Avaritia**
++ **12) Thaumic Concilium**
 
 <details>
 
-<summary>Some demonstrations of fixes </summary>
+<summary>Some demonstrations of fixes (quite outdated, not all fixes are shown)</summary>
 
 
 <details>
