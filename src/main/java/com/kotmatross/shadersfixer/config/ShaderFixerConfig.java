@@ -27,9 +27,14 @@ public class ShaderFixerConfig {
 
     public static boolean FixThaumicConciliumShaders;
 
+    public static boolean FixOpenComputersShaders;
+    public static boolean FixElnShaders;
+
 
     public static boolean TechgunsGoreLogger;
     public static List<String> TechgunsGoreList = new ArrayList<>();
+
+    public static boolean ElnLightMixins;
 
     //Category
     static final String categoryShadersfixes = "Shaders fixes";
@@ -49,8 +54,12 @@ public class ShaderFixerConfig {
         FixJourneymapShaders = config.getBoolean("FixJourneymapShaders", categoryShadersfixes, true, "Fixes rendering errors in Journeymap mod when using shaders.");
 
         FixAvaritiaShaders = config.getBoolean("FixAvaritiaShaders", categoryShadersfixes, true, "Fixes rendering errors in Avaritia mod when using shaders.");
-        FixThaumicConciliumShaders = config.getBoolean("FixThaumicConciliumShaders", categoryShadersfixes, true, "Fixes rendering errors in ThaumicConcilium mod when using shaders.");
+        FixThaumicConciliumShaders = config.getBoolean("FixThaumicConciliumShaders", categoryShadersfixes, true, "Fixes rendering errors in Thaumic Concilium mod when using shaders.");
 
+        FixOpenComputersShaders = config.getBoolean("FixOpenComputersShaders", categoryShadersfixes, true, "Fixes rendering errors in OpenComputers mod when using shaders.");
+        FixElnShaders = config.getBoolean("FixElnShaders", categoryShadersfixes, true, "Fixes rendering errors in ElectricalAge mod when using shaders.");
+
+        ElnLightMixins = config.getBoolean("ElnLightMixins", categorytweaks, true, "Slightly modifies the code for rendering the light sprite to avoid an issue with bsl shaders that renders object with full alpha when the object's alpha is close to 0. Use carefully with new versions, as it calls the old sprite rendering code");
 
         TechgunsGoreLogger = config.getBoolean("TechgunsGoreLogger", categorytweaks, false, "Prints the name of the killed mob( using techguns weapons) in the log, useful for TechgunsGoreList, where 1 parameter is the name of the mob.");
 //        TechgunsGoreList = new ArrayList<>(Arrays.asList(config.getStringList("TechgunsGoreList", categorytweaks, new String[]{"entity_glyphid:6:0.66:85:156:17"}, "Adds an entity to the gore Techguns entity list. The syntax is: mobname:GibsNumber:GibsScale:BloodСolorR:BloodColorG:BloodColorBlue . Please note that Blood R-G-B colors can only be integers up to 255")));

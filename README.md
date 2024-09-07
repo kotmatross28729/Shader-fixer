@@ -16,6 +16,8 @@ A mod that adds more compatibility with shaders.
 + **10) Journeymap**
 + **11) Avaritia**
 + **12) Thaumic Concilium**
++ **13) OpenComputers**
++ **14) Electrical Age**
 
 <details>
 

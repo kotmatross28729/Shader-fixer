@@ -63,6 +63,13 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
             ShaderFixerConfig.FixThaumicConciliumShaders = false;
         }
 
+        if(!loadedMods.contains("OpenComputers")) {
+            ShaderFixerConfig.FixOpenComputersShaders = false;
+        }
+        if(!loadedMods.contains("Eln")) {
+            ShaderFixerConfig.FixElnShaders = false;
+        }
+
         List<String> mixins = new ArrayList<>();
 
             if (side == MixinEnvironment.Side.CLIENT) {
@@ -162,7 +169,8 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.avaritia.client.MixinRenderHeavenArrow");
                 }
                 if (ShaderFixerConfig.FixThaumicConciliumShaders) {
-                    //TODO почему-то работает странно
+                    //_TODO почему-то работает странно
+                    //  Требуется мануальный патч (или дальнейшее изучение)
                     ShadersFixer.logger.info("Trying to integrate Thaumic Concilium mixins...");
                     mixins.add("client.ThaumicConcilium.client.MixinAstralMonitorRenderer");
                     mixins.add("client.ThaumicConcilium.client.MixinCrimsonOrbEntityRenderer");
@@ -173,6 +181,22 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.ThaumicConcilium.client.MixinQuicksilverElementalRenderer");
                     mixins.add("client.ThaumicConcilium.client.MixinRiftRenderer");
                     //mixins.add("client.ThaumicConcilium.client.MixinShaderCallback");
+                }
+                if (ShaderFixerConfig.FixOpenComputersShaders) {
+                    ShadersFixer.logger.info("Trying to integrate OpenComputers mixins...");
+                    mixins.add("client.oc.client.MixinScreenRenderer");
+                    mixins.add("client.oc.client.MixinHologramRenderer");
+                    mixins.add("client.oc.client.MixinRobotRenderer");
+                }
+                if (ShaderFixerConfig.FixElnShaders) {
+                    ShadersFixer.logger.info("Trying to integrate ElectricalAge mixins...");
+                    mixins.add("client.eln.client.MixinDataLogs");
+                    mixins.add("client.eln.client.MixinUtilsClient");
+                    if(ShaderFixerConfig.ElnLightMixins) {
+                        mixins.add("client.eln.client.MixinLampSocketStandardObjRender");
+                        mixins.add("client.eln.client.MixinLampSocketSuspendedObjRender");
+                    }
+                    mixins.add("client.eln.client.MixinNixieTubeDescriptor");
                 }
             }
 

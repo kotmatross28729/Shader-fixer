@@ -48,6 +48,8 @@ dependencies {
 	compileOnly name: 'journeymap-1.7.10-5.2.3-unlimited'
     compileOnly name: 'ThaumicConcilium-1.0.8'
     compileOnly name: 'Avaritia-1.51'
+	compileOnly name: 'Eln-1.21.9'
+	compileOnly name: 'OpenComputers-1.10.23-GTNH-dev'
 
     compileOnly fileTree(dir: 'libs', include: '*.jar')
     compileOnly fileTree(dir: 'libs', include: '*.zip')
