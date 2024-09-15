@@ -9,10 +9,10 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-
+@Deprecated
 @SideOnly(Side.CLIENT)
-public class RenderEntityLightingFix extends RenderLiving {
-
+public class RenderEntityLightingFix /*extends RenderLiving*/ {
+/**
     public RenderEntityLightingFix()
     {
         super(new ModelCreeper(), 0.0F); //dirty hack
@@ -38,11 +38,11 @@ public class RenderEntityLightingFix extends RenderLiving {
     private static final ResourceLocation creeperTextures = new ResourceLocation("textures/entity/creeper/creeper.png");
     @Override
     protected ResourceLocation getEntityTexture(Entity entity) {
-
         if(ShaderFixerConfig.LightingFixCreeper){
             return creeperTextures;
         } else {
             return new ResourceLocation(Tags.MODID, "textures/LightingFix.png"); // invisible texture, dirty hack 2
         }
     }
+    */
 }

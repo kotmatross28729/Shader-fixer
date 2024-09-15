@@ -187,6 +187,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.oc.client.MixinScreenRenderer");
                     mixins.add("client.oc.client.MixinHologramRenderer");
                     mixins.add("client.oc.client.MixinRobotRenderer");
+                    mixins.add("client.oc.client.MixinRenderState");
                 }
                 if (ShaderFixerConfig.FixElnShaders) {
                     ShadersFixer.logger.info("Trying to integrate ElectricalAge mixins...");

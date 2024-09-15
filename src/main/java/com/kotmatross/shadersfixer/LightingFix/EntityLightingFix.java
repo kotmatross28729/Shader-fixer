@@ -8,6 +8,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+@Deprecated
 public class EntityLightingFix extends EntityCreature {
 
     public EntityLightingFix(World var1) {

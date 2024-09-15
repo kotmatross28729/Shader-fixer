@@ -9,6 +9,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 
 import java.util.HashMap;
 
+@Deprecated
 public class EventHandler {
 public static final HashMap<String, EntityLightingFix> Entities = new HashMap<>();
 

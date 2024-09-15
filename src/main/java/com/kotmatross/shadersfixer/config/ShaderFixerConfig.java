@@ -96,6 +96,7 @@ public class ShaderFixerConfig {
     }
 
 
+    /**
 //Lighting Fix
     static final String categoryLightingFix = "Lighting Fix";
     public static boolean LightingFix = false;
@@ -116,5 +117,6 @@ public class ShaderFixerConfig {
             config.save();
         }
     }
+    */
 
 }

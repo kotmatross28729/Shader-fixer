@@ -1,4 +1,6 @@
 package com.kotmatross.shadersfixer.LightingFix;
+
+@Deprecated
 public class TEMP {
 
 /*

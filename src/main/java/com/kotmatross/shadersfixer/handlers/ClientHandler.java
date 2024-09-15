@@ -136,7 +136,6 @@ public class ClientHandler {
                     text2.getChatStyle().setColor(EnumChatFormatting.AQUA);
                     text2.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/kotmatross28729/EnviroMine-continuation/releases"));
                     player.addChatComponentMessage(text2);
-                        ShadersFixer.logger.fatal("ticks enviro: " + ticks);
                         WasLoadedEnviroMine = true;
                 }
             }
@@ -171,7 +170,5 @@ public class ClientHandler {
             }
         }
         WasLoadedEndMSG = false;
-
-
     }
 }

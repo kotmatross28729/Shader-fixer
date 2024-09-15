@@ -1,9 +1,8 @@
 package com.kotmatross.shadersfixer.mixins.late.client.ThaumicConcilium.client;
 
 import com.ilya3point999k.thaumicconcilium.client.render.RiftRenderer;
+import com.kotmatross.shadersfixer.Utils;
 import net.minecraft.entity.Entity;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL20;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,10 +19,10 @@ public class MixinRiftRenderer {
 
     @Inject(method = "func_76986_a", at = @At(value = "INVOKE", target = "Lcom/ilya3point999k/thaumicconcilium/client/render/ShaderHelper;useShader(ILcom/ilya3point999k/thaumicconcilium/client/render/ShaderCallback;)V", ordinal = 0, shift = BEFORE), remap = false)
     private void beforeUseShader(Entity entity, double x, double y, double z, float yaw, float pt, CallbackInfo ci) {
-        shaders_fixer$program = GL11.glGetInteger(GL20.GL_CURRENT_PROGRAM);
+        shaders_fixer$program = Utils.GLGetCurrentProgram();
     }
     @Inject(method = "func_76986_a", at = @At(value = "INVOKE", target = "Lcom/ilya3point999k/thaumicconcilium/client/render/ShaderHelper;releaseShader()V", ordinal = 0, shift = AFTER), remap = false)
     private void afterUseShader(Entity entity, double x, double y, double z, float yaw, float pt, CallbackInfo ci) {
-        GL20.glUseProgram(shaders_fixer$program);
+        Utils.GLUseCurrentProgram(shaders_fixer$program);
     }
 }

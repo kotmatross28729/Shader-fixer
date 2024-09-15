@@ -6,9 +6,6 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 
-import java.util.HashMap;
-import java.util.List;
-
 public class Utils {
     //OP guys
     public static final ResourceLocation shaders_fix = new ResourceLocation(Tags.MODID, "textures/shaders_workaround.png");
@@ -76,15 +73,13 @@ public class Utils {
      *        Utils.GLUseCurrentProgram(shaders_fixer$program);
      *    }
      */
-    public static float GetGLCurrentProgram() {
+    public static int GLGetCurrentProgram() {
         return GL11.glGetInteger(GL20.GL_CURRENT_PROGRAM);
+    }
+    public static void GLUseDefaultProgram() {
+        GL20.glUseProgram(0);
     }
     public static void GLUseCurrentProgram(int program) {
         GL20.glUseProgram(program);
     }
-
-
-
-
-
 }

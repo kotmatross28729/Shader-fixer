@@ -17,7 +17,7 @@ import static org.spongepowered.asm.mixin.injection.At.Shift.BEFORE;
 @Mixin(value = ModelArmorInfinity.class, priority = 999)
 public class MixinModelArmorInfinity {
     @Unique
-    public int shaders_fixer$program; //пщаыжлщдпрывжщапщждывраопж
+    public int shaders_fixer$program;
     @Unique
     public float shaders_fixer$lbx;
     @Unique
@@ -25,12 +25,12 @@ public class MixinModelArmorInfinity {
 
     @Inject(method = "func_78088_a", at = @At(value = "INVOKE", target = "Lfox/spiteful/avaritia/render/CosmicRenderShenanigans;useShader()V", ordinal = 0, shift = BEFORE), remap = false)
     private void beforeUseShader(Entity entity, float f, float f1, float f2, float f3, float f4, float f5, CallbackInfo ci) {
-        shaders_fixer$program = GL11.glGetInteger(GL20.GL_CURRENT_PROGRAM);
+        shaders_fixer$program = Utils.GLGetCurrentProgram();
     }
 
     @Inject(method = "func_78088_a", at = @At(value = "INVOKE", target = "Lfox/spiteful/avaritia/render/CosmicRenderShenanigans;releaseShader()V", ordinal = 0, shift = AFTER), remap = false)
     private void afterUseShader(Entity entity, float f, float f1, float f2, float f3, float f4, float f5, CallbackInfo ci) {
-        GL20.glUseProgram(shaders_fixer$program);
+        Utils.GLUseCurrentProgram(shaders_fixer$program);
         shaders_fixer$lbx = Utils.GetLastBrightnessX();
         shaders_fixer$lby = Utils.GetLastBrightnessY();
         Utils.EnableFullBrightness();
@@ -45,12 +45,11 @@ public class MixinModelArmorInfinity {
 
     @Inject(method = "func_78088_a", at = @At(value = "INVOKE", target = "Lfox/spiteful/avaritia/render/CosmicRenderShenanigans;useShader()V", ordinal = 1, shift = BEFORE), remap = false)
     private void beforeUseShader2(Entity entity, float f, float f1, float f2, float f3, float f4, float f5, CallbackInfo ci) {
-        shaders_fixer$program2 = GL11.glGetInteger(GL20.GL_CURRENT_PROGRAM);
-
+        shaders_fixer$program2 = Utils.GLGetCurrentProgram();
     }
     @Inject(method = "func_78088_a", at = @At(value = "INVOKE", target = "Lfox/spiteful/avaritia/render/CosmicRenderShenanigans;releaseShader()V", ordinal = 1, shift = AFTER), remap = false)
     private void afterUseShader2(Entity entity, float f, float f1, float f2, float f3, float f4, float f5, CallbackInfo ci) {
-        GL20.glUseProgram(shaders_fixer$program2);
+        Utils.GLUseCurrentProgram(shaders_fixer$program2);
     }
     @Unique
     public float shaders_fixer$lbx2;
@@ -59,8 +58,8 @@ public class MixinModelArmorInfinity {
 
     @Inject(method = "func_78088_a", at = @At(value = "INVOKE", target = "Lfox/spiteful/avaritia/render/ModelArmorInfinity;setWings()V", ordinal = 0, shift = BEFORE), remap = false)
     private void WINGSBrightness(Entity entity, float f, float f1, float f2, float f3, float f4, float f5, CallbackInfo ci) {
-        shaders_fixer$lbx = Utils.GetLastBrightnessX();
-        shaders_fixer$lby = Utils.GetLastBrightnessY();
+        shaders_fixer$lbx2 = Utils.GetLastBrightnessX();
+        shaders_fixer$lby2 = Utils.GetLastBrightnessY();
         Utils.EnableFullBrightness();
     }
 
