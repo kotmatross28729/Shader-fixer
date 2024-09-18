@@ -74,6 +74,8 @@ public class ShaderFixerConfig {
     public static boolean FixMinecraftHitboxesRender;
     public static boolean FixMinecraftFishinglineRender;
     public static boolean FixMinecraftLeashRender;
+
+    public static boolean EnableXMixinRenderLiving;
     public static boolean FixMinecraftEnderdragonDeathEffectsRender;
     public static boolean FixMinecraftLightningBoltRender;
     public static boolean FixMinecraftNameTagsRender;
@@ -85,10 +87,11 @@ public class ShaderFixerConfig {
         FixMinecraftHitboxesRender = config.getBoolean("FixMinecraftHitboxesRender", categoryShadersfixes, true, "Fixes hitbox rendering (F3 + B) with shaders.");
         FixMinecraftFishinglineRender = config.getBoolean("FixMinecraftFishinglineRender", categoryShadersfixes, true, "Fixes fishing line rendering (which is from a fishing rod) with shaders.");
         FixMinecraftLeashRender = config.getBoolean("FixMinecraftLeashRender", categoryShadersfixes, true, "Fixes leash line rendering with shaders.");
+        EnableXMixinRenderLiving = config.getBoolean("EnableXMixinRenderLiving", categoryShadersfixes, true, "Enables XMixinRenderLiving which should fix DamageIndicators GUI rendering with shaders.");
         FixMinecraftEnderdragonDeathEffectsRender = config.getBoolean("FixMinecraftEnderdragonDeathEffectsRender", categoryShadersfixes, true, "Fixes rendering of dragon death effects (purple flashes) with shaders.");
         FixMinecraftLightningBoltRender = config.getBoolean("FixMinecraftLightningBoltRender", categoryShadersfixes, true, "Fixes rendering of lightning bolt with shaders.");
         FixMinecraftNameTagsRender = config.getBoolean("FixMinecraftNameTagsRender", categoryShadersfixes, true, "Fixes rendering of name tags with shaders.");
-        enableNotifications = config.getBoolean("enableNotifications", categorytweaks, true, "Turns on a notification in the chat when detected mods for which I (kotmatross) have useful forks.");
+        enableNotifications = config.getBoolean("enableNotifications", categorytweaks, true, "Turns on a notification in the chat when detected 'old version' mods.");
 
         if(config.hasChanged()) {
             config.save();

@@ -25,7 +25,5 @@ public abstract class MixinRenderSpellWhip extends Render {
     public void doRender(EntitySpellWhip entity, double x, double y, double z, float entityYaw, float partialTicks, CallbackInfo ci) {
         Utils.EnableFullBrightness();
         Utils.Fix();
-        Tessellator.instance.setBrightness(15728880);
-
     }
 }

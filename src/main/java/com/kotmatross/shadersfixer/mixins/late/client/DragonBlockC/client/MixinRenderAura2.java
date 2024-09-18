@@ -22,8 +22,7 @@ public class MixinRenderAura2 {
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     private void lightning(EntityAura2 e, double par2, double par4, double par6, float par9, float var20, float var13, boolean rot, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
         Utils.Fix();
-        Tessellator.instance.setBrightness(15728880);
+        Utils.EnableFullBrightness();
     }
 }

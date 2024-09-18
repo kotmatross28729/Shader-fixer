@@ -1,6 +1,5 @@
 package com.kotmatross.shadersfixer.handlers;
 
-import com.kotmatross.shadersfixer.ShadersFixer;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -29,6 +28,8 @@ public class ClientHandler {
     public static boolean EnviroMine  = true;
     public static boolean MatterMegadrive = true;
 
+    public static boolean Avaritia = true;
+
     public static int ticks = 50; // after some messages in chat, inspired by EFR
 
     //Very Hacky hacky hack
@@ -39,13 +40,14 @@ public class ClientHandler {
     public static boolean WasLoadedItemPhysic = false;
     public static boolean WasLoadedEnviroMine = false;
     public static boolean WasLoadedMatterMegadrive = false;
+    public static boolean WasLoadedAvaritia = false;
     public static boolean WasLoadedEndMSG = false;
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public void onClientTick(TickEvent.ClientTickEvent event) {
         if(enableNotifications) {
-
+//My
             if (Loader.isModLoaded("lightsabers")) {if (!Loader.instance().getIndexedModList().get("lightsabers").getVersion().contains("kotmatross edition")) {Lightsabers = false;}}
             if (Loader.isModLoaded("Neat")) {if (!Loader.instance().getIndexedModList().get("Neat").getVersion().contains("kotmatross edition")) {Neat = false;}}
             if (Loader.isModLoaded("world-tooltips")) {if (!Loader.instance().getIndexedModList().get("world-tooltips").getVersion().contains("kotmatross edition")) {WorldTooltips = false;}}
@@ -53,6 +55,12 @@ public class ClientHandler {
             if (Loader.isModLoaded("itemphysic")) {if (!Loader.instance().getIndexedModList().get("itemphysic").getVersion().contains("kotmatross edition")) {ItemPhysic = false;}}
             if (Loader.isModLoaded("enviromine")) {if (!Loader.instance().getIndexedModList().get("enviromine").getVersion().contains("kotmatross edition")) {EnviroMine = false;}}
             if (Loader.isModLoaded("mo")) {if (!Loader.instance().getIndexedModList().get("mo").getVersion().contains("kotmatross edition")) {MatterMegadrive = false;}}
+//Not my
+            if (Loader.isModLoaded("Avaritia")) {
+                double AvaritiaVersionCurrent = Double.parseDouble(Loader.instance().getIndexedModList().get("Avaritia").getVersion());
+                double AvaritiaVersionConst = Double.parseDouble("1.13");
+                if (!(AvaritiaVersionCurrent > AvaritiaVersionConst) ){Avaritia = false;}
+            }
 
             World world = FMLClientHandler.instance().getWorldClient();
             EntityPlayer player = FMLClientHandler.instance().getClientPlayerEntity();
@@ -152,7 +160,20 @@ public class ClientHandler {
                         WasLoadedMatterMegadrive = true;
                 }
             }
-                if ( (!Lightsabers || !Neat || !WorldTooltips || !Minechem || !ItemPhysic || !EnviroMine || !MatterMegadrive) && !WasLoadedEndMSG ) {
+            if (!Avaritia && !WasLoadedAvaritia) {
+                if (player.ticksExisted == ticks) {
+                    ticks += 10;
+                    ChatComponentText text = new ChatComponentText(I18n.format("kotmatross.Avaritia"));
+                    player.addChatComponentMessage(text);
+
+                    ChatComponentText text2 = new ChatComponentText(I18n.format("kotmatross.fork"));
+                    text2.getChatStyle().setColor(EnumChatFormatting.AQUA);
+                    text2.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/GTNewHorizons/Avaritia/releases"));
+                    player.addChatComponentMessage(text2);
+                    WasLoadedAvaritia = true;
+                }
+            }
+                if ( (!Lightsabers || !Neat || !WorldTooltips || !Minechem || !ItemPhysic || !EnviroMine || !MatterMegadrive | !Avaritia) && !WasLoadedEndMSG ) {
                     if (player.ticksExisted == ticks) {
                     ChatComponentText text = new ChatComponentText(I18n.format("kotmatross.endMSG"));
                     text.getChatStyle().setColor(EnumChatFormatting.GOLD);
@@ -165,6 +186,7 @@ public class ClientHandler {
                         WasLoadedItemPhysic = false;
                         WasLoadedEnviroMine = false;
                         WasLoadedMatterMegadrive = false;
+                        WasLoadedAvaritia = false;
                         WasLoadedEndMSG = true;
                 }
             }

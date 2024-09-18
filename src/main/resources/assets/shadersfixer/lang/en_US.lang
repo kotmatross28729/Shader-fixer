@@ -5,6 +5,7 @@ kotmatross.Minechem=[Shader fixer]: An old version of Minechem has been detected
 kotmatross.ItemPhysic=[Shader fixer]: An old version of ItemPhysic has been detected, we recommend updating to
 kotmatross.EnviroMine=[Shader fixer]: An old version of EnviroMine has been detected, we recommend updating to
 kotmatross.MatterMegadrive=[Shader fixer]: An old version of MatterMegadrive has been detected, we recommend updating to
+kotmatross.Avaritia=[Shader fixer]: An old version of Avaritia has been detected, we recommend updating to
 kotmatross.endMSG=Text marked in blue (Aqua) is clickable and will take you to the github download page. Be sure to read the changelog before using any of these forks. You can also disable this notification in .minecraft\config\shadersfixer\mixinsEarly.cfg\enableNotifications=false.
 
 kotmatross.fork=the latest version of it's fork

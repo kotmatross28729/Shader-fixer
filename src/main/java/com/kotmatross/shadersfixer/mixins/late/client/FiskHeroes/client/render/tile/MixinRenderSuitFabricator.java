@@ -24,7 +24,6 @@ public abstract class MixinRenderSuitFabricator extends TileEntitySpecialRendere
     public void render(com.fiskmods.heroes.common.tileentity.TileEntitySuitFabricator tile, double x, double y, double z, float partialTicks, CallbackInfo ci) {
         Utils.EnableFullBrightness();
         Utils.Fix();
-        Tessellator.instance.setBrightness(15728880);
     }
 
     @Inject(method = "render",
@@ -39,7 +38,6 @@ public abstract class MixinRenderSuitFabricator extends TileEntitySpecialRendere
     public void render2(com.fiskmods.heroes.common.tileentity.TileEntitySuitFabricator tile, double x, double y, double z, float partialTicks, CallbackInfo ci) {
         Utils.EnableFullBrightness();
         Utils.Fix();
-        Tessellator.instance.setBrightness(15728880);
     }
 
     @Inject(method = "render",
@@ -54,6 +52,5 @@ public abstract class MixinRenderSuitFabricator extends TileEntitySpecialRendere
     public void render3(com.fiskmods.heroes.common.tileentity.TileEntitySuitFabricator tile, double x, double y, double z, float partialTicks, CallbackInfo ci) {
         Utils.EnableFullBrightness();
         Utils.Fix();
-        Tessellator.instance.setBrightness(15728880);
     }
 }

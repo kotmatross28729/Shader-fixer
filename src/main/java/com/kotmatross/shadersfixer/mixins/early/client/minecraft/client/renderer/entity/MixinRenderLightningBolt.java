@@ -27,6 +27,5 @@ public abstract class MixinRenderLightningBolt extends Render {
     {
         Utils.Fix();
         Utils.EnableFullBrightness();
-        Tessellator.instance.setBrightness(15728880);
     }
 }
