@@ -3,13 +3,7 @@ package com.kotmatross.shadersfixer.mixins.late.client.ThaumicConcilium.client;
 import com.ilya3point999k.thaumicconcilium.client.render.ShaderCallback;
 import com.kotmatross.shadersfixer.shrimp.Fucked;
 import com.kotmatross.shadersfixer.shrimp.FuckingCursed;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL20;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Fucked @FuckingCursed
 @Mixin(value = ShaderCallback.class, priority = 999)
 public class MixinShaderCallback {

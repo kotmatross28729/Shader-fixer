@@ -1,7 +1,6 @@
 package com.kotmatross.shadersfixer.handlers;
 
 import com.kotmatross.shadersfixer.Tags;
-import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
 import com.kotmatross.shadersfixer.shrimp.FuckingCursed;
 import com.kotmatross.shadersfixer.shrimp.FuckingShit;
 import cpw.mods.fml.client.FMLClientHandler;
@@ -198,7 +197,7 @@ public class ClientHandler {
                     text1.getChatStyle().setColor(EnumChatFormatting.AQUA);
                     text2.getChatStyle().setColor(EnumChatFormatting.GOLD);
                     text3.getChatStyle().setColor(EnumChatFormatting.GOLD);
-                    text4.getChatStyle().setColor(EnumChatFormatting.RED).setBold(true).setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, Config));;
+                    text4.getChatStyle().setColor(EnumChatFormatting.RED).setBold(true).setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, Config));
 
                     //omagad
                     ChatComponentText textFinal = (ChatComponentText) text0.appendSibling(text1).appendSibling(text2).appendSibling(text3).appendSibling(text4).appendSibling(text5);

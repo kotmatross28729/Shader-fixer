@@ -1,11 +1,10 @@
 package com.kotmatross.shadersfixer.config;
 
+import net.minecraftforge.common.config.Configuration;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.kotmatross.shadersfixer.Utils;
-import net.minecraftforge.common.config.Configuration;
 
 public class ShaderFixerConfig {
     // Definitely does NOT look like a BugTorch config

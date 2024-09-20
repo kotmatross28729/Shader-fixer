@@ -94,6 +94,9 @@ public class ShadersFixer {
                 MinecraftForge.EVENT_BUS.register(EHandler);
             }
         }*/
+        if(!Utils.CanUse120GL){
+            logger.error("The device doesn't support OpenGL20 (1.2), some fixes will not work!");
+        }
     }
 
 }

@@ -1,10 +1,7 @@
 package com.kotmatross.shadersfixer.proxy;
 
 import com.kotmatross.shadersfixer.ShadersFixer;
-import com.kotmatross.shadersfixer.LightingFix.EntityLightingFix;
-import com.kotmatross.shadersfixer.LightingFix.RenderEntityLightingFix;
 import com.kotmatross.shadersfixer.handlers.ClientHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraftforge.common.MinecraftForge;
 
