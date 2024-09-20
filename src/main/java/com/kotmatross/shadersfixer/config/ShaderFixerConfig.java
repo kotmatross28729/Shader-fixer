@@ -59,7 +59,7 @@ public class ShaderFixerConfig {
         FixOpenComputersShaders = config.getBoolean("FixOpenComputersShaders", categoryShadersfixes, true, "Fixes rendering errors in OpenComputers mod when using shaders.");
         FixElnShaders = config.getBoolean("FixElnShaders", categoryShadersfixes, true, "Fixes rendering errors in ElectricalAge mod when using shaders.");
 
-        ElnLightMixins = config.getBoolean("ElnLightMixins", categorytweaks, true, "Slightly modifies the code for rendering the light sprite to avoid an issue with bsl shaders that renders object with full alpha when the object's alpha is close to 0. Use carefully with new versions, as it calls the old sprite rendering code");
+        ElnLightMixins = config.getBoolean("ElnLightMixins", categorytweaks, true, "Slightly modifies the code for rendering the light sprite to avoid an issue with bsl shaders that renders object with full alpha when the object's alpha is close to 0 (below 0.1). Use carefully with new versions, as it calls the old sprite rendering code");
 
         TechgunsGoreLogger = config.getBoolean("TechgunsGoreLogger", categorytweaks, false, "Prints the name of the killed mob( using techguns weapons) in the log, useful for TechgunsGoreList, where 1 parameter is the name of the mob.");
 //        TechgunsGoreList = new ArrayList<>(Arrays.asList(config.getStringList("TechgunsGoreList", categorytweaks, new String[]{"entity_glyphid:6:0.66:85:156:17"}, "Adds an entity to the gore Techguns entity list. The syntax is: mobname:GibsNumber:GibsScale:BloodСolorR:BloodColorG:BloodColorBlue . Please note that Blood R-G-B colors can only be integers up to 255")));
@@ -80,6 +80,8 @@ public class ShaderFixerConfig {
     public static boolean FixMinecraftLightningBoltRender;
     public static boolean FixMinecraftNameTagsRender;
 
+    public static boolean FixMinecraftEffectGUIBlending;
+
     public static boolean enableNotifications;
     public static void loadEarlyMixinConfig(File configFile) {
         Configuration config = new Configuration(configFile);
@@ -91,6 +93,7 @@ public class ShaderFixerConfig {
         FixMinecraftEnderdragonDeathEffectsRender = config.getBoolean("FixMinecraftEnderdragonDeathEffectsRender", categoryShadersfixes, true, "Fixes rendering of dragon death effects (purple flashes) with shaders.");
         FixMinecraftLightningBoltRender = config.getBoolean("FixMinecraftLightningBoltRender", categoryShadersfixes, true, "Fixes rendering of lightning bolt with shaders.");
         FixMinecraftNameTagsRender = config.getBoolean("FixMinecraftNameTagsRender", categoryShadersfixes, true, "Fixes rendering of name tags with shaders.");
+        FixMinecraftEffectGUIBlending = config.getBoolean("FixMinecraftEffectGUIBlending", categoryShadersfixes, true, "Fixes an annoying bug due to which the effect bar in the creative menu turns black.");
         enableNotifications = config.getBoolean("enableNotifications", categorytweaks, true, "Turns on a notification in the chat when detected 'old version' mods.");
 
         if(config.hasChanged()) {

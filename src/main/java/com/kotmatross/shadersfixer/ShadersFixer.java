@@ -53,9 +53,9 @@ public class ShadersFixer {
         }
     }
 
-    public static boolean isPsychedelicraftLoaded() {
-        return Loader.isModLoaded("psychedelicraft");
-    }
+//    public static boolean isPsychedelicraftLoaded() {
+//        return Loader.isModLoaded("psychedelicraft");
+//    }
     private static final boolean IS_SHADERS_MOD_PRESENT;
     static {
         boolean shadersModPresent = false;
@@ -69,9 +69,9 @@ public class ShadersFixer {
     public static boolean SHADERS_MOD() {
         return IS_SHADERS_MOD_PRESENT;
     }
-    public static boolean LightingFix() {
-        return SHADERS_MOD() || isPsychedelicraftLoaded();
-    }
+//    public static boolean LightingFix() {
+//        return SHADERS_MOD() || isPsychedelicraftLoaded();
+//    }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {

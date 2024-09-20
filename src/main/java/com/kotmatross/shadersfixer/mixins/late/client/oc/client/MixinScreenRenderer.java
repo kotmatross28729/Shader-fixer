@@ -27,6 +27,6 @@ public class MixinScreenRenderer {
 
     @Inject(method = "renderTileEntityAt", at = @At(value = "INVOKE", target = "Lnet/minecraft/profiler/Profiler;endSection()V", ordinal = 0, shift = At.Shift.AFTER))
     private void AfterDraw(TileEntity t, double x, double y, double z, float f, CallbackInfo ci) {
-        Utils.GLUseCurrentProgram(shaders_fixer$program);
+        Utils.GLUseProgram(shaders_fixer$program);
     }
 }

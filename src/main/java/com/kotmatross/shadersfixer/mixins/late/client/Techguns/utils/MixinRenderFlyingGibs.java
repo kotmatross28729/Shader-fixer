@@ -1,5 +1,6 @@
 package com.kotmatross.shadersfixer.mixins.late.client.Techguns.utils;
 
+import com.kotmatross.shadersfixer.shrimp.Fucked;
 import net.minecraft.client.model.*;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
@@ -24,7 +25,7 @@ import java.util.Random;
 
 import static com.kotmatross.shadersfixer.config.ShaderFixerConfig.TechgunsGoreList;
 
-
+@Deprecated @Fucked
 @Mixin(value = RenderFlyingGibs.class, priority = 999)
 public abstract class MixinRenderFlyingGibs extends Render {
 

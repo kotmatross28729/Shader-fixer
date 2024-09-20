@@ -3,8 +3,6 @@ package com.kotmatross.shadersfixer.mixins.late.client.avaritia.client;
 import com.kotmatross.shadersfixer.Utils;
 import fox.spiteful.avaritia.render.ModelArmorInfinity;
 import net.minecraft.entity.Entity;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL20;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,7 +28,7 @@ public class MixinModelArmorInfinity {
 
     @Inject(method = "func_78088_a", at = @At(value = "INVOKE", target = "Lfox/spiteful/avaritia/render/CosmicRenderShenanigans;releaseShader()V", ordinal = 0, shift = AFTER), remap = false)
     private void afterUseShader(Entity entity, float f, float f1, float f2, float f3, float f4, float f5, CallbackInfo ci) {
-        Utils.GLUseCurrentProgram(shaders_fixer$program);
+        Utils.GLUseProgram(shaders_fixer$program);
         shaders_fixer$lbx = Utils.GetLastBrightnessX();
         shaders_fixer$lby = Utils.GetLastBrightnessY();
         Utils.EnableFullBrightness();
@@ -49,7 +47,7 @@ public class MixinModelArmorInfinity {
     }
     @Inject(method = "func_78088_a", at = @At(value = "INVOKE", target = "Lfox/spiteful/avaritia/render/CosmicRenderShenanigans;releaseShader()V", ordinal = 1, shift = AFTER), remap = false)
     private void afterUseShader2(Entity entity, float f, float f1, float f2, float f3, float f4, float f5, CallbackInfo ci) {
-        Utils.GLUseCurrentProgram(shaders_fixer$program2);
+        Utils.GLUseProgram(shaders_fixer$program2);
     }
     @Unique
     public float shaders_fixer$lbx2;

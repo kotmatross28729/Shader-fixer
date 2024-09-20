@@ -78,7 +78,7 @@ public class MixinLampSocketStandardObjRender {
                 UtilsClient.enableCulling();
                 UtilsClient.disableDepthTest(); //Beautiful effect, but overlay the whole render (i.e. through wall) : so distance limited.
 
-                if(light * 0.06667f * coeff < 0.1) // ~0.1 - bsl "dead alpha" start
+                if((light * 0.06667f * coeff) < 0.1) // ~0.1 - bsl "dead alpha" start
                 {
                     GL11.glColor4f(1.f, 1.f, 1.f, 0.1f);
                 } else {
@@ -93,7 +93,7 @@ public class MixinLampSocketStandardObjRender {
 
         if (lightAlphaPlane != null && light > 0)
         {
-            if(light * 0.06667f < 0.1) // ~0.1 - bsl "dead alpha" start
+            if((light * 0.06667f) < 0.1) // ~0.1 - bsl "dead alpha" start
             {
                 GL11.glColor4f(1.f, 0.98f, 0.92f, 0.1f);
             } else {
@@ -111,9 +111,4 @@ public class MixinLampSocketStandardObjRender {
          * GL11.glLineWidth(2f); GL11.glDisable(GL11.GL_TEXTURE_2D); GL11.glDisable(GL11.GL_LIGHTING); GL11.glColor3f(1f,1f,1f); GL11.glBegin(GL11.GL_LINES); GL11.glVertex3d(0f, 0f, 0f); GL11.glVertex3d(Math.cos(alphaZ*Math.PI/180.0), Math.sin(alphaZ*Math.PI/180.0),0.0); GL11.glEnd(); GL11.glEnable(GL11.GL_TEXTURE_2D); GL11.glEnable(GL11.GL_LIGHTING);
          */
     }
-
-
-
-
-
 }

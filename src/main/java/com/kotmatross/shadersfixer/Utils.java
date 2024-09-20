@@ -56,10 +56,8 @@ public class Utils {
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lbx, lby);
     }
     public static void EnableFullBrightness() {
-        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)15728880 % 65536.0F, (float)15728880 / 65536.0F);
+        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)(MAX_LIGHT_COORD % INT_2X16), (float)(MAX_LIGHT_COORD / INT_2X16));
     }
-
-
 
     /*Shader docs
      *    @Unique public static int shaders_fixer$program;
@@ -79,7 +77,7 @@ public class Utils {
     public static void GLUseDefaultProgram() {
         GL20.glUseProgram(0);
     }
-    public static void GLUseCurrentProgram(int program) {
+    public static void GLUseProgram(int program) {
         GL20.glUseProgram(program);
     }
 }

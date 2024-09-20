@@ -93,7 +93,7 @@ public class MixinLampSocketSuspendedObjRender {
                 UtilsClient.disableLight();
                 UtilsClient.disableDepthTest();
 
-                if(light * 0.06667f * coeff < 0.1) // ~0.1 - bsl "dead alpha" start
+                if((light * 0.06667f * coeff) < 0.1) // ~0.1 - bsl "dead alpha" start
                 {
                     GL11.glColor4f(1.f, 1.f, 1.f, 0.1f);
                 } else {

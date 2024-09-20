@@ -1,5 +1,6 @@
 package com.kotmatross.shadersfixer.mixins.late.client.Techguns.utils;
 
+import com.kotmatross.shadersfixer.shrimp.Fucked;
 import net.minecraft.client.model.*;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.Entity;
@@ -27,6 +28,7 @@ import java.util.HashMap;
 
 import static com.kotmatross.shadersfixer.config.ShaderFixerConfig.*;
 
+@Deprecated @Fucked
 @Mixin(value = DeathEffect.class, priority = 999)
 public class MixinDeathEffect {
 @Shadow(remap = false)

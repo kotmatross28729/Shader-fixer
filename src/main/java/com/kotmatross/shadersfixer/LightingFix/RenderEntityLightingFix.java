@@ -1,15 +1,10 @@
 package com.kotmatross.shadersfixer.LightingFix;
 
-import com.kotmatross.shadersfixer.Tags;
-import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
+import com.kotmatross.shadersfixer.shrimp.Fucked;
+import com.kotmatross.shadersfixer.shrimp.FuckingCursed;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.model.ModelCreeper;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ResourceLocation;
-@Deprecated
+@Deprecated @Fucked @FuckingCursed
 @SideOnly(Side.CLIENT)
 public class RenderEntityLightingFix /*extends RenderLiving*/ {
 /**

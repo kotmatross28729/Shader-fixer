@@ -25,7 +25,7 @@ public class MixinAstralMonitorRenderer {
 
     @Inject(method = "renderItem", at = @At(value = "INVOKE", target = "Lcom/ilya3point999k/thaumicconcilium/client/render/ShaderHelper;releaseShader()V", ordinal = 0, shift = AFTER), remap = false)
     private void afterUseShader(IItemRenderer.ItemRenderType type, ItemStack item, Object[] data, CallbackInfo ci) {
-        Utils.GLUseCurrentProgram(shaders_fixer$program);
+        Utils.GLUseProgram(shaders_fixer$program);
     }
 
     @Unique
@@ -38,6 +38,6 @@ public class MixinAstralMonitorRenderer {
 
     @Inject(method = "renderItem", at = @At(value = "INVOKE", target = "Lcom/ilya3point999k/thaumicconcilium/client/render/ShaderHelper;releaseShader()V", ordinal = 1, shift = AFTER), remap = false)
     private void afterUseShader2(IItemRenderer.ItemRenderType type, ItemStack item, Object[] data, CallbackInfo ci) {
-        Utils.GLUseCurrentProgram(shaders_fixer$program2);
+        Utils.GLUseProgram(shaders_fixer$program2);
     }
 }

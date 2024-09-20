@@ -1,13 +1,14 @@
 package com.kotmatross.shadersfixer.mixins.late.client.mchelio;
 
 import com.kotmatross.shadersfixer.Utils;
+import com.kotmatross.shadersfixer.shrimp.Fucked;
 import mcheli.gui.MCH_Gui;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
+@Deprecated @Fucked
 @Mixin(value = MCH_Gui.class, priority = 999)
 public class MixinMCH_Gui {
     @Inject(method = "drawTexturedModalRectRotate",

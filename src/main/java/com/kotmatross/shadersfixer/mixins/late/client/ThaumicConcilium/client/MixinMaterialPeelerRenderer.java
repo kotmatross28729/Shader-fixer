@@ -23,6 +23,6 @@ public class MixinMaterialPeelerRenderer {
     }
     @Inject(method = "func_76986_a", at = @At(value = "INVOKE", target = "Lcom/ilya3point999k/thaumicconcilium/client/render/ShaderHelper;releaseShader()V", ordinal = 0, shift = AFTER), remap = false)
     private void afterUseShader(Entity entity, double x, double y, double z, float yaw, float partialTickTime, CallbackInfo ci) {
-        Utils.GLUseCurrentProgram(shaders_fixer$program);
+        Utils.GLUseProgram(shaders_fixer$program);
     }
 }

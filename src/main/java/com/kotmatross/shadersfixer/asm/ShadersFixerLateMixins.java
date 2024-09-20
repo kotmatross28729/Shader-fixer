@@ -129,7 +129,6 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.mchelio.MixinMCH_HudItem"); //?
                     mixins.add("client.mchelio.MixinMCH_RenderAircraft"); //<--
                 }
-
                 if (ShaderFixerConfig.FixRivalRebelsShaders) {
                     ShadersFixer.logger.info("Trying to integrate Rival Rebels mixins...");
                     mixins.add("client.rivalrebels.client.entity.MixinRenderLaserBurst");
