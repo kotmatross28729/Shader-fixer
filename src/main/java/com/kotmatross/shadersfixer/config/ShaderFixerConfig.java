@@ -80,8 +80,10 @@ public class ShaderFixerConfig {
     public static boolean FixMinecraftNameTagsRender;
 
     public static boolean FixMinecraftEffectGUIBlending;
-
     public static boolean enableNotifications;
+
+    public static int startTicksOffset;
+    public static int ticksInterval;
     public static void loadEarlyMixinConfig(File configFile) {
         Configuration config = new Configuration(configFile);
 
@@ -94,6 +96,8 @@ public class ShaderFixerConfig {
         FixMinecraftNameTagsRender = config.getBoolean("FixMinecraftNameTagsRender", categoryShadersfixes, true, "Fixes rendering of name tags with shaders.");
         FixMinecraftEffectGUIBlending = config.getBoolean("FixMinecraftEffectGUIBlending", categoryShadersfixes, true, "Fixes an annoying bug due to which the effect bar in the creative menu turns black.");
         enableNotifications = config.getBoolean("enableNotifications", categorytweaks, true, "Turns on a notification in the chat when detected 'old version' mods.");
+        startTicksOffset = config.getInt("startTicksOffset", categorytweaks, 50,0, 65536, "First update notification will be delayed by n ticks to be displayed last at chat.");
+        ticksInterval = config.getInt("ticksInterval", categorytweaks, 10,0, 65536, "Update notifications will be delayed by n ticks after the last notification (to avoid a sudden influx of notifications).");
 
         if(config.hasChanged()) {
             config.save();

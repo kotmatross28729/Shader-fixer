@@ -21,6 +21,8 @@ import net.minecraft.world.World;
 import java.io.File;
 
 import static com.kotmatross.shadersfixer.config.ShaderFixerConfig.enableNotifications;
+import static com.kotmatross.shadersfixer.config.ShaderFixerConfig.startTicksOffset;
+import static com.kotmatross.shadersfixer.config.ShaderFixerConfig.ticksInterval;
 
 @FuckingCursed @FuckingShit
 public class ClientHandler {
@@ -36,7 +38,7 @@ public class ClientHandler {
     public static boolean MatterMegadrive = true;
     public static boolean Avaritia = true;
 
-    public static int ticks = 50; // after some messages in chat, inspired by EFR
+    public static int ticks = startTicksOffset; // after some messages in chat, inspired by EFR
 
     //Very Hacky hacky hack
     public static boolean WasLoadedLightsabers = false;
@@ -83,7 +85,7 @@ public class ClientHandler {
 
                 if (!Lightsabers && !WasLoadedLightsabers) {
                     if (player.ticksExisted == ticks) {
-                        ticks += 10;
+                        ticks += ticksInterval;
                     ChatComponentText text = new ChatComponentText(I18n.format("kotmatross.Lightsabers"));
                     textfork.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/kotmatross28729/Advanced_Lightsabers-Shaders_fix/releases"));
                     ChatComponentText text3 = (ChatComponentText)textSF.appendSibling(textdepr0).appendSibling(text).appendSibling(textdepr1).appendSibling(textfork);
@@ -93,7 +95,7 @@ public class ClientHandler {
             }
                 if (!Neat && !WasLoadedNeat) {
                     if (player.ticksExisted == ticks) {
-                        ticks += 10;
+                        ticks += ticksInterval;
                     ChatComponentText text = new ChatComponentText(I18n.format("kotmatross.Neat"));
                     textfork.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/kotmatross28729/Neat-shaders-fix/releases"));
                     ChatComponentText text3 = (ChatComponentText)textSF.appendSibling(textdepr0).appendSibling(text).appendSibling(textdepr1).appendSibling(textfork);
@@ -103,7 +105,7 @@ public class ClientHandler {
             }
                 if (!WorldTooltips && !WasLoadedWorldTooltips) {
                     if (player.ticksExisted == ticks) {
-                        ticks += 10;
+                        ticks += ticksInterval;
                     ChatComponentText text = new ChatComponentText(I18n.format("kotmatross.WorldTooltips"));
                     textfork.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/kotmatross28729/WorldTooltipsShadersFix/releases"));
                     ChatComponentText text3 = (ChatComponentText)textSF.appendSibling(textdepr0).appendSibling(text).appendSibling(textdepr1).appendSibling(textfork);
@@ -113,7 +115,7 @@ public class ClientHandler {
             }
                 if (!Minechem && !WasLoadedMinechem) {
                     if (player.ticksExisted == ticks) {
-                        ticks += 10;
+                        ticks += ticksInterval;
                     ChatComponentText text = new ChatComponentText(I18n.format("kotmatross.Minechem"));
                     textfork.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/kotmatross28729/Minechem-5-continuation/releases"));
                     ChatComponentText text3 = (ChatComponentText)textSF.appendSibling(textdepr0).appendSibling(text).appendSibling(textdepr1).appendSibling(textfork);
@@ -123,7 +125,7 @@ public class ClientHandler {
             }
                 if (!ItemPhysic && !WasLoadedItemPhysic) {
                     if (player.ticksExisted == ticks) {
-                        ticks += 10;
+                        ticks += ticksInterval;
                     ChatComponentText text = new ChatComponentText(I18n.format("kotmatross.ItemPhysic"));
                     textfork.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/kotmatross28729/ItemPhysic/releases"));
                     ChatComponentText text3 = (ChatComponentText)textSF.appendSibling(textdepr0).appendSibling(text).appendSibling(textdepr1).appendSibling(textfork);
@@ -133,7 +135,7 @@ public class ClientHandler {
             }
                 if (!EnviroMine && !WasLoadedEnviroMine) {
                     if (player.ticksExisted == ticks) {
-                        ticks += 10;
+                        ticks += ticksInterval;
                     ChatComponentText text = new ChatComponentText(I18n.format("kotmatross.EnviroMine"));
                     textfork.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/kotmatross28729/EnviroMine-continuation/releases"));
                     ChatComponentText text3 = (ChatComponentText)textSF.appendSibling(textdepr0).appendSibling(text).appendSibling(textdepr1).appendSibling(textfork);
@@ -143,7 +145,7 @@ public class ClientHandler {
             }
                 if (!MatterMegadrive && !WasLoadedMatterMegadrive) {
                     if (player.ticksExisted == ticks) {
-                        ticks += 10;
+                        ticks += ticksInterval;
                     ChatComponentText text = new ChatComponentText(I18n.format("kotmatross.MatterMegadrive"));
                     textfork.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/kotmatross28729/MatterMegadriveFork/releases"));
                     ChatComponentText text3 = (ChatComponentText)textSF.appendSibling(textdepr0).appendSibling(text).appendSibling(textdepr1).appendSibling(textfork);
@@ -153,7 +155,7 @@ public class ClientHandler {
             }
                 if (!Avaritia && !WasLoadedAvaritia) {
                     if (player.ticksExisted == ticks) {
-                        ticks += 10;
+                        ticks += ticksInterval;
                         ChatComponentText text = new ChatComponentText(I18n.format("kotmatross.Avaritia"));
                         textfork.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/GTNewHorizons/Avaritia/releases"));
                         ChatComponentText text3 = (ChatComponentText)textSF.appendSibling(textdepr0).appendSibling(text).appendSibling(textdepr1).appendSibling(textfork);
@@ -168,19 +170,7 @@ public class ClientHandler {
                     ChatComponentText text1 = new ChatComponentText(I18n.format("kotmatross.endMSG1"));
                     ChatComponentText text2 = new ChatComponentText(I18n.format("kotmatross.endMSG2"));
                     ChatComponentText text3 = new ChatComponentText(I18n.format("kotmatross.endMSG3"));
-/**
-                    //Thanks, MC, for reset formatting on EVERY FUCKING™ new line
                     ChatComponentText text4 = new ChatComponentText
-                        (
-                            EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + I18n.format("kotmatross.endMSG4M") +
-                                 EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + I18n.format("kotmatross.endMSG4C") +
-                                 EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + I18n.format("kotmatross.endMSG4S") +
-                                 EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + I18n.format("kotmatross.endMSG4X") +
-                                 EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + I18n.format("kotmatross.endMSG4E") +
-                                 EnumChatFormatting.RESET
-                        );
-*/
-                        ChatComponentText text4 = new ChatComponentText
                             (
                                  I18n.format("kotmatross.endMSG4M") +
                                       I18n.format("kotmatross.endMSG4C") +
@@ -189,7 +179,6 @@ public class ClientHandler {
                                       I18n.format("kotmatross.endMSG4E") +
                                       EnumChatFormatting.RESET
                             );
-
                     ChatComponentText text5 = new ChatComponentText(I18n.format("kotmatross.endMSG5"));
                     String Config = Launch.minecraftHome + File.separator + "config" + File.separator + Tags.MODID + File.separator + "mixinsEarly.cfg";
 
@@ -204,7 +193,7 @@ public class ClientHandler {
 
                     //Birb®
                     player.addChatComponentMessage(textFinal);
-                        ticks = 50;
+                        ticks = startTicksOffset;
                         WasLoadedLightsabers = false;
                         WasLoadedNeat = false;
                         WasLoadedWorldTooltips = false;

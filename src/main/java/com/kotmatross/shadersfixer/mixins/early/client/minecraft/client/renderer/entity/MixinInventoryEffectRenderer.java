@@ -1,5 +1,6 @@
 package com.kotmatross.shadersfixer.mixins.early.client.minecraft.client.renderer.entity;
 
+import com.kotmatross.shadersfixer.shrimp.FuckingShit;
 import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import org.lwjgl.opengl.GL11;
@@ -8,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-//Worst mixin
+@FuckingShit
 @Mixin(value = InventoryEffectRenderer.class, priority = 999)
 public class MixinInventoryEffectRenderer {
 //Missing blend i think (it is it's is it)
