@@ -2,6 +2,7 @@ package com.kotmatross.shadersfixer.LightingFix;
 
 import com.kotmatross.shadersfixer.shrimp.Fucked;
 import com.kotmatross.shadersfixer.shrimp.FuckingCursed;
+import com.kotmatross.shadersfixer.shrimp.FuckingShit;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -10,7 +11,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-@Deprecated @Fucked @FuckingCursed
+@Deprecated @Fucked @FuckingCursed @FuckingShit
 public class EntityLightingFix extends EntityCreature {
 
     public EntityLightingFix(World var1) {

@@ -2,6 +2,7 @@ package com.kotmatross.shadersfixer.LightingFix;
 
 import com.kotmatross.shadersfixer.shrimp.Fucked;
 import com.kotmatross.shadersfixer.shrimp.FuckingCursed;
+import com.kotmatross.shadersfixer.shrimp.FuckingShit;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -11,7 +12,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 
 import java.util.HashMap;
 
-@Deprecated @Fucked @FuckingCursed
+@Deprecated @Fucked @FuckingCursed @FuckingShit
 public class EventHandler {
 public static final HashMap<String, EntityLightingFix> Entities = new HashMap<>();
 

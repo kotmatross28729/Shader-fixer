@@ -13,17 +13,17 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(value = LampSocketStandardObjRender.class, priority = 999)
 public class MixinLampSocketStandardObjRender {
-    @Shadow private Obj3D obj;
-    @Shadow private Obj3D.Obj3DPart socket;
-    @Shadow private Obj3D.Obj3DPart socket_unlightable;
-    @Shadow private Obj3D.Obj3DPart socket_lightable;
-    @Shadow private Obj3D.Obj3DPart lampOn;
-    @Shadow private Obj3D.Obj3DPart lampOff;
-    @Shadow private Obj3D.Obj3DPart lightAlphaPlane;
-    @Shadow private Obj3D.Obj3DPart lightAlphaPlaneNoDepth;
-    @Shadow ResourceLocation tOn;
-    @Shadow ResourceLocation tOff;
-    @Shadow private boolean onOffModel;
+    @Shadow(remap = false) private Obj3D obj;
+    @Shadow(remap = false) private Obj3D.Obj3DPart socket;
+    @Shadow(remap = false) private Obj3D.Obj3DPart socket_unlightable;
+    @Shadow(remap = false) private Obj3D.Obj3DPart socket_lightable;
+    @Shadow(remap = false) private Obj3D.Obj3DPart lampOn;
+    @Shadow(remap = false) private Obj3D.Obj3DPart lampOff;
+    @Shadow(remap = false) private Obj3D.Obj3DPart lightAlphaPlane;
+    @Shadow(remap = false) private Obj3D.Obj3DPart lightAlphaPlaneNoDepth;
+    @Shadow(remap = false) ResourceLocation tOn;
+    @Shadow(remap = false) ResourceLocation tOff;
+    @Shadow(remap = false) private boolean onOffModel;
 
     /**
      * @author kotmatross

@@ -1,11 +1,29 @@
-kotmatross.Lightsabers=[Shader fixer]: An old version of Advanced Lightsabers has been detected, we recommend updating to
-kotmatross.Neat=[Shader fixer]: An old version of Neat has been detected, we recommend updating to
-kotmatross.WorldTooltips=[Shader fixer]: An old version of WorldTooltips has been detected, we recommend updating to
-kotmatross.Minechem=[Shader fixer]: An old version of Minechem has been detected, we recommend updating to
-kotmatross.ItemPhysic=[Shader fixer]: An old version of ItemPhysic has been detected, we recommend updating to
-kotmatross.EnviroMine=[Shader fixer]: An old version of EnviroMine has been detected, we recommend updating to
-kotmatross.MatterMegadrive=[Shader fixer]: An old version of MatterMegadrive has been detected, we recommend updating to
-kotmatross.Avaritia=[Shader fixer]: An old version of Avaritia has been detected, we recommend updating to
-kotmatross.endMSG=Text marked in blue (Aqua) is clickable and will take you to the github download page. Be sure to read the changelog before using any of these forks. You can also disable this notification in .minecraft\config\shadersfixer\mixinsEarly.cfg\enableNotifications=false.
+#Reminder: some lines have spaces, they cannot be removed, because without them the text will simply merge in one mess
 
-kotmatross.fork=the latest version of it's fork
+kotmatross.SF=[Shader fixer]: 
+
+kotmatross.depr0=An old version of 
+kotmatross.depr1= has been detected, we recommend updating to
+kotmatross.fork= the latest version of it's fork
+
+kotmatross.Lightsabers=Advanced Lightsabers
+kotmatross.Neat=Neat
+kotmatross.WorldTooltips=WorldTooltips
+kotmatross.Minechem=Minechem
+kotmatross.ItemPhysic=ItemPhysic
+kotmatross.EnviroMine=EnviroMine
+kotmatross.MatterMegadrive=MatterMegadrive
+kotmatross.Avaritia=Avaritia
+
+kotmatross.endMSG0=Text marked in blue 
+kotmatross.endMSG1=(Aqua) 
+kotmatross.endMSG2=is clickable and will take you to the github download page. Be sure to read the changelog before using any of these forks. 
+kotmatross.endMSG3=You can also disable this notification in 
+
+kotmatross.endMSG4M=.minecraft
+kotmatross.endMSG4C=\config
+kotmatross.endMSG4S=\shadersfixer
+kotmatross.endMSG4X=\mixinsEarly.cfg
+kotmatross.endMSG4E= | enableNotifications=false.
+
+kotmatross.endMSG5= (click to open file, requires a restart)

@@ -1,5 +1,9 @@
 package com.kotmatross.shadersfixer.handlers;
 
+import com.kotmatross.shadersfixer.Tags;
+import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
+import com.kotmatross.shadersfixer.shrimp.FuckingCursed;
+import com.kotmatross.shadersfixer.shrimp.FuckingShit;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -10,12 +14,16 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.event.ClickEvent;
+import net.minecraft.launchwrapper.Launch;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
+import java.io.File;
+
 import static com.kotmatross.shadersfixer.config.ShaderFixerConfig.enableNotifications;
 
+@FuckingCursed @FuckingShit
 public class ClientHandler {
     public static final ClientHandler INSTANCE = new ClientHandler();
     private final Minecraft mc = FMLClientHandler.instance().getClient();
@@ -27,7 +35,6 @@ public class ClientHandler {
     public static boolean ItemPhysic = true;
     public static boolean EnviroMine  = true;
     public static boolean MatterMegadrive = true;
-
     public static boolean Avaritia = true;
 
     public static int ticks = 50; // after some messages in chat, inspired by EFR
@@ -69,42 +76,39 @@ public class ClientHandler {
                 return;
             }
 
+            ChatComponentText textSF = new ChatComponentText(EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + I18n.format( "kotmatross.SF") + EnumChatFormatting.RESET);
+            ChatComponentText textdepr0 = new ChatComponentText(I18n.format("kotmatross.depr0"));
+            ChatComponentText textdepr1 = new ChatComponentText(I18n.format("kotmatross.depr1"));
+            ChatComponentText textfork = new ChatComponentText(I18n.format("kotmatross.fork"));
+            textfork.getChatStyle().setColor(EnumChatFormatting.AQUA);
+
                 if (!Lightsabers && !WasLoadedLightsabers) {
                     if (player.ticksExisted == ticks) {
                         ticks += 10;
                     ChatComponentText text = new ChatComponentText(I18n.format("kotmatross.Lightsabers"));
-                    player.addChatComponentMessage(text);
-
-                    ChatComponentText text2 = new ChatComponentText(I18n.format("kotmatross.fork"));
-                    text2.getChatStyle().setColor(EnumChatFormatting.AQUA);
-                    text2.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/kotmatross28729/Advanced_Lightsabers-Shaders_fix/releases"));
-                    player.addChatComponentMessage(text2);
-                    WasLoadedLightsabers = true;
+                    textfork.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/kotmatross28729/Advanced_Lightsabers-Shaders_fix/releases"));
+                    ChatComponentText text3 = (ChatComponentText)textSF.appendSibling(textdepr0).appendSibling(text).appendSibling(textdepr1).appendSibling(textfork);
+                    player.addChatComponentMessage(text3);
+                        WasLoadedLightsabers = true;
                 }
             }
                 if (!Neat && !WasLoadedNeat) {
                     if (player.ticksExisted == ticks) {
                         ticks += 10;
                     ChatComponentText text = new ChatComponentText(I18n.format("kotmatross.Neat"));
-                    player.addChatComponentMessage(text);
-
-                    ChatComponentText text2 = new ChatComponentText(I18n.format("kotmatross.fork"));
-                    text2.getChatStyle().setColor(EnumChatFormatting.AQUA);
-                    text2.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/kotmatross28729/Neat-shaders-fix/releases"));
-                    player.addChatComponentMessage(text2);
-                    WasLoadedNeat = true;
+                    textfork.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/kotmatross28729/Neat-shaders-fix/releases"));
+                    ChatComponentText text3 = (ChatComponentText)textSF.appendSibling(textdepr0).appendSibling(text).appendSibling(textdepr1).appendSibling(textfork);
+                    player.addChatComponentMessage(text3);
+                        WasLoadedNeat = true;
                 }
             }
                 if (!WorldTooltips && !WasLoadedWorldTooltips) {
                     if (player.ticksExisted == ticks) {
                         ticks += 10;
                     ChatComponentText text = new ChatComponentText(I18n.format("kotmatross.WorldTooltips"));
-                    player.addChatComponentMessage(text);
-
-                    ChatComponentText text2 = new ChatComponentText(I18n.format("kotmatross.fork"));
-                    text2.getChatStyle().setColor(EnumChatFormatting.AQUA);
-                    text2.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/kotmatross28729/WorldTooltipsShadersFix/releases"));
-                    player.addChatComponentMessage(text2);
+                    textfork.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/kotmatross28729/WorldTooltipsShadersFix/releases"));
+                    ChatComponentText text3 = (ChatComponentText)textSF.appendSibling(textdepr0).appendSibling(text).appendSibling(textdepr1).appendSibling(textfork);
+                    player.addChatComponentMessage(text3);
                         WasLoadedWorldTooltips = true;
                 }
             }
@@ -112,12 +116,9 @@ public class ClientHandler {
                     if (player.ticksExisted == ticks) {
                         ticks += 10;
                     ChatComponentText text = new ChatComponentText(I18n.format("kotmatross.Minechem"));
-                    player.addChatComponentMessage(text);
-
-                    ChatComponentText text2 = new ChatComponentText(I18n.format("kotmatross.fork"));
-                    text2.getChatStyle().setColor(EnumChatFormatting.AQUA);
-                    text2.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/kotmatross28729/Minechem-5-continuation/releases"));
-                    player.addChatComponentMessage(text2);
+                    textfork.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/kotmatross28729/Minechem-5-continuation/releases"));
+                    ChatComponentText text3 = (ChatComponentText)textSF.appendSibling(textdepr0).appendSibling(text).appendSibling(textdepr1).appendSibling(textfork);
+                    player.addChatComponentMessage(text3);
                         WasLoadedMinechem = true;
                 }
             }
@@ -125,12 +126,9 @@ public class ClientHandler {
                     if (player.ticksExisted == ticks) {
                         ticks += 10;
                     ChatComponentText text = new ChatComponentText(I18n.format("kotmatross.ItemPhysic"));
-                    player.addChatComponentMessage(text);
-
-                    ChatComponentText text2 = new ChatComponentText(I18n.format("kotmatross.fork"));
-                    text2.getChatStyle().setColor(EnumChatFormatting.AQUA);
-                    text2.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/kotmatross28729/ItemPhysic/releases"));
-                    player.addChatComponentMessage(text2);
+                    textfork.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/kotmatross28729/ItemPhysic/releases"));
+                    ChatComponentText text3 = (ChatComponentText)textSF.appendSibling(textdepr0).appendSibling(text).appendSibling(textdepr1).appendSibling(textfork);
+                    player.addChatComponentMessage(text3);
                         WasLoadedItemPhysic = true;
                 }
             }
@@ -138,12 +136,9 @@ public class ClientHandler {
                     if (player.ticksExisted == ticks) {
                         ticks += 10;
                     ChatComponentText text = new ChatComponentText(I18n.format("kotmatross.EnviroMine"));
-                    player.addChatComponentMessage(text);
-
-                    ChatComponentText text2 = new ChatComponentText(I18n.format("kotmatross.fork"));
-                    text2.getChatStyle().setColor(EnumChatFormatting.AQUA);
-                    text2.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/kotmatross28729/EnviroMine-continuation/releases"));
-                    player.addChatComponentMessage(text2);
+                    textfork.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/kotmatross28729/EnviroMine-continuation/releases"));
+                    ChatComponentText text3 = (ChatComponentText)textSF.appendSibling(textdepr0).appendSibling(text).appendSibling(textdepr1).appendSibling(textfork);
+                    player.addChatComponentMessage(text3);
                         WasLoadedEnviroMine = true;
                 }
             }
@@ -151,33 +146,65 @@ public class ClientHandler {
                     if (player.ticksExisted == ticks) {
                         ticks += 10;
                     ChatComponentText text = new ChatComponentText(I18n.format("kotmatross.MatterMegadrive"));
-                    player.addChatComponentMessage(text);
-
-                    ChatComponentText text2 = new ChatComponentText(I18n.format("kotmatross.fork"));
-                    text2.getChatStyle().setColor(EnumChatFormatting.AQUA);
-                    text2.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/kotmatross28729/MatterMegadriveFork/releases"));
-                    player.addChatComponentMessage(text2);
+                    textfork.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/kotmatross28729/MatterMegadriveFork/releases"));
+                    ChatComponentText text3 = (ChatComponentText)textSF.appendSibling(textdepr0).appendSibling(text).appendSibling(textdepr1).appendSibling(textfork);
+                    player.addChatComponentMessage(text3);
                         WasLoadedMatterMegadrive = true;
                 }
             }
-            if (!Avaritia && !WasLoadedAvaritia) {
-                if (player.ticksExisted == ticks) {
-                    ticks += 10;
-                    ChatComponentText text = new ChatComponentText(I18n.format("kotmatross.Avaritia"));
-                    player.addChatComponentMessage(text);
-
-                    ChatComponentText text2 = new ChatComponentText(I18n.format("kotmatross.fork"));
-                    text2.getChatStyle().setColor(EnumChatFormatting.AQUA);
-                    text2.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/GTNewHorizons/Avaritia/releases"));
-                    player.addChatComponentMessage(text2);
-                    WasLoadedAvaritia = true;
+                if (!Avaritia && !WasLoadedAvaritia) {
+                    if (player.ticksExisted == ticks) {
+                        ticks += 10;
+                        ChatComponentText text = new ChatComponentText(I18n.format("kotmatross.Avaritia"));
+                        textfork.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/GTNewHorizons/Avaritia/releases"));
+                        ChatComponentText text3 = (ChatComponentText)textSF.appendSibling(textdepr0).appendSibling(text).appendSibling(textdepr1).appendSibling(textfork);
+                        player.addChatComponentMessage(text3);
+                            WasLoadedAvaritia = true;
+                    }
                 }
-            }
                 if ( (!Lightsabers || !Neat || !WorldTooltips || !Minechem || !ItemPhysic || !EnviroMine || !MatterMegadrive | !Avaritia) && !WasLoadedEndMSG ) {
                     if (player.ticksExisted == ticks) {
-                    ChatComponentText text = new ChatComponentText(I18n.format("kotmatross.endMSG"));
-                    text.getChatStyle().setColor(EnumChatFormatting.GOLD);
-                    player.addChatComponentMessage(text);
+
+                    ChatComponentText text0 = new ChatComponentText(I18n.format("kotmatross.endMSG0"));
+                    ChatComponentText text1 = new ChatComponentText(I18n.format("kotmatross.endMSG1"));
+                    ChatComponentText text2 = new ChatComponentText(I18n.format("kotmatross.endMSG2"));
+                    ChatComponentText text3 = new ChatComponentText(I18n.format("kotmatross.endMSG3"));
+/**
+                    //Thanks, MC, for reset formatting on EVERY FUCKING™ new line
+                    ChatComponentText text4 = new ChatComponentText
+                        (
+                            EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + I18n.format("kotmatross.endMSG4M") +
+                                 EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + I18n.format("kotmatross.endMSG4C") +
+                                 EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + I18n.format("kotmatross.endMSG4S") +
+                                 EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + I18n.format("kotmatross.endMSG4X") +
+                                 EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + I18n.format("kotmatross.endMSG4E") +
+                                 EnumChatFormatting.RESET
+                        );
+*/
+                        ChatComponentText text4 = new ChatComponentText
+                            (
+                                 I18n.format("kotmatross.endMSG4M") +
+                                      I18n.format("kotmatross.endMSG4C") +
+                                      I18n.format("kotmatross.endMSG4S") +
+                                      I18n.format("kotmatross.endMSG4X") +
+                                      I18n.format("kotmatross.endMSG4E") +
+                                      EnumChatFormatting.RESET
+                            );
+
+                    ChatComponentText text5 = new ChatComponentText(I18n.format("kotmatross.endMSG5"));
+                    String Config = Launch.minecraftHome + File.separator + "config" + File.separator + Tags.MODID + File.separator + "mixinsEarly.cfg";
+
+                    text0.getChatStyle().setColor(EnumChatFormatting.GOLD);
+                    text1.getChatStyle().setColor(EnumChatFormatting.AQUA);
+                    text2.getChatStyle().setColor(EnumChatFormatting.GOLD);
+                    text3.getChatStyle().setColor(EnumChatFormatting.GOLD);
+                    text4.getChatStyle().setColor(EnumChatFormatting.RED).setBold(true).setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, Config));;
+
+                    //omagad
+                    ChatComponentText textFinal = (ChatComponentText) text0.appendSibling(text1).appendSibling(text2).appendSibling(text3).appendSibling(text4).appendSibling(text5);
+
+                    //Birb®
+                    player.addChatComponentMessage(textFinal);
                         ticks = 50;
                         WasLoadedLightsabers = false;
                         WasLoadedNeat = false;

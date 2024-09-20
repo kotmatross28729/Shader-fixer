@@ -1,11 +1,27 @@
-kotmatross.Lightsabers=[Shader fixer]: Обнаружена старая версия Advanced Lightsabers, рекомендуем обновится до
-kotmatross.Neat=[Shader fixer]: Обнаружена старая версия Neat, рекомендуем обновится до
-kotmatross.WorldTooltips=[Shader fixer]: Обнаружена старая версия WorldTooltips, рекомендуем обновится до
-kotmatross.Minechem=[Shader fixer]: Обнаружена старая версия Minechem, рекомендуем обновится до
-kotmatross.ItemPhysic=[Shader fixer]: Обнаружена старая версия ItemPhysic, рекомендуем обновится до
-kotmatross.EnviroMine=[Shader fixer]: Обнаружена старая версия EnviroMine, рекомендуем обновится до
-kotmatross.MatterMegadrive=[Shader fixer]: Обнаружена старая версия MatterMegadrive, рекомендуем обновится до
-kotmatross.Avaritia=[Shader fixer]: Обнаружена старая версия Avaritia, рекомендуем обновится до
-kotmatross.endMSG=Текст, помеченный синим (Aqua) кликабелен и введет на страницу загрузки github. Не забудьте прочитать список изменений прежде, чем использовать любой из этих форков. Вы также можете отключить это оповещение в .minecraft\config\shadersfixer\mixinsEarly.cfg\enableNotifications=false.
+kotmatross.SF=[Shader fixer]: 
 
-kotmatross.fork=последней версии его форка
+kotmatross.depr0=Обнаружена старая версия 
+kotmatross.depr1= рекомендуем обновится до
+kotmatross.fork= последней версии его форка
+
+kotmatross.Lightsabers=Advanced Lightsabers
+kotmatross.Neat=Neat
+kotmatross.WorldTooltips=WorldTooltips
+kotmatross.Minechem=Minechem
+kotmatross.ItemPhysic=ItemPhysic
+kotmatross.EnviroMine=EnviroMine
+kotmatross.MatterMegadrive=MatterMegadrive
+kotmatross.Avaritia=Avaritia
+
+kotmatross.endMSG0=Текст, помеченный синим 
+kotmatross.endMSG1=(Aqua) 
+kotmatross.endMSG2=кликабелен и введет на страницу загрузки github. Не забудьте прочитать список изменений прежде, чем использовать любой из этих форков. 
+kotmatross.endMSG3=Вы также можете отключить это оповещение в 
+
+kotmatross.endMSG4M=.minecraft
+kotmatross.endMSG4C=\config
+kotmatross.endMSG4S=\shadersfixer
+kotmatross.endMSG4X=\mixinsEarly.cfg
+kotmatross.endMSG4E= | enableNotifications=false.
+
+kotmatross.endMSG5= (нажмите чтобы открыть файл, требует перезапуск)

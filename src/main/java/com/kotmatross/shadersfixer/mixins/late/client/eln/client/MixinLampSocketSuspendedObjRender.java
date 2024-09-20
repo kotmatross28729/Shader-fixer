@@ -14,20 +14,20 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(value = LampSocketSuspendedObjRender.class, priority = 999)
 public class MixinLampSocketSuspendedObjRender {
 
-    @Shadow private Obj3D obj;
-    @Shadow private Obj3D.Obj3DPart socket;
-    @Shadow private Obj3D.Obj3DPart chain;
-    @Shadow private Obj3D.Obj3DPart base;
-    @Shadow private Obj3D.Obj3DPart lightAlphaPlaneNoDepth;
-    @Shadow ResourceLocation tOn;
-    @Shadow ResourceLocation tOff;
-    @Shadow
+    @Shadow(remap = false) private Obj3D obj;
+    @Shadow(remap = false) private Obj3D.Obj3DPart socket;
+    @Shadow(remap = false) private Obj3D.Obj3DPart chain;
+    @Shadow(remap = false) private Obj3D.Obj3DPart base;
+    @Shadow(remap = false) private Obj3D.Obj3DPart lightAlphaPlaneNoDepth;
+    @Shadow(remap = false) ResourceLocation tOn;
+    @Shadow(remap = false) ResourceLocation tOff;
+    @Shadow(remap = false)
     private boolean onOffModel;
-    @Shadow private int length;
-    @Shadow private boolean canSwing = true;
-    @Shadow float baseLength;
-    @Shadow float chainLength;
-    @Shadow float chainFactor;
+    @Shadow(remap = false) private int length;
+    @Shadow(remap = false) private boolean canSwing = true;
+    @Shadow(remap = false) float baseLength;
+    @Shadow(remap = false) float chainLength;
+    @Shadow(remap = false) float chainFactor;
 
     /**
      * @author kotmatross
