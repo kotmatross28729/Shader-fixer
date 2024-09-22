@@ -14,6 +14,8 @@ kotmatross.ItemPhysic=ItemPhysic
 kotmatross.EnviroMine=EnviroMine
 kotmatross.MatterMegadrive=MatterMegadrive
 kotmatross.Avaritia=Avaritia
+kotmatross.NEI=NotEnoughItems
+kotmatross.CCC=CodeChickenCore
 
 kotmatross.endMSG0=Text marked in blue 
 kotmatross.endMSG1=(Aqua) 

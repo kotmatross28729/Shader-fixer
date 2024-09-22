@@ -33,27 +33,8 @@ public class ShadersFixer {
     public static Configuration config;
     public static final Logger logger = LogManager.getLogger();
 
-
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
-        if(ShaderFixerConfig.FixNEIShaders) {
-            if (Loader.isModLoaded("NotEnoughItems")) {
-                String[] NEIVersionCurrent = Loader.instance().getIndexedModList().get("NotEnoughItems").getVersion().split("\\.");
-                String[] NEIVersionConst = "1.0.5.120".split("\\.");
-                if (NEIVersionCurrent.length == NEIVersionConst.length) {
-                    for (int pos = 0; pos < NEIVersionCurrent.length; pos++) {
-                        int NEIVersionCurrentPart = Integer.parseInt(NEIVersionCurrent[pos]);
-                        int NEIVersionConstPart = Integer.parseInt(NEIVersionConst[pos]);
-                        if (NEIVersionCurrentPart > NEIVersionConstPart) {
-                            break;
-                        }
-                        if (NEIVersionCurrentPart < NEIVersionConstPart) {
-                            throw new RuntimeException("You are using a version of NEI that is not compatible with ShadersFixer, please update to: https://github.com/GTNewHorizons/NotEnoughItems/releases");
-                        }
-                    }
-                }
-            }
-        }
     }
 
     @Mod.EventHandler
@@ -69,9 +50,6 @@ public class ShadersFixer {
         }
     }
 
-//    public static boolean isPsychedelicraftLoaded() {
-//        return Loader.isModLoaded("psychedelicraft");
-//    }
     private static final boolean IS_SHADERS_MOD_PRESENT;
     static {
         boolean shadersModPresent = false;
@@ -85,31 +63,9 @@ public class ShadersFixer {
     public static boolean SHADERS_MOD() {
         return IS_SHADERS_MOD_PRESENT;
     }
-//    public static boolean LightingFix() {
-//        return SHADERS_MOD() || isPsychedelicraftLoaded();
-//    }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        /**
-        if (FMLLaunchHandler.side().isClient()) {
-            if (LightingFix()) {
-                logger.info("ShadersMod or Psychedelicraft loaded, lighting fix = true ");
-                ShaderFixerConfig.LightingFix = true;
-            } else {
-                if (!SHADERS_MOD() && !isPsychedelicraftLoaded()) {
-                    logger.warn("ShadersMod and Psychedelicraft is not loaded, skip lighting fix ");
-                    ShaderFixerConfig.LightingFix = false;
-                }
-            }
-        }
-        if(!ForceDisableLightingFix) {
-            if(ShaderFixerConfig.LightingFix) {
-                EventHandler EHandler = new EventHandler();
-                FMLCommonHandler.instance().bus().register(EHandler);
-                MinecraftForge.EVENT_BUS.register(EHandler);
-            }
-        }*/
         if(!Utils.CanUse120GL){
             logger.error("The device doesn't support OpenGL20 (1.2), some fixes will not work!");
         }

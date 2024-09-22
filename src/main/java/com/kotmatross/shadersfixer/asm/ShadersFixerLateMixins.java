@@ -22,6 +22,9 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
     }
     public static final MixinEnvironment.Side side = MixinEnvironment.getCurrentEnvironment().getSide();
 
+    public static boolean oldNEI = false;
+    public static boolean oldCCC = false;
+
     @Override
     public List<String> getMixins(Set<String> loadedMods) {
         String configFolder = "config" + File.separator + Tags.MODID + File.separator;
@@ -100,9 +103,53 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.FiskHeroes.client.render.tile.MixinRenderSuitDatabase");
                     mixins.add("client.FiskHeroes.client.MixinSHRenderHooks");
                 }
+                //PIZDEC FULL
                 if (ShaderFixerConfig.FixNEIShaders) {
+                   if (Loader.isModLoaded("NotEnoughItems")) {
+                       if(Loader.instance().getIndexedModList().get("NotEnoughItems").getVersion().equals("1.0.5.120")) {
+                           oldNEI = true;
+                       } else {
+                           String[] NEIVersionCurrent = Loader.instance().getIndexedModList().get("NotEnoughItems").getVersion().split("\\.");
+                           String[] NEIVersionConst = "1.0.5.120".split("\\.");
+                           for (int pos = 0; pos < (Math.min(NEIVersionCurrent.length, NEIVersionConst.length)); pos++) {
+                               int NEIVersionCurrentPart = Integer.parseInt(NEIVersionCurrent[pos]);
+                               int NEIVersionConstPart = Integer.parseInt(NEIVersionConst[pos]);
+                               if (NEIVersionCurrentPart > NEIVersionConstPart) {
+                                   break;
+                               }
+                               if (NEIVersionCurrentPart < NEIVersionConstPart) {
+                                   oldNEI = true;
+                                   break;
+                               }
+                           }
+                       }
+                   }
+                    if (Loader.isModLoaded("CodeChickenCore")) {
+                        if(Loader.instance().getIndexedModList().get("CodeChickenCore").getVersion().equals("1.0.7.48")) {
+                            oldCCC = true;
+                        } else {
+                            String[] CCCVersionCurrent = Loader.instance().getIndexedModList().get("CodeChickenCore").getVersion().split("\\.");
+                            String[] CCCVersionConst = "1.0.7.48".split("\\.");
+                            for (int pos = 0; pos < (Math.min(CCCVersionCurrent.length, CCCVersionConst.length)); pos++) {
+                                int CCCVersionCurrentPart = Integer.parseInt(CCCVersionCurrent[pos]);
+                                int CCCVersionConstPart = Integer.parseInt(CCCVersionConst[pos]);
+                                if (CCCVersionCurrentPart > CCCVersionConstPart) {
+                                    break;
+                                }
+                                if (CCCVersionCurrentPart < CCCVersionConstPart) {
+                                    oldCCC = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
                     ShadersFixer.logger.info("Trying to integrate NotEnoughItems mixins...");
-                    mixins.add("client.NotEnoughItems.client.MixinWorldOverlayRenderer");
+                    if(!oldNEI){
+                        mixins.add("client.NotEnoughItems.client.MixinWorldOverlayRenderer");
+                    } else {
+                        ShadersFixer.logger.warn("old NEI detected, mixin may be unstable!");
+                        mixins.add("client.NotEnoughItems.client.MixinWorldOverlayRendererLEGACY");
+                    }
                 }
                 if (ShaderFixerConfig.FixTechgunsShaders) {
                     ShadersFixer.logger.info("Trying to integrate Techguns mixins...");

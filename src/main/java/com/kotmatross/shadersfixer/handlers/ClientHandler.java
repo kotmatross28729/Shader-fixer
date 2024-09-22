@@ -1,6 +1,7 @@
 package com.kotmatross.shadersfixer.handlers;
 
 import com.kotmatross.shadersfixer.Tags;
+import com.kotmatross.shadersfixer.asm.ShadersFixerLateMixins;
 import com.kotmatross.shadersfixer.shrimp.FuckingCursed;
 import com.kotmatross.shadersfixer.shrimp.FuckingShit;
 import cpw.mods.fml.client.FMLClientHandler;
@@ -37,6 +38,8 @@ public class ClientHandler {
     public static boolean EnviroMine  = true;
     public static boolean MatterMegadrive = true;
     public static boolean Avaritia = true;
+    public static boolean NEI = true;
+    public static boolean CCC = true;
 
     public static int ticks = startTicksOffset; // after some messages in chat, inspired by EFR
 
@@ -49,6 +52,10 @@ public class ClientHandler {
     public static boolean WasLoadedEnviroMine = false;
     public static boolean WasLoadedMatterMegadrive = false;
     public static boolean WasLoadedAvaritia = false;
+
+    public static boolean WasLoadedNEI = false;
+
+    public static boolean WasLoadedCCC = false;
     public static boolean WasLoadedEndMSG = false;
 
     @SubscribeEvent
@@ -68,6 +75,12 @@ public class ClientHandler {
                 double AvaritiaVersionCurrent = Double.parseDouble(Loader.instance().getIndexedModList().get("Avaritia").getVersion());
                 double AvaritiaVersionConst = Double.parseDouble("1.13");
                 if (!(AvaritiaVersionCurrent > AvaritiaVersionConst) ){Avaritia = false;}
+            }
+            if (ShadersFixerLateMixins.oldNEI) {
+                NEI = false;
+            }
+            if (ShadersFixerLateMixins.oldCCC) {
+                CCC = false;
             }
 
             World world = FMLClientHandler.instance().getWorldClient();
@@ -163,7 +176,27 @@ public class ClientHandler {
                             WasLoadedAvaritia = true;
                     }
                 }
-                if ( (!Lightsabers || !Neat || !WorldTooltips || !Minechem || !ItemPhysic || !EnviroMine || !MatterMegadrive | !Avaritia) && !WasLoadedEndMSG ) {
+            if (!NEI && !WasLoadedNEI) {
+                if (player.ticksExisted == ticks) {
+                    ticks += ticksInterval;
+                    ChatComponentText text = new ChatComponentText(I18n.format("kotmatross.NEI"));
+                    textfork.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/GTNewHorizons/NotEnoughItems/releases"));
+                    ChatComponentText text3 = (ChatComponentText)textSF.appendSibling(textdepr0).appendSibling(text).appendSibling(textdepr1).appendSibling(textfork);
+                    player.addChatComponentMessage(text3);
+                        WasLoadedNEI = true;
+                }
+            }
+            if (!CCC && !WasLoadedCCC) {
+                if (player.ticksExisted == ticks) {
+                    ticks += ticksInterval;
+                    ChatComponentText text = new ChatComponentText(I18n.format("kotmatross.CCC"));
+                    textfork.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/GTNewHorizons/CodeChickenCore/releases"));
+                    ChatComponentText text3 = (ChatComponentText)textSF.appendSibling(textdepr0).appendSibling(text).appendSibling(textdepr1).appendSibling(textfork);
+                    player.addChatComponentMessage(text3);
+                    WasLoadedCCC = true;
+                }
+            }
+                if ( (!Lightsabers || !Neat || !WorldTooltips || !Minechem || !ItemPhysic || !EnviroMine || !MatterMegadrive || !Avaritia || !NEI|| !CCC) && !WasLoadedEndMSG ) {
                     if (player.ticksExisted == ticks) {
 
                     ChatComponentText text0 = new ChatComponentText(I18n.format("kotmatross.endMSG0"));
@@ -202,6 +235,8 @@ public class ClientHandler {
                         WasLoadedEnviroMine = false;
                         WasLoadedMatterMegadrive = false;
                         WasLoadedAvaritia = false;
+                        WasLoadedNEI = false;
+                        WasLoadedCCC = false;
                         WasLoadedEndMSG = true;
                 }
             }
