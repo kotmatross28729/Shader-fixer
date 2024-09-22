@@ -5,6 +5,7 @@ import com.gtnewhorizon.gtnhmixins.LateMixin;
 import com.kotmatross.shadersfixer.ShadersFixer;
 import com.kotmatross.shadersfixer.Tags;
 import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
+import cpw.mods.fml.common.Loader;
 import net.minecraft.launchwrapper.Launch;
 import org.spongepowered.asm.mixin.MixinEnvironment;
 
@@ -30,6 +31,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
         if(!loadedMods.contains("fiskheroes")) {
             ShaderFixerConfig.FixFisksuperheroesShaders = false;
         }
+
         if(!loadedMods.contains("NotEnoughItems")) {
             ShaderFixerConfig.FixNEIShaders = false;
         }

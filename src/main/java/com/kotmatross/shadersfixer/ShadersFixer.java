@@ -36,8 +36,19 @@ public class ShadersFixer {
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
-        //String configFolder = "config" + File.separator + Tags.MODID + File.separator;
-        //ShaderFixerConfig.loadLightingFixConfig(new File(Launch.minecraftHome, configFolder + "LightingFix.cfg"));
+        if(ShaderFixerConfig.FixNEIShaders) {
+            if (Loader.isModLoaded("NotEnoughItems")) {
+                String[] NEIVersionCurrent = Loader.instance().getIndexedModList().get("NotEnoughItems").getVersion().split("\\.");
+                String[] NEIVersionConst = "1.0.5.120".split("\\.");
+                if (NEIVersionCurrent.length == NEIVersionConst.length) {
+                    for (int pos = 0; pos < NEIVersionCurrent.length; pos++) {
+                        if (Integer.parseInt(NEIVersionCurrent[pos]) <= Integer.parseInt(NEIVersionConst[pos])) {
+                            throw new RuntimeException("You are using a version of NEI that is not compatible with ShadersFixer, please update to: https://github.com/GTNewHorizons/NotEnoughItems/releases");
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Mod.EventHandler
