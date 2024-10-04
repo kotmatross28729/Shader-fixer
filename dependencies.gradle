@@ -50,6 +50,7 @@ dependencies {
     compileOnly name: 'Avaritia-1.51'
 	compileOnly name: 'Eln-1.21.9'
 	compileOnly name: 'OpenComputers-1.10.23-GTNH-dev'
+    compileOnly name: 'HBM-NTM-.1.0.27_X5103_H261'
 
     compileOnly fileTree(dir: 'libs', include: '*.jar')
     compileOnly fileTree(dir: 'libs', include: '*.zip')

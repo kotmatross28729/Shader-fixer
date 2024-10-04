@@ -16,7 +16,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import static journeymap.client.render.draw.DrawUtil.zLevel;
 
 @Mixin(value = DrawUtil.class, priority = 999)
-
 public class MixinDrawUtil {
 
     @Inject(method = "drawRectangle", at = @At(value = "HEAD"), remap = false)

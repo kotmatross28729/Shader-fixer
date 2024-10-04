@@ -1,4 +1,4 @@
-* Fix lighting bug in NEI (or rather reduce it, since the brightness changes a little, but noticeably less)
+* Fix lighting bug in NEI
    - It also made it much brighter (side effect? actually using vanilla render so it looks like vanilla (and in vanilla it very bright))
    - Also optimize `renderMobSpawnOverlay` fix when using the original NEI
 
@@ -8,5 +8,29 @@
 
 * Fixed a bug where the NEI overlay was causing some rendering to appear gray
     - For example: world tooltips, neat, schematica, etc.
+
+
+
+* Fixed almost all bugs in HBM's NTM
+  - some things related to weapons unfixed (since a rework is planned soon)
+     - the hardest part is just ahead...
+
+
+
+
+
+---
+REMINDER FOR ME:
+
+RenderBioRevolver
+
+ItemRenderWeaponLilMac
+
+ModelFolly
+
+RenderOminousBullet (?)
+
+RenderRainbow
+
 
 

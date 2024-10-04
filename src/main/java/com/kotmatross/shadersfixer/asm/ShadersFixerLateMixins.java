@@ -25,6 +25,8 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
     public static boolean oldNEI = false;
     public static boolean oldCCC = false;
 
+    public static boolean specjork = false;
+
     @Override
     public List<String> getMixins(Set<String> loadedMods) {
         String configFolder = "config" + File.separator + Tags.MODID + File.separator;
@@ -73,6 +75,9 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
         }
         if(!loadedMods.contains("Eln")) {
             ShaderFixerConfig.FixElnShaders = false;
+        }
+        if(!loadedMods.contains("hbm")) {
+            ShaderFixerConfig.FixHbmShaders = false;
         }
 
         List<String> mixins = new ArrayList<>();
@@ -246,6 +251,70 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                         mixins.add("client.eln.client.MixinLampSocketSuspendedObjRender");
                     }
                     mixins.add("client.eln.client.MixinNixieTubeDescriptor");
+                }
+                if (ShaderFixerConfig.FixHbmShaders) {
+                    try {
+                        Class.forName("com.hbm.dim.SolarSystem"); //idk why this, but why not?
+                        specjork = true;
+                    } catch (ClassNotFoundException e) {
+                        specjork = false;
+                    }
+
+
+                    ShadersFixer.logger.info("Trying to integrate Hbm's NTM mixins...");
+                    mixins.add("client.hbm.client.MixinParticleAmatFlash"); //Antimatter explosion
+                    mixins.add("client.hbm.client.MixinParticleDebugLine"); //Drone path lines
+                    mixins.add("client.hbm.client.MixinParticleRadiationFog"); //GL11.GL_LIGHTING
+                    mixins.add("client.hbm.client.MixinParticleSpark"); //"Tauon" turret, arc welder
+                    mixins.add("client.hbm.client.MixinParticleSpentCasing"); //Smoke on bullets/shells
+                    if(specjork) {
+                        mixins.add("client.hbm.client.MixinBeamPronter"); //FEL laser, ICF laser
+                    } else {
+                        mixins.add("client.hbm.client.MixinBeamPronterORIG"); //FEL laser, ICF laser
+                    }
+                    mixins.add("client.hbm.client.MixinItemRenderDetonatorLaser"); //LED on top, sine wave on the side
+                    mixins.add("client.hbm.client.MixinItemRendererMeteorSword"); //Lighting glitch in 3rd person view
+                    mixins.add("client.hbm.client.MixinItemRenderLibrary"); //Radiation-Powered Engine lights render in hand
+                    mixins.add("client.hbm.client.MixinItemRenderWeaponGlass"); //Model itself, sine wave on the side, brighter sine wave with shaders
+                    mixins.add("client.hbm.client.MixinModelArmorEnvsuit"); //Armor helmet lamps
+                    mixins.add("client.hbm.client.MixinRenderBAT9000"); //Liquid inside
+                    mixins.add("client.hbm.client.MixinRenderBeam"); //Immolator/ HPP LaserJet projectile
+                    mixins.add("client.hbm.client.MixinRenderBeam2"); //Power Fist (Zapper) projectile
+                    mixins.add("client.hbm.client.MixinRenderBeam3"); //Power Fist (Extracting Mining Laser) projectile
+                    mixins.add("client.hbm.client.MixinRenderBeam4"); //Spark Plug projectile
+                    mixins.add("client.hbm.client.MixinRenderBeam5"); //B92 projectile
+                    mixins.add("client.hbm.client.MixinRenderBeam6"); //B92 projectile
+                    mixins.add("client.hbm.client.MixinRenderBlackHole"); //Jet from the center along the poles
+                    mixins.add("client.hbm.client.MixinRenderBobble"); //Pu-238 Bobble
+                    mixins.add("client.hbm.client.MixinRenderCloudRainbow"); //Flickering field, during a DFC explosion, from a B93 projectile
+                    mixins.add("client.hbm.client.MixinRenderCore"); //Sphere of the block itself, additional spheres when it works
+                    mixins.add("client.hbm.client.MixinRenderCraneConsole"); //Buttons on the console
+                    mixins.add("client.hbm.client.MixinRenderDeathBlast"); //From the orbital death ray
+                    mixins.add("client.hbm.client.MixinRenderDemonLamp"); //Disk of blue light, brighter with shaders
+                    mixins.add("client.hbm.client.MixinRenderFlare"); //Flare grenade, brighter with shaders
+                    mixins.add("client.hbm.client.MixinRenderFOEQ"); //Fire behind the falling shuttle
+                    mixins.add("client.hbm.client.MixinRenderLantern"); //Light in the lamp
+                    mixins.add("client.hbm.client.MixinRenderLanternINNER"); //Light in the lamp
+                    mixins.add("client.hbm.client.MixinRenderLanternBehemoth"); //Light in the lamp
+                    mixins.add("client.hbm.client.MixinRenderMachineForceField"); //Green lines forming a sphere
+                    mixins.add("client.hbm.client.MixinRenderMixer"); //Liquid inside
+                    mixins.add("client.hbm.client.MixinRenderOverhead"); //Red square near entities
+                    mixins.add("client.hbm.client.MixinRenderPumpjack"); //Pumpjack bridle
+                    mixins.add("client.hbm.client.MixinRenderRadarScreen"); //Green bar going from top to bottom
+                    mixins.add("client.hbm.client.MixinRenderRadGen"); //2 lights on top of engine
+                    mixins.add("client.hbm.client.MixinRenderRBMKConsole"); //Buttons on the console
+                    mixins.add("client.hbm.client.MixinRenderRBMKLid"); //Cherenkov radiation
+                    mixins.add("client.hbm.client.MixinRenderSiegeCraft"); //4 lights on top
+                    mixins.add("client.hbm.client.MixinRenderSiegeLaser"); //UFO projectile
+                    mixins.add("client.hbm.client.MixinRenderSmallReactor"); //Cherenkov radiation, brighter with shaders
+                    mixins.add("client.hbm.client.MixinRenderSolarBoiler"); //Rays of light
+                    mixins.add("client.hbm.client.MixinRenderSparks"); //Lightning in a breeding reactor/DFC
+                    mixins.add("client.hbm.client.MixinRenderSpear"); //Rays of light from the digamma spear
+                    mixins.add("client.hbm.client.MixinRenderOrbus"); //Liquid inside
+                    if(specjork) {
+                        mixins.add("client.hbm.client.MixinSkyProviderCelestial");
+                        mixins.add("client.hbm.client.MixinSkyProviderLaytheSunset");
+                    }
                 }
             }
 

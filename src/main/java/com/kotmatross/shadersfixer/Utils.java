@@ -5,7 +5,6 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
-import org.lwjgl.opengl.GLContext;
 
 public class Utils {
     //OP guys
@@ -13,8 +12,10 @@ public class Utils {
     public static void Fix() {
         Minecraft.getMinecraft().renderEngine.bindTexture(shaders_fix);
     }
-
-    public static boolean CanUse120GL = GLContext.getCapabilities().OpenGL20; //avoid crash if cant use GL20 (1.2)
+    public static final ResourceLocation shaders_fix2 = new ResourceLocation(Tags.MODID, "textures/LightingFix.png");
+    public static void Fix2() {
+        Minecraft.getMinecraft().renderEngine.bindTexture(shaders_fix2);
+    }
 
     //numbers
     public static int INT_2X16 = 65536;
@@ -75,20 +76,12 @@ public class Utils {
      *    }
      */
     public static int GLGetCurrentProgram() {
-        if(CanUse120GL) {
             return GL11.glGetInteger(GL20.GL_CURRENT_PROGRAM);
-        } else {
-            return 0;
-        }
     }
     public static void GLUseDefaultProgram() {
-        if(CanUse120GL) {
             GL20.glUseProgram(0);
-        }
     }
     public static void GLUseProgram(int program) {
-        if(CanUse120GL) {
             GL20.glUseProgram(program);
-        }
     }
 }
