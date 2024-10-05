@@ -21,7 +21,7 @@ public class MixinRenderSmallReactor {
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     public void func_147500_a(TileEntity tileEntity, double x, double y, double z, float f, CallbackInfo ci) {
-        //Utils.EnableFullBrightness();
+        Utils.EnableFullBrightness();
         Utils.Fix();
     }
 }
