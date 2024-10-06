@@ -1,3 +1,10 @@
+# 3.1
+
+* Complete HBM's NTM fix
+  * also improve some visuals with shaders
+
+# 3.0
+
 * Fix lighting bug in NEI
    - It also made it much brighter (side effect? actually using vanilla render so it looks like vanilla (and in vanilla it very bright))
    - Also optimize `renderMobSpawnOverlay` fix when using the original NEI
@@ -15,10 +22,6 @@
   - some things related to weapons unfixed (since a rework is planned soon)
      - the hardest part is just ahead...
 
-
-
-
-
 ---
 REMINDER FOR ME:
 
@@ -27,10 +30,6 @@ RenderBioRevolver
 ItemRenderWeaponLilMac
 
 ModelFolly
-
-RenderOminousBullet (?)
-
-RenderRainbow
 
 
 

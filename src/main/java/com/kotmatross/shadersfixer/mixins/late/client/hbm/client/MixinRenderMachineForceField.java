@@ -5,6 +5,7 @@ import com.hbm.render.tileentity.RenderMachineForceField;
 import com.kotmatross.shadersfixer.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
+import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -15,24 +16,26 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = RenderMachineForceField.class, priority = 999)
 public class MixinRenderMachineForceField {
 
-    //IT"S SO FUCKING OVER
-//    @Unique
-//    public int shaders_fixer$program;
-//
-//    @Inject(method = "generateSphere",
-//        at = @At(value = "INVOKE",
-//            target = "Lorg/lwjgl/opengl/GL11;glPushMatrix()V", ordinal = 0, shift = At.Shift.BEFORE), remap = false)
-//    public void generateSpherePR(int l, int s, float rad, int hex, CallbackInfo ci) {
-//        shaders_fixer$program = Utils.GLGetCurrentProgram();
-//        Utils.GLUseDefaultProgram();
-//    }
-//
-//    @Inject(method = "generateSphere",
-//        at = @At(value = "INVOKE",
-//            target = "Lorg/lwjgl/opengl/GL11;glPopMatrix()V", ordinal = 0, shift = At.Shift.AFTER), remap = false)
-//    public void generateSpherePRE(int l, int s, float rad, int hex, CallbackInfo ci) {
-//        Utils.GLUseProgram(shaders_fixer$program);
-//    }
+    //WE'RE SO FUCKING BACK
+    @Unique
+    public int shaders_fixer$program;
+
+    @Inject(method = "generateSphere",
+        at = @At(value = "INVOKE",
+            target = "Lorg/lwjgl/opengl/GL11;glPushMatrix()V", ordinal = 0, shift = At.Shift.BEFORE), remap = false)
+    public void generateSpherePR(int l, int s, float rad, int hex, CallbackInfo ci) {
+        GL11.glDepthMask(false);
+        shaders_fixer$program = Utils.GLGetCurrentProgram();
+        Utils.GLUseDefaultProgram();
+    }
+
+    @Inject(method = "generateSphere",
+        at = @At(value = "INVOKE",
+            target = "Lorg/lwjgl/opengl/GL11;glPopMatrix()V", ordinal = 0, shift = At.Shift.AFTER), remap = false)
+    public void generateSpherePRE(int l, int s, float rad, int hex, CallbackInfo ci) {
+        Utils.GLUseProgram(shaders_fixer$program);
+        GL11.glDepthMask(true);
+    }
 
     @Inject(method = "generateSphere",
         slice = @Slice(from = @At(value = "INVOKE",
@@ -48,23 +51,25 @@ public class MixinRenderMachineForceField {
         Utils.Fix();
     }
 
-//    @Unique
-//    public int shaders_fixer$program2;
-//
-//    @Inject(method = "generateSphere2",
-//        at = @At(value = "INVOKE",
-//            target = "Lorg/lwjgl/opengl/GL11;glPushMatrix()V", ordinal = 0, shift = At.Shift.BEFORE), remap = false)
-//    public void generateSpherePR2(int l, int s, float rad, int hex, CallbackInfo ci) {
-//        shaders_fixer$program2 = Utils.GLGetCurrentProgram();
-//        Utils.GLUseDefaultProgram();
-//    }
-//
-//    @Inject(method = "generateSphere2",
-//        at = @At(value = "INVOKE",
-//            target = "Lorg/lwjgl/opengl/GL11;glPopMatrix()V", ordinal = 0, shift = At.Shift.AFTER), remap = false)
-//    public void generateSpherePRE2(int l, int s, float rad, int hex, CallbackInfo ci) {
-//        Utils.GLUseProgram(shaders_fixer$program2);
-//    }
+    @Unique
+    public int shaders_fixer$program2;
+
+    @Inject(method = "generateSphere2",
+        at = @At(value = "INVOKE",
+            target = "Lorg/lwjgl/opengl/GL11;glPushMatrix()V", ordinal = 0, shift = At.Shift.BEFORE), remap = false)
+    public void generateSpherePR2(int l, int s, float rad, int hex, CallbackInfo ci) {
+        GL11.glDepthMask(false);
+        shaders_fixer$program2 = Utils.GLGetCurrentProgram();
+        Utils.GLUseDefaultProgram();
+    }
+
+    @Inject(method = "generateSphere2",
+        at = @At(value = "INVOKE",
+            target = "Lorg/lwjgl/opengl/GL11;glPopMatrix()V", ordinal = 0, shift = At.Shift.AFTER), remap = false)
+    public void generateSpherePRE2(int l, int s, float rad, int hex, CallbackInfo ci) {
+        Utils.GLUseProgram(shaders_fixer$program2);
+        GL11.glDepthMask(true);
+    }
 
     @Inject(method = "generateSphere2",
         slice = @Slice(from = @At(value = "INVOKE",

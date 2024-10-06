@@ -37,6 +37,8 @@ public class ShaderFixerConfig {
 
     public static boolean ElnLightMixins;
 
+    public static boolean ThaumicConciliumExtraMixins;
+
     //Category
     static final String categoryShadersfixes = "Shaders fixes";
     static final String categorytweaks = "Tweaks & fixes";
@@ -61,6 +63,8 @@ public class ShaderFixerConfig {
         FixElnShaders = config.getBoolean("FixElnShaders", categoryShadersfixes, true, "Fixes rendering errors in ElectricalAge mod when using shaders.");
         FixHbmShaders = config.getBoolean("FixHbmShaders", categoryShadersfixes, true, "Fixes rendering errors in Hbm's NTM mod when using shaders.");
         ElnLightMixins = config.getBoolean("ElnLightMixins", categorytweaks, true, "Slightly modifies the code for rendering the light sprite to avoid an issue with bsl shaders that renders object with full alpha when the object's alpha is close to 0 (below 0.1). Use carefully with new versions, as it calls the old sprite rendering code");
+
+        ThaumicConciliumExtraMixins = config.getBoolean("ThaumicConciliumExtraMixins", categorytweaks, true, "Adds additional GL11.glDepthMask calls when using shaders to disable shadows on Thaumic Concilium items/mobs. If this is false, then shadows from Thaumic Concilium items/mobs will not be rendered correctly");
 
         TechgunsGoreLogger = config.getBoolean("TechgunsGoreLogger", categorytweaks, false, "Prints the name of the killed mob( using techguns weapons) in the log, useful for TechgunsGoreList, where 1 parameter is the name of the mob.");
 //        TechgunsGoreList = new ArrayList<>(Arrays.asList(config.getStringList("TechgunsGoreList", categorytweaks, new String[]{"entity_glyphid:6:0.66:85:156:17"}, "Adds an entity to the gore Techguns entity list. The syntax is: mobname:GibsNumber:GibsScale:BloodСolorR:BloodColorG:BloodColorBlue . Please note that Blood R-G-B colors can only be integers up to 255")));
