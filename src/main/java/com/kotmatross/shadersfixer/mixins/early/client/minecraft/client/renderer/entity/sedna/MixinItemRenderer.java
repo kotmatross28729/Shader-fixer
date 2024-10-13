@@ -6,6 +6,7 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import org.lwjgl.opengl.GL11;
@@ -60,8 +61,7 @@ public class MixinItemRenderer {
         return 2.75F;
     }
 
-    @Inject(method = "renderItemInFirstPerson",
-        at = @At(value = "HEAD"), remap = false)
+    @Inject(method = "renderItemInFirstPerson", at = @At(value = "HEAD"))
     public void renderItemInFirstPerson(float interp, CallbackInfo ci) {
         //GETTERS
         shaders_fixer$f1 = prevEquippedProgress + (equippedProgress - prevEquippedProgress) * interp;
@@ -94,14 +94,14 @@ public class MixinItemRenderer {
         return false;
     }
 
-    @ModifyArg(method = "renderItemInFirstPerson", at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glRotatef(FFFF)V", ordinal = 2), index = 0, remap = false)
+    @ModifyArg(method = "renderItemInFirstPerson", at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glRotatef(FFFF)V", ordinal = 2), index = 0)
     private float modifyPitchRotation(float angle) {
         if(shaders_fixer$checkVibe())
             return (shaders_fixer$player.rotationPitch - shaders_fixer$armPitch) * 0.1F * shaders_fixer$turnMagnitude;
         return (shaders_fixer$player.rotationPitch - shaders_fixer$armPitch) * 0.1F;
     }
 
-    @ModifyArg(method = "renderItemInFirstPerson", at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glRotatef(FFFF)V", ordinal = 3), index = 0, remap = false)
+    @ModifyArg(method = "renderItemInFirstPerson", at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glRotatef(FFFF)V", ordinal = 3), index = 0)
     private float modifyYawRotation(float angle) {
         if(shaders_fixer$checkVibe())
             return (shaders_fixer$player.rotationYaw - shaders_fixer$armYaw) * 0.1F * shaders_fixer$turnMagnitude;
@@ -126,8 +126,7 @@ public class MixinItemRenderer {
     }
 
     @Redirect(method = "renderItemInFirstPerson",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glScalef(FFF)V", ordinal = 3),
-        require = 1, remap = false)
+        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glScalef(FFF)V", ordinal = 3))
     public void skipES(float x, float y, float z) {
         if(!shaders_fixer$checkVibe()) {
             GL11.glScalef(0.4F, 0.4F, 0.4F);
@@ -137,36 +136,33 @@ public class MixinItemRenderer {
     @Inject(method = "renderItemInFirstPerson",
         at = @At(value = "INVOKE",
         target = "Lnet/minecraft/client/renderer/ItemRenderer;renderItem(Lnet/minecraft/entity/EntityLivingBase;Lnet/minecraft/item/ItemStack;ILnet/minecraftforge/client/IItemRenderer$ItemRenderType;)V",
-        shift = At.Shift.BEFORE), remap = false
-    )
+        shift = At.Shift.BEFORE))
     private void renderItemInFirstPersonGAMMA(float interp, CallbackInfo ci) {
         if(shaders_fixer$checkVibe()) {
             GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
         }
     }
 
-//    @Inject(method = "renderItemInFirstPerson",
-//        at = @At(value = "INVOKE",
-//            target =
-//                //"Lnet/minecraft/client/renderer/ItemRenderer;renderItem(Lnet/minecraft/entity/EntityLivingBase;Lnet/minecraft/item/ItemStack;ILnet/minecraftforge/client/IItemRenderer$ItemRenderType)V",
-//                  "Lnet/minecraft/client/renderer/ItemRenderer;renderItem(Lnet/minecraft/entity/EntityLivingBase;Lnet/minecraft/item/ItemStack;ILnet/minecraftforge/client/IItemRenderer$ItemRenderType;)V",
-//            shift = At.Shift.BEFORE)
-//    )
-//    private void renderItemInFirstPersonGAMMAZ(float interp, CallbackInfo ci) {
-//        if(checkVibe()) {
-//            if (mc.renderViewEntity instanceof EntityPlayer) {
-//                EntityPlayer entityplayer = (EntityPlayer) mc.renderViewEntity;
-//                float distanceDelta = entityplayer.distanceWalkedModified - entityplayer.prevDistanceWalkedModified;
-//                float distanceInterp = -(entityplayer.distanceWalkedModified + distanceDelta * interp);
-//                float camYaw = entityplayer.prevCameraYaw + (entityplayer.cameraYaw - entityplayer.prevCameraYaw) * interp;
-//                float camPitch = entityplayer.prevCameraPitch + (entityplayer.cameraPitch - entityplayer.prevCameraPitch) * interp;
-//                GL11.glTranslatef(MathHelper.sin(distanceInterp * (float) Math.PI * swayPeriod) * camYaw * 0.5F * swayMagnitude, -Math.abs(MathHelper.cos(distanceInterp * (float) Math.PI * swayPeriod) * camYaw) * swayMagnitude, 0.0F);
-//                GL11.glRotatef(MathHelper.sin(distanceInterp * (float) Math.PI * swayPeriod) * camYaw * 3.0F, 0.0F, 0.0F, 1.0F);
-//                GL11.glRotatef(Math.abs(MathHelper.cos(distanceInterp * (float) Math.PI * swayPeriod - 0.2F) * camYaw) * 5.0F, 1.0F, 0.0F, 0.0F);
-//                GL11.glRotatef(camPitch, 1.0F, 0.0F, 0.0F);
-//            }
-//        }
-//    }
+    @Inject(method = "renderItemInFirstPerson",
+        at = @At(value = "INVOKE",
+            target =
+                  "Lnet/minecraft/client/renderer/ItemRenderer;renderItem(Lnet/minecraft/entity/EntityLivingBase;Lnet/minecraft/item/ItemStack;ILnet/minecraftforge/client/IItemRenderer$ItemRenderType;)V",
+            shift = At.Shift.BEFORE))
+    private void renderItemInFirstPersonGAMMAZ(float interp, CallbackInfo ci) {
+        if(shaders_fixer$checkVibe()) {
+            if (shaders_fixer$mc.renderViewEntity instanceof EntityPlayer) {
+                EntityPlayer entityplayer = (EntityPlayer) shaders_fixer$mc.renderViewEntity;
+                float distanceDelta = entityplayer.distanceWalkedModified - entityplayer.prevDistanceWalkedModified;
+                float distanceInterp = -(entityplayer.distanceWalkedModified + distanceDelta * interp);
+                float camYaw = entityplayer.prevCameraYaw + (entityplayer.cameraYaw - entityplayer.prevCameraYaw) * interp;
+                float camPitch = entityplayer.prevCameraPitch + (entityplayer.cameraPitch - entityplayer.prevCameraPitch) * interp;
+                GL11.glTranslatef(MathHelper.sin(distanceInterp * (float) Math.PI * shaders_fixer$swayPeriod) * camYaw * 0.5F * shaders_fixer$swayMagnitude, -Math.abs(MathHelper.cos(distanceInterp * (float) Math.PI * shaders_fixer$swayPeriod) * camYaw) * shaders_fixer$swayMagnitude, 0.0F);
+                GL11.glRotatef(MathHelper.sin(distanceInterp * (float) Math.PI * shaders_fixer$swayPeriod) * camYaw * 3.0F, 0.0F, 0.0F, 1.0F);
+                GL11.glRotatef(Math.abs(MathHelper.cos(distanceInterp * (float) Math.PI * shaders_fixer$swayPeriod - 0.2F) * camYaw) * 5.0F, 1.0F, 0.0F, 0.0F);
+                GL11.glRotatef(camPitch, 1.0F, 0.0F, 0.0F);
+            }
+        }
+    }
 
 
 

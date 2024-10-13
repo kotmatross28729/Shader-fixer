@@ -5,7 +5,6 @@ import com.hbm.render.item.weapon.sedna.ItemRenderAtlas;
 import com.kotmatross.shadersfixer.shrimp.Vibe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
-import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

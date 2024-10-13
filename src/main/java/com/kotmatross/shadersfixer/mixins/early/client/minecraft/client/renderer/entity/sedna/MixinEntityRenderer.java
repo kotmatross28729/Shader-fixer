@@ -35,22 +35,30 @@ public class MixinEntityRenderer {
     private double cameraPitch;
 
     @Redirect(method = "renderHand",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glTranslatef(FFF)V", ordinal = 1), remap = false)
-    public void skip1(float x, float y, float z) {
+        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glTranslatef(FFF)V", ordinal = 1))
+    public void skip1(float X, float XX, float XXX) {
         if(!shaders_fixer$checkVibe()) {
             GL11.glTranslatef((float)this.cameraYaw, (float)(-this.cameraPitch), 0.0F);
         }
     }
     @Redirect(method = "renderHand",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glScaled(DDD)V", ordinal = 0), remap = false)
-    public void skip2(float angle, float x, float y, float z) {
+        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glScaled(DDD)V", ordinal = 0))
+    public void skip2(double X, double XX, double XXX) {
         if(!shaders_fixer$checkVibe()) {
             GL11.glScaled(this.cameraZoom, this.cameraZoom, 1.0D);
         }
     }
     @Redirect(method = "renderHand",
-        at = @At(value = "INVOKE", target = "net/minecraft/client/renderer/EntityRenderer.hurtCameraEffect(F)V", ordinal = 0))
-    public void skip3(float angle, float x, float y, float z) {
+        at = @At(value = "INVOKE", target = "net/minecraft/client/renderer/EntityRenderer.hurtCameraEffect(F)V"))
+    public void skip3(float X) {
+        if(shaders_fixer$checkVibe()) {
+            //IGNORE
+        }
+    }
+
+    @Redirect(method = "renderHand",
+        at = @At(value = "INVOKE", target = "net/minecraft/client/renderer/EntityRenderer.setupViewBobbing(F)V"))
+    public void skip4(float X) {
         if(shaders_fixer$checkVibe()) {
             //IGNORE
         }
