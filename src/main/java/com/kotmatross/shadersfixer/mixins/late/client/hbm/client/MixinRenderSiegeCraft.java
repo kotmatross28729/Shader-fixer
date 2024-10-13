@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = RenderSiegeCraft.class, priority = 999)
 public class MixinRenderSiegeCraft {
-    @Shadow
+    @Shadow(remap = false)
     protected ResourceLocation getEntityTexture(EntitySiegeCraft entity) {
         SiegeTier tier = entity.getTier();
         return new ResourceLocation(RefStrings.MODID + ":textures/entity/siege_craft_" + tier.name + ".png");

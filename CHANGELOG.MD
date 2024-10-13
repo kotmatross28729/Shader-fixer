@@ -1,3 +1,12 @@
+# 3.2
+### TODO
+
+- [ ] Fix guns rotation/translation wrong
+- [ ] Fix DANI wrong textures & lighting
+- [ ] Fix aim animation choppy
+
+- [ ] Find a way to have both space fork & main fixes (or just way until gun rework will be in sf)
+
 # 3.1
 
 * Complete HBM's NTM fix

@@ -320,7 +320,25 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.hbm.client.MixinRenderRainbow"); //ZOMG
 
 
+                    //TODO Danger zone
+                    mixins.add("client.hbm.client.sedna.MixinLegoClient");
+                    mixins.add("client.hbm.client.sedna.MixinModEventHandlerRenderer");
+                    mixins.add("client.hbm.client.sedna.MixinItemRenderWeaponBase");
 
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderAm180");
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderAtlas");
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderCarbine");
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderCongoLake");
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderDANI");
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderDebug");
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderFlamer");
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderFlaregun");
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderGreasegun");
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderHeavyRevolver");
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderHenry");
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderLiberator");
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderMaresleg");
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderPepperbox");
                 }
             }
 

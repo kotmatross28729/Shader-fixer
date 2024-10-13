@@ -1,7 +1,6 @@
 # Shader Fixer (1.7.10)
 
 ## requires [unimixins](https://github.com/LegacyModdingMC/UniMixins/releases)
- - However, any other loader that implements `org.spongepowered.asm.mixin` will work, but not recommended
 
 **[CurseForge](https://legacy.curseforge.com/minecraft/mc-mods/shader-fixer)
 | [Modrinth](https://modrinth.com/mod/shader-fixer)**

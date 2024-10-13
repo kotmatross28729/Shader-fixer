@@ -90,8 +90,12 @@ public class ShaderFixerConfig {
 
     public static int startTicksOffset;
     public static int ticksInterval;
+
+    public static boolean FixHbmGunsRender;
     public static void loadEarlyMixinConfig(File configFile) {
         Configuration config = new Configuration(configFile);
+
+        FixHbmGunsRender = config.getBoolean("FixHbmGunsRender", categoryShadersfixes, true, "ADD_LATTER");
 
         FixMinecraftHitboxesRender = config.getBoolean("FixMinecraftHitboxesRender", categoryShadersfixes, true, "Fixes hitbox rendering (F3 + B) with shaders.");
         FixMinecraftFishinglineRender = config.getBoolean("FixMinecraftFishinglineRender", categoryShadersfixes, true, "Fixes fishing line rendering (which is from a fishing rod) with shaders.");
