@@ -32,15 +32,38 @@ public class MixinItemRenderWeaponBase {
         Utils.GLUseProgram(shaders_fixer$program);
     }
 
+    @Unique private static float shaders_fixer$lbx;
+    @Unique private static float shaders_fixer$lby;
+
     @Inject(method = "renderGapFlash",
         at = @At(value = "HEAD"), remap = false)
     private static void renderGapFlash(long lastShot, CallbackInfo ci) {
+        shaders_fixer$lbx = Utils.GetLastBrightnessX();
+        shaders_fixer$lby = Utils.GetLastBrightnessY();
         Utils.EnableFullBrightness();
     }
+
+    @Inject(method = "renderGapFlash",
+        at = @At(value = "TAIL"), remap = false)
+    private static void renderGapFlash2(long lastShot, CallbackInfo ci) {
+        Utils.DisableFullBrightness(shaders_fixer$lbx, shaders_fixer$lby);
+    }
+
+    @Unique private static float shaders_fixer$lbx2;
+    @Unique private static float shaders_fixer$lby2;
+
     @Inject(method = "renderMuzzleFlash(JID)V",
         at = @At(value = "HEAD"), remap = false)
     private static void renderMuzzleFlash(long lastShot, int duration, double l, CallbackInfo ci) {
+        shaders_fixer$lbx2 = Utils.GetLastBrightnessX();
+        shaders_fixer$lby2 = Utils.GetLastBrightnessY();
         Utils.EnableFullBrightness();
+    }
+
+    @Inject(method = "renderMuzzleFlash(JID)V",
+        at = @At(value = "TAIL"), remap = false)
+    private static void renderMuzzleFlash2(long lastShot, int duration, double l, CallbackInfo ci) {
+        Utils.DisableFullBrightness(shaders_fixer$lbx2, shaders_fixer$lby2);
     }
 
 }

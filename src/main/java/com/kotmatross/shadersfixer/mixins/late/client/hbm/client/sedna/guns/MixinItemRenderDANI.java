@@ -3,6 +3,7 @@ package com.kotmatross.shadersfixer.mixins.late.client.hbm.client.sedna.guns;
 import com.hbm.main.ResourceManager;
 import com.hbm.render.item.weapon.sedna.ItemRenderDANI;
 import com.kotmatross.shadersfixer.shrimp.Vibe;
+import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -24,12 +25,8 @@ public class MixinItemRenderDANI implements Vibe {
             target = "Lcom/hbm/render/item/weapon/sedna/ItemRenderDANI;renderSmokeNodes(Ljava/util/List;D)V",
             shift = At.Shift.AFTER), remap = false
     )
-    public void fixAfterSmoke(ItemStack stack, CallbackInfo ci) {
-        for(int i = -1; i <= 1; i += 2) {
-            int index = i == -1 ? 0 : 1;
-            //TODO im idiot, need to use @Local or smt
+    public void fixAfterSmoke(ItemStack stack, CallbackInfo ci, @Local(ordinal = 0) int index) {
             Minecraft.getMinecraft().renderEngine.bindTexture(index == 0 ? ResourceManager.dani_celestial_tex : ResourceManager.dani_lunar_tex);
-        }
     }
 
 }

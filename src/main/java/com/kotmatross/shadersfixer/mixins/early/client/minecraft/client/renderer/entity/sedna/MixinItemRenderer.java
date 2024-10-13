@@ -96,7 +96,6 @@ public class MixinItemRenderer {
 
     @ModifyArg(method = "renderItemInFirstPerson", at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glRotatef(FFFF)V", ordinal = 2), index = 0, remap = false)
     private float modifyPitchRotation(float angle) {
-        //TODO alpha
         if(shaders_fixer$checkVibe())
             return (shaders_fixer$player.rotationPitch - shaders_fixer$armPitch) * 0.1F * shaders_fixer$turnMagnitude;
         return (shaders_fixer$player.rotationPitch - shaders_fixer$armPitch) * 0.1F;
@@ -104,16 +103,14 @@ public class MixinItemRenderer {
 
     @ModifyArg(method = "renderItemInFirstPerson", at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glRotatef(FFFF)V", ordinal = 3), index = 0, remap = false)
     private float modifyYawRotation(float angle) {
-        //TODO alpha
         if(shaders_fixer$checkVibe())
             return (shaders_fixer$player.rotationYaw - shaders_fixer$armYaw) * 0.1F * shaders_fixer$turnMagnitude;
         return (shaders_fixer$player.rotationYaw - shaders_fixer$armYaw) * 0.1F;
     }
 
     @Redirect(method = "renderItemInFirstPerson",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glTranslatef(FFF)V", ordinal = 7), remap = false)
+        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glTranslatef(FFF)V", ordinal = 7))
     public void skipET(float x, float y, float z) {
-        //TODO SKIP E
         if(!shaders_fixer$checkVibe()) {
             float f13 = 0.8F;
             GL11.glTranslatef(0.7F * f13, -0.65F * f13 - (1.0F - shaders_fixer$f1) * 0.6F, -0.9F * f13);
@@ -121,9 +118,8 @@ public class MixinItemRenderer {
     }
 
     @Redirect(method = "renderItemInFirstPerson",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glRotatef(FFFF)V", ordinal = 18), remap = false)
+        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glRotatef(FFFF)V", ordinal = 18))
     public void skipER(float angle, float x, float y, float z) {
-        //TODO SKIP E
         if(!shaders_fixer$checkVibe()) {
             GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
         }
@@ -133,7 +129,6 @@ public class MixinItemRenderer {
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glScalef(FFF)V", ordinal = 3),
         require = 1, remap = false)
     public void skipES(float x, float y, float z) {
-        //TODO SKIP Extra
         if(!shaders_fixer$checkVibe()) {
             GL11.glScalef(0.4F, 0.4F, 0.4F);
         }
