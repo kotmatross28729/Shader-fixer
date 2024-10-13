@@ -2,10 +2,13 @@ package com.kotmatross.shadersfixer.asm;
 
 import com.gtnewhorizon.gtnhmixins.ILateMixinLoader;
 import com.gtnewhorizon.gtnhmixins.LateMixin;
+import com.hbm.items.ModItems;
+import com.hbm.items.weapon.sedna.ItemGunBaseNT;
 import com.kotmatross.shadersfixer.ShadersFixer;
 import com.kotmatross.shadersfixer.Tags;
 import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
 import cpw.mods.fml.common.Loader;
+import net.minecraft.item.ItemStack;
 import net.minecraft.launchwrapper.Launch;
 import org.spongepowered.asm.mixin.MixinEnvironment;
 
@@ -343,5 +346,29 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
             }
 
         return mixins;
+    }
+
+    public static float getGunsMagnitude(ItemStack stack) {
+        //DJ ИВАН ФРОСТ
+        if (Loader.isModLoaded("hbm")) {
+            if(stack != null) {
+                //TODO Manual values, use with attention
+                if (stack.getItem() == ModItems.gun_am180) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;
+                if (stack.getItem() == ModItems.gun_light_revolver) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;
+                if (stack.getItem() == ModItems.gun_carbine) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;
+                if (stack.getItem() == ModItems.gun_congolake) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;
+                if (stack.getItem() == ModItems.gun_light_revolver_dani) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;
+                if (stack.getItem() == ModItems.gun_debug) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;
+                if (stack.getItem() == ModItems.gun_flamer) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;
+                if (stack.getItem() == ModItems.gun_flaregun) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;
+                if (stack.getItem() == ModItems.gun_greasegun) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;
+                if (stack.getItem() == ModItems.gun_heavy_revolver) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;
+                if (stack.getItem() == ModItems.gun_henry) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;
+                if (stack.getItem() == ModItems.gun_liberator) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;
+                if (stack.getItem() == ModItems.gun_maresleg) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;
+                if (stack.getItem() == ModItems.gun_pepperbox) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;
+            }
+        }
+        return 2.75F;
     }
 }

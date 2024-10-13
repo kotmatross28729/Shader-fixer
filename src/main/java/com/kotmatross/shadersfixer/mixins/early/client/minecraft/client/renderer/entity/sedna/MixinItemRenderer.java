@@ -1,5 +1,6 @@
 package com.kotmatross.shadersfixer.mixins.early.client.minecraft.client.renderer.entity.sedna;
 
+import com.kotmatross.shadersfixer.asm.ShadersFixerLateMixins;
 import com.kotmatross.shadersfixer.shrimp.Vibe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -9,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
+import org.apache.logging.log4j.LogManager;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -38,26 +40,19 @@ public class MixinItemRenderer {
     @Unique Minecraft shaders_fixer$mc;
     @Unique float shaders_fixer$swing;
 
-
-    //TODO make this not shit
     @Unique
     protected float shaders_fixer$getSwayMagnitude(ItemStack stack) {
-        //idk if this even changes?
         return 0.5F;
     }
     @Unique
     protected float shaders_fixer$getSwayPeriod(ItemStack stack) {
-        //idk if this even changes?
         return 0.75F;
     }
     @Unique
     protected float shaders_fixer$getTurnMagnitude(ItemStack stack) {
-        //TODO find a way to check for modded items when IT'S FUCKING EARLY MIXINS
-//        if(stack.getItem() == ModItems.gun_am180) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;
-//        if(stack.getItem() == ModItems.gun_light_revolver) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;
-//        if(stack.getItem() == ModItems.gun_carbine) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;
-//        if(stack.getItem() == ModItems.gun_congolake) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;
-//        if(stack.getItem() == ModItems.gun_light_revolver_dani) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;
+    try {
+        return ShadersFixerLateMixins.getGunsMagnitude(stack);
+    } catch (NoClassDefFoundError ignored) {}
         return 2.75F;
     }
 
@@ -72,6 +67,7 @@ public class MixinItemRenderer {
 
         shaders_fixer$swayMagnitude = shaders_fixer$getSwayMagnitude(stack);
         shaders_fixer$swayPeriod = shaders_fixer$getSwayPeriod(stack);
+
         shaders_fixer$turnMagnitude = shaders_fixer$getTurnMagnitude(stack);
         shaders_fixer$pitch = shaders_fixer$player.prevRotationPitch + (shaders_fixer$player.rotationPitch - shaders_fixer$player.prevRotationPitch) * interp;
         shaders_fixer$yaw = shaders_fixer$player.prevRotationYaw + (shaders_fixer$player.rotationYaw - shaders_fixer$player.prevRotationYaw) * interp;
