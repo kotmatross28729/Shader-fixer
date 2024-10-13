@@ -22,6 +22,7 @@ A mod that adds more compatibility with shaders.
 + **12) Thaumic Concilium**
 + **13) OpenComputers**
 + **14) Electrical Age**
++ **15) HBM's NTM**
 
 # Credits:
 
