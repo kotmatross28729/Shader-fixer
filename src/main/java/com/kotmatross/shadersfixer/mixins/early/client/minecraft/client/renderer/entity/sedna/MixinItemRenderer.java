@@ -1,6 +1,5 @@
 package com.kotmatross.shadersfixer.mixins.early.client.minecraft.client.renderer.entity.sedna;
 
-import com.hbm.render.item.weapon.sedna.ItemRenderWeaponBase;
 import com.kotmatross.shadersfixer.asm.ShadersFixerLateMixins;
 import com.kotmatross.shadersfixer.shrimp.Vibe;
 import net.minecraft.client.Minecraft;
@@ -59,8 +58,7 @@ public class MixinItemRenderer {
     @Inject(method = "renderItemInFirstPerson", at = @At(value = "HEAD"))
     public void renderItemInFirstPerson(float interp, CallbackInfo ci) {
 
-        //How the fuck I forgot this
-        ItemRenderWeaponBase.interp = interp;
+        try {ShadersFixerLateMixins.handleInterpolation(interp);} catch (NoClassDefFoundError ignored){}
 
         //GETTERS
         shaders_fixer$f1 = prevEquippedProgress + (equippedProgress - prevEquippedProgress) * interp;

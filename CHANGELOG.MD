@@ -1,10 +1,5 @@
 # 3.2
 ### TODO
-
-- [ ] Fix guns rotations or translations wrong
-- [X] Fix DANI wrong textures
-- [X] Fix aim animation choppy
-
 - [ ] Find a way to have both space fork & main fixes (or just way until gun rework will be in sf)
 
 # 3.1

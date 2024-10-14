@@ -70,7 +70,7 @@ public class ShadersFixerEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLo
             if(ShaderFixerConfig.FixHbmGunsRender){
                 mixins.add("client.minecraft.client.renderer.entity.sedna.MixinEntityRenderer");
                 mixins.add("client.minecraft.client.renderer.entity.sedna.MixinItemRenderer");
-
+                mixins.add("client.minecraft.client.renderer.entity.sedna.MixinForgeHooksClient");
             }
 
         }

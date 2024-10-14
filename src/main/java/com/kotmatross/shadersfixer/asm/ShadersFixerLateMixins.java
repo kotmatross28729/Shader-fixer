@@ -4,6 +4,7 @@ import com.gtnewhorizon.gtnhmixins.ILateMixinLoader;
 import com.gtnewhorizon.gtnhmixins.LateMixin;
 import com.hbm.items.ModItems;
 import com.hbm.items.weapon.sedna.ItemGunBaseNT;
+import com.hbm.render.item.weapon.sedna.ItemRenderWeaponBase;
 import com.kotmatross.shadersfixer.ShadersFixer;
 import com.kotmatross.shadersfixer.Tags;
 import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
@@ -322,8 +323,6 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.hbm.client.MixinRenderOminousBullet"); //yer
                     mixins.add("client.hbm.client.MixinRenderRainbow"); //ZOMG
 
-
-                    //TODO Danger zone
                     mixins.add("client.hbm.client.sedna.MixinLegoClient");
                     mixins.add("client.hbm.client.sedna.MixinModEventHandlerRenderer");
                     mixins.add("client.hbm.client.sedna.MixinItemRenderWeaponBase");
@@ -346,6 +345,12 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
             }
 
         return mixins;
+    }
+
+    public static void handleInterpolation(float interp) {
+        if (Loader.isModLoaded("hbm")) {
+                ItemRenderWeaponBase.interp = interp;
+            }
     }
 
     public static float getGunsMagnitude(ItemStack stack) {
