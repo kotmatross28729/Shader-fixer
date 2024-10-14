@@ -264,7 +264,6 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                         specjork = false;
                     }
 
-
                     ShadersFixer.logger.info("Trying to integrate Hbm's NTM mixins...");
                     mixins.add("client.hbm.client.MixinParticleAmatFlash"); //Antimatter explosion
                     mixins.add("client.hbm.client.MixinParticleDebugLine"); //Drone path lines

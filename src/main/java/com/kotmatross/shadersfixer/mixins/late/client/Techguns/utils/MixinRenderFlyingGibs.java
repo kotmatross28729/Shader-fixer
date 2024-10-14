@@ -1,6 +1,6 @@
 package com.kotmatross.shadersfixer.mixins.late.client.Techguns.utils;
 
-import com.kotmatross.shadersfixer.shrimp.Fucked;
+import com.kotmatross.shadersfixer.shrimp.nonsense.Fucked;
 import net.minecraft.client.model.*;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;

@@ -1,6 +1,6 @@
 package com.kotmatross.shadersfixer.mixins.early.client.minecraft.client.renderer.entity;
 
-import com.kotmatross.shadersfixer.shrimp.FuckingShit;
+import com.kotmatross.shadersfixer.shrimp.nonsense.FuckingShit;
 import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import org.lwjgl.opengl.GL11;

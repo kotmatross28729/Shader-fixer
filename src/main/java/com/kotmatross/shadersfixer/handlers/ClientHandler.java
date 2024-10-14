@@ -2,8 +2,8 @@ package com.kotmatross.shadersfixer.handlers;
 
 import com.kotmatross.shadersfixer.Tags;
 import com.kotmatross.shadersfixer.asm.ShadersFixerLateMixins;
-import com.kotmatross.shadersfixer.shrimp.FuckingCursed;
-import com.kotmatross.shadersfixer.shrimp.FuckingShit;
+import com.kotmatross.shadersfixer.shrimp.nonsense.FuckingCursed;
+import com.kotmatross.shadersfixer.shrimp.nonsense.FuckingShit;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;

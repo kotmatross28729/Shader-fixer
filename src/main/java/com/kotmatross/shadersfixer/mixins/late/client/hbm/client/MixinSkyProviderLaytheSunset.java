@@ -1,7 +1,6 @@
-/**
 package com.kotmatross.shadersfixer.mixins.late.client.hbm.client;
 
-//import com.hbm.dim.laythe.SkyProviderLaytheSunset;
+import com.hbm.dim.laythe.SkyProviderLaytheSunset;
 import com.kotmatross.shadersfixer.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -10,8 +9,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-//@Mixin(value = SkyProviderLaytheSunset.class, priority = 999)
-@Mixin(targets = "com.hbm.dim.laythe.SkyProviderLaytheSunset")
+@Mixin(value = SkyProviderLaytheSunset.class, priority = 999)
+//@Mixin(targets = "com.hbm.dim.laythe.SkyProviderLaytheSunset")
 
 public class MixinSkyProviderLaytheSunset {
     @Inject(method = "renderSunset",
@@ -20,4 +19,3 @@ public class MixinSkyProviderLaytheSunset {
         Utils.Fix2();
     }
 }
-*/

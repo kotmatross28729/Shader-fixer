@@ -64,15 +64,6 @@ public class ShadersFixer {
         return IS_SHADERS_MOD_PRESENT;
     }
 
-//    public static boolean isHbmSpaceLoaded() {
-//        try {
-//            Class.forName("com.hbm.dim.SolarSystem"); //idk why this, but why not?
-//            return true;
-//        } catch (ClassNotFoundException e) {
-//            return false;
-//        }
-//    }
-
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
     }

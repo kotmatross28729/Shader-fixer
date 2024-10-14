@@ -1,8 +1,8 @@
-package com.kotmatross.shadersfixer.LightingFix;
+package com.kotmatross.shadersfixer.junk;
 
-import com.kotmatross.shadersfixer.shrimp.Fucked;
-import com.kotmatross.shadersfixer.shrimp.FuckingCursed;
-import com.kotmatross.shadersfixer.shrimp.FuckingShit;
+import com.kotmatross.shadersfixer.shrimp.nonsense.Fucked;
+import com.kotmatross.shadersfixer.shrimp.nonsense.FuckingCursed;
+import com.kotmatross.shadersfixer.shrimp.nonsense.FuckingShit;
 
 @Deprecated @Fucked @FuckingCursed @FuckingShit
 public class TEMP {

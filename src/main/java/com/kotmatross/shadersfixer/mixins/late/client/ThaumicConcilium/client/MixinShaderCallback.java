@@ -1,8 +1,8 @@
 package com.kotmatross.shadersfixer.mixins.late.client.ThaumicConcilium.client;
 
 import com.ilya3point999k.thaumicconcilium.client.render.ShaderCallback;
-import com.kotmatross.shadersfixer.shrimp.Fucked;
-import com.kotmatross.shadersfixer.shrimp.FuckingCursed;
+import com.kotmatross.shadersfixer.shrimp.nonsense.Fucked;
+import com.kotmatross.shadersfixer.shrimp.nonsense.FuckingCursed;
 import org.spongepowered.asm.mixin.Mixin;
 @Fucked @FuckingCursed
 @Mixin(value = ShaderCallback.class, priority = 999)

@@ -2,9 +2,9 @@ package com.kotmatross.shadersfixer.mixins.late.client.NotEnoughItems.client;
 
 import codechicken.nei.WorldOverlayRenderer;
 import com.kotmatross.shadersfixer.Utils;
-import com.kotmatross.shadersfixer.shrimp.Fucked;
-import com.kotmatross.shadersfixer.shrimp.FuckingCursed;
-import com.kotmatross.shadersfixer.shrimp.FuckingShit;
+import com.kotmatross.shadersfixer.shrimp.nonsense.Fucked;
+import com.kotmatross.shadersfixer.shrimp.nonsense.FuckingCursed;
+import com.kotmatross.shadersfixer.shrimp.nonsense.FuckingShit;
 import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;

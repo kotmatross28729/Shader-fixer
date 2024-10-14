@@ -1,6 +1,6 @@
 # 3.2
-### TODO
-- [ ] Find a way to have both space fork & main fixes (or just way until gun rework will be in sf)
+
+* Fixed new Hbm's NTM gun rework with shaders
 
 # 3.1
 
@@ -25,15 +25,3 @@
 * Fixed almost all bugs in HBM's NTM
   - some things related to weapons unfixed (since a rework is planned soon)
      - the hardest part is just ahead...
-
----
-REMINDER FOR ME:
-
-RenderBioRevolver
-
-ItemRenderWeaponLilMac
-
-ModelFolly
-
-
-

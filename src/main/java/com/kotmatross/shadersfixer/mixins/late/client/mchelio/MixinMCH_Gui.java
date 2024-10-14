@@ -1,7 +1,7 @@
 package com.kotmatross.shadersfixer.mixins.late.client.mchelio;
 
 import com.kotmatross.shadersfixer.Utils;
-import com.kotmatross.shadersfixer.shrimp.Fucked;
+import com.kotmatross.shadersfixer.shrimp.nonsense.Fucked;
 import mcheli.gui.MCH_Gui;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
