@@ -1,5 +1,6 @@
 package com.kotmatross.shadersfixer.mixins.early.client.minecraft.client.renderer.entity.sedna;
 
+import com.hbm.render.item.weapon.sedna.ItemRenderWeaponBase;
 import com.kotmatross.shadersfixer.asm.ShadersFixerLateMixins;
 import com.kotmatross.shadersfixer.shrimp.Vibe;
 import net.minecraft.client.Minecraft;
@@ -10,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
-import org.apache.logging.log4j.LogManager;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -58,6 +58,10 @@ public class MixinItemRenderer {
 
     @Inject(method = "renderItemInFirstPerson", at = @At(value = "HEAD"))
     public void renderItemInFirstPerson(float interp, CallbackInfo ci) {
+
+        //How the fuck I forgot this
+        ItemRenderWeaponBase.interp = interp;
+
         //GETTERS
         shaders_fixer$f1 = prevEquippedProgress + (equippedProgress - prevEquippedProgress) * interp;
 
@@ -135,7 +139,7 @@ public class MixinItemRenderer {
         shift = At.Shift.BEFORE))
     private void renderItemInFirstPersonGAMMA(float interp, CallbackInfo ci) {
         if(shaders_fixer$checkVibe()) {
-            GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
+            GL11.glRotated(180, 0, 1, 0);
         }
     }
 

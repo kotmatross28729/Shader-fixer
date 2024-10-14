@@ -48,9 +48,10 @@ public class MixinEntityRenderer {
             GL11.glScaled(this.cameraZoom, this.cameraZoom, 1.0D);
         }
     }
+
     @Redirect(method = "renderHand",
         at = @At(value = "INVOKE", target = "net/minecraft/client/renderer/EntityRenderer.hurtCameraEffect(F)V"))
-    public void skip3(float X) {
+    public void skip3(EntityRenderer entityRenderer, float X) {
         if(shaders_fixer$checkVibe()) {
             //IGNORE
         }
@@ -58,7 +59,7 @@ public class MixinEntityRenderer {
 
     @Redirect(method = "renderHand",
         at = @At(value = "INVOKE", target = "net/minecraft/client/renderer/EntityRenderer.setupViewBobbing(F)V"))
-    public void skip4(float X) {
+    public void skip4(EntityRenderer entityRenderer, float X) {
         if(shaders_fixer$checkVibe()) {
             //IGNORE
         }
