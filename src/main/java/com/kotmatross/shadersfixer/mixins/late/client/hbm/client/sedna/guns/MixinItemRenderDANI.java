@@ -25,7 +25,7 @@ public class MixinItemRenderDANI implements Vibe {
             target = "Lcom/hbm/render/item/weapon/sedna/ItemRenderDANI;renderSmokeNodes(Ljava/util/List;D)V",
             shift = At.Shift.AFTER), remap = false
     )
-    public void fixAfterSmoke(ItemStack stack, CallbackInfo ci, @Local(ordinal = 0) int index) {
+    public void fixAfterSmoke(ItemStack stack, CallbackInfo ci, @Local(ordinal = 1) int index) {
             Minecraft.getMinecraft().renderEngine.bindTexture(index == 0 ? ResourceManager.dani_celestial_tex : ResourceManager.dani_lunar_tex);
     }
 
