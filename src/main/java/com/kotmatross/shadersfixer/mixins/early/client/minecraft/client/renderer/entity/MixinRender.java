@@ -1,6 +1,5 @@
 package com.kotmatross.shadersfixer.mixins.early.client.minecraft.client.renderer.entity;
 
-
 import com.kotmatross.shadersfixer.Utils;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;

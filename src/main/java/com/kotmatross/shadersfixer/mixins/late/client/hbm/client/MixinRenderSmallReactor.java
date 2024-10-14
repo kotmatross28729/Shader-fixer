@@ -13,15 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = RenderSmallReactor.class, priority = 999)
 public class MixinRenderSmallReactor {
-//    @Inject(method = "func_147500_a", at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 3, shift = At.Shift.BEFORE), remap = false)
-//    public void func_147500_aPRD(TileEntity tileEntity, double x, double y, double z, float f, CallbackInfo ci) {
-//        GL11.glDepthMask(false);
-//    }
-//    @Inject(method = "func_147500_a", at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 4, shift = At.Shift.AFTER), remap = false)
-//    public void func_147500_aPRED(TileEntity tileEntity, double x, double y, double z, float f, CallbackInfo ci) {
-//        GL11.glDepthMask(true);
-//    }
-
     @Unique
     public int shaders_fixer$program;
 

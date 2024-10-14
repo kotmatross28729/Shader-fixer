@@ -1,3 +1,7 @@
+# 3.2
+### TODO
+- [ ] Find a way to have both space fork & main fixes (or just way until gun rework will be in sf)
+
 # 3.1
 
 * Complete HBM's NTM fix
