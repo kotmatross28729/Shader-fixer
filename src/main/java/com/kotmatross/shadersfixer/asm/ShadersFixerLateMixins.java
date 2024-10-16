@@ -337,9 +337,11 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderGreasegun");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderHeavyRevolver");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderHenry");
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderLAG");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderLiberator");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderMaresleg");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderPepperbox");
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderUzi");
                 }
             }
 
@@ -351,12 +353,24 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 ItemRenderWeaponBase.interp = interp;
             }
     }
-
-    public static float getGunsMagnitude(ItemStack stack) {
-        //DJ ИВАН ФРОСТ
+    public static float getGunsSwayMagnitude(ItemStack stack) {
         if (Loader.isModLoaded("hbm")) {
             if(stack != null) {
-                //TODO Manual values, use with attention
+                return ItemGunBaseNT.getIsAiming(stack) ? 0.1F : 0.5F;
+            }
+        }
+        return 0.5F;
+    }
+    public static float getGunsSwayPeriod(ItemStack stack) {
+//        if (Loader.isModLoaded("hbm")) {
+//            if(stack != null) {
+//            }
+//        }
+        return 0.75F;
+    }
+    public static float getGunsTurnMagnitude(ItemStack stack) {
+        if (Loader.isModLoaded("hbm")) {
+            if(stack != null) {
                 if (stack.getItem() == ModItems.gun_am180) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;
                 if (stack.getItem() == ModItems.gun_light_revolver) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;
                 if (stack.getItem() == ModItems.gun_carbine) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;
@@ -368,9 +382,11 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 if (stack.getItem() == ModItems.gun_greasegun) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;
                 if (stack.getItem() == ModItems.gun_heavy_revolver) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;
                 if (stack.getItem() == ModItems.gun_henry) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;
+                if (stack.getItem() == ModItems.gun_lag) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;
                 if (stack.getItem() == ModItems.gun_liberator) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;
                 if (stack.getItem() == ModItems.gun_maresleg) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;
                 if (stack.getItem() == ModItems.gun_pepperbox) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;
+                if (stack.getItem() == ModItems.gun_uzi) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;
             }
         }
         return 2.75F;

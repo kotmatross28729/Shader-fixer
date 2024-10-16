@@ -41,16 +41,24 @@ public class MixinItemRenderer {
 
     @Unique
     protected float shaders_fixer$getSwayMagnitude(ItemStack stack) {
-        return 0.5F;
+        //return 0.5F;
+        try {
+            return ShadersFixerLateMixins.getGunsSwayMagnitude(stack);
+        } catch (NoClassDefFoundError ignored) {}
+        return 2.75F;
     }
     @Unique
     protected float shaders_fixer$getSwayPeriod(ItemStack stack) {
-        return 0.75F;
+        //return 0.75F;
+        try {
+            return ShadersFixerLateMixins.getGunsSwayPeriod(stack);
+        } catch (NoClassDefFoundError ignored) {}
+        return 2.75F;
     }
     @Unique
     protected float shaders_fixer$getTurnMagnitude(ItemStack stack) {
     try {
-        return ShadersFixerLateMixins.getGunsMagnitude(stack);
+        return ShadersFixerLateMixins.getGunsTurnMagnitude(stack);
     } catch (NoClassDefFoundError ignored) {}
         return 2.75F;
     }
