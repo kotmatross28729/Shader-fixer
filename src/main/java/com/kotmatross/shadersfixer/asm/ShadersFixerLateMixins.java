@@ -8,6 +8,7 @@ import com.hbm.render.item.weapon.sedna.ItemRenderWeaponBase;
 import com.kotmatross.shadersfixer.ShadersFixer;
 import com.kotmatross.shadersfixer.Tags;
 import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
+import com.kotmatross.shadersfixer.mixins.late.client.hbm.client.sedna.guns.MixinItemRenderAm180;
 import cpw.mods.fml.common.Loader;
 import net.minecraft.item.ItemStack;
 import net.minecraft.launchwrapper.Launch;
@@ -329,18 +330,27 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderAm180");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderAtlas");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderCarbine");
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderChemthrower");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderCongoLake");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderDANI");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderDebug");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderFlamer");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderFlaregun");
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderG3");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderGreasegun");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderHeavyRevolver");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderHenry");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderLAG");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderLiberator");
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderM2");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderMaresleg");
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderMareslegAkimbo");
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderPanzerschreck");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderPepperbox");
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderQuadro");
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderShredder");
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderSPAS12");
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderStinger");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderUzi");
                 }
             }
@@ -371,22 +381,32 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
     public static float getGunsTurnMagnitude(ItemStack stack) {
         if (Loader.isModLoaded("hbm")) {
             if(stack != null) {
-                if (stack.getItem() == ModItems.gun_am180) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;
-                if (stack.getItem() == ModItems.gun_light_revolver) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;
-                if (stack.getItem() == ModItems.gun_carbine) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;
-                if (stack.getItem() == ModItems.gun_congolake) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;
-                if (stack.getItem() == ModItems.gun_light_revolver_dani) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;
-                if (stack.getItem() == ModItems.gun_debug) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;
-                if (stack.getItem() == ModItems.gun_flamer) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;
-                if (stack.getItem() == ModItems.gun_flaregun) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;
-                if (stack.getItem() == ModItems.gun_greasegun) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;
-                if (stack.getItem() == ModItems.gun_heavy_revolver) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;
-                if (stack.getItem() == ModItems.gun_henry) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;
-                if (stack.getItem() == ModItems.gun_lag) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;
-                if (stack.getItem() == ModItems.gun_liberator) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;
-                if (stack.getItem() == ModItems.gun_maresleg) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;
-                if (stack.getItem() == ModItems.gun_pepperbox) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;
-                if (stack.getItem() == ModItems.gun_uzi) return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;
+                if (stack.getItem() == ModItems.gun_am180)                  return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;                   // ItemRenderAm180
+                if (stack.getItem() == ModItems.gun_light_revolver)         return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;                  // ItemRenderAtlas
+                if (stack.getItem() == ModItems.gun_carbine)                return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;                   // ItemRenderCarbine
+                if (stack.getItem() == ModItems.gun_chemthrower)            return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;                  // ItemRenderChemthrower
+                if (stack.getItem() == ModItems.gun_congolake)              return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;                  // ItemRenderCongoLake
+                if (stack.getItem() == ModItems.gun_light_revolver_dani)    return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;                  // ItemRenderDANI
+                if (stack.getItem() == ModItems.gun_debug)                  return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;                  // ItemRenderDebug
+                if (stack.getItem() == ModItems.gun_flamer)                 return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;                   // ItemRenderFlamer
+                if (stack.getItem() == ModItems.gun_flaregun)               return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;                  // ItemRenderFlaregun
+                if (stack.getItem() == ModItems.gun_g3)                     return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;                  // ItemRenderG3
+                if (stack.getItem() == ModItems.gun_greasegun)              return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;                   // ItemRenderGreasegun
+                if (stack.getItem() == ModItems.gun_heavy_revolver)         return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;                  // ItemRenderHeavyRevolver
+                if (stack.getItem() == ModItems.gun_henry)                  return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;                   // ItemRenderHenry
+                if (stack.getItem() == ModItems.gun_lag)                    return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;                  // ItemRenderLAG
+                if (stack.getItem() == ModItems.gun_liberator)              return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;                  // ItemRenderLiberator
+                if (stack.getItem() == ModItems.gun_m2)                     return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;                   // ItemRenderM2
+                if (stack.getItem() == ModItems.gun_maresleg)               return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;                   // ItemRenderMaresleg
+                if (stack.getItem() == ModItems.gun_maresleg_akimbo)        return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;                   // ItemRenderMareslegAkimbo
+                if (stack.getItem() == ModItems.gun_maresleg_broken)        return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;                   // ItemRenderMaresleg
+                if (stack.getItem() == ModItems.gun_panzerschreck)          return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;                  // ItemRenderPanzerschreck
+                if (stack.getItem() == ModItems.gun_pepperbox)              return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;                   // ItemRenderPepperbox
+                if (stack.getItem() == ModItems.gun_quadro)                 return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;                  // ItemRenderQuadro
+                if (stack.getItem() == ModItems.gun_autoshotgun)            return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;                   // ItemRenderShredder
+                if (stack.getItem() == ModItems.gun_spas12)                 return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;                   // ItemRenderSPAS12
+                if (stack.getItem() == ModItems.gun_stinger)                return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;                  // ItemRenderStinger
+                if (stack.getItem() == ModItems.gun_uzi)                    return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;                  // ItemRenderUzi
             }
         }
         return 2.75F;
