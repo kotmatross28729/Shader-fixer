@@ -1,6 +1,8 @@
 # 3.2
 
 * Fixed new Hbm's NTM gun rework with shaders
+  - Now all bugs are DEFINITELY fixed (please)
+* Added a setting to bypass the 30 fps limit in the main menu
 
 # 3.1
 

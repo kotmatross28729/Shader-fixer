@@ -22,7 +22,6 @@ public abstract class MixinRenderFish extends Render {
                 ordinal = 1)),
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
-
     public void doRender(EntityFishHook p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_, CallbackInfo ci)
     {
         Utils.Fix();

@@ -66,13 +66,15 @@ public class ShadersFixerEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLo
                 ShadersFixer.logger.info("Integrating MixinInventoryEffectRenderer...");
                 mixins.add("client.minecraft.client.renderer.entity.MixinInventoryEffectRenderer"); //I did this for almost an hour, and then I remembered that ElephantFix exists
             }
-
             if(ShaderFixerConfig.FixHbmGunsRender){
                 mixins.add("client.minecraft.client.renderer.entity.sedna.MixinEntityRenderer");
                 mixins.add("client.minecraft.client.renderer.entity.sedna.MixinItemRenderer");
                 mixins.add("client.minecraft.client.renderer.entity.sedna.MixinForgeHooksClient");
             }
-
+            if(ShaderFixerConfig.UnlockMainMenuFPS) {
+                ShadersFixer.logger.info("Integrating MixinMinecraft...");
+                mixins.add("client.minecraft.client.renderer.entity.MixinMinecraft");
+            }
         }
 
         return mixins;

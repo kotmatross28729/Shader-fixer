@@ -92,6 +92,9 @@ public class ShaderFixerConfig {
     public static int ticksInterval;
 
     public static boolean FixHbmGunsRender;
+
+    public static boolean UnlockMainMenuFPS;
+    public static int MainMenuFPSValue;
     public static void loadEarlyMixinConfig(File configFile) {
         Configuration config = new Configuration(configFile);
 
@@ -106,9 +109,11 @@ public class ShaderFixerConfig {
         FixMinecraftNameTagsRender = config.getBoolean("FixMinecraftNameTagsRender", categoryShadersfixes, true, "Fixes rendering of name tags with shaders.");
         FixMinecraftEffectGUIBlending = config.getBoolean("FixMinecraftEffectGUIBlending", categoryShadersfixes, true, "Fixes an annoying bug due to which the effect bar in the creative menu turns black.");
         enableNotifications = config.getBoolean("enableNotifications", categorytweaks, true, "Turns on a notification in the chat when detected 'old version' mods.");
-        startTicksOffset = config.getInt("startTicksOffset", categorytweaks, 50,0, 65536, "First update notification will be delayed by n ticks to be displayed last at chat.");
-        ticksInterval = config.getInt("ticksInterval", categorytweaks, 10,0, 65536, "Update notifications will be delayed by n ticks after the last notification (to avoid a sudden influx of notifications).");
+        startTicksOffset = config.getInt("startTicksOffset", categorytweaks, 50,0, 1024, "First update notification will be delayed by n ticks to be displayed last at chat.");
+        ticksInterval = config.getInt("ticksInterval", categorytweaks, 10,0, 1024, "Update notifications will be delayed by n ticks after the last notification (to avoid a sudden influx of notifications).");
 
+        UnlockMainMenuFPS = config.getBoolean("UnlockMainMenuFPS", categorytweaks, true, "By default, minecraft locks your frame rate to 30 in the main menu. In new versions of the game this value is 60, which is 2 times smoother than in 1.7.10. This option allows you to set any maximum FPS value in the main menu.");
+        MainMenuFPSValue = config.getInt("MainMenuFPSValue", categorytweaks, 144,-1, 1024, "Maximum number of frames in the main menu (see UnlockMainMenuFPS). -1 or 0 to use fps limit in settings");
         if(config.hasChanged()) {
             config.save();
         }
