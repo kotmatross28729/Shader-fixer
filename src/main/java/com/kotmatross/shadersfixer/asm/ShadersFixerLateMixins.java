@@ -8,7 +8,6 @@ import com.hbm.render.item.weapon.sedna.ItemRenderWeaponBase;
 import com.kotmatross.shadersfixer.ShadersFixer;
 import com.kotmatross.shadersfixer.Tags;
 import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
-import com.kotmatross.shadersfixer.mixins.late.client.hbm.client.sedna.guns.MixinItemRenderAm180;
 import cpw.mods.fml.common.Loader;
 import net.minecraft.item.ItemStack;
 import net.minecraft.launchwrapper.Launch;
@@ -83,6 +82,9 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
         }
         if(!loadedMods.contains("hbm")) {
             ShaderFixerConfig.FixHbmShaders = false;
+        }
+        if(!loadedMods.contains("dsurround")) {
+            ShaderFixerConfig.FixDSShaders = false;
         }
 
         List<String> mixins = new ArrayList<>();
@@ -227,8 +229,6 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.avaritia.client.MixinRenderHeavenArrow");
                 }
                 if (ShaderFixerConfig.FixThaumicConciliumShaders) {
-                    //_TODO почему-то работает странно
-                    //  Требуется мануальный патч (или дальнейшее изучение)
                     ShadersFixer.logger.info("Trying to integrate Thaumic Concilium mixins...");
                     mixins.add("client.ThaumicConcilium.client.MixinAstralMonitorRenderer");
                     mixins.add("client.ThaumicConcilium.client.MixinCrimsonOrbEntityRenderer");
@@ -257,6 +257,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     }
                     mixins.add("client.eln.client.MixinNixieTubeDescriptor");
                 }
+
                 if (ShaderFixerConfig.FixHbmShaders) {
                     try {
                         Class.forName("com.hbm.dim.SolarSystem"); //idk why this, but why not?
@@ -320,38 +321,22 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                         mixins.add("client.hbm.client.MixinSkyProviderLaytheSunset");
                     }
                     mixins.add("client.hbm.client.MixinRenderBullet"); //GLASS/TAU
-                    mixins.add("client.hbm.client.MixinRenderOminousBullet"); //yer
                     mixins.add("client.hbm.client.MixinRenderRainbow"); //ZOMG
 
                     mixins.add("client.hbm.client.sedna.MixinLegoClient");
                     mixins.add("client.hbm.client.sedna.MixinModEventHandlerRenderer");
                     mixins.add("client.hbm.client.sedna.MixinItemRenderWeaponBase");
 
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderAm180");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderAtlas");
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderCarbine");
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderChemthrower");
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderCongoLake");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderDANI");
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderDebug");
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderFlamer");
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderFlaregun");
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderG3");
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderGreasegun");
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderHeavyRevolver");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderHenry");
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderLAG");
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderLiberator");
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderM2");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderMaresleg");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderMareslegAkimbo");
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderPanzerschreck");
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderPepperbox");
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderQuadro");
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderShredder");
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderSPAS12");
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderStinger");
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderUzi");
+                }
+
+                if (ShaderFixerConfig.FixDSShaders) {
+                    ShadersFixer.logger.info("Trying to integrate DynamicSurroundings mixins...");
+                    mixins.add("client.DynamicSurroundings.client.MixinAuroraRenderer");
                 }
             }
 
@@ -393,6 +378,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 if (stack.getItem() == ModItems.gun_g3)                     return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;                  // ItemRenderG3
                 if (stack.getItem() == ModItems.gun_greasegun)              return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;                   // ItemRenderGreasegun
                 if (stack.getItem() == ModItems.gun_heavy_revolver)         return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;                  // ItemRenderHeavyRevolver
+                if (stack.getItem() == ModItems.gun_heavy_revolver_lilmac)  return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;                  // ItemRenderHeavyRevolver
                 if (stack.getItem() == ModItems.gun_henry)                  return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;                   // ItemRenderHenry
                 if (stack.getItem() == ModItems.gun_lag)                    return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;                  // ItemRenderLAG
                 if (stack.getItem() == ModItems.gun_liberator)              return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;                  // ItemRenderLiberator
@@ -400,12 +386,15 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 if (stack.getItem() == ModItems.gun_maresleg)               return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;                   // ItemRenderMaresleg
                 if (stack.getItem() == ModItems.gun_maresleg_akimbo)        return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;                   // ItemRenderMareslegAkimbo
                 if (stack.getItem() == ModItems.gun_maresleg_broken)        return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;                   // ItemRenderMaresleg
+                if (stack.getItem() == ModItems.gun_minigun)                return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;                   // ItemRenderMinigun
+                if (stack.getItem() == ModItems.gun_missile_launcher)       return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;                   // ItemRenderMissileLauncher
                 if (stack.getItem() == ModItems.gun_panzerschreck)          return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;                  // ItemRenderPanzerschreck
                 if (stack.getItem() == ModItems.gun_pepperbox)              return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;                   // ItemRenderPepperbox
                 if (stack.getItem() == ModItems.gun_quadro)                 return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;                  // ItemRenderQuadro
                 if (stack.getItem() == ModItems.gun_autoshotgun)            return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;                   // ItemRenderShredder
                 if (stack.getItem() == ModItems.gun_spas12)                 return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;                   // ItemRenderSPAS12
                 if (stack.getItem() == ModItems.gun_stinger)                return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;                  // ItemRenderStinger
+                if (stack.getItem() == ModItems.gun_tesla_cannon)           return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.5F;                   // ItemRenderTeslaCannon
                 if (stack.getItem() == ModItems.gun_uzi)                    return ItemGunBaseNT.getIsAiming(stack) ? 2.5F : -0.25F;                  // ItemRenderUzi
             }
         }

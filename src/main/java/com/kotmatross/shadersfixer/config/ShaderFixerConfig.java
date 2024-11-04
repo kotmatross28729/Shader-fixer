@@ -31,6 +31,8 @@ public class ShaderFixerConfig {
 
     public static boolean FixHbmShaders;
 
+    public static boolean FixDSShaders;
+
 
     public static boolean TechgunsGoreLogger;
     public static List<String> TechgunsGoreList = new ArrayList<>();
@@ -62,6 +64,9 @@ public class ShaderFixerConfig {
         FixOpenComputersShaders = config.getBoolean("FixOpenComputersShaders", categoryShadersfixes, true, "Fixes rendering errors in OpenComputers mod when using shaders.");
         FixElnShaders = config.getBoolean("FixElnShaders", categoryShadersfixes, true, "Fixes rendering errors in ElectricalAge mod when using shaders.");
         FixHbmShaders = config.getBoolean("FixHbmShaders", categoryShadersfixes, true, "Fixes rendering errors in Hbm's NTM mod when using shaders.");
+        FixDSShaders = config.getBoolean("FixDSShaders", categoryShadersfixes, true, "Fixes rendering errors in DynamicSurroundings mod when using shaders.");
+
+
         ElnLightMixins = config.getBoolean("ElnLightMixins", categorytweaks, true, "Slightly modifies the code for rendering the light sprite to avoid an issue with bsl shaders that renders object with full alpha when the object's alpha is close to 0 (below 0.1). Use carefully with new versions, as it calls the old sprite rendering code");
 
         ThaumicConciliumExtraMixins = config.getBoolean("ThaumicConciliumExtraMixins", categorytweaks, true, "Adds additional GL11.glDepthMask calls when using shaders to disable shadows on Thaumic Concilium items/mobs. If this is false, then shadows from Thaumic Concilium items/mobs will not be rendered correctly");

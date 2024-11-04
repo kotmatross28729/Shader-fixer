@@ -22,6 +22,7 @@ A mod that adds more compatibility with shaders.
 + **13) OpenComputers**
 + **14) Electrical Age**
 + **15) HBM's NTM**
++ **16) Dynamic Surroundings**
 
 # Credits:
 

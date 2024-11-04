@@ -20,7 +20,7 @@ public class MixinLegoClient {
         Utils.Fix();
     }
 
-    @Inject(method = "lambda$static$6(Lcom/hbm/entity/projectile/EntityBulletBaseMK4;Ljava/lang/Float;)V",
+    @Inject(method = "lambda$static$7(Lcom/hbm/entity/projectile/EntityBulletBaseMK4;Ljava/lang/Float;)V",
         at = @At(value = "HEAD"), remap = false)
     private static void RENDER_FLARE(EntityBulletBaseMK4 bullet, Float interp, CallbackInfo ci) {
         Utils.EnableFullBrightness();
