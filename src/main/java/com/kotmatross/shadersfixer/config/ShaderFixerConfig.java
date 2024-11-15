@@ -33,6 +33,8 @@ public class ShaderFixerConfig {
 
     public static boolean FixDSShaders;
 
+    public static boolean FixLMMEhaders;
+
 
     public static boolean TechgunsGoreLogger;
     public static List<String> TechgunsGoreList = new ArrayList<>();
@@ -65,7 +67,7 @@ public class ShaderFixerConfig {
         FixElnShaders = config.getBoolean("FixElnShaders", categoryShadersfixes, true, "Fixes rendering errors in ElectricalAge mod when using shaders.");
         FixHbmShaders = config.getBoolean("FixHbmShaders", categoryShadersfixes, true, "Fixes rendering errors in Hbm's NTM mod when using shaders.");
         FixDSShaders = config.getBoolean("FixDSShaders", categoryShadersfixes, true, "Fixes rendering errors in DynamicSurroundings mod when using shaders.");
-
+        FixLMMEhaders = config.getBoolean("FixLMMEhaders", categoryShadersfixes, true, "Disables mob rendering in LittleMaidMobEnhanced interaction GUI to fix shaders.");
 
         ElnLightMixins = config.getBoolean("ElnLightMixins", categorytweaks, true, "Slightly modifies the code for rendering the light sprite to avoid an issue with bsl shaders that renders object with full alpha when the object's alpha is close to 0 (below 0.1). Use carefully with new versions, as it calls the old sprite rendering code");
 

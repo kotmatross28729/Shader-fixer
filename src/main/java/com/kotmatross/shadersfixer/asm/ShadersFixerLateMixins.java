@@ -87,6 +87,10 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
             ShaderFixerConfig.FixDSShaders = false;
         }
 
+        if(!loadedMods.contains("lmmx")) {
+            ShaderFixerConfig.FixLMMEhaders = false;
+        }
+
         List<String> mixins = new ArrayList<>();
 
             if (side == MixinEnvironment.Side.CLIENT) {
@@ -338,6 +342,11 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     ShadersFixer.logger.info("Trying to integrate DynamicSurroundings mixins...");
                     mixins.add("client.DynamicSurroundings.client.MixinAuroraRenderer");
                 }
+                if (ShaderFixerConfig.FixLMMEhaders) {
+                    ShadersFixer.logger.warn("Trying to integrate LittleMaidMobEnhanced mixins...");
+                    mixins.add("client.lmme.MixinGuiInventory");
+                }
+
             }
 
         return mixins;
