@@ -41,26 +41,15 @@ public class MixinItemRenderer {
 
     @Unique
     protected float shaders_fixer$getSwayMagnitude(ItemStack stack) {
-        //return 0.5F;
-        try {
-            return ShadersFixerLateMixins.getGunsSwayMagnitude(stack);
-        } catch (NoClassDefFoundError ignored) {}
-        return 2.75F;
+        return ShadersFixerLateMixins.getGunsSwayMagnitude(stack);
     }
     @Unique
     protected float shaders_fixer$getSwayPeriod(ItemStack stack) {
-        //return 0.75F;
-        try {
-            return ShadersFixerLateMixins.getGunsSwayPeriod(stack);
-        } catch (NoClassDefFoundError ignored) {}
-        return 2.75F;
+        return ShadersFixerLateMixins.getGunsSwayPeriod(stack);
     }
     @Unique
     protected float shaders_fixer$getTurnMagnitude(ItemStack stack) {
-    try {
         return ShadersFixerLateMixins.getGunsTurnMagnitude(stack);
-    } catch (NoClassDefFoundError ignored) {}
-        return 2.75F;
     }
 
     @Inject(method = "renderItemInFirstPerson", at = @At(value = "HEAD"))
