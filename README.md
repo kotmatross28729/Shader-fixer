@@ -23,6 +23,7 @@ A mod that adds more compatibility with shaders.
 + **14) Electrical Age**
 + **15) HBM's NTM**
 + **16) Dynamic Surroundings**
++ **17) Hardcore Ender Expansion**
 
 # Credits:
 

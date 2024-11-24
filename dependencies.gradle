@@ -53,6 +53,7 @@ dependencies {
 	compileOnly name: 'HBM-NTM-[1.0.27_X5091]'
 	compileOnly name: 'DynamicSurroundings-1.7.10-1.0.7.5'
 	compileOnly name: 'LittleMaidMobEnhanced-1.7.10-1.4.4'
+	compileOnly name: 'HardcoreEnderExpansion-1.11.3-GTNH'
 	
     compileOnly fileTree(dir: 'libs', include: '*.jar')
     compileOnly fileTree(dir: 'libs', include: '*.zip')

@@ -4,6 +4,7 @@
   - Now all bugs are DEFINITELY fixed (please)
 * Added a setting to bypass the 30 fps limit in the main menu
 * Fixed Dynamic Surroundings aurora with shaders
+* Fixed Hardcore Ender Expansion  with shaders
 
 # 3.1
 

@@ -1,6 +1,5 @@
 package com.kotmatross.shadersfixer.mixins.late.client.hbm.client;
 
-import com.hbm.blocks.generic.BlockBobble;
 import com.hbm.render.entity.effect.RenderDeathBlast;
 import com.kotmatross.shadersfixer.Utils;
 import net.minecraft.entity.Entity;

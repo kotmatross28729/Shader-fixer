@@ -25,30 +25,20 @@ import java.util.Random;
 @FuckingCursed
 @Mixin(value = GuiInventory.class, priority = 998)
 public abstract class MixinGuiInventory extends GuiContainer{
-    @Shadow
-    private Random rand = new Random();
-    @Shadow
+    @Shadow(remap = false)
+    private Random rand;
+    @Shadow(remap = false)
     private IInventory upperChestInventory;
-    @Shadow
+    @Shadow(remap = false)
     private IInventory lowerChestInventory;
-    @Shadow
-    private float xSize_lo;
-    @Shadow
-    private float ySize_lo;
-    @Shadow
+    @Shadow(remap = false)
     private int ySizebk;
-    @Shadow
+    @Shadow(remap = false)
     private int updateCounter;
-    @Shadow
+    @Shadow(remap = false)
     public EntityLittleMaid entitylittlemaid;
-    @Shadow
-    public GuiButtonNextPage[] txbutton = new GuiButtonNextPage[4];
-    @Shadow
-    public GuiButton selectbutton;
-    @Shadow
+    @Shadow(remap = false)
     public boolean isChangeTexture;
-    @Shadow
-    protected static final ResourceLocation fguiTex = new ResourceLocation("lmmx", "textures/gui/container/littlemaidinventory.png");
 
     public MixinGuiInventory(EntityPlayer pPlayer, EntityLittleMaid elmaid) {
         super(new ContainerInventory(pPlayer.inventory, elmaid));

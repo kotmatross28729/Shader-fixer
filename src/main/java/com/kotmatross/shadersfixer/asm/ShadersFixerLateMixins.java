@@ -92,7 +92,11 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
         }
 
         if(!loadedMods.contains("lmmx")) {
-            ShaderFixerConfig.FixLMMEhaders = false;
+            ShaderFixerConfig.FixLMMEShaders = false;
+        }
+
+        if(!loadedMods.contains("HardcoreEnderExpansion")) {
+            ShaderFixerConfig.FixHEEhaders = false;
         }
 
         List<String> mixins = new ArrayList<>();
@@ -340,16 +344,33 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderHenry");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderMaresleg");
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderMareslegAkimbo");
+
+                    mixins.add("client.hbm.client.MixinRenderChemical"); //Antimatter thing
+                    mixins.add("client.hbm.client.MixinRenderSolidifier");
+                    mixins.add("client.hbm.client.MixinRenderLiquefactor");
+
+
+
                 }
 
                 if (ShaderFixerConfig.FixDSShaders) {
                     ShadersFixer.logger.info("Trying to integrate DynamicSurroundings mixins...");
                     mixins.add("client.DynamicSurroundings.client.MixinAuroraRenderer");
                 }
-                if (ShaderFixerConfig.FixLMMEhaders) {
+
+                if (ShaderFixerConfig.FixLMMEShaders) {
                     ShadersFixer.logger.warn("Trying to integrate LittleMaidMobEnhanced mixins...");
                     mixins.add("client.lmme.MixinGuiInventory");
                 }
+                if (ShaderFixerConfig.FixHEEhaders) {
+                    ShadersFixer.logger.warn("Trying to integrate HardcoreEnderExpansion mixins...");
+                    mixins.add("client.HEE.MixinRenderBossDragon");
+                    mixins.add("client.HEE.MixinRenderWeatherLightningBoltPurple");
+                    mixins.add("client.HEE.MixinModClientProxy");
+                }
+
+
+
 
             }
 

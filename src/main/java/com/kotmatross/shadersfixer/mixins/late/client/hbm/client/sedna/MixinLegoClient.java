@@ -1,6 +1,5 @@
 package com.kotmatross.shadersfixer.mixins.late.client.hbm.client.sedna;
 
-import com.hbm.entity.projectile.EntityBulletBaseMK4;
 import com.hbm.items.weapon.sedna.factory.LegoClient;
 import com.kotmatross.shadersfixer.Utils;
 import net.minecraft.client.renderer.Tessellator;
@@ -20,9 +19,9 @@ public class MixinLegoClient {
         Utils.Fix();
     }
 
-    @Inject(method = "lambda$static$7(Lcom/hbm/entity/projectile/EntityBulletBaseMK4;Ljava/lang/Float;)V",
-        at = @At(value = "HEAD"), remap = false)
-    private static void RENDER_FLARE(EntityBulletBaseMK4 bullet, Float interp, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-    }
+//    @Inject(method = "lambda$static$7(Lcom/hbm/entity/projectile/EntityBulletBaseMK4;Ljava/lang/Float;)V",
+//        at = @At(value = "HEAD"), remap = false)
+//    private static void RENDER_FLARE(EntityBulletBaseMK4 bullet, Float interp, CallbackInfo ci) {
+//        Utils.EnableFullBrightness();
+//    }
 }
