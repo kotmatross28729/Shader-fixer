@@ -14,14 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MixinRenderGlobal implements IWorldAccess  {
 
     @Inject(method = "drawOutlinedBoundingBox",
-        slice = @Slice(from = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
-            ordinal = 0),
-            to = @At(value = "INVOKE",
-                target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-                ordinal = 3)),
-        at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
+        at = @At(value = "HEAD"))
     private static void drawOutlinedBoundingBox(AxisAlignedBB p_147590_0_, int p_147590_1_, CallbackInfo ci)
     {
         Utils.Fix();

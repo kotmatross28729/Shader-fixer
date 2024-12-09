@@ -99,6 +99,10 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
             ShaderFixerConfig.FixHEEhaders = false;
         }
 
+        if(!loadedMods.contains("rple")) {
+            ShaderFixerConfig.FixRPLECrash = false;
+        }
+
         List<String> mixins = new ArrayList<>();
 
             if (side == MixinEnvironment.Side.CLIENT) {
@@ -168,7 +172,15 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                         }
                     }
                     ShadersFixer.logger.info("Trying to integrate NotEnoughItems mixins...");
-                    if(!oldNEI){
+                    if(ShaderFixerConfig.FixRPLECrash) {
+                        ShadersFixer.logger.error("RPLE detected, using safe version of WorldOverlayRendererMixin...");
+                        if(!oldNEI){
+                            mixins.add("client.NotEnoughItems.client.MixinWorldOverlayRendererSAFE");
+                        } else {
+                            mixins.add("client.NotEnoughItems.client.MixinWorldOverlayRendererSAFELEGACY");
+                        }
+                        ShadersFixer.logger.error("WARNING: fix for GL_LIGHTING and GL_BLEND will NOT work with RPLE");
+                    } else if(!oldNEI){
                         mixins.add("client.NotEnoughItems.client.MixinWorldOverlayRenderer");
                     } else {
                         ShadersFixer.logger.warn("old NEI detected, mixin may be unstable!");

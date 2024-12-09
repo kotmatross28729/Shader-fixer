@@ -17,12 +17,6 @@ import java.util.Random;
 @Mixin(value = RenderEarthCrack.class, priority = 999)
 public abstract class MixinRenderEarthCrack extends Render {
     @Inject(method = "doRender",
-        slice = @Slice(from = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
-            ordinal = 0),
-            to = @At(value = "INVOKE",
-                target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-                ordinal = 0)),
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     public void doRender(EntityEarthCrack entity, double x, double y, double z, float entityYaw, float partialTicks, CallbackInfo ci) {
@@ -30,12 +24,6 @@ public abstract class MixinRenderEarthCrack extends Render {
     }
 
     @Inject(method = "renderLightning",
-        slice = @Slice(from = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
-            ordinal = 0),
-            to = @At(value = "INVOKE",
-                target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-                ordinal = 0)),
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     public void renderLightning(Random rand, Random randPrev, int ticks, int layers, Vec3 src, Vec3 dst, int segments, float intensity, float[] color, float alpha, long seed, CallbackInfo ci) {

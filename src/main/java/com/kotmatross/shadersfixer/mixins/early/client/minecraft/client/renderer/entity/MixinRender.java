@@ -11,17 +11,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = Render.class, priority = 999)
 public class MixinRender {
-    @Inject(method = "func_147906_a",
-        slice = @Slice(from = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
-            ordinal = 0),
-            to = @At(value = "INVOKE",
-                target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-                ordinal = 0)),
-        at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
-    protected void func_147906_a(Entity p_147906_1_, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_, CallbackInfo ci)
-    {
+    @Inject(method = "func_147906_a", at = @At(value = "HEAD"))
+    protected void func_147906_a(Entity p_147906_1_, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_, CallbackInfo ci) {
         Utils.Fix();
     }
 }

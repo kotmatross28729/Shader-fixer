@@ -14,12 +14,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MixinBulletProjectileRenderer implements ProjectileRenderer {
 
     @Inject(method = "render",
-        slice = @Slice(from = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
-            ordinal = 0),
-            to = @At(value = "INVOKE",
-                target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-                ordinal = 0)),
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     public void render(TrackingProjectile projectile, double viewX, double viewY, double viewZ, float partialTicks, CallbackInfo ci) {

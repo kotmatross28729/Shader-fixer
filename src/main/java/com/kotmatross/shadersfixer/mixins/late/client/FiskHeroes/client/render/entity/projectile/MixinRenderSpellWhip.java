@@ -14,12 +14,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = RenderSpellWhip.class, priority = 999)
 public abstract class MixinRenderSpellWhip extends Render {
     @Inject(method = "doRender",
-        slice = @Slice(from = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
-            ordinal = 0),
-            to = @At(value = "INVOKE",
-                target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-                ordinal = 0)),
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     public void doRender(EntitySpellWhip entity, double x, double y, double z, float entityYaw, float partialTicks, CallbackInfo ci) {

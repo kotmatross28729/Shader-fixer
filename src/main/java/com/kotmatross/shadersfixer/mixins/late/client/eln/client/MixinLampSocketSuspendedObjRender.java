@@ -13,8 +13,6 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(value = LampSocketSuspendedObjRender.class, priority = 999)
 public class MixinLampSocketSuspendedObjRender {
-
-    @Shadow(remap = false) private Obj3D obj;
     @Shadow(remap = false) private Obj3D.Obj3DPart socket;
     @Shadow(remap = false) private Obj3D.Obj3DPart chain;
     @Shadow(remap = false) private Obj3D.Obj3DPart base;
@@ -27,7 +25,6 @@ public class MixinLampSocketSuspendedObjRender {
     @Shadow(remap = false) private boolean canSwing = true;
     @Shadow(remap = false) float baseLength;
     @Shadow(remap = false) float chainLength;
-    @Shadow(remap = false) float chainFactor;
 
     /**
      * @author kotmatross

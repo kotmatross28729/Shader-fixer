@@ -12,12 +12,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = com.fiskmods.heroes.client.pack.json.beam.BeamRendererLightning.class, priority = 999)
 public abstract class MixinBeamRendererLightning implements com.fiskmods.heroes.client.pack.json.beam.IBeamRenderer {
     @Inject(method = "render",
-        slice = @Slice(from = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
-            ordinal = 0),
-            to = @At(value = "INVOKE",
-                target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-                ordinal = 0)),
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     public void render(Entity anchor, float width, float height, float beamScale, Long seed, Vec3 src, Vec3 dst, Vec3 color, float opacity0, float opacity1, float scale0, float scale1, float time, float scale, boolean isClientPlayer, boolean isFirstPerson, float partialTicks, CallbackInfo ci) {

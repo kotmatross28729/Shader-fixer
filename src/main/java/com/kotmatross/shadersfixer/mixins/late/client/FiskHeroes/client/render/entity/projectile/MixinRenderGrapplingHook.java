@@ -14,12 +14,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MixinRenderGrapplingHook extends Render {
 
     @Inject(method = "render",
-        slice = @Slice(from = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
-            ordinal = 0),
-            to = @At(value = "INVOKE",
-                target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-                ordinal = 0)),
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     public void render(AbstractEntityGrapplingHook entity, double x, double y, double z, float f, float partialTicks, CallbackInfo ci) {

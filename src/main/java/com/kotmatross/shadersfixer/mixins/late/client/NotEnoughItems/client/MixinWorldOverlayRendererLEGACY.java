@@ -19,7 +19,7 @@ import static org.spongepowered.asm.mixin.injection.At.Shift.AFTER;
 import static org.spongepowered.asm.mixin.injection.At.Shift.BEFORE;
 
 @Fucked @FuckingCursed @FuckingShit
-@Mixin(value = WorldOverlayRenderer.class, priority = 999)
+@Mixin(value = WorldOverlayRenderer.class, priority = 1005)
 public class MixinWorldOverlayRendererLEGACY {
 
     @Inject(method = "renderMobSpawnOverlay",

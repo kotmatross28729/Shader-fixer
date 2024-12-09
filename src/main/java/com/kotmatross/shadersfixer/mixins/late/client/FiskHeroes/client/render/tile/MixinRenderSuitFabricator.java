@@ -13,43 +13,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MixinRenderSuitFabricator extends TileEntitySpecialRenderer {
 
     @Inject(method = "render",
-        slice = @Slice(from = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
-            ordinal = 0),
-            to = @At(value = "INVOKE",
-                target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-                ordinal = 0)),
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     public void render(com.fiskmods.heroes.common.tileentity.TileEntitySuitFabricator tile, double x, double y, double z, float partialTicks, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
-    }
-
-    @Inject(method = "render",
-        slice = @Slice(from = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
-            ordinal = 1),
-            to = @At(value = "INVOKE",
-                target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-                ordinal = 1)),
-        at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
-    public void render2(com.fiskmods.heroes.common.tileentity.TileEntitySuitFabricator tile, double x, double y, double z, float partialTicks, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
-    }
-
-    @Inject(method = "render",
-        slice = @Slice(from = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
-            ordinal = 0),
-            to = @At(value = "INVOKE",
-                target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-                ordinal = 2)),
-        at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
-    public void render3(com.fiskmods.heroes.common.tileentity.TileEntitySuitFabricator tile, double x, double y, double z, float partialTicks, CallbackInfo ci) {
         Utils.EnableFullBrightness();
         Utils.Fix();
     }

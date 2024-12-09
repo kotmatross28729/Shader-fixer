@@ -37,6 +37,8 @@ public class ShaderFixerConfig {
 
     public static boolean FixHEEhaders;
 
+    public static boolean FixRPLECrash;
+
 
     public static boolean TechgunsGoreLogger;
     public static List<String> TechgunsGoreList = new ArrayList<>();
@@ -72,6 +74,9 @@ public class ShaderFixerConfig {
         FixLMMEShaders = config.getBoolean("FixLMMEhaders", categoryShadersfixes, true, "Disables mob rendering in LittleMaidMobEnhanced interaction GUI to fix shaders.");
 
         FixHEEhaders = config.getBoolean("FixHEEhaders", categoryShadersfixes, true, "Fixes rendering errors in HardcoreEnderExpansion mod when using shaders.");
+
+        FixRPLECrash = config.getBoolean("FixRPLECrash", categoryShadersfixes, true, "Fixes crash with RPLE and NEI by using \"safe\" version of NEI mixin.");
+
 
         ElnLightMixins = config.getBoolean("ElnLightMixins", categorytweaks, true, "Slightly modifies the code for rendering the light sprite to avoid an issue with bsl shaders that renders object with full alpha when the object's alpha is close to 0 (below 0.1). Use carefully with new versions, as it calls the old sprite rendering code");
 

@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(value = LampSocketStandardObjRender.class, priority = 999)
 public class MixinLampSocketStandardObjRender {
-    @Shadow(remap = false) private Obj3D obj;
     @Shadow(remap = false) private Obj3D.Obj3DPart socket;
     @Shadow(remap = false) private Obj3D.Obj3DPart socket_unlightable;
     @Shadow(remap = false) private Obj3D.Obj3DPart socket_lightable;

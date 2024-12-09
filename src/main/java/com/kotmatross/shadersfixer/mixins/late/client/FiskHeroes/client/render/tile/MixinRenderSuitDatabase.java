@@ -12,12 +12,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = com.fiskmods.heroes.client.render.tile.RenderSuitDatabase.class, priority = 999)
 public abstract class MixinRenderSuitDatabase extends TileEntitySpecialRenderer {
     @Inject(method = "render",
-        slice = @Slice(from = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
-            ordinal = 0),
-            to = @At(value = "INVOKE",
-                target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-                ordinal = 0)),
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     public void render(TileEntitySuitDatabase tile, double x, double y, double z, float partialTicks, CallbackInfo ci) {
