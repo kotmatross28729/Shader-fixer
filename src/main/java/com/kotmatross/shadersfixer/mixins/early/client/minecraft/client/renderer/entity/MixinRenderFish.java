@@ -13,6 +13,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = RenderFish.class, priority = 999)
 public abstract class MixinRenderFish extends Render {
 
+    //Fish line
+
     @Inject(method = "doRender",
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))

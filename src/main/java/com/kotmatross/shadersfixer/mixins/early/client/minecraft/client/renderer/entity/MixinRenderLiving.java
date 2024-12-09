@@ -12,6 +12,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = RenderLiving.class, priority = 999)
 public abstract class MixinRenderLiving {
 
+    //Leash render
+
     @Inject(method = "func_110827_b",
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))

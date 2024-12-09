@@ -13,6 +13,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = RenderLightningBolt.class, priority = 999)
 public abstract class MixinRenderLightningBolt extends Render {
 
+    //Lightning Bolt
+
     @Inject(method = "doRender(Lnet/minecraft/entity/effect/EntityLightningBolt;DDDFF)V",
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
