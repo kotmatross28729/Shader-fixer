@@ -17,12 +17,6 @@ import static org.spongepowered.asm.mixin.injection.At.Shift.BEFORE;
 public class MixinWorldOverlayRendererSAFELEGACY {
 
     @Inject(method = "renderMobSpawnOverlay",
-        slice = @Slice(from = @At(value = "INVOKE",
-            target = "Lorg/lwjgl/opengl/GL11;glBegin(I)V",
-            ordinal = 0),
-            to = @At(value = "INVOKE",
-                target = "Lorg/lwjgl/opengl/GL11;glEnd()V",
-                ordinal = 0)),
         at = @At(value = "INVOKE",
             target = "Lorg/lwjgl/opengl/GL11;glBegin(I)V"), remap = false)
     private static void renderMobSpawnOverlay(Entity entity, CallbackInfo ci) {
@@ -43,12 +37,6 @@ public class MixinWorldOverlayRendererSAFELEGACY {
     }
 
     @Inject(method = "renderChunkBounds",
-        slice = @Slice(from = @At(value = "INVOKE",
-            target = "Lorg/lwjgl/opengl/GL11;glBegin(I)V",
-            ordinal = 0),
-            to = @At(value = "INVOKE",
-                target = "Lorg/lwjgl/opengl/GL11;glEnd()V",
-                ordinal = 0)),
         at = @At(value = "INVOKE",
             target = "Lorg/lwjgl/opengl/GL11;glBegin(I)V"), remap = false)
     private static void renderChunkBounds(Entity entity, CallbackInfo ci) {

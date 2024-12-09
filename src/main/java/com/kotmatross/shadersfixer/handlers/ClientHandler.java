@@ -25,7 +25,7 @@ import static com.kotmatross.shadersfixer.config.ShaderFixerConfig.enableNotific
 import static com.kotmatross.shadersfixer.config.ShaderFixerConfig.startTicksOffset;
 import static com.kotmatross.shadersfixer.config.ShaderFixerConfig.ticksInterval;
 
-@FuckingCursed @FuckingShit
+@FuckingCursed
 public class ClientHandler {
     public static final ClientHandler INSTANCE = new ClientHandler();
     private final Minecraft mc = FMLClientHandler.instance().getClient();

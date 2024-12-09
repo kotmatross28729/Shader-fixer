@@ -38,12 +38,6 @@ public class MixinRenderMachineForceField {
     }
 
     @Inject(method = "generateSphere",
-        slice = @Slice(from = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
-            ordinal = 0),
-            to = @At(value = "INVOKE",
-                target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-                ordinal = 0)),
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     public void generateSphere(int l, int s, float rad, int hex, CallbackInfo ci) {
@@ -72,12 +66,6 @@ public class MixinRenderMachineForceField {
     }
 
     @Inject(method = "generateSphere2",
-        slice = @Slice(from = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
-            ordinal = 0),
-            to = @At(value = "INVOKE",
-                target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-                ordinal = 0)),
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     public void generateSphere2(int l, int s, float rad, int hex, CallbackInfo ci) {

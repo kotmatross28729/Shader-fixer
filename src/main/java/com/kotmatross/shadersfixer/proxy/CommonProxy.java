@@ -9,6 +9,5 @@ public class CommonProxy {
     public void init(ShadersFixer Tmod)
     {
         mod = Tmod;
-        //EntityRegistry.registerModEntity(EntityLightingFix.class, "EntityLightingFix", entityId++, Tmod, ShaderFixerConfig.LightingFixRange, 16, false);
     }
 }

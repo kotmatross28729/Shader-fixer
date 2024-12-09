@@ -16,6 +16,5 @@ public class ClientProxy extends CommonProxy {
     public void init(ShadersFixer Tmod)
     {
         super.init(Tmod);
-        //RenderingRegistry.registerEntityRenderingHandler(EntityLightingFix.class, new RenderEntityLightingFix());
     }
 }

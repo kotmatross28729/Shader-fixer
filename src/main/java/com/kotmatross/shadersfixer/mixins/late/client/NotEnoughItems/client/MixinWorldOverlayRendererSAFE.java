@@ -17,12 +17,6 @@ import static org.spongepowered.asm.mixin.injection.At.Shift.BEFORE;
 public class MixinWorldOverlayRendererSAFE {
 
     @Inject(method = "renderMobSpawnOverlay",
-        slice = @Slice(from = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
-            ordinal = 0),
-            to = @At(value = "INVOKE",
-                target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-                ordinal = 0)),
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     private static void renderMobSpawnOverlay(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ, CallbackInfo ci) {
@@ -44,12 +38,6 @@ public class MixinWorldOverlayRendererSAFE {
     }
 
     @Inject(method = "renderChunkBounds",
-        slice = @Slice(from = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
-            ordinal = 0),
-            to = @At(value = "INVOKE",
-                target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-                ordinal = 0)),
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     private static void renderChunkBounds(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ, CallbackInfo ci) {

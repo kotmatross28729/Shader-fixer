@@ -2,7 +2,6 @@ package com.kotmatross.shadersfixer.mixins.late.client.NotEnoughItems.client;
 
 import codechicken.nei.WorldOverlayRenderer;
 import com.kotmatross.shadersfixer.Utils;
-import com.kotmatross.shadersfixer.shrimp.nonsense.Fucked;
 import com.kotmatross.shadersfixer.shrimp.nonsense.FuckingCursed;
 import com.kotmatross.shadersfixer.shrimp.nonsense.FuckingShit;
 import net.minecraft.entity.Entity;
@@ -12,23 +11,16 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import static org.spongepowered.asm.mixin.injection.At.Shift.AFTER;
 import static org.spongepowered.asm.mixin.injection.At.Shift.BEFORE;
 
-@Fucked @FuckingCursed @FuckingShit
+@FuckingCursed @FuckingShit
 @Mixin(value = WorldOverlayRenderer.class, priority = 1005)
 public class MixinWorldOverlayRendererLEGACY {
 
     @Inject(method = "renderMobSpawnOverlay",
-        slice = @Slice(from = @At(value = "INVOKE",
-            target = "Lorg/lwjgl/opengl/GL11;glBegin(I)V",
-            ordinal = 0),
-            to = @At(value = "INVOKE",
-                target = "Lorg/lwjgl/opengl/GL11;glEnd()V",
-                ordinal = 0)),
         at = @At(value = "INVOKE",
             target = "Lorg/lwjgl/opengl/GL11;glBegin(I)V"), remap = false)
     private static void renderMobSpawnOverlay(Entity entity, CallbackInfo ci) {
@@ -49,12 +41,6 @@ public class MixinWorldOverlayRendererLEGACY {
     }
 
     @Inject(method = "renderChunkBounds",
-        slice = @Slice(from = @At(value = "INVOKE",
-            target = "Lorg/lwjgl/opengl/GL11;glBegin(I)V",
-            ordinal = 0),
-            to = @At(value = "INVOKE",
-                target = "Lorg/lwjgl/opengl/GL11;glEnd()V",
-                ordinal = 0)),
         at = @At(value = "INVOKE",
             target = "Lorg/lwjgl/opengl/GL11;glBegin(I)V"), remap = false)
     private static void renderChunkBounds(Entity entity, CallbackInfo ci) {

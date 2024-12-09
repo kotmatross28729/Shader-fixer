@@ -22,12 +22,6 @@ public class MixinItemRenderWeaponGlass {
     }
 
     @Inject(method = "renderItem",
-        slice = @Slice(from = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
-            ordinal = 0),
-            to = @At(value = "INVOKE",
-                target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-                ordinal = 0)),
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     public void renderItem2(IItemRenderer.ItemRenderType type, ItemStack item, Object[] data, CallbackInfo ci) {

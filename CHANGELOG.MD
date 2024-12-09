@@ -5,6 +5,9 @@
 * Added a setting to bypass the 30 fps limit in the main menu
 * Fixed Dynamic Surroundings aurora with shaders
 * Fixed Hardcore Ender Expansion  with shaders
+* Added mixin that disables mob rendering in LittleMaidMobEnhanced interaction GUI to fix shaders
+* Fixed crash with RPLE and NEI
+* Optimized code (performance improvements at the measurement error level)
 
 # 3.1
 
