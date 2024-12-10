@@ -365,6 +365,15 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
 
                 }
 
+                if(ShaderFixerConfig.HbmExtendedHazardDescriptions) {
+                    mixins.add("client.hbm.client.descr.MixinHazardTypeAsbestos");
+                    mixins.add("client.hbm.client.descr.MixinHazardTypeBlinding");
+                    mixins.add("client.hbm.client.descr.MixinHazardTypeCoal");
+                    mixins.add("client.hbm.client.descr.MixinHazardTypeExplosive");
+                    mixins.add("client.hbm.client.descr.MixinHazardTypeHot");
+                    mixins.add("client.hbm.client.descr.MixinHazardTypeHydroactive");
+                }
+
                 if (ShaderFixerConfig.FixDSShaders) {
                     ShadersFixer.logger.info("Trying to integrate DynamicSurroundings mixins...");
                     mixins.add("client.DynamicSurroundings.client.MixinAuroraRenderer");

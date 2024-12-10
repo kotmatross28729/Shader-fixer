@@ -29,3 +29,12 @@ kotmatross.endMSG4X=\mixinsEarly.cfg
 kotmatross.endMSG4E= | enableNotifications=false.
 
 kotmatross.endMSG5= (click to open file, requires a restart)
+
+# HbmExtendedHazardDescriptions
+info.template__seconds=second(s)
+trait.danger.level.hydro=Explosion force:
+trait.danger.level.hot=Ignites for:
+trait.danger.level.explosive=Explosion force:
+trait.danger.level.coal=Danger:
+trait.danger.level.blinding=Blinding for:
+trait.danger.level.asbestos=Danger:

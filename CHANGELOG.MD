@@ -8,6 +8,11 @@
 * Added mixin that disables mob rendering in LittleMaidMobEnhanced interaction GUI to fix shaders
 * Fixed crash with RPLE and NEI
 * Optimized code (performance improvements at the measurement error level)
+* Added option for extended tooltips for dangerous items (hbm's ntm)
+  - Asbestos/Coal dust items show how many "units" of dust they emit per tick
+  - Explosive/Hydroactive items show the force of the explosion
+  - Blinding/Pyrophoric items show for how many seconds they blind/ignite
+    - If player has a tungsten reaches, then tooltip for pyrophoric items will be gray and crossed out
 
 # 3.1
 
