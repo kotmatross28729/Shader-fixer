@@ -11,6 +11,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -39,23 +40,10 @@ public class MixinItemRenderer {
     @Unique Minecraft shaders_fixer$mc;
     @Unique float shaders_fixer$swing;
 
-    @Unique
-    protected float shaders_fixer$getSwayMagnitude(ItemStack stack) {
-        return ShadersFixerLateMixins.getGunsSwayMagnitude(stack);
-    }
-    @Unique
-    protected float shaders_fixer$getSwayPeriod(ItemStack stack) {
-        return ShadersFixerLateMixins.getGunsSwayPeriod(stack);
-    }
-    @Unique
-    protected float shaders_fixer$getTurnMagnitude(ItemStack stack) {
-        return ShadersFixerLateMixins.getGunsTurnMagnitude(stack);
-    }
-
     @Inject(method = "renderItemInFirstPerson", at = @At(value = "HEAD"))
     public void renderItemInFirstPerson(float interp, CallbackInfo ci) {
 
-        try {ShadersFixerLateMixins.handleInterpolation(interp);} catch (NoClassDefFoundError ignored){}
+        //try {ShadersFixerLateMixins.handleInterpolation(interp);} catch (NoClassDefFoundError ignored){} GET OUT
 
         //GETTERS
         shaders_fixer$f1 = prevEquippedProgress + (equippedProgress - prevEquippedProgress) * interp;
@@ -64,10 +52,10 @@ public class MixinItemRenderer {
         shaders_fixer$mc = Minecraft.getMinecraft();
         shaders_fixer$player = shaders_fixer$mc.thePlayer;
 
-        shaders_fixer$swayMagnitude = shaders_fixer$getSwayMagnitude(stack);
-        shaders_fixer$swayPeriod = shaders_fixer$getSwayPeriod(stack);
+        shaders_fixer$swayMagnitude = ShadersFixerLateMixins.getGunsSwayMagnitude(stack);
+        shaders_fixer$swayPeriod = ShadersFixerLateMixins.getGunsSwayPeriod(stack);
 
-        shaders_fixer$turnMagnitude = shaders_fixer$getTurnMagnitude(stack);
+        shaders_fixer$turnMagnitude = ShadersFixerLateMixins.getGunsTurnMagnitude(stack);
         shaders_fixer$pitch = shaders_fixer$player.prevRotationPitch + (shaders_fixer$player.rotationPitch - shaders_fixer$player.prevRotationPitch) * interp;
         shaders_fixer$yaw = shaders_fixer$player.prevRotationYaw + (shaders_fixer$player.rotationYaw - shaders_fixer$player.prevRotationYaw) * interp;
 

@@ -14,11 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.lang.annotation.Annotation;
 
 @Mixin(value = ItemRenderDANI.class, priority = 999)
-public class MixinItemRenderDANI implements Vibe {
-    @Override
-    public Class<? extends Annotation> annotationType() {
-        return Vibe.class;
-    }
+public class MixinItemRenderDANI {
 
     @Inject(method = "renderFirstPerson",
         at = @At(value = "INVOKE",

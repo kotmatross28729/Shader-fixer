@@ -2,6 +2,7 @@ package com.kotmatross.shadersfixer.asm;
 
 import com.gtnewhorizon.gtnhmixins.ILateMixinLoader;
 import com.gtnewhorizon.gtnhmixins.LateMixin;
+import com.hbm.config.ClientConfig;
 import com.hbm.items.ModItems;
 import com.hbm.items.weapon.sedna.ItemGunBaseNT;
 import com.hbm.render.item.weapon.sedna.ItemRenderWeaponBase;
@@ -34,6 +35,8 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
     public static boolean oldCCC = false;
 
     public static boolean specjork = false;
+
+    public static boolean ishbmLoaded = false;
 
     @Override
     public List<String> getMixins(Set<String> loadedMods) {
@@ -290,6 +293,8 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                         specjork = false;
                     }
 
+                    ishbmLoaded = Loader.isModLoaded("hbm");
+
                     ShadersFixer.logger.info("Trying to integrate Hbm's NTM mixins...");
                     mixins.add("client.hbm.client.MixinParticleAmatFlash"); //Antimatter explosion
                     mixins.add("client.hbm.client.MixinParticleDebugLine"); //Drone path lines
@@ -361,8 +366,6 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.hbm.client.MixinRenderSolidifier");
                     mixins.add("client.hbm.client.MixinRenderLiquefactor");
 
-
-
                 }
 
                 if(ShaderFixerConfig.HbmExtendedHazardDescriptions) {
@@ -390,16 +393,13 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.HEE.MixinModClientProxy");
                 }
 
-
-
-
             }
 
         return mixins;
     }
 
     public static void handleInterpolation(float interp) {
-        if (Loader.isModLoaded("hbm")) {
+        if (ishbmLoaded) {
             try {
                 ItemRenderWeaponBase.interp = interp;
             } catch (NoSuchFieldError ignored){}
@@ -415,10 +415,23 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
         return invokeHbmRenderGetters(stack, "getTurnMagnitude");
     }
 
+    public static float getGunsBaseFOV(ItemStack stack) {
+        return invokeHbmRenderGetters(stack, "getBaseFOV");
+    }
+
+    public static boolean getFOVConf() {
+        if (ishbmLoaded) {
+            try {
+                return ClientConfig.GUN_MODEL_FOV.get();
+            } catch (NoSuchFieldError ignored){
+            }
+        }
+        return false;
+    }
 
     //Because "protected"
     public static float invokeHbmRenderGetters(ItemStack stack, String name) {
-        if (Loader.isModLoaded("hbm") && stack != null) {
+        if (ishbmLoaded && stack != null) {
             try {
                 IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(stack, IItemRenderer.ItemRenderType.EQUIPPED);
                 if(customRenderer instanceof ItemRenderWeaponBase) {
@@ -428,6 +441,6 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 }
             } catch (Exception ignored) {}
         }
-        return name.equals("getSwayMagnitude") ? 0.5F : name.equals("getSwayPeriod") ? 0.75F : name.equals("getTurnMagnitude") ? 2.75F : 0;
+        return name.equals("getSwayMagnitude") ? 0.5F : name.equals("getSwayPeriod") ? 0.75F : name.equals("getTurnMagnitude") ? 2.75F : name.equals("getBaseFOV") ? 70.0F: 0;
     }
 }

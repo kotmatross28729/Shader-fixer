@@ -13,12 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.lang.annotation.Annotation;
 
 @Mixin(value = ItemRenderAtlas.class, priority = 999)
-public class MixinItemRenderAtlas implements Vibe {
-    @Override
-    public Class<? extends Annotation> annotationType() {
-        return Vibe.class;
-    }
-
+public class MixinItemRenderAtlas  {
     @Inject(method = "renderFirstPerson",
         at = @At(value = "INVOKE",
             target = "Lcom/hbm/render/item/weapon/sedna/ItemRenderAtlas;renderSmokeNodes(Ljava/util/List;D)V",
