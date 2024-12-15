@@ -1,20 +1,15 @@
 package com.kotmatross.shadersfixer.mixins.early.client.minecraft.client.renderer.entity.sedna;
 
 import com.kotmatross.shadersfixer.asm.ShadersFixerLateMixins;
-import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
 import com.kotmatross.shadersfixer.shrimp.Vibe;
 import com.kotmatross.shadersfixer.shrimp.nonsense.FuckingCursed;
 import com.llamalad7.mixinextras.sugar.Local;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
-import org.apache.logging.log4j.LogManager;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -26,7 +21,6 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON;
 
@@ -55,7 +49,7 @@ public class MixinEntityRenderer {
     public void HandleInterp(float interp, int p_78476_2_, CallbackInfo ci)
     {
         if(shaders_fixer$checkVibe()) {
-            try {ShadersFixerLateMixins.handleInterpolation(interp);} catch (NoClassDefFoundError ignored){} //Yeah, I used it in the wrong place
+            try {ShadersFixerLateMixins.handleInterpolation(interp);} catch (NoClassDefFoundError ignored){} //INTERPOLATE FOV (SCOPE)
         }
     }
 

@@ -11,7 +11,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -43,7 +42,7 @@ public class MixinItemRenderer {
     @Inject(method = "renderItemInFirstPerson", at = @At(value = "HEAD"))
     public void renderItemInFirstPerson(float interp, CallbackInfo ci) {
 
-        //try {ShadersFixerLateMixins.handleInterpolation(interp);} catch (NoClassDefFoundError ignored){} GET OUT
+        try {ShadersFixerLateMixins.handleInterpolation(interp);} catch (NoClassDefFoundError ignored){} //INTERPOLATE AIM
 
         //GETTERS
         shaders_fixer$f1 = prevEquippedProgress + (equippedProgress - prevEquippedProgress) * interp;

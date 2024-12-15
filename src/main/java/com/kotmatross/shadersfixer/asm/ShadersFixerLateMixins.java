@@ -3,8 +3,6 @@ package com.kotmatross.shadersfixer.asm;
 import com.gtnewhorizon.gtnhmixins.ILateMixinLoader;
 import com.gtnewhorizon.gtnhmixins.LateMixin;
 import com.hbm.config.ClientConfig;
-import com.hbm.items.ModItems;
-import com.hbm.items.weapon.sedna.ItemGunBaseNT;
 import com.hbm.render.item.weapon.sedna.ItemRenderWeaponBase;
 import com.kotmatross.shadersfixer.ShadersFixer;
 import com.kotmatross.shadersfixer.Tags;
@@ -14,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
-import org.apache.logging.log4j.LogManager;
 import org.spongepowered.asm.mixin.MixinEnvironment;
 
 import java.io.File;
