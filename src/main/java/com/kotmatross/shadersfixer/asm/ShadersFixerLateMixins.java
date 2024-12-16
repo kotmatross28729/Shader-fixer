@@ -103,6 +103,10 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
             ShaderFixerConfig.FixRPLECrash = false;
         }
 
+        if(!loadedMods.contains("angelica")) {
+            ShaderFixerConfig.PatchHBMAngelica = false;
+        }
+
         List<String> mixins = new ArrayList<>();
 
             if (side == MixinEnvironment.Side.CLIENT) {
@@ -384,10 +388,16 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.lmme.MixinGuiInventory");
                 }
                 if (ShaderFixerConfig.FixHEEhaders) {
-                    ShadersFixer.logger.warn("Trying to integrate HardcoreEnderExpansion mixins...");
+                    ShadersFixer.logger.info("Trying to integrate HardcoreEnderExpansion mixins...");
                     mixins.add("client.HEE.MixinRenderBossDragon");
                     mixins.add("client.HEE.MixinRenderWeatherLightningBoltPurple");
                     mixins.add("client.HEE.MixinModClientProxy");
+                }
+
+
+                if (ShaderFixerConfig.PatchHBMAngelica) {
+                    ShadersFixer.logger.info("Trying to integrate Angelica mixins...");
+                    mixins.add("client.angelica.MixinHandRenderer");
                 }
 
             }

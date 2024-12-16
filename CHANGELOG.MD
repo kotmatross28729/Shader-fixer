@@ -2,6 +2,8 @@
 
 * Fixed new Hbm's NTM gun rework with shaders
   - Now all bugs are DEFINITELY fixed (please)
+  - The `/ntmclient set GUN_MODEL_FOV true` command is known to not work with optifine. Also, aiming with the StG 77 (AUG) weapon looks very choppy with optifine (no interpolation). These problems will NOT be fixed, due to the fact that optifine is closed source and applies changes in “patches”, which is why any modification of data changed by optifine is impossible
+    - These problems can be avoided by simply using angelica instead of optifine
 * Added a setting to bypass the 30 fps limit in the main menu
 * Fixed Dynamic Surroundings aurora with shaders
 * Fixed Hardcore Ender Expansion with shaders

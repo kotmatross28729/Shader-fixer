@@ -27,6 +27,8 @@ import static net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED_FI
 @FuckingCursed
 @Mixin(value = EntityRenderer.class, priority = 1003)
 public class MixinEntityRenderer {
+    //FOR VANILLA (NO OPTIFINE/ANGELICA)
+
     //Don't even ask, I don't give a fuck what that means
     @Unique
     public boolean shaders_fixer$checkVibe() {
