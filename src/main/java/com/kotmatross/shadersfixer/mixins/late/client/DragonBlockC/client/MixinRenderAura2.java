@@ -3,7 +3,6 @@ package com.kotmatross.shadersfixer.mixins.late.client.DragonBlockC.client;
 import JinRyuu.DragonBC.common.Npcs.EntityAura2;
 import JinRyuu.DragonBC.common.Npcs.RenderAura2;
 import com.kotmatross.shadersfixer.Utils;
-import net.minecraft.client.renderer.Tessellator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

@@ -1,12 +1,10 @@
 package com.kotmatross.shadersfixer.mixins.late.client.FiskHeroes.client.render.tile;
 
 import com.kotmatross.shadersfixer.Utils;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = com.fiskmods.heroes.client.render.tile.RenderSuitFabricator.class, priority = 999)
