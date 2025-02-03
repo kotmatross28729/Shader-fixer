@@ -106,7 +106,10 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
         if(!loadedMods.contains("angelica")) {
             ShaderFixerConfig.PatchHBMAngelica = false;
         }
-
+        if(!loadedMods.contains("customnpcs")) {
+            ShaderFixerConfig.FixCNPCShaders = false;
+        }
+        
         List<String> mixins = new ArrayList<>();
 
             if (side == MixinEnvironment.Side.CLIENT) {
@@ -341,7 +344,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.hbm.client.MixinRenderRBMKLid"); //Cherenkov radiation
                     mixins.add("client.hbm.client.MixinRenderSiegeCraft"); //4 lights on top
                     mixins.add("client.hbm.client.MixinRenderSiegeLaser"); //UFO projectile
-                    mixins.add("client.hbm.client.MixinRenderSmallReactor"); //Cherenkov radiation, brighter with shaders
+                    mixins.add("client.hbm.client.MixinRenderSmallReactor"); //Cherenkov's radiation, brighter with shaders
                     mixins.add("client.hbm.client.MixinRenderSolarBoiler"); //Rays of light
                     mixins.add("client.hbm.client.MixinRenderSparks"); //Lightning in a breeding reactor/DFC
                     mixins.add("client.hbm.client.MixinRenderSpear"); //Rays of light from the digamma spear
@@ -366,18 +369,17 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.hbm.client.MixinRenderChemical"); //Antimatter thing
                     mixins.add("client.hbm.client.MixinRenderSolidifier");
                     mixins.add("client.hbm.client.MixinRenderLiquefactor");
-
+                    
+                    if(ShaderFixerConfig.HbmExtendedHazardDescriptions) {
+                        mixins.add("client.hbm.client.descr.MixinHazardTypeAsbestos");
+                        mixins.add("client.hbm.client.descr.MixinHazardTypeBlinding");
+                        mixins.add("client.hbm.client.descr.MixinHazardTypeCoal");
+                        mixins.add("client.hbm.client.descr.MixinHazardTypeExplosive");
+                        mixins.add("client.hbm.client.descr.MixinHazardTypeHot");
+                        mixins.add("client.hbm.client.descr.MixinHazardTypeHydroactive");
+                    }
                 }
-
-                if(ShaderFixerConfig.HbmExtendedHazardDescriptions) {
-                    mixins.add("client.hbm.client.descr.MixinHazardTypeAsbestos");
-                    mixins.add("client.hbm.client.descr.MixinHazardTypeBlinding");
-                    mixins.add("client.hbm.client.descr.MixinHazardTypeCoal");
-                    mixins.add("client.hbm.client.descr.MixinHazardTypeExplosive");
-                    mixins.add("client.hbm.client.descr.MixinHazardTypeHot");
-                    mixins.add("client.hbm.client.descr.MixinHazardTypeHydroactive");
-                }
-
+                
                 if (ShaderFixerConfig.FixDSShaders) {
                     ShadersFixer.logger.info("Trying to integrate DynamicSurroundings mixins...");
                     mixins.add("client.DynamicSurroundings.client.MixinAuroraRenderer");
@@ -393,12 +395,19 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.HEE.MixinRenderWeatherLightningBoltPurple");
                     mixins.add("client.HEE.MixinModClientProxy");
                 }
-
-
+                
                 if (ShaderFixerConfig.PatchHBMAngelica) {
                     ShadersFixer.logger.info("Trying to integrate Angelica mixins...");
                     mixins.add("client.angelica.MixinHandRenderer");
                 }
+    
+                if (ShaderFixerConfig.FixCNPCShaders) {
+                    ShadersFixer.logger.info("Trying to integrate CustomNPC mixins...");
+                    mixins.add("client.cnpc.MixinRenderChatMessages");
+                    mixins.add("client.cnpc.MixinRenderNPCInterface");
+                }
+    
+                
 
             }
 

@@ -40,14 +40,13 @@ public class ShaderFixerConfig {
     public static boolean FixRPLECrash;
 
     public static boolean PatchHBMAngelica;
+    
+    public static boolean FixCNPCShaders;
 
     public static boolean TechgunsGoreLogger;
     public static List<String> TechgunsGoreList = new ArrayList<>();
 
     public static boolean ElnLightMixins;
-
-    public static boolean ThaumicConciliumExtraMixins;
-
     public static boolean HbmExtendedHazardDescriptions;
 
     //Category
@@ -75,14 +74,12 @@ public class ShaderFixerConfig {
         FixHbmShaders = config.getBoolean("FixHbmShaders", categoryShadersfixes, true, "Fixes rendering errors in Hbm's NTM mod when using shaders.");
         FixDSShaders = config.getBoolean("FixDSShaders", categoryShadersfixes, true, "Fixes rendering errors in DynamicSurroundings mod when using shaders.");
         FixLMMEShaders = config.getBoolean("FixLMMEhaders", categoryShadersfixes, true, "Disables mob rendering in LittleMaidMobEnhanced interaction GUI to fix shaders.");
-
         FixHEEhaders = config.getBoolean("FixHEEhaders", categoryShadersfixes, true, "Fixes rendering errors in HardcoreEnderExpansion mod when using shaders.");
-
         FixRPLECrash = config.getBoolean("FixRPLECrash", categoryShadersfixes, true, "Fixes crash with RPLE and NEI by using \"safe\" version of NEI mixin.");
-
         PatchHBMAngelica = config.getBoolean("PatchHBMAngelica", categoryShadersfixes, true, "Patches the HandRenderer class to work correctly with Hbm's NTM gun fix.");
-
-
+        FixCNPCShaders = config.getBoolean("FixCNPCShaders", categoryShadersfixes, true, "Fixes rendering errors in CustomNPC mod when using shaders.");
+        
+        
         ElnLightMixins = config.getBoolean("ElnLightMixins", categorytweaks, true, "Slightly modifies the code for rendering the light sprite to avoid an issue with bsl shaders that renders object with full alpha when the object's alpha is close to 0 (below 0.1). Use carefully with new versions, as it calls the old sprite rendering code");
 
         HbmExtendedHazardDescriptions = config.getBoolean("HbmExtendedHazardDescriptions", categorytweaks, true, "Adds additional information to dangerous items [HBM's NTM]");
