@@ -71,10 +71,18 @@ public class ClientHandler {
             if (Loader.isModLoaded("enviromine")) {if (!Loader.instance().getIndexedModList().get("enviromine").getVersion().contains("kotmatross edition")) {EnviroMine = false;}}
             if (Loader.isModLoaded("mo")) {if (!Loader.instance().getIndexedModList().get("mo").getVersion().contains("kotmatross edition")) {MatterMegadrive = false;}}
 //Not my
-            if (Loader.isModLoaded("Avaritia")) { //1 extra point and Double.parseDouble dead
-                double AvaritiaVersionCurrent = Double.parseDouble(Loader.instance().getIndexedModList().get("Avaritia").getVersion());
-                double AvaritiaVersionConst = Double.parseDouble("1.13");
-                if (!(AvaritiaVersionCurrent > AvaritiaVersionConst) ){Avaritia = false;}
+            if (Loader.isModLoaded("Avaritia")) {
+                double AvaritiaVersionCurrent;
+                double AvaritiaVersionConst;
+                        
+
+                try {
+                    AvaritiaVersionCurrent = Double.parseDouble(Loader.instance().getIndexedModList().get("Avaritia").getVersion());
+                    AvaritiaVersionConst = Double.parseDouble("1.13");
+                    if (!(AvaritiaVersionCurrent > AvaritiaVersionConst) ){Avaritia = false;}
+                } catch (NumberFormatException ignored) {
+                    //Аварийный случай для аваритиа
+                }
             }
             if (ShadersFixerLateMixins.oldNEI) {
                 NEI = false;

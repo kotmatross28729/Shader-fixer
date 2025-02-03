@@ -30,7 +30,6 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
 
     public static boolean oldNEI = false;
     public static boolean oldCCC = false;
-
     public static boolean specjork = false;
 
     public static boolean ishbmLoaded = false;
@@ -44,7 +43,6 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
         if(!loadedMods.contains("fiskheroes")) {
             ShaderFixerConfig.FixFisksuperheroesShaders = false;
         }
-
         if(!loadedMods.contains("NotEnoughItems")) {
             ShaderFixerConfig.FixNEIShaders = false;
         }
@@ -57,11 +55,9 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
         if(!loadedMods.contains("zeldaswordskills")) {
             ShaderFixerConfig.FixZeldaSwordSkillsShaders = false;
         }
-
         if(!loadedMods.contains("mcheli")) {
             ShaderFixerConfig.FixMcheliOShaders = false;
         }
-
         if(!loadedMods.contains("rivalrebels")) {
             ShaderFixerConfig.FixRivalRebelsShaders = false;
         }
@@ -77,7 +73,6 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
         if(!loadedMods.contains("ThaumicConcilium")) {
             ShaderFixerConfig.FixThaumicConciliumShaders = false;
         }
-
         if(!loadedMods.contains("OpenComputers")) {
             ShaderFixerConfig.FixOpenComputersShaders = false;
         }
@@ -90,7 +85,6 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
         if(!loadedMods.contains("dsurround")) {
             ShaderFixerConfig.FixDSShaders = false;
         }
-
         if(!loadedMods.contains("lmmx")) {
             ShaderFixerConfig.FixLMMEShaders = false;
         }
@@ -98,11 +92,9 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
         if(!loadedMods.contains("HardcoreEnderExpansion")) {
             ShaderFixerConfig.FixHEEhaders = false;
         }
-
         if(!loadedMods.contains("rple")) {
             ShaderFixerConfig.FixRPLECrash = false;
         }
-
         if(!loadedMods.contains("angelica")) {
             ShaderFixerConfig.PatchHBMAngelica = false;
         }
@@ -147,15 +139,17 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                            String[] NEIVersionCurrent = Loader.instance().getIndexedModList().get("NotEnoughItems").getVersion().split("\\.");
                            String[] NEIVersionConst = "1.0.5.120".split("\\.");
                            for (int pos = 0; pos < (Math.min(NEIVersionCurrent.length, NEIVersionConst.length)); pos++) {
-                               int NEIVersionCurrentPart = Integer.parseInt(NEIVersionCurrent[pos]);
-                               int NEIVersionConstPart = Integer.parseInt(NEIVersionConst[pos]);
-                               if (NEIVersionCurrentPart > NEIVersionConstPart) {
-                                   break;
-                               }
-                               if (NEIVersionCurrentPart < NEIVersionConstPart) {
-                                   oldNEI = true;
-                                   break;
-                               }
+                               try {
+                                   int NEIVersionCurrentPart = Integer.parseInt(NEIVersionCurrent[pos]);
+                                   int NEIVersionConstPart = Integer.parseInt(NEIVersionConst[pos]);
+                                   if (NEIVersionCurrentPart > NEIVersionConstPart) {
+                                       break;
+                                   }
+                                   if (NEIVersionCurrentPart < NEIVersionConstPart) {
+                                       oldNEI = true;
+                                       break;
+                                   }
+                               } catch (NumberFormatException ignored) {}
                            }
                        }
                    }
@@ -166,6 +160,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                             String[] CCCVersionCurrent = Loader.instance().getIndexedModList().get("CodeChickenCore").getVersion().split("\\.");
                             String[] CCCVersionConst = "1.0.7.48".split("\\.");
                             for (int pos = 0; pos < (Math.min(CCCVersionCurrent.length, CCCVersionConst.length)); pos++) {
+                                try {
                                 int CCCVersionCurrentPart = Integer.parseInt(CCCVersionCurrent[pos]);
                                 int CCCVersionConstPart = Integer.parseInt(CCCVersionConst[pos]);
                                 if (CCCVersionCurrentPart > CCCVersionConstPart) {
@@ -175,6 +170,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                                     oldCCC = true;
                                     break;
                                 }
+                                } catch (NumberFormatException ignored) {}
                             }
                         }
                     }
