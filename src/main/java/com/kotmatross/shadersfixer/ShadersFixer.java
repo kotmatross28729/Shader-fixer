@@ -32,11 +32,16 @@ public class ShadersFixer {
 
     public static Configuration config;
     public static final Logger logger = LogManager.getLogger();
-
+    
+    public static boolean IS_ANGELICA_PRESENT = false;
+    
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
+        if(Loader.isModLoaded("angelica")){
+            IS_ANGELICA_PRESENT = true;
+        }
     }
-
+    
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         proxy.registerEvents();

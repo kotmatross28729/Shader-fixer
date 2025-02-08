@@ -11,8 +11,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = RenderBlackHole.class, priority = 999)
 public class MixinRenderBlackHole {
-    
-    
     @Unique
     private static float shaders_fixer$lbx;
     @Unique

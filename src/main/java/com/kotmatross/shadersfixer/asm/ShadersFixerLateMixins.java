@@ -209,6 +209,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 if (ShaderFixerConfig.FixZeldaSwordSkillsShaders) {
                     ShadersFixer.logger.info("Trying to integrate ZeldaSwordSkills mixins...");
                     mixins.add("client.Zeldaswordskills.client.render.entity.MixinRenderEntityWhip");
+                    mixins.add("client.Zeldaswordskills.client.render.entity.MixinRenderEntityHookShot");
                 }
                 if (ShaderFixerConfig.FixMcheliOShaders) {
                     ShadersFixer.logger.info("Trying to integrate Mcheli Overdrive mixins...");

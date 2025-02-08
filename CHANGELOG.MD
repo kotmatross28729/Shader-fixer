@@ -1,3 +1,11 @@
+# 3.3
+
+* **[Hbm's NTM]** Fixed brightness of NTM black holes with angelica shaders
+* **[CustomNPC]** Fixed NPC labels with shaders
+* **[Zeldaswordskills]** Fixed hookshot/clawshot/multishot with shaders
+* Fixed `NumberFormatException` / `NoClassDefFoundError` in rare cases
+
+
 # 3.2
 
 * Fixed new Hbm's NTM gun rework with shaders
