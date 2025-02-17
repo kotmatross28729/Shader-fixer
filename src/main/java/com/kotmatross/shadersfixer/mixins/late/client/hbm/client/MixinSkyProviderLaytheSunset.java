@@ -10,8 +10,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = SkyProviderLaytheSunset.class, priority = 999)
-//@Mixin(targets = "com.hbm.dim.laythe.SkyProviderLaytheSunset")
-
 public class MixinSkyProviderLaytheSunset {
     @Inject(method = "renderSunset",
         at = @At(value = "HEAD"), remap = false)

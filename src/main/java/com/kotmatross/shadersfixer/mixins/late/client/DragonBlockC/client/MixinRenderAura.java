@@ -20,7 +20,6 @@ public class MixinRenderAura {
                 ordinal = 0)),
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
-
     public void renderAura(EntityAura par1Entity, double parX, double parY, double parZ, float par8, float par9,CallbackInfo ci) {
         Utils.Fix();
     }

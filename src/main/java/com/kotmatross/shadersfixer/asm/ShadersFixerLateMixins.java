@@ -310,7 +310,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.hbm.client.MixinItemRenderDetonatorLaser"); //LED on top, sine wave on the side
                     mixins.add("client.hbm.client.MixinItemRendererMeteorSword"); //Lighting glitch in 3rd person view
                     mixins.add("client.hbm.client.MixinItemRenderLibrary"); //Radiation-Powered Engine lights render in hand
-                    mixins.add("client.hbm.client.MixinItemRenderWeaponGlass"); //Model itself, sine wave on the side, brighter sine wave with shaders
+                    mixins.add("client.hbm.client.MixinItemRenderWeaponGlass"); //!Model itself, sine wave on the side, brighter sine wave with shaders
                     mixins.add("client.hbm.client.MixinModelArmorEnvsuit"); //Armor helmet lamps
                     mixins.add("client.hbm.client.MixinRenderBAT9000"); //Liquid inside
                     mixins.add("client.hbm.client.MixinRenderBeam"); //Immolator/ HPP LaserJet projectile
@@ -347,11 +347,11 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.hbm.client.MixinRenderSpear"); //Rays of light from the digamma spear
                     mixins.add("client.hbm.client.MixinRenderOrbus"); //Liquid inside
                     if(specjork) {
-                        mixins.add("client.hbm.client.MixinSkyProviderCelestial");
-                        mixins.add("client.hbm.client.MixinSkyProviderLaytheSunset");
+                        mixins.add("client.hbm.client.MixinSkyProviderCelestial");  //Sky
+                        mixins.add("client.hbm.client.MixinSkyProviderLaytheSunset"); //Sunset
                     }
-                    mixins.add("client.hbm.client.MixinRenderBullet"); //GLASS/TAU
-                    mixins.add("client.hbm.client.MixinRenderRainbow"); //ZOMG
+                    mixins.add("client.hbm.client.MixinRenderBullet"); //!GLASS/TAU
+                    mixins.add("client.hbm.client.MixinRenderRainbow"); //!ZOMG
 
                     mixins.add("client.hbm.client.sedna.MixinLegoClient");
                     mixins.add("client.hbm.client.sedna.MixinModEventHandlerRenderer");

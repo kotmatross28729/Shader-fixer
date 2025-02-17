@@ -1,3 +1,7 @@
+# 3.3 hot-fix
+
+* **[Hbm's NTM:Space]** Fixed crash with new `X5244_H261` update
+
 # 3.3
 
 * **[Hbm's NTM]** Fixed brightness of NTM black holes with angelica shaders
