@@ -1,3 +1,9 @@
+# 3.3 hot-fix-patch-1
+
+* **[Hbm's NTM:Space]** Fixed white square near the sun with angelica shaders
+* **[Hbm's NTM:Space]** Fixed blinding white bar on laythe with Complementary Shaders
+* **[Hbm's NTM:Space]** """Fixed""" eye-ripping black bottom of horizon with Complementary Shaders (only works if player is below ~219 Y)
+
 # 3.3 hot-fix
 
 * **[Hbm's NTM:Space]** Fixed crash with new `X5244_H261` update

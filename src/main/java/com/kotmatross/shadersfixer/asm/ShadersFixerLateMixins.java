@@ -348,7 +348,6 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.hbm.client.MixinRenderOrbus"); //Liquid inside
                     if(specjork) {
                         mixins.add("client.hbm.client.MixinSkyProviderCelestial");  //Sky
-                        mixins.add("client.hbm.client.MixinSkyProviderLaytheSunset"); //Sunset
                     }
                     mixins.add("client.hbm.client.MixinRenderBullet"); //!GLASS/TAU
                     mixins.add("client.hbm.client.MixinRenderRainbow"); //!ZOMG
