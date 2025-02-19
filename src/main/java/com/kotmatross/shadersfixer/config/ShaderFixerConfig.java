@@ -36,9 +36,6 @@ public class ShaderFixerConfig {
     public static boolean FixLMMEShaders;
 
     public static boolean FixHEEhaders;
-
-    public static boolean FixRPLECrash;
-
     public static boolean PatchHBMAngelica;
     
     public static boolean FixCNPCShaders;
@@ -75,7 +72,6 @@ public class ShaderFixerConfig {
         FixDSShaders = config.getBoolean("FixDSShaders", categoryShadersfixes, true, "Fixes rendering errors in DynamicSurroundings mod when using shaders.");
         FixLMMEShaders = config.getBoolean("FixLMMEhaders", categoryShadersfixes, true, "Disables mob rendering in LittleMaidMobEnhanced interaction GUI to fix shaders.");
         FixHEEhaders = config.getBoolean("FixHEEhaders", categoryShadersfixes, true, "Fixes rendering errors in HardcoreEnderExpansion mod when using shaders.");
-        FixRPLECrash = config.getBoolean("FixRPLECrash", categoryShadersfixes, true, "Fixes crash with RPLE and NEI by using \"safe\" version of NEI mixin.");
         PatchHBMAngelica = config.getBoolean("PatchHBMAngelica", categoryShadersfixes, true, "Patches the HandRenderer class to work correctly with Hbm's NTM gun fix.");
         FixCNPCShaders = config.getBoolean("FixCNPCShaders", categoryShadersfixes, true, "Fixes rendering errors in CustomNPC mod when using shaders.");
         

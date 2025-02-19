@@ -26,7 +26,6 @@ public class MixinSkyProviderCelestial {
     // * Find out why complementary doesn’t like alpha shenanigans (sometimes too much, sometimes not at all)
     // * What the hell is going on orbit (if it's even possible)
     
-    
    //Fix sky with shaders
    @Inject(method = "render",
         at = @At(value = "HEAD"), remap = false)

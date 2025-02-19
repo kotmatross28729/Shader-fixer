@@ -11,7 +11,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = ParticleAmatFlash.class, priority = 999)
 public class MixinParticleAmatFlash {
-
+    
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //TODO: find out why not rendered with complementary (although flare (which is the same???) rendered)
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    
     @Inject(method = "func_70539_a",
         at = @At(value = "INVOKE",
             target = "Lorg/lwjgl/opengl/GL11;glDepthMask(Z)V", shift = At.Shift.AFTER), remap = false)
@@ -43,18 +51,4 @@ public class MixinParticleAmatFlash {
     public void func_70539_a1(Tessellator tess, float interp, float x, float y, float z, float tx, float tz, CallbackInfo ci) {
         Utils.EnableFullBrightness();
     }
-
-//    @Inject(method = "func_70539_a",
-//        slice = @Slice(from = @At(value = "INVOKE",
-//            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
-//            ordinal = 0),
-//            to = @At(value = "INVOKE",
-//                target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-//                ordinal = 0)),
-//        at = @At(value = "INVOKE",
-//            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
-//    public void func_70539_a(Tessellator tess, float interp, float x, float y, float z, float tx, float tz, CallbackInfo ci) {
-//        Utils.Fix();
-//    }
-
 }

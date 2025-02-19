@@ -2,14 +2,13 @@ package com.kotmatross.shadersfixer.mixins.late.client.NotEnoughItems.client;
 
 import codechicken.nei.WorldOverlayRenderer;
 import com.kotmatross.shadersfixer.Utils;
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import static org.spongepowered.asm.mixin.injection.At.Shift.AFTER;
@@ -18,6 +17,8 @@ import static org.spongepowered.asm.mixin.injection.At.Shift.BEFORE;
 @Mixin(value = WorldOverlayRenderer.class, priority = 1005)
 public class MixinWorldOverlayRenderer {
 
+    //FOR GTNH NEI
+    
     @Inject(method = "renderMobSpawnOverlay",
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
@@ -69,7 +70,8 @@ public class MixinWorldOverlayRenderer {
     @Unique
     private static boolean shaders_fixer$blendingC;
 
-
+    //GETTERS
+    
     @Inject(method = "renderMobSpawnOverlay", at =  @At(value = "HEAD"), remap = false)
     private static void shaders_fixer$lightingGETM(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ, CallbackInfo ci) {
         shaders_fixer$lightingM = GL11.glGetBoolean(GL11.GL_LIGHTING);
@@ -87,38 +89,39 @@ public class MixinWorldOverlayRenderer {
     private static void shaders_fixer$blendingGETC(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ, CallbackInfo ci) {
         shaders_fixer$blendingC = GL11.glGetBoolean(GL11.GL_BLEND);
     }
-
-    @Redirect(method = "renderMobSpawnOverlay",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V"),
-        require = 1, remap = false)
-    private static void enableLightingM(int cap) {
-        if (cap == GL11.GL_LIGHTING && shaders_fixer$lightingM)
-            GL11.glEnable(cap);
+    
+    //Only enable/disable if it was on/off in first place
+    
+    @WrapWithCondition(
+            method = "renderMobSpawnOverlay",
+            at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 1), remap = false
+    )
+    private static boolean enableLightingM(GL11 instance, int cap) {
+        return shaders_fixer$lightingM;
     }
-    @Redirect(method = "renderMobSpawnOverlay",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V"),
-        require = 1, remap = false)
-    private static void disableBlendingM(int cap) {
-        if (cap == GL11.GL_BLEND && !shaders_fixer$blendingM)
-            GL11.glDisable(cap);
+    
+    @WrapWithCondition(
+            method = "renderMobSpawnOverlay",
+            at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 2), remap = false
+    )
+    private static boolean disableBlendingM(GL11 instance, int cap) {
+        return !shaders_fixer$blendingM;
     }
-
-    @Redirect(method = "renderChunkBounds",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V"),
-        require = 1, remap = false)
-    private static void enableLightingC(int cap) {
-        if (cap == GL11.GL_LIGHTING && shaders_fixer$lightingC)
-            GL11.glEnable(cap);
+    
+    
+    @WrapWithCondition(
+            method = "renderChunkBounds",
+            at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 1), remap = false
+    )
+    private static boolean enableLightingC(GL11 instance, int cap) {
+        return shaders_fixer$lightingC;
     }
-    @Redirect(method = "renderChunkBounds",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V"),
-        require = 1, remap = false)
-    private static void disableBlendingC(int cap) {
-        if (cap == GL11.GL_BLEND && !shaders_fixer$blendingC)
-            GL11.glDisable(cap);
+    
+    @WrapWithCondition(
+            method = "renderChunkBounds",
+            at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 2), remap = false
+    )
+    private static boolean disableBlendingC(GL11 instance, int cap) {
+        return !shaders_fixer$blendingC;
     }
-
-
-
-
 }

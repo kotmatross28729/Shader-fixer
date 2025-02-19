@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+@Deprecated
 @Mixin(value = ItemRenderWeaponGlass.class, priority = 999)
 public class MixinItemRenderWeaponGlass {
 

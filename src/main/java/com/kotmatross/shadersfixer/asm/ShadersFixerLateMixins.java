@@ -88,12 +88,8 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
         if(!loadedMods.contains("lmmx")) {
             ShaderFixerConfig.FixLMMEShaders = false;
         }
-
         if(!loadedMods.contains("HardcoreEnderExpansion")) {
             ShaderFixerConfig.FixHEEhaders = false;
-        }
-        if(!loadedMods.contains("rple")) {
-            ShaderFixerConfig.FixRPLECrash = false;
         }
         if(!loadedMods.contains("angelica")) {
             ShaderFixerConfig.PatchHBMAngelica = false;
@@ -175,15 +171,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                         }
                     }
                     ShadersFixer.logger.info("Trying to integrate NotEnoughItems mixins...");
-                    if(ShaderFixerConfig.FixRPLECrash) {
-                        ShadersFixer.logger.error("RPLE detected, using safe version of WorldOverlayRendererMixin...");
-                        if(!oldNEI){
-                            mixins.add("client.NotEnoughItems.client.MixinWorldOverlayRendererSAFE");
-                        } else {
-                            mixins.add("client.NotEnoughItems.client.MixinWorldOverlayRendererSAFELEGACY");
-                        }
-                        ShadersFixer.logger.error("WARNING: fix for GL_LIGHTING and GL_BLEND will NOT work with RPLE");
-                    } else if(!oldNEI){
+                    if(!oldNEI){
                         mixins.add("client.NotEnoughItems.client.MixinWorldOverlayRenderer");
                     } else {
                         ShadersFixer.logger.warn("old NEI detected, mixin may be unstable!");
@@ -213,10 +201,9 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 }
                 if (ShaderFixerConfig.FixMcheliOShaders) {
                     ShadersFixer.logger.info("Trying to integrate Mcheli Overdrive mixins...");
-                    //mixins.add("client.mchelio.MixinMCH_Gui"); //x
-                    mixins.add("client.mchelio.MixinMCH_GuiTargetMarker"); //?
-                    mixins.add("client.mchelio.MixinMCH_HudItem"); //?
-                    mixins.add("client.mchelio.MixinMCH_RenderAircraft"); //<--
+                    mixins.add("client.mchelio.MixinMCH_GuiTargetMarker");
+                    mixins.add("client.mchelio.MixinMCH_HudItem");
+                    mixins.add("client.mchelio.MixinMCH_RenderAircraft");
                 }
                 if (ShaderFixerConfig.FixRivalRebelsShaders) {
                     ShadersFixer.logger.info("Trying to integrate Rival Rebels mixins...");
@@ -266,7 +253,6 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.ThaumicConcilium.client.MixinMaterialPeelerRenderer");
                     mixins.add("client.ThaumicConcilium.client.MixinQuicksilverElementalRenderer");
                     mixins.add("client.ThaumicConcilium.client.MixinRiftRenderer");
-                    //mixins.add("client.ThaumicConcilium.client.MixinShaderCallback");
                 }
                 if (ShaderFixerConfig.FixOpenComputersShaders) {
                     ShadersFixer.logger.info("Trying to integrate OpenComputers mixins...");
