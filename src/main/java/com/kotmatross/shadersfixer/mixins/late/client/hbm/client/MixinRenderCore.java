@@ -25,6 +25,7 @@ public class MixinRenderCore {
         Utils.Fix();
     }
 
+    //TODO: check if need program fix
     @Inject(method = "renderFlare",
         at = @At(value = "HEAD"), remap = false)
     public void renderFlare(TileEntityCore core, CallbackInfo ci) {

@@ -1,5 +1,6 @@
 package com.kotmatross.shadersfixer;
 
+import net.coderbot.iris.gl.program.Program;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.util.ResourceLocation;
@@ -76,12 +77,16 @@ public class Utils {
      *    }
      */
     public static int GLGetCurrentProgram() {
-            return GL11.glGetInteger(GL20.GL_CURRENT_PROGRAM);
+        return GL11.glGetInteger(GL20.GL_CURRENT_PROGRAM);
     }
     public static void GLUseDefaultProgram() {
-            GL20.glUseProgram(0);
+        if(ShadersFixer.IS_ANGELICA_PRESENT) {
+            Program.unbind();   //For angelica, same glUseProgram(0), but also clears uniforms and samplers
+        } else {
+            GL20.glUseProgram(0);   //For optifine
+        }
     }
     public static void GLUseProgram(int program) {
-            GL20.glUseProgram(program);
+        GL20.glUseProgram(program);
     }
 }

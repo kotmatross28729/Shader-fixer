@@ -24,6 +24,9 @@ A mod that adds more compatibility with shaders.
 + **15) HBM's NTM**
 + **16) Dynamic Surroundings**
 + **17) Hardcore Ender Expansion**
++ **18) CustomNPC**
+
+* And also some QOL changes (can be found in the configs)
 
 # Credits:
 

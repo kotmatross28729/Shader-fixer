@@ -16,6 +16,8 @@ import static org.spongepowered.asm.mixin.injection.At.Shift.BEFORE;
 
 @Mixin(value = CosmicItemRenderer.class, priority = 999)
 public class MixinCosmicItemRenderer {
+    //!Not working with angelica
+    
     @Unique
     public int shaders_fixer$program; // Делей программ
 

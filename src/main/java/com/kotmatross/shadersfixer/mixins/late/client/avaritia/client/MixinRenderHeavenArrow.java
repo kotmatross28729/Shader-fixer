@@ -11,6 +11,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = RenderHeavenArrow.class, priority = 999)
 public class MixinRenderHeavenArrow {
+    //!Not working with angelica
+    
     @Unique
     public float shaders_fixer$lbx;
     @Unique

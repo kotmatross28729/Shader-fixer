@@ -57,7 +57,7 @@ dependencies {
 	compileOnly name: 'LittleMaidMobEnhanced-1.7.10-1.4.4'
 	compileOnly name: 'HardcoreEnderExpansion-1.11.3-GTNH'
     compileOnly name: 'rple-mc1.7.10-1.3.5-dev'
-    compileOnly name: 'angelica-1.0.0-beta26-dev'
+    compileOnly name: 'angelica-1.0.0-beta35-dev'
     compileOnly name: 'CustomNPC-Plus-1.9.3-dev'
     
     compileOnly fileTree(dir: 'libs', include: '*.jar')

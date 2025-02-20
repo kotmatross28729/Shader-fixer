@@ -14,6 +14,8 @@ import static org.spongepowered.asm.mixin.injection.At.Shift.BEFORE;
 
 @Mixin(value = ModelArmorInfinity.class, priority = 999)
 public class MixinModelArmorInfinity {
+    //!Not working with angelica
+    
     @Unique
     public int shaders_fixer$program;
     @Unique

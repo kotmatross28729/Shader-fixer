@@ -1,7 +1,7 @@
 kotmatross.SF=[Shader fixer]: 
 
 kotmatross.depr0=Обнаружена старая версия 
-kotmatross.depr1= рекомендуем обновится до
+kotmatross.depr1= ,рекомендуем обновится до
 kotmatross.fork= последней версии его форка
 
 kotmatross.Lightsabers=Advanced Lightsabers
@@ -26,7 +26,7 @@ kotmatross.endMSG4S=\shadersfixer
 kotmatross.endMSG4X=\mixinsEarly.cfg
 kotmatross.endMSG4E= | enableNotifications=false.
 
-kotmatross.endMSG5= (нажмите чтобы открыть файл, требует перезапуск)
+kotmatross.endMSG5= (нажмите чтобы открыть файл, требуется перезапуск)
 
 # HbmExtendedHazardDescriptions
 info.template__seconds=секунд(ы)

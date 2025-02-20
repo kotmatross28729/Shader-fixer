@@ -4,6 +4,9 @@ import net.irisshaders.iris.api.v0.IrisApi;
 
 public class AngelicaUtils {
 	public static boolean isShaderEnabled() {
-		return IrisApi.getInstance().isShaderPackInUse();
+		if(ShadersFixer.IS_ANGELICA_PRESENT) {
+			return IrisApi.getInstance().isShaderPackInUse();
+		}
+		return false;
 	}
 }

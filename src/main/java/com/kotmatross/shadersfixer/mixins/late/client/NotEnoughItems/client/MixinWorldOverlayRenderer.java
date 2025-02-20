@@ -96,7 +96,7 @@ public class MixinWorldOverlayRenderer {
             method = "renderMobSpawnOverlay",
             at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 1), remap = false
     )
-    private static boolean enableLightingM(GL11 instance, int cap) {
+    private static boolean enableLightingM(int cap) {
         return shaders_fixer$lightingM;
     }
     
@@ -104,7 +104,7 @@ public class MixinWorldOverlayRenderer {
             method = "renderMobSpawnOverlay",
             at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 2), remap = false
     )
-    private static boolean disableBlendingM(GL11 instance, int cap) {
+    private static boolean disableBlendingM(int cap) {
         return !shaders_fixer$blendingM;
     }
     
@@ -113,7 +113,7 @@ public class MixinWorldOverlayRenderer {
             method = "renderChunkBounds",
             at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 1), remap = false
     )
-    private static boolean enableLightingC(GL11 instance, int cap) {
+    private static boolean enableLightingC(int cap) {
         return shaders_fixer$lightingC;
     }
     
@@ -121,7 +121,7 @@ public class MixinWorldOverlayRenderer {
             method = "renderChunkBounds",
             at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 2), remap = false
     )
-    private static boolean disableBlendingC(GL11 instance, int cap) {
+    private static boolean disableBlendingC(int cap) {
         return !shaders_fixer$blendingC;
     }
 }

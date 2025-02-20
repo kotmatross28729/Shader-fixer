@@ -33,8 +33,7 @@ public class MixinHandRenderer {
 
 
     @Inject(method = "setupGlState", at = @At(value = "HEAD"), remap = false)
-    public void HandleInterp(RenderGlobal gameRenderer, Camera camera, float tickDelta, CallbackInfo ci)
-    {
+    public void HandleInterp(RenderGlobal gameRenderer, Camera camera, float tickDelta, CallbackInfo ci) {
         if(shaders_fixer$checkVibe()) {
             try {ShadersFixerLateMixins.handleInterpolation(tickDelta);} catch (NoClassDefFoundError ignored){} //INTERPOLATE FOV (SCOPE)
         }
@@ -48,7 +47,5 @@ public class MixinHandRenderer {
         }
         return false;
     }
-
-
-
+    
 }

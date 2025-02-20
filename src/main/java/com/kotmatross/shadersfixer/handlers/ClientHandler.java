@@ -3,7 +3,6 @@ package com.kotmatross.shadersfixer.handlers;
 import com.kotmatross.shadersfixer.Tags;
 import com.kotmatross.shadersfixer.asm.ShadersFixerLateMixins;
 import com.kotmatross.shadersfixer.shrimp.nonsense.FuckingCursed;
-import com.kotmatross.shadersfixer.shrimp.nonsense.FuckingShit;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -21,7 +20,6 @@ import net.minecraft.world.World;
 
 import java.io.File;
 
-import static com.kotmatross.shadersfixer.config.ShaderFixerConfig.enableNotifications;
 import static com.kotmatross.shadersfixer.config.ShaderFixerConfig.startTicksOffset;
 import static com.kotmatross.shadersfixer.config.ShaderFixerConfig.ticksInterval;
 
@@ -61,7 +59,6 @@ public class ClientHandler {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public void onClientTick(TickEvent.ClientTickEvent event) {
-        if(enableNotifications) {
 //My
             if (Loader.isModLoaded("lightsabers")) {if (!Loader.instance().getIndexedModList().get("lightsabers").getVersion().contains("kotmatross edition")) {Lightsabers = false;}}
             if (Loader.isModLoaded("Neat")) {if (!Loader.instance().getIndexedModList().get("Neat").getVersion().contains("kotmatross edition")) {Neat = false;}}
@@ -248,7 +245,6 @@ public class ClientHandler {
                         WasLoadedEndMSG = true;
                 }
             }
-        }
         WasLoadedEndMSG = false;
     }
 }

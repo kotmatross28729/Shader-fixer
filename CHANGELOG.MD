@@ -1,3 +1,11 @@
+# 3.3 hot-fix-patch-2
+
+* **[Hbm's NTM]** (Finally) fixed antimatter explosion not rendered with Complementary Shaders
+* **[Hbm's NTM]** Fixed mirror rays (for solar boiler) not rendered with angelica shaders (may flicker a little - this is normal)
+* **[Hbm's NTM]** Fixed Cherenkov radiation not rendered on the research reactor with angelica shaders
+* **[Hbm's NTM]** Fixed Cherenkov radiation not rendered on the demon lamp with Complementary Shaders 
+* **[Hbm's NTM]** Fixed DFC explosion rendering with angelica shaders
+
 # 3.3 hot-fix-patch-1
 
 * **[Hbm's NTM:Space]** Fixed white square near the sun with angelica shaders
@@ -37,12 +45,12 @@
 # 3.1
 
 * Complete HBM's NTM fix
-  * also improve some visuals with shaders
+  * Also improve some visuals with shaders
 
 # 3.0
 
 * Fix lighting bug in NEI
-   - It also made it much brighter (side effect? actually using vanilla render so it looks like vanilla (and in vanilla it very bright))
+   - It also made it much brighter (side effect? actually using vanilla render, so it looks like vanilla (and in vanilla it very bright))
    - Also optimize `renderMobSpawnOverlay` fix when using the original NEI
 
 
@@ -51,7 +59,6 @@
 
 * Fixed a bug where the NEI overlay was causing some rendering to appear gray
     - For example: world tooltips, neat, schematica, etc.
-
 
 
 * Fixed almost all bugs in HBM's NTM
