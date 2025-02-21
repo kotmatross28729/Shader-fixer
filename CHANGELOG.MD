@@ -1,3 +1,9 @@
+# 3.3 hot-fix-patch-3
+
+* **[Hbm's NTM:Space]** Fixed sunset not rendered with angelica shaders
+* **[Hbm's NTM:Space]** Fixed GL state leak on laythe (sunset) when opening the angelica shaders menu
+  * Due to the use of a different blend function, the laythe sunset looks different (in any case, better than that horror without blend)
+
 # 3.3 hot-fix-patch-2
 
 * **[Hbm's NTM]** (Finally) fixed antimatter explosion not rendered with Complementary Shaders

@@ -334,6 +334,8 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.hbm.client.MixinRenderOrbus"); //Liquid inside
                     if(specjork) {
                         mixins.add("client.hbm.client.MixinSkyProviderCelestial");  //Sky
+                        mixins.add("client.hbm.client.MixinSkyProviderLaytheSunset");
+                        mixins.add("client.hbm.client.MixinSkyProviderOrbit");  //Sky but orbit
                     }
                     mixins.add("client.hbm.client.MixinRenderBullet"); //!GLASS/TAU
                     mixins.add("client.hbm.client.MixinRenderRainbow"); //!ZOMG
@@ -388,9 +390,6 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.cnpc.MixinRenderChatMessages");
                     mixins.add("client.cnpc.MixinRenderNPCInterface");
                 }
-    
-                
-
             }
 
         return mixins;

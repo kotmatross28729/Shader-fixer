@@ -12,6 +12,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -22,38 +23,45 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinSkyProviderCelestial {
     //FOR NTM:SPACE
     
-    //TODO: 
-    // * Find out why complementary doesn’t like alpha shenanigans (sometimes too much, sometimes not at all)
-    // * What the hell is going on orbit (if it's even possible)
-    
    //Fix sky with shaders
    @Inject(method = "render",
         at = @At(value = "HEAD"), remap = false)
     public void render(float partialTicks, WorldClient world, Minecraft mc, CallbackInfo ci) {
         Utils.Fix2();
     }
+
+    @Unique
+    public int shaders_fixer$programSUNSET;
+    
+    @Inject(method = "render",
+            at = @At(value = "INVOKE",
+                    target = "Lcom/hbm/dim/SkyProviderCelestial;renderSunset(FLnet/minecraft/client/multiplayer/WorldClient;Lnet/minecraft/client/Minecraft;)V", shift = At.Shift.BEFORE)
+    , remap = false)
+    public void SunsetOPERATION(float partialTicks, WorldClient world, Minecraft mc, CallbackInfo ci) {
+        shaders_fixer$programSUNSET = Utils.GLGetCurrentProgram();
+        Utils.GLUseDefaultProgram();
+    }
+    
+    @Inject(method = "render",
+            at = @At(value = "INVOKE",
+                    target = "Lcom/hbm/dim/SkyProviderCelestial;renderSunset(FLnet/minecraft/client/multiplayer/WorldClient;Lnet/minecraft/client/Minecraft;)V", shift = At.Shift.AFTER)
+    , remap = false)
+    public void SunsetOPERATION2(float partialTicks, WorldClient world, Minecraft mc, CallbackInfo ci) {
+        Utils.GLUseProgram(shaders_fixer$programSUNSET);
+    }
+    
     
     @Redirect(method = "render",
             at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glColor4f(FFFF)V", ordinal = 1), remap = false)
     private void transformGLColor(float r, float g, float b, float a) {
-      float alpha = a;
-      
-      //Because with shaders: alpha < 0.1 = full alpha, alpha > 1 = you can go blind
-      if(AngelicaUtils.isShaderEnabled()) {
-          alpha = MathHelper.clamp_float(alpha, 0.1F, 1.0F);
-      }
-       
-       GL11.glColor4f(r, g, b, alpha);
-    }
-    
-    //Disable sunset (bugged with complementary - blinding white bar)
-    @WrapWithCondition(
-            method = "render",
-            at = @At(value = "INVOKE", target = "Lcom/hbm/dim/SkyProviderCelestial;renderSunset(FLnet/minecraft/client/multiplayer/WorldClient;Lnet/minecraft/client/Minecraft;)V")
-            , remap = false
-    )
-    private boolean disableSunset(SkyProviderCelestial instance, float partialTicks, WorldClient world, Minecraft mc) {
-        return !AngelicaUtils.isShaderEnabled();
+        float alpha = a;
+        
+        //Because with shaders: alpha < 0.1 = full alpha, alpha > 1 = you can go blind
+        if(AngelicaUtils.isShaderEnabled()) {
+            alpha = MathHelper.clamp_float(alpha, 0.1F, 1.0F);
+        }
+        
+        GL11.glColor4f(r, g, b, alpha);
     }
     
     //!DIRTY HACK
