@@ -1,3 +1,14 @@
+# 3.3 hot-fix-patch-4
+
+*Yeah, I'm too lazy to change 3.3 to 3.4, that's why we now have patches (awhile)*
+
+* **[Hbm's NTM:Space]** Fixed incorrect rendering of an orbiting planet in orbit (space station) (appearing translucent / cut in half / wrong colors, etc.)
+* **[Hbm's NTM]** Fixed DFC core flare rendering (meltdown with High Energy Field Jammer) with Complementary Shaders
+* **[Hbm's NTM]** Fixed Cherenkov radiation not rendered on the RBMK fuel rod with Complementary Shaders
+  * For some reason, after NTM optimization update, there is no Cherenkov radiation effect (`lastFluxQuantity` broken?)
+* **[Hbm's NTM]** Fixed flare (projectile) brightness with angelica shaders
+* **[Hbm's NTM]** Fixed ICF/PWR Controller marker GL state leak with angelica
+
 # 3.3 hot-fix-patch-3
 
 * **[Hbm's NTM:Space]** Fixed sunset not rendered with angelica shaders

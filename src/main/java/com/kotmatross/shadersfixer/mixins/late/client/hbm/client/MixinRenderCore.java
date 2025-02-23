@@ -4,6 +4,7 @@ import com.hbm.render.tileentity.RenderCore;
 import com.hbm.tileentity.machine.TileEntityCore;
 import com.kotmatross.shadersfixer.Utils;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -24,13 +25,30 @@ public class MixinRenderCore {
         Utils.EnableFullBrightness();
         Utils.Fix();
     }
-
-    //TODO: check if need program fix
+    
     @Inject(method = "renderFlare",
         at = @At(value = "HEAD"), remap = false)
     public void renderFlare(TileEntityCore core, CallbackInfo ci) {
         Utils.EnableFullBrightness();
         Utils.Fix();
+    }
+    
+    @Unique
+    public int shaders_fixer$program;
+    
+    @Inject(method = "renderFlare",
+            at = @At(value = "INVOKE",
+                    target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V", shift = At.Shift.BEFORE))
+    public void renderFlarePR(TileEntityCore core, CallbackInfo ci) {
+        shaders_fixer$program = Utils.GLGetCurrentProgram();
+        Utils.GLUseDefaultProgram();
+    }
+    
+    @Inject(method = "renderFlare",
+            at = @At(value = "INVOKE",
+                    target = "Lnet/minecraft/client/renderer/Tessellator;draw()I", shift = At.Shift.AFTER))
+    public void renderFlarePRE(TileEntityCore core, CallbackInfo ci) {
+        Utils.GLUseProgram(shaders_fixer$program);
     }
 
 }

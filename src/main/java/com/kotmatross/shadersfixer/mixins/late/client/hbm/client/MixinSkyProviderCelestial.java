@@ -1,6 +1,8 @@
 package com.kotmatross.shadersfixer.mixins.late.client.hbm.client;
 
+import com.hbm.dim.CelestialBody;
 import com.hbm.dim.SkyProviderCelestial;
+import com.hbm.dim.SolarSystem;
 import com.kotmatross.shadersfixer.AngelicaUtils;
 import com.kotmatross.shadersfixer.Utils;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
@@ -19,11 +21,14 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.List;
+
 @Mixin(value = SkyProviderCelestial.class, priority = 999)
 public class MixinSkyProviderCelestial {
-    //FOR NTM:SPACE
-    
-   //Fix sky with shaders
+    // FOR NTM:SPACE
+    //!Sensitive to changes
+
+    // Fix sky with shaders
    @Inject(method = "render",
         at = @At(value = "HEAD"), remap = false)
     public void render(float partialTicks, WorldClient world, Minecraft mc, CallbackInfo ci) {
@@ -158,5 +163,60 @@ public class MixinSkyProviderCelestial {
     private boolean disableDraw(Tessellator instance) {
         return !AngelicaUtils.isShaderEnabled();
     }
+    
+    
+    /**
+     *  All these WrapWithConditions are aimed at removing this block of code:
+     *  <pre>
+     *  {@code
+     * tessellator.func_78382_b();
+     * tessellator.func_78374_a(-size, 100.0, -size, 0.0, 0.0);
+     * tessellator.func_78374_a(size, 100.0, -size, 1.0, 0.0);
+     * tessellator.func_78374_a(size, 100.0, size, 1.0, 1.0);
+     * tessellator.func_78374_a(-size, 100.0, size, 0.0, 1.0);
+     * tessellator.func_78381_a();
+     *  }
+     * </pre>
+     *  If angelica shaders are enabled AND rendering planet is on orbit
+     */
+    
+    @Unique
+    public CelestialBody shaders_fixer$GET_IS_ORBIT;
+    
+    @Inject(method = "renderCelestials",
+            at = @At(value = "HEAD"), remap = false
+    )
+    public void GET_ORBIT(float partialTicks, WorldClient world, Minecraft mc, List<SolarSystem.AstroMetric> metrics, float celestialAngle, CelestialBody tidalLockedBody, Vec3 planetTint, float visibility, float blendAmount, CelestialBody orbiting, float maxSize, CallbackInfo ci) {
+        shaders_fixer$GET_IS_ORBIT = orbiting;
+    }
+    
+    @WrapWithCondition(
+            method = "renderCelestials",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V", ordinal = 2)
+    )
+    private boolean disableStartDrawingQuadsORBIT(Tessellator instance) {
+        return !AngelicaUtils.isShaderEnabled() || (shaders_fixer$GET_IS_ORBIT == null);
+    }
+    
+    @WrapWithCondition(method = "renderCelestials",
+            slice = @Slice(from = @At(value = "INVOKE",
+                    target = "Lnet/minecraft/client/renderer/Tessellator;addVertexWithUV(DDDDD)V",
+                    ordinal = 8),
+                    to = @At(value = "INVOKE",
+                            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
+                            ordinal = 2)),
+            at = @At(value = "INVOKE",
+                    target = "Lnet/minecraft/client/renderer/Tessellator;addVertexWithUV(DDDDD)V"))
+    private boolean disableAddVertexWithUVORBIT(Tessellator instance, double p_78377_1_, double p_78377_3_, double p_78377_5_, double p_78374_7_, double p_78374_9_) {
+        return !AngelicaUtils.isShaderEnabled() || (shaders_fixer$GET_IS_ORBIT == null);
+    }
+    @WrapWithCondition(
+            method = "renderCelestials",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;draw()I", ordinal = 2)
+    )
+    private boolean disableDrawORBIT(Tessellator instance) {
+        return !AngelicaUtils.isShaderEnabled() || (shaders_fixer$GET_IS_ORBIT == null);
+    }
 }
+
 
