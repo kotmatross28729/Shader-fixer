@@ -296,7 +296,6 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.hbm.client.MixinItemRenderDetonatorLaser"); //LED on top, sine wave on the side
                     mixins.add("client.hbm.client.MixinItemRendererMeteorSword"); //Lighting glitch in 3rd person view
                     mixins.add("client.hbm.client.MixinItemRenderLibrary"); //Radiation-Powered Engine lights render in hand
-                    mixins.add("client.hbm.client.MixinItemRenderWeaponGlass"); //!Model itself, sine wave on the side, brighter sine wave with shaders
                     mixins.add("client.hbm.client.MixinModelArmorEnvsuit"); //Armor helmet lamps
                     mixins.add("client.hbm.client.MixinRenderBAT9000"); //Liquid inside
                     mixins.add("client.hbm.client.MixinRenderBeam"); //Immolator/ HPP LaserJet projectile
@@ -350,8 +349,14 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.hbm.client.sedna.guns.MixinItemRenderMareslegAkimbo");
 
                     mixins.add("client.hbm.client.MixinRenderChemical"); //Antimatter thing
-                    mixins.add("client.hbm.client.MixinRenderSolidifier");
-                    mixins.add("client.hbm.client.MixinRenderLiquefactor");
+                    mixins.add("client.hbm.client.MixinRenderSolidifier"); //Liquid inside
+                    mixins.add("client.hbm.client.MixinRenderLiquefactor"); //Liquid inside
+    
+                    mixins.add("client.hbm.client.MixinRenderRefueler");
+                    mixins.add("client.hbm.client.MixinModelNo9"); //Lamp
+                    mixins.add("client.hbm.client.MixinRenderCharger"); //Lamp
+                    mixins.add("client.hbm.client.MixinRenderFurnaceSteel"); //Heat thing
+                    mixins.add("client.hbm.client.MixinModelArmorWingsPheo"); //idk
                     
                     if(ShaderFixerConfig.HbmExtendedHazardDescriptions) {
                         mixins.add("client.hbm.client.descr.MixinHazardTypeAsbestos");

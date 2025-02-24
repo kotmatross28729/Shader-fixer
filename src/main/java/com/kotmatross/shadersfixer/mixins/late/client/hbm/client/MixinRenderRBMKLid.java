@@ -3,6 +3,7 @@ package com.kotmatross.shadersfixer.mixins.late.client.hbm.client;
 import com.hbm.render.tileentity.RenderRBMKLid;
 import com.kotmatross.shadersfixer.Utils;
 import net.minecraft.tileentity.TileEntity;
+import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -27,8 +28,6 @@ public class MixinRenderRBMKLid {
         return 0.4F;
     }
     
-    
-    //TODO: check if need glDepthMask disabled
     @Unique
     public int shaders_fixer$program;
     
@@ -38,6 +37,7 @@ public class MixinRenderRBMKLid {
     public void func_147500_aPR(TileEntity te, double x, double y, double z, float i, CallbackInfo ci) {
         shaders_fixer$program = Utils.GLGetCurrentProgram();
         Utils.GLUseDefaultProgram();
+        GL11.glDepthMask(false);
     }
     
     @Inject(method = "func_147500_a",
@@ -45,6 +45,7 @@ public class MixinRenderRBMKLid {
                     target = "Lnet/minecraft/client/renderer/Tessellator;draw()I", shift = At.Shift.AFTER))
     public void func_147500_aPRE(TileEntity te, double x, double y, double z, float i, CallbackInfo ci) {
         Utils.GLUseProgram(shaders_fixer$program);
+        GL11.glDepthMask(true);
     }
     
 }

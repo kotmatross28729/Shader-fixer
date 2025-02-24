@@ -1,3 +1,12 @@
+# 3.3 hot-fix-patch-5
+*Last patch (I hope)*
+
+* **[Hbm's NTM:Space]** Completely fixed horizon/sunset with angelica shaders
+* **[Hbm's NTM]** Fixed rendering of refueler liquid with angelica shaders (liquid was rendered under refueler, without clip)
+* **[Hbm's NTM]** Fixed lamp on the miner's helmet with angelica shaders
+* **[Hbm's NTM]** Fixed lamp on the charger with angelica shaders
+* **[Hbm's NTM]** Fixed fire rendering in a steel furnace with angelica shaders
+
 # 3.3 hot-fix-patch-4
 
 *Yeah, I'm too lazy to change 3.3 to 3.4, that's why we now have patches (awhile)*

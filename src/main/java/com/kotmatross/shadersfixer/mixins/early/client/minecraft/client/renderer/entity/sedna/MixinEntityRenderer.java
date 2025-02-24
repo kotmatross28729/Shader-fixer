@@ -48,8 +48,7 @@ public class MixinEntityRenderer {
 
 
     @Inject(method = "renderHand", at = @At(value = "HEAD"))
-    public void HandleInterp(float interp, int p_78476_2_, CallbackInfo ci)
-    {
+    public void HandleInterp(float interp, int p_78476_2_, CallbackInfo ci) {
         if(shaders_fixer$checkVibe()) {
             try {ShadersFixerLateMixins.handleInterpolation(interp);} catch (NoClassDefFoundError ignored){} //INTERPOLATE FOV (SCOPE)
         }
@@ -81,8 +80,7 @@ public class MixinEntityRenderer {
     }
 
     @ModifyConstant(method = "getFOVModifier", constant = @Constant(floatValue = 70.0F))
-    public float ModifyBaseFOV(float fov, @Local EntityLivingBase entityplayer)
-    {
+    public float ModifyBaseFOV(float fov, @Local EntityLivingBase entityplayer) {
         if(shaders_fixer$checkVibe()) {
             fov = ShadersFixerLateMixins.getGunsBaseFOV(entityplayer.getHeldItem());
             return fov;
