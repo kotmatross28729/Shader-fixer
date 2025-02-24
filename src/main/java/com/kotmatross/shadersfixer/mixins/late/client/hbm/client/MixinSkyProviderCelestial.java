@@ -6,7 +6,6 @@ import com.hbm.dim.SolarSystem;
 import com.kotmatross.shadersfixer.AngelicaUtils;
 import com.kotmatross.shadersfixer.Utils;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
-import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.Tessellator;
@@ -27,7 +26,7 @@ import java.util.List;
 public class MixinSkyProviderCelestial {
     // FOR NTM:SPACE
     //!Sensitive to changes
-
+    
     // Fix sky with shaders
    @Inject(method = "render",
         at = @At(value = "HEAD"), remap = false)
@@ -35,6 +34,7 @@ public class MixinSkyProviderCelestial {
         Utils.Fix2();
     }
 
+    //Fixes sunset not rendering
     @Unique
     public int shaders_fixer$programSUNSET;
     
@@ -55,13 +55,12 @@ public class MixinSkyProviderCelestial {
         Utils.GLUseProgram(shaders_fixer$programSUNSET);
     }
     
-    
+    //Because with shaders: alpha < 0.1 = full alpha, alpha > 1 = you can go blind
     @Redirect(method = "render",
             at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glColor4f(FFFF)V", ordinal = 1), remap = false)
     private void transformGLColor(float r, float g, float b, float a) {
         float alpha = a;
         
-        //Because with shaders: alpha < 0.1 = full alpha, alpha > 1 = you can go blind
         if(AngelicaUtils.isShaderEnabled()) {
             alpha = MathHelper.clamp_float(alpha, 0.1F, 1.0F);
         }
@@ -69,57 +68,26 @@ public class MixinSkyProviderCelestial {
         GL11.glColor4f(r, g, b, alpha);
     }
     
-    //!DIRTY HACK
-    /**
-     *  All these WrapWithConditions are aimed at removing this block of code:
-     *  <pre>
-     *  {@code
-     *          tessellator.func_78382_b();
-     *          tessellator.func_78374_a(-115.0 * sc, 100.0, -115.0 * sc, 0.0 + uvOffset, 0.0);
-     *          tessellator.func_78374_a(115.0 * sc, 100.0, -115.0 * sc, 1.0 + uvOffset, 0.0);
-     *          tessellator.func_78374_a(115.0 * sc, 100.0, 115.0 * sc, 1.0 + uvOffset, 1.0);
-     *          tessellator.func_78374_a(-115.0 * sc, 100.0, 115.0 * sc, 0.0 + uvOffset, 1.0);
-     *          tessellator.func_78381_a();
-     *  }
-     * </pre>
-     *  If angelica shaders are enabled AND planet have at least 0.1 alpha 
-     *  (with complementary the planet is rendered completely black, so we don't render it while the player is on the ground (to not ruin the horizon))
-     */
+    //glSkyList2 is ignored by shaders anyway.
+    //Disabling it fixes sunset overlap
+    @WrapWithCondition(
+            method = "render",
+            at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glCallList(I)V", ordinal = 2)
+            , remap = false
+    )
+    private boolean disableCallList2Shaders(int i) {
+        return !AngelicaUtils.isShaderEnabled();
+    }
     
+    //Idfk how, but it also disables "planet" (giant black square) rendering with complementary
+    //A more painless way, instead of completely deleting the render with all shaders
     @WrapWithCondition(
             method = "render",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V", ordinal = 1)
+            at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glBlendFunc(II)V", ordinal = 0)
+            , remap = false
     )
-    private boolean disableStartDrawingQuadsRender(Tessellator instance, @Local(ordinal = 2) Vec3 pos) {
-        if(AngelicaUtils.isShaderEnabled()){
-            return ((float) pos.yCoord - 200.0F) / 300.0F > 0.1;
-        }
-        return true;
-    }
-    @WrapWithCondition(method = "render",
-            slice = @Slice(from = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/client/renderer/Tessellator;addVertexWithUV(DDDDD)V",
-                    ordinal = 0),
-                    to = @At(value = "INVOKE",
-                            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-                            ordinal = 1)),
-            at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/client/renderer/Tessellator;addVertexWithUV(DDDDD)V"))
-    private boolean disableAddVertexWithUVRender(Tessellator instance, double p_78377_1_, double p_78377_3_, double p_78377_5_, double p_78374_7_, double p_78374_9_, @Local(ordinal = 2) Vec3 pos) {
-        if(AngelicaUtils.isShaderEnabled()){
-            return ((float) pos.yCoord - 200.0F) / 300.0F > 0.1;
-        }
-        return true;
-    }
-    @WrapWithCondition(
-            method = "render",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;draw()I", ordinal = 1)
-    )
-    private boolean disableDrawRender(Tessellator instance, @Local(ordinal = 2) Vec3 pos) {
-        if(AngelicaUtils.isShaderEnabled()){
-            return ((float) pos.yCoord - 200.0F) / 300.0F > 0.1;
-        }
-        return true;
+    private boolean disableBlendShaders(int i, int j) {
+        return !AngelicaUtils.isShaderEnabled();
     }
     
     /**
@@ -177,9 +145,8 @@ public class MixinSkyProviderCelestial {
      * tessellator.func_78381_a();
      *  }
      * </pre>
-     *  If angelica shaders are enabled AND rendering planet is on orbit
+     *  If angelica shaders are enabled AND rendering planet is on orbit (Fixes the horror that is happening in orbit)
      */
-    
     @Unique
     public CelestialBody shaders_fixer$GET_IS_ORBIT;
     
@@ -218,5 +185,3 @@ public class MixinSkyProviderCelestial {
         return !AngelicaUtils.isShaderEnabled() || (shaders_fixer$GET_IS_ORBIT == null);
     }
 }
-
-
