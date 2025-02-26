@@ -1,3 +1,6 @@
+# last
+* **[Hbm's NTM]** Fixed fire diamond (NFPA 704) brightness with angelica shaders
+
 # 3.3 hot-fix-patch-5
 *Last patch (I hope)*
 

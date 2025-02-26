@@ -357,6 +357,9 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.hbm.client.MixinRenderCharger"); //Lamp
                     mixins.add("client.hbm.client.MixinRenderFurnaceSteel"); //Heat thing
                     mixins.add("client.hbm.client.MixinModelArmorWingsPheo"); //idk
+    
+                    mixins.add("client.hbm.client.MixinRenderTorex");
+                    mixins.add("client.hbm.client.MixinDiamondPronter");
                     
                     if(ShaderFixerConfig.HbmExtendedHazardDescriptions) {
                         mixins.add("client.hbm.client.descr.MixinHazardTypeAsbestos");
