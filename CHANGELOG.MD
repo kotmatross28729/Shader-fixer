@@ -1,5 +1,6 @@
-# last
+# 3.4?
 * **[Hbm's NTM]** Fixed fire diamond (NFPA 704) brightness with angelica shaders
+* **[Hbm's NTM]** Fixed nuclear explosion brightness (was completely black) with angelica shaders 
 
 # 3.3 hot-fix-patch-5
 *Last patch (I hope)*

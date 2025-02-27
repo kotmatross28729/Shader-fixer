@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = LegoClient.class, priority = 999)
 public class MixinLegoClient {
+    
     @Inject(method = "renderBulletStandard(Lnet/minecraft/client/renderer/Tessellator;IIDDDZ)V",
         at = @At(value = "HEAD"), remap = false)
     private static void renderBulletStandard(Tessellator tess, int dark, int light, double length, double widthF, double widthB, boolean fullbright, CallbackInfo ci) {

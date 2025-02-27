@@ -15,6 +15,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import org.spongepowered.asm.mixin.MixinEnvironment;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -273,10 +274,10 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 }
 
                 if (ShaderFixerConfig.FixHbmShaders) {
+    
                     try {
-                        Class.forName("com.hbm.dim.SolarSystem"); //idk why this, but why not?
-                        specjork = true;
-                    } catch (ClassNotFoundException e) {
+                        specjork = (Launch.classLoader.getClassBytes("com.hbm.dim.SolarSystem") != null);
+                    } catch (IOException e) {
                         specjork = false;
                     }
 
@@ -289,7 +290,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.hbm.client.MixinParticleSpark"); //"Tauon" turret, arc welder
                     mixins.add("client.hbm.client.MixinParticleSpentCasing"); //Smoke on bullets/shells
                     if(specjork) {
-                        mixins.add("client.hbm.client.MixinBeamPronter"); //FEL laser, ICF laser
+                        mixins.add("client.hbm.client.MixinBeamPronter"); //FEL laser, ICF laser, but for fork
                     } else {
                         mixins.add("client.hbm.client.MixinBeamPronterORIG"); //FEL laser, ICF laser
                     }
@@ -338,28 +339,28 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.hbm.client.MixinRenderBullet"); //!GLASS/TAU
                     mixins.add("client.hbm.client.MixinRenderRainbow"); //!ZOMG
 
-                    mixins.add("client.hbm.client.sedna.MixinLegoClient");
-                    mixins.add("client.hbm.client.sedna.MixinModEventHandlerRenderer");
-                    mixins.add("client.hbm.client.sedna.MixinItemRenderWeaponBase");
+                    mixins.add("client.hbm.client.sedna.MixinLegoClient"); //Bullet render
+                    mixins.add("client.hbm.client.sedna.MixinModEventHandlerRenderer"); //Redirect to out system
+                    mixins.add("client.hbm.client.sedna.MixinItemRenderWeaponBase"); //Smoke, flash brightness
 
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderAtlas");
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderDANI");
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderHenry");
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderMaresleg");
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderMareslegAkimbo");
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderAtlas"); //Patch texture after smoke
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderDANI"); //Patch dual texture
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderHenry"); //Patch texture after smoke
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderMaresleg"); //Patch texture after smoke
+                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderMareslegAkimbo"); //Patch texture after smoke
 
                     mixins.add("client.hbm.client.MixinRenderChemical"); //Antimatter thing
                     mixins.add("client.hbm.client.MixinRenderSolidifier"); //Liquid inside
                     mixins.add("client.hbm.client.MixinRenderLiquefactor"); //Liquid inside
     
-                    mixins.add("client.hbm.client.MixinRenderRefueler");
+                    mixins.add("client.hbm.client.MixinRenderRefueler"); //Liquid & glClipPlane
                     mixins.add("client.hbm.client.MixinModelNo9"); //Lamp
                     mixins.add("client.hbm.client.MixinRenderCharger"); //Lamp
                     mixins.add("client.hbm.client.MixinRenderFurnaceSteel"); //Heat thing
-                    mixins.add("client.hbm.client.MixinModelArmorWingsPheo"); //idk
+                    mixins.add("client.hbm.client.MixinModelArmorWingsPheo"); //idk (I know)
     
-                    mixins.add("client.hbm.client.MixinRenderTorex");
-                    mixins.add("client.hbm.client.MixinDiamondPronter");
+                    mixins.add("client.hbm.client.MixinRenderTorex"); //MUSHROOM
+                    mixins.add("client.hbm.client.MixinDiamondPronter"); //NFPA 704 (on barrels, tanks)
                     
                     if(ShaderFixerConfig.HbmExtendedHazardDescriptions) {
                         mixins.add("client.hbm.client.descr.MixinHazardTypeAsbestos");
@@ -418,11 +419,9 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
     public static float getGunsTurnMagnitude(ItemStack stack) {
         return invokeHbmRenderGetters(stack, "getTurnMagnitude");
     }
-
     public static float getGunsBaseFOV(ItemStack stack) {
         return invokeHbmRenderGetters(stack, "getBaseFOV");
     }
-
     public static boolean getFOVConf() {
         if (ishbmLoaded) {
             try {
