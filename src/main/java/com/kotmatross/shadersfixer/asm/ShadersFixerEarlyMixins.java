@@ -22,95 +22,91 @@ public class ShadersFixerEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLo
         return "mixins.shadersfixer.early.json";
     }
     
-    private Object[][] getFixes() {
-        return new Object[][] {
-                {ShaderFixerConfig.FixMinecraftHitboxesRender, "MixinRenderGlobal"},
-                {ShaderFixerConfig.FixMinecraftFishinglineRender, "MixinRenderFish"},
-                {ShaderFixerConfig.FixMinecraftLeashRender, "MixinRenderLiving"},
-                {ShaderFixerConfig.EnableXMixinRenderLiving, "XMixinRenderLiving"},
-                {ShaderFixerConfig.FixMinecraftEnderdragonDeathEffectsRender, "MixinRenderDragon"},
-                {ShaderFixerConfig.FixMinecraftLightningBoltRender, "MixinRenderLightningBolt"},
-                {ShaderFixerConfig.FixMinecraftNameTagsRender, new String[] {
-                        "MixinRender",
-                        "MixinRendererLivingEntity"
-                }},
-                {ShaderFixerConfig.FixMinecraftEffectGUIBlending, "MixinInventoryEffectRenderer"},
-                {ShaderFixerConfig.FixHbmGunsRender, new String[] {
-                        "sedna.MixinEntityRenderer",
-                        "sedna.MixinItemRenderer",
-                        "sedna.MixinForgeHooksClient"
-                }},
-                {ShaderFixerConfig.UnlockMainMenuFPS, "MixinMinecraft"},
-                {ShaderFixerConfig.FixRiddingHand, "MixinRenderPlayer"},
-        
-                //ADD THERE ^
-        };
-    }
-    
     @Override
     public List<String> getMixins(Set<String> loadedCoreMods) {
-        
         ShadersFixer.logger.info("Starting Shaderfixer engine...");
         String configFolder = "config" + File.separator + Tags.MODID + File.separator;
         ShaderFixerConfig.loadEarlyMixinConfig(new File(Launch.minecraftHome, configFolder + "mixinsEarly.cfg"));
         boolean client = FMLLaunchHandler.side().isClient();
         
-//        long startTime = System.nanoTime();
-        
         List<String> mixins = new ArrayList<>();
-
-        if(client) {
-            for (Object[] fix : getFixes()) {
-                if ((boolean) fix[0]) {
-                    handleFix(fix[1], mixins);
-                }
-            }
-        }
-    
-//        long endTime = System.nanoTime();
-//        long elapsedTime = (endTime - startTime);
         
-//        ShadersFixer.logger.info("Execution time: {} ms", elapsedTime / 1_000_000);
-//        ShadersFixer.logger.info("Execution time: {} ns", elapsedTime);
-    
-        return mixins;
-    }
-    
-    private void handleFix(Object mixinData, List<String> mixins) {
-        if (mixinData instanceof String) {
-            addMixin((String) mixinData, mixins);
-        } else if (mixinData instanceof String[]) {
-            for (String mixin : (String[]) mixinData) {
-                addMixin(mixin, mixins);
+        if(client) {
+            if(ShaderFixerConfig.FixMinecraftHitboxesRender) {
+                ShadersFixer.logger.info("Integrating drawOutlinedBoundingBox mixin...");
+                mixins.add("client.minecraft.client.renderer.entity.MixinRenderGlobal");
+            }
+            if(ShaderFixerConfig.FixMinecraftFishinglineRender) {
+                ShadersFixer.logger.info("Integrating MixinRenderFish...");
+                mixins.add("client.minecraft.client.renderer.entity.MixinRenderFish");
+            }
+            if(ShaderFixerConfig.FixMinecraftLeashRender) {
+                ShadersFixer.logger.info("Integrating MixinRenderLiving...");
+                mixins.add("client.minecraft.client.renderer.entity.MixinRenderLiving");
+            }
+            if(ShaderFixerConfig.EnableXMixinRenderLiving) {
+                ShadersFixer.logger.info("Integrating XMixinRenderLiving... (for Damage Indicators fix)");
+                mixins.add("client.minecraft.client.renderer.entity.XMixinRenderLiving");
+            }
+            if(ShaderFixerConfig.FixMinecraftEnderdragonDeathEffectsRender) {
+                ShadersFixer.logger.info("Integrating MixinRenderDragon...");
+                mixins.add("client.minecraft.client.renderer.entity.MixinRenderDragon");
+            }
+            if(ShaderFixerConfig.FixMinecraftLightningBoltRender) {
+                ShadersFixer.logger.info("Integrating MixinRenderLightningBolt...");
+                mixins.add("client.minecraft.client.renderer.entity.MixinRenderLightningBolt");
+            }
+            if(ShaderFixerConfig.FixMinecraftNameTagsRender) {
+                ShadersFixer.logger.info("Integrating MixinRender...");
+                mixins.add("client.minecraft.client.renderer.entity.MixinRender");
+                ShadersFixer.logger.info("Integrating MixinRendererLivingEntity...");
+                mixins.add("client.minecraft.client.renderer.entity.MixinRendererLivingEntity");
+            }
+            if(ShaderFixerConfig.FixMinecraftEffectGUIBlending) {
+                ShadersFixer.logger.info("Integrating MixinInventoryEffectRenderer...");
+                mixins.add("client.minecraft.client.renderer.entity.MixinInventoryEffectRenderer");
+            }
+            if(ShaderFixerConfig.FixHbmGunsRender) {
+                ShadersFixer.logger.info("Integrating MixinEntityRenderer...");
+                mixins.add("client.minecraft.client.renderer.entity.sedna.MixinEntityRenderer");
+                ShadersFixer.logger.info("Integrating MixinItemRenderer...");
+                mixins.add("client.minecraft.client.renderer.entity.sedna.MixinItemRenderer");
+                ShadersFixer.logger.info("Integrating MixinForgeHooksClient...");
+                mixins.add("client.minecraft.client.renderer.entity.sedna.MixinForgeHooksClient");
+            }
+            if(ShaderFixerConfig.UnlockMainMenuFPS) {
+                ShadersFixer.logger.info("Integrating MixinMinecraft...");
+                mixins.add("client.minecraft.client.renderer.entity.MixinMinecraft");
+            }
+            if(ShaderFixerConfig.FixRiddingHand) {
+                ShadersFixer.logger.info("Integrating MixinRenderPlayer...");
+                mixins.add("client.minecraft.client.renderer.entity.MixinRenderPlayer");
             }
         }
-    }
-    private void addMixin(String mixinClass, List<String> mixins) {
-        String fullClass = "client.minecraft.client.renderer.entity." + mixinClass;
-        ShadersFixer.logger.info("Integrating {}...", mixinClass);
-        mixins.add(fullClass);
+        
+        return mixins;
     }
     
     @Override
     public String[] getASMTransformerClass() {
         return null;
     }
-
+    
     @Override
     public String getModContainerClass() {
         return null;
     }
-
+    
     @Override
     public String getSetupClass() {
         return null;
     }
-
+    
     @Override
     public void injectData(Map<String, Object> data) {
-
+        
     }
-
+    
     @Override
     public String getAccessTransformerClass() {
         return null;
