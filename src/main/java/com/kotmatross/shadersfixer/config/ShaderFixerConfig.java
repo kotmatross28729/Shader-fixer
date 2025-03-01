@@ -112,6 +112,8 @@ public class ShaderFixerConfig {
     
     public static boolean FixRiddingHand;
     
+    public static boolean DisableRiddingHandRotation;
+    
     public static void loadEarlyMixinConfig(File configFile) {
         Configuration config = new Configuration(configFile);
 
@@ -133,7 +135,8 @@ public class ShaderFixerConfig {
         UnlockMainMenuFPS = config.getBoolean("UnlockMainMenuFPS", categorytweaks, true, "By default, minecraft locks your frame rate to 30 in the main menu. In new versions of the game this value is 60, which is 2 times smoother than in 1.7.10. This option allows you to set any maximum FPS value in the main menu.");
         MainMenuFPSValue = config.getInt("MainMenuFPSValue", categorytweaks, 144,-1, 1024, "Maximum number of frames in the main menu (see UnlockMainMenuFPS). -1 or 0 to use fps limit in settings.");
     
-        FixRiddingHand = config.getBoolean("FixRiddingHand", categorytweaks, true, "Fixes bug due to which the hand wouldn't update rotation when the player was riding (sitting).");
+        FixRiddingHand = config.getBoolean("FixRiddingHand", categorytweaks, true, "Fixes bug due to which the hand wouldn't update rotation when the player was riding/sitting.");
+        DisableRiddingHandRotation = config.getBoolean("DisableRiddingHandRotation", categorytweaks, false, "Disables 1st person hand rotation when the player is riding/sitting (similar to newer versions). Requires FixRiddingHand to be false.");
     
         if(config.hasChanged()) {
             config.save();

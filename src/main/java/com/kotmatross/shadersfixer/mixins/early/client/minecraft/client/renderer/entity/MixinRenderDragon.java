@@ -6,14 +6,12 @@ import net.minecraft.entity.boss.EntityDragon;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = RenderDragon.class, priority = 999)
 public abstract class MixinRenderDragon {
 
     //Dragon death beams
-
     @Inject(method = "renderEquippedItems",
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))

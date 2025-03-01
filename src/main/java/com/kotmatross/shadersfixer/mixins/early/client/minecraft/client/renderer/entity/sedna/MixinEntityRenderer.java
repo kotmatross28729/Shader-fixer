@@ -53,8 +53,7 @@ public class MixinEntityRenderer {
             try {ShadersFixerLateMixins.handleInterpolation(interp);} catch (NoClassDefFoundError ignored){} //INTERPOLATE FOV (SCOPE)
         }
     }
-
-
+    
     @Redirect(method = "renderHand",
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glTranslatef(FFF)V", ordinal = 1))
     public void skip1(float X, float XX, float XXX) {

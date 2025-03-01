@@ -1,5 +1,6 @@
 package com.kotmatross.shadersfixer.mixins.early.client.minecraft.client.renderer.entity;
 
+import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderPlayer;
@@ -24,6 +25,10 @@ public abstract class MixinRenderPlayer extends RendererLivingEntity {
 	@Inject(method = "renderFirstPersonArm",
 			at = @At(value = "HEAD"))
 	protected void renderFirstPersonArm(EntityPlayer p_82441_1_, CallbackInfo ci) {
-		this.modelBipedMain.isRiding = p_82441_1_.isRiding();
+		if(ShaderFixerConfig.FixRiddingHand) {
+			this.modelBipedMain.isRiding = p_82441_1_.isRiding();
+		} else if (ShaderFixerConfig.DisableRiddingHandRotation) {
+			this.modelBipedMain.isRiding = false;
+		}
 	}
 }

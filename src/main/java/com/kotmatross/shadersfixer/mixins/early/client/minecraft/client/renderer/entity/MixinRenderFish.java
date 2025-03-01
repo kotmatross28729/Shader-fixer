@@ -7,14 +7,12 @@ import net.minecraft.entity.projectile.EntityFishHook;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = RenderFish.class, priority = 999)
 public abstract class MixinRenderFish extends Render {
 
     //Fish line
-
     @Inject(method = "doRender",
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
