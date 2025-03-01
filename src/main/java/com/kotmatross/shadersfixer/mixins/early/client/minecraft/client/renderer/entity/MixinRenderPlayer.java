@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = RenderPlayer.class, priority = 459)
+@Mixin(value = RenderPlayer.class, priority = 1059)
 public abstract class MixinRenderPlayer extends RendererLivingEntity {
 	
 	public MixinRenderPlayer(ModelBase p_i1261_1_, float p_i1261_2_) {
@@ -21,14 +21,13 @@ public abstract class MixinRenderPlayer extends RendererLivingEntity {
 	@Shadow
 	public ModelBiped modelBipedMain;
 	
-	//Peak mjoang codding
 	@Inject(method = "renderFirstPersonArm",
 			at = @At(value = "HEAD"))
 	protected void renderFirstPersonArm(EntityPlayer p_82441_1_, CallbackInfo ci) {
-		if(ShaderFixerConfig.FixRiddingHand) {
-			this.modelBipedMain.isRiding = p_82441_1_.isRiding();
-		} else if (ShaderFixerConfig.DisableRiddingHandRotation) {
+		if (ShaderFixerConfig.DisableRiddingHandRotation) {
 			this.modelBipedMain.isRiding = false;
+		} else if(ShaderFixerConfig.FixRiddingHand) {
+			this.modelBipedMain.isRiding = p_82441_1_.isRiding(); //Peak mjoang codding
 		}
 	}
 }

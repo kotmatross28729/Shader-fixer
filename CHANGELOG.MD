@@ -2,6 +2,7 @@
 * **[Hbm's NTM]** Fixed fire diamond (NFPA 704) brightness with angelica shaders
 * **[Hbm's NTM]** Fixed nuclear explosion brightness (was completely black) with angelica shaders 
 * **[Vanilla]** Fixed bug due to which the hand wouldn't update rotation when the player was riding/sitting
+  * Also added a config option that disables hand rotation when the player is riding/sitting (similar to newer versions) [`DisableRiddingHandRotation`]
 
 # 3.3 hot-fix-patch-5
 *Last patch (I hope)*
