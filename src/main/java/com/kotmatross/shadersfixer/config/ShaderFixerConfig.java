@@ -100,8 +100,8 @@ public class ShaderFixerConfig {
     public static boolean FixMinecraftNameTagsRender;
 
     public static boolean FixMinecraftEffectGUIBlending;
+    
     public static boolean enableNotifications;
-
     public static int startTicksOffset;
     public static int ticksInterval;
 
@@ -109,10 +109,13 @@ public class ShaderFixerConfig {
 
     public static boolean UnlockMainMenuFPS;
     public static int MainMenuFPSValue;
+    
+    public static boolean FixRiddingHand;
+    
     public static void loadEarlyMixinConfig(File configFile) {
         Configuration config = new Configuration(configFile);
 
-        FixHbmGunsRender = config.getBoolean("FixHbmGunsRender", categoryShadersfixes, true, "Uses a fairly complex mixin system to fix new guns with shaders");
+        FixHbmGunsRender = config.getBoolean("FixHbmGunsRender", categoryShadersfixes, true, "Uses a fairly complex mixin system to fix new guns with shaders.");
 
         FixMinecraftHitboxesRender = config.getBoolean("FixMinecraftHitboxesRender", categoryShadersfixes, true, "Fixes hitbox rendering (F3 + B) with shaders.");
         FixMinecraftFishinglineRender = config.getBoolean("FixMinecraftFishinglineRender", categoryShadersfixes, true, "Fixes fishing line rendering (which is from a fishing rod) with shaders.");
@@ -122,39 +125,19 @@ public class ShaderFixerConfig {
         FixMinecraftLightningBoltRender = config.getBoolean("FixMinecraftLightningBoltRender", categoryShadersfixes, true, "Fixes rendering of lightning bolt with shaders.");
         FixMinecraftNameTagsRender = config.getBoolean("FixMinecraftNameTagsRender", categoryShadersfixes, true, "Fixes rendering of name tags with shaders.");
         FixMinecraftEffectGUIBlending = config.getBoolean("FixMinecraftEffectGUIBlending", categoryShadersfixes, true, "Fixes an annoying bug due to which the effect bar in the creative menu turns black.");
+      
         enableNotifications = config.getBoolean("enableNotifications", categorytweaks, true, "Turns on a notification in the chat when detected 'old version' mods.");
         startTicksOffset = config.getInt("startTicksOffset", categorytweaks, 50,0, 1024, "First update notification will be delayed by n ticks to be displayed last at chat.");
         ticksInterval = config.getInt("ticksInterval", categorytweaks, 10,0, 1024, "Update notifications will be delayed by n ticks after the last notification (to avoid a sudden influx of notifications).");
 
         UnlockMainMenuFPS = config.getBoolean("UnlockMainMenuFPS", categorytweaks, true, "By default, minecraft locks your frame rate to 30 in the main menu. In new versions of the game this value is 60, which is 2 times smoother than in 1.7.10. This option allows you to set any maximum FPS value in the main menu.");
-        MainMenuFPSValue = config.getInt("MainMenuFPSValue", categorytweaks, 144,-1, 1024, "Maximum number of frames in the main menu (see UnlockMainMenuFPS). -1 or 0 to use fps limit in settings");
+        MainMenuFPSValue = config.getInt("MainMenuFPSValue", categorytweaks, 144,-1, 1024, "Maximum number of frames in the main menu (see UnlockMainMenuFPS). -1 or 0 to use fps limit in settings.");
+    
+        FixRiddingHand = config.getBoolean("FixRiddingHand", categorytweaks, true, "Fixes bug due to which the hand wouldn't update rotation when the player was riding (sitting).");
+    
         if(config.hasChanged()) {
             config.save();
         }
     }
-
-
-    /**
-//Lighting Fix
-    static final String categoryLightingFix = "Lighting Fix";
-    public static boolean LightingFix = false;
-    public static boolean LightingFixCreeper = false;
-
-    public static int LightingFixRange = 2147483647;
-
-    public static boolean ForceDisableLightingFix = true;
-
-    public static void loadLightingFixConfig(File configFile) {
-        Configuration config = new Configuration(configFile);
-        LightingFix = config.getBoolean("LightingFix", categoryLightingFix, false, "Enables LightingFix - a special mob that, due to its rendering features, fixes the “Infamous lighting bug” (more details on the mod wiki)");
-        LightingFixCreeper = config.getBoolean("LightingFixCreeper", categoryLightingFix, false, "Function that displays LightingFix mob as a creeper");
-        LightingFixRange = config.getInt("LightingFixRange", categoryLightingFix, Utils.INT_MAX,1, Utils.INT_MAX, "\"trackingRange\" of the LightingFix mob, I recommend not touching it");
-        ForceDisableLightingFix = config.getBoolean("ForceDisableLightingFix", categoryLightingFix, true, "By default, LightingFix is automatically enabled when a mod, that changes the shader component, is detected. This option allows you to intentionally turn off LightingFix even if such mods are detected");
-
-        if(config.hasChanged()) {
-            config.save();
-        }
-    }
-    */
-
+    
 }

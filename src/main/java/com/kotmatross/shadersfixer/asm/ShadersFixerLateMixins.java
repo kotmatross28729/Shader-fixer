@@ -18,8 +18,13 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 @LateMixin
 public class ShadersFixerLateMixins implements ILateMixinLoader {
@@ -31,378 +36,357 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
 
     public static boolean oldNEI = false;
     public static boolean oldCCC = false;
+    public static boolean oldAvaritia = false;
     public static boolean specjork = false;
-
     public static boolean ishbmLoaded = false;
 
     @Override
     public List<String> getMixins(Set<String> loadedMods) {
+        ShadersFixer.logger.info("Integrating Shaderfixer late mixins...");
         String configFolder = "config" + File.separator + Tags.MODID + File.separator;
         ShaderFixerConfig.loadMixinConfig(new File(Launch.minecraftHome, configFolder + "mixins.cfg"));
 
-        //don't integrate mixins if there are no suitable mods
-        if(!loadedMods.contains("fiskheroes")) {
-            ShaderFixerConfig.FixFisksuperheroesShaders = false;
+        oldNEI = checkNEIVersion();
+        oldCCC = checkCCCVersion();
+        oldAvaritia = checkAvaritiaVersion();
+        try {
+            specjork = (Launch.classLoader.getClassBytes("com.hbm.dim.SolarSystem") != null);
+        } catch (IOException e) {
+            specjork = false;
         }
-        if(!loadedMods.contains("NotEnoughItems")) {
-            ShaderFixerConfig.FixNEIShaders = false;
-        }
-        if(!loadedMods.contains("Techguns")) {
-            ShaderFixerConfig.FixTechgunsShaders = false;
-        }
-        if(!loadedMods.contains("jinryuubetterrenderaddon") && !loadedMods.contains("jinryuudragonblockc")) {
-            ShaderFixerConfig.FixDragonBlockCShaders = false;
-        }
-        if(!loadedMods.contains("zeldaswordskills")) {
-            ShaderFixerConfig.FixZeldaSwordSkillsShaders = false;
-        }
-        if(!loadedMods.contains("mcheli")) {
-            ShaderFixerConfig.FixMcheliOShaders = false;
-        }
-        if(!loadedMods.contains("rivalrebels")) {
-            ShaderFixerConfig.FixRivalRebelsShaders = false;
-        }
-        if(!loadedMods.contains("Schematica")) {
-            ShaderFixerConfig.FixSchematicaShaders = false;
-        }
-        if(!loadedMods.contains("journeymap")) {
-            ShaderFixerConfig.FixJourneymapShaders = false;
-        }
-        if(!loadedMods.contains("Avaritia")) {
-            ShaderFixerConfig.FixAvaritiaShaders = false;
-        }
-        if(!loadedMods.contains("ThaumicConcilium")) {
-            ShaderFixerConfig.FixThaumicConciliumShaders = false;
-        }
-        if(!loadedMods.contains("OpenComputers")) {
-            ShaderFixerConfig.FixOpenComputersShaders = false;
-        }
-        if(!loadedMods.contains("Eln")) {
-            ShaderFixerConfig.FixElnShaders = false;
-        }
-        if(!loadedMods.contains("hbm")) {
-            ShaderFixerConfig.FixHbmShaders = false;
-        }
-        if(!loadedMods.contains("dsurround")) {
-            ShaderFixerConfig.FixDSShaders = false;
-        }
-        if(!loadedMods.contains("lmmx")) {
-            ShaderFixerConfig.FixLMMEShaders = false;
-        }
-        if(!loadedMods.contains("HardcoreEnderExpansion")) {
-            ShaderFixerConfig.FixHEEhaders = false;
-        }
-        if(!loadedMods.contains("angelica")) {
-            ShaderFixerConfig.PatchHBMAngelica = false;
-        }
-        if(!loadedMods.contains("customnpcs")) {
-            ShaderFixerConfig.FixCNPCShaders = false;
-        }
+        ishbmLoaded = Loader.isModLoaded("hbm");
+    
+        Map<String, Consumer<Boolean>> modConfigMap = new HashMap<>();
+    
+        modConfigMap.put("fiskheroes", value -> ShaderFixerConfig.FixFisksuperheroesShaders = value);
+        modConfigMap.put("NotEnoughItems", value -> ShaderFixerConfig.FixNEIShaders = value);
+        modConfigMap.put("Techguns", value -> ShaderFixerConfig.FixTechgunsShaders = value);
+        modConfigMap.put("jinryuubetterrenderaddon", value -> ShaderFixerConfig.FixDragonBlockCShaders = value);
+        modConfigMap.put("jinryuudragonblockc", value -> ShaderFixerConfig.FixDragonBlockCShaders = value);
+        modConfigMap.put("zeldaswordskills", value -> ShaderFixerConfig.FixZeldaSwordSkillsShaders = value);
+        modConfigMap.put("mcheli", value -> ShaderFixerConfig.FixMcheliOShaders = value);
+        modConfigMap.put("rivalrebels", value -> ShaderFixerConfig.FixRivalRebelsShaders = value);
+        modConfigMap.put("Schematica", value -> ShaderFixerConfig.FixSchematicaShaders = value);
+        modConfigMap.put("journeymap", value -> ShaderFixerConfig.FixJourneymapShaders = value);
+        modConfigMap.put("Avaritia", value -> ShaderFixerConfig.FixAvaritiaShaders = value);
+        modConfigMap.put("ThaumicConcilium", value -> ShaderFixerConfig.FixThaumicConciliumShaders = value);
+        modConfigMap.put("OpenComputers", value -> ShaderFixerConfig.FixOpenComputersShaders = value);
+        modConfigMap.put("Eln", value -> ShaderFixerConfig.FixElnShaders = value);
+        modConfigMap.put("hbm", value -> ShaderFixerConfig.FixHbmShaders = value);
+        modConfigMap.put("dsurround", value -> ShaderFixerConfig.FixDSShaders = value);
+        modConfigMap.put("lmmx", value -> ShaderFixerConfig.FixLMMEShaders = value);
+        modConfigMap.put("HardcoreEnderExpansion", value -> ShaderFixerConfig.FixHEEhaders = value);
+        modConfigMap.put("angelica", value -> ShaderFixerConfig.PatchHBMAngelica = value);
+        modConfigMap.put("customnpcs", value -> ShaderFixerConfig.FixCNPCShaders = value);
+        
+        //ADD THERE ^
+        
+        modConfigMap.forEach((modId, configSetter) -> {
+            boolean isLoaded = loadedMods.contains(modId);
+            boolean currentState = isLoaded && getCurrentConfigState(modId);
+            configSetter.accept(isLoaded && currentState);
+        });
         
         List<String> mixins = new ArrayList<>();
 
-            if (side == MixinEnvironment.Side.CLIENT) {
-                ShadersFixer.logger.info("Integrating Shaderfixer late client mixins...");
-
-                if (ShaderFixerConfig.FixFisksuperheroesShaders) {
-                    ShadersFixer.logger.info("Trying to integrate fiskheroes mixins...");
-                    mixins.add("client.FiskHeroes.client.pack.json.beam.MixinBeamRendererLightning");
-                    mixins.add("client.FiskHeroes.client.pack.json.beam.MixinBeamRendererLine");
-                    mixins.add("client.FiskHeroes.client.pack.json.shape.MixinShapeFormatCircles");
-                    mixins.add("client.FiskHeroes.client.pack.json.shape.MixinShapeFormatLines");
-                    mixins.add("client.FiskHeroes.client.pack.json.shape.MixinShapeFormatWireframe");
-                    mixins.add("client.FiskHeroes.client.particle.MixinEntitySHSpellWaveFX");
-                    mixins.add("client.FiskHeroes.client.render.effect.MixinEffectTentacles");
-                    mixins.add("client.FiskHeroes.client.render.entity.effect.MixinRenderEarthCrack");
-                    mixins.add("client.FiskHeroes.client.render.entity.effect.MixinRenderGravityWave");
-                    mixins.add("client.FiskHeroes.client.render.entity.effect.MixinRenderSpeedBlur");
-                    mixins.add("client.FiskHeroes.client.render.entity.projectile.MixinRenderEnergyBolt");
-                    mixins.add("client.FiskHeroes.client.render.entity.projectile.MixinRenderGrapplingHook");
-                    mixins.add("client.FiskHeroes.client.render.entity.projectile.MixinRenderSonicWave");
-                    mixins.add("client.FiskHeroes.client.render.entity.projectile.MixinRenderSpellWhip");
-                    mixins.add("client.FiskHeroes.client.render.entity.MixinRenderGrappleRope");
-                    mixins.add("client.FiskHeroes.client.render.projectile.MixinBulletProjectileRenderer");
-                    mixins.add("client.FiskHeroes.client.render.projectile.MixinProjectileRenderHandler");
-                    mixins.add("client.FiskHeroes.client.render.tile.MixinRenderSuitFabricator");
-                    mixins.add("client.FiskHeroes.client.render.tile.MixinRenderSuitDatabase");
-                    mixins.add("client.FiskHeroes.client.MixinSHRenderHooks");
-                }
-                //PIZDEC FULL
-                if (ShaderFixerConfig.FixNEIShaders) {
-                   if (Loader.isModLoaded("NotEnoughItems")) {
-                       if(Loader.instance().getIndexedModList().get("NotEnoughItems").getVersion().equals("1.0.5.120")) {
-                           oldNEI = true;
-                       } else {
-                           String[] NEIVersionCurrent = Loader.instance().getIndexedModList().get("NotEnoughItems").getVersion().split("\\.");
-                           String[] NEIVersionConst = "1.0.5.120".split("\\.");
-                           for (int pos = 0; pos < (Math.min(NEIVersionCurrent.length, NEIVersionConst.length)); pos++) {
-                               try {
-                                   int NEIVersionCurrentPart = Integer.parseInt(NEIVersionCurrent[pos]);
-                                   int NEIVersionConstPart = Integer.parseInt(NEIVersionConst[pos]);
-                                   if (NEIVersionCurrentPart > NEIVersionConstPart) {
-                                       break;
-                                   }
-                                   if (NEIVersionCurrentPart < NEIVersionConstPart) {
-                                       oldNEI = true;
-                                       break;
-                                   }
-                               } catch (NumberFormatException ignored) {}
-                           }
-                       }
-                   }
-                    if (Loader.isModLoaded("CodeChickenCore")) {
-                        if(Loader.instance().getIndexedModList().get("CodeChickenCore").getVersion().equals("1.0.7.48")) {
-                            oldCCC = true;
-                        } else {
-                            String[] CCCVersionCurrent = Loader.instance().getIndexedModList().get("CodeChickenCore").getVersion().split("\\.");
-                            String[] CCCVersionConst = "1.0.7.48".split("\\.");
-                            for (int pos = 0; pos < (Math.min(CCCVersionCurrent.length, CCCVersionConst.length)); pos++) {
-                                try {
-                                int CCCVersionCurrentPart = Integer.parseInt(CCCVersionCurrent[pos]);
-                                int CCCVersionConstPart = Integer.parseInt(CCCVersionConst[pos]);
-                                if (CCCVersionCurrentPart > CCCVersionConstPart) {
-                                    break;
-                                }
-                                if (CCCVersionCurrentPart < CCCVersionConstPart) {
-                                    oldCCC = true;
-                                    break;
-                                }
-                                } catch (NumberFormatException ignored) {}
-                            }
-                        }
-                    }
-                    ShadersFixer.logger.info("Trying to integrate NotEnoughItems mixins...");
-                    if(!oldNEI){
-                        mixins.add("client.NotEnoughItems.client.MixinWorldOverlayRenderer");
-                    } else {
-                        ShadersFixer.logger.warn("old NEI detected, mixin may be unstable!");
-                        mixins.add("client.NotEnoughItems.client.MixinWorldOverlayRendererLEGACY");
-                    }
-                }
-                if (ShaderFixerConfig.FixTechgunsShaders) {
-                    ShadersFixer.logger.info("Trying to integrate Techguns mixins...");
-                    mixins.add("client.Techguns.client.renderer.tileentity.MixinRenderTGChest");
-                    mixins.add("client.Techguns.client.renderer.MixinTGRenderHelper");
-                    mixins.add("client.Techguns.utils.MixinEntityDeathUtils");
-//                    mixins.add("client.Techguns.utils.MixinDeathEffect");
-//                    mixins.add("client.Techguns.utils.MixinRenderFlyingGibs");
-
-                }
-                if (ShaderFixerConfig.FixDragonBlockCShaders) {
-                    ShadersFixer.logger.info("Trying to integrate DragonBlockC mixins...");
-                    mixins.add("client.DragonBlockC.client.MixinRenderPlayerJBRA");
-                    mixins.add("client.DragonBlockC.client.MixinRenderAura");
-                    mixins.add("client.DragonBlockC.client.MixinRenderAura2");
-                    mixins.add("client.DragonBlockC.client.MixinRenderDBC");
-                }
-                if (ShaderFixerConfig.FixZeldaSwordSkillsShaders) {
-                    ShadersFixer.logger.info("Trying to integrate ZeldaSwordSkills mixins...");
-                    mixins.add("client.Zeldaswordskills.client.render.entity.MixinRenderEntityWhip");
-                    mixins.add("client.Zeldaswordskills.client.render.entity.MixinRenderEntityHookShot");
-                }
-                if (ShaderFixerConfig.FixMcheliOShaders) {
-                    ShadersFixer.logger.info("Trying to integrate Mcheli Overdrive mixins...");
-                    mixins.add("client.mchelio.MixinMCH_GuiTargetMarker");
-                    mixins.add("client.mchelio.MixinMCH_HudItem");
-                    mixins.add("client.mchelio.MixinMCH_RenderAircraft");
-                }
-                if (ShaderFixerConfig.FixRivalRebelsShaders) {
-                    ShadersFixer.logger.info("Trying to integrate Rival Rebels mixins...");
-                    mixins.add("client.rivalrebels.client.entity.MixinRenderLaserBurst");
-                    mixins.add("client.rivalrebels.client.entity.MixinRenderLaserLink");
-                    mixins.add("client.rivalrebels.client.entity.MixinRenderLightningBolt2");
-                    mixins.add("client.rivalrebels.client.entity.MixinRenderLightningLink");
-                    mixins.add("client.rivalrebels.client.entity.MixinRenderPlasmoid");
-                    mixins.add("client.rivalrebels.client.model.MixinModelAstroBlasterBody");
-                    mixins.add("client.rivalrebels.client.model.MixinAstroBlasterRenderer");
-                    mixins.add("client.rivalrebels.client.model.MixinModelBlastRing");
-                    mixins.add("client.rivalrebels.client.entity.MixinRenderSphereBlast");
-                    mixins.add("client.rivalrebels.client.entity.MixinRenderTachyonBombBlast");
-                    mixins.add("client.rivalrebels.client.entity.MixinRenderTheoreticalTsarBlast");
-                    mixins.add("client.rivalrebels.client.entity.MixinRenderTsarBlast");
-                    mixins.add("client.rivalrebels.client.entity.MixinRenderAntimatterBombBlast");
-                    mixins.add("client.rivalrebels.client.entity.MixinRenderRhodes");
-                    mixins.add("client.rivalrebels.client.entity.MixinTileEntityForceFieldNodeRenderer");
-                    mixins.add("client.rivalrebels.client.entity.MixinRenderLibrary");
-                    mixins.add("client.rivalrebels.client.entity.MixinRenderBlood");
-                    mixins.add("client.rivalrebels.client.entity.MixinEntityBloodFX");
-                    mixins.add("client.rivalrebels.client.entity.MixinTileEntityPlasmaExplosionRenderer");
-                }
-                if (ShaderFixerConfig.FixSchematicaShaders) {
-                    ShadersFixer.logger.info("Trying to integrate Schematica mixins...");
-                    mixins.add("client.Schematica.client.MixinRendererSchematicChunk");
-                    mixins.add("client.Schematica.client.MixinRendererSchematicGlobal");
-                    mixins.add("client.Schematica.client.MixinRenderHelper");
-                }
-                if (ShaderFixerConfig.FixJourneymapShaders) {
-                    ShadersFixer.logger.info("Trying to integrate Journeymap mixins...");
-                    mixins.add("client.Journeymap.MixinDrawUtil");
-                }
-                if (ShaderFixerConfig.FixAvaritiaShaders) {
-                    ShadersFixer.logger.info("Trying to integrate Avaritia mixins...");
-                    mixins.add("client.avaritia.client.MixinCosmicItemRenderer");
-                    mixins.add("client.avaritia.client.MixinModelArmorInfinity");
-                    mixins.add("client.avaritia.client.MixinRenderHeavenArrow");
-                }
-                if (ShaderFixerConfig.FixThaumicConciliumShaders) {
-                    ShadersFixer.logger.info("Trying to integrate Thaumic Concilium mixins...");
-                    mixins.add("client.ThaumicConcilium.client.MixinAstralMonitorRenderer");
-                    mixins.add("client.ThaumicConcilium.client.MixinCrimsonOrbEntityRenderer");
-                    mixins.add("client.ThaumicConcilium.client.MixinDissolvedRenderer");
-                    mixins.add("client.ThaumicConcilium.client.MixinDistortionEffectRenderer");
-                    mixins.add("client.ThaumicConcilium.client.MixinHexOfPredictabilityTileRenderer");
-                    mixins.add("client.ThaumicConcilium.client.MixinMaterialPeelerRenderer");
-                    mixins.add("client.ThaumicConcilium.client.MixinQuicksilverElementalRenderer");
-                    mixins.add("client.ThaumicConcilium.client.MixinRiftRenderer");
-                }
-                if (ShaderFixerConfig.FixOpenComputersShaders) {
-                    ShadersFixer.logger.info("Trying to integrate OpenComputers mixins...");
-                    mixins.add("client.oc.client.MixinScreenRenderer");
-                    mixins.add("client.oc.client.MixinHologramRenderer");
-                    mixins.add("client.oc.client.MixinRobotRenderer");
-                    mixins.add("client.oc.client.MixinRenderState");
-                }
-                if (ShaderFixerConfig.FixElnShaders) {
-                    ShadersFixer.logger.info("Trying to integrate ElectricalAge mixins...");
-                    mixins.add("client.eln.client.MixinDataLogs");
-                    mixins.add("client.eln.client.MixinUtilsClient");
-                    if(ShaderFixerConfig.ElnLightMixins) {
-                        mixins.add("client.eln.client.MixinLampSocketStandardObjRender");
-                        mixins.add("client.eln.client.MixinLampSocketSuspendedObjRender");
-                    }
-                    mixins.add("client.eln.client.MixinNixieTubeDescriptor");
-                }
-
-                if (ShaderFixerConfig.FixHbmShaders) {
-    
-                    try {
-                        specjork = (Launch.classLoader.getClassBytes("com.hbm.dim.SolarSystem") != null);
-                    } catch (IOException e) {
-                        specjork = false;
-                    }
-
-                    ishbmLoaded = Loader.isModLoaded("hbm");
-
-                    ShadersFixer.logger.info("Trying to integrate Hbm's NTM mixins...");
-                    mixins.add("client.hbm.client.MixinParticleAmatFlash"); //Antimatter explosion
-                    mixins.add("client.hbm.client.MixinParticleDebugLine"); //Drone path lines
-                    mixins.add("client.hbm.client.MixinParticleRadiationFog"); //GL11.GL_LIGHTING
-                    mixins.add("client.hbm.client.MixinParticleSpark"); //"Tauon" turret, arc welder
-                    mixins.add("client.hbm.client.MixinParticleSpentCasing"); //Smoke on bullets/shells
-                    if(specjork) {
-                        mixins.add("client.hbm.client.MixinBeamPronter"); //FEL laser, ICF laser, but for fork
-                    } else {
-                        mixins.add("client.hbm.client.MixinBeamPronterORIG"); //FEL laser, ICF laser
-                    }
-                    mixins.add("client.hbm.client.MixinItemRenderDetonatorLaser"); //LED on top, sine wave on the side
-                    mixins.add("client.hbm.client.MixinItemRendererMeteorSword"); //Lighting glitch in 3rd person view
-                    mixins.add("client.hbm.client.MixinItemRenderLibrary"); //Radiation-Powered Engine lights render in hand
-                    mixins.add("client.hbm.client.MixinModelArmorEnvsuit"); //Armor helmet lamps
-                    mixins.add("client.hbm.client.MixinRenderBAT9000"); //Liquid inside
-                    mixins.add("client.hbm.client.MixinRenderBeam"); //Immolator/ HPP LaserJet projectile
-                    mixins.add("client.hbm.client.MixinRenderBeam2"); //Power Fist (Zapper) projectile
-                    mixins.add("client.hbm.client.MixinRenderBeam3"); //Power Fist (Extracting Mining Laser) projectile
-                    mixins.add("client.hbm.client.MixinRenderBeam4"); //Spark Plug projectile
-                    mixins.add("client.hbm.client.MixinRenderBeam5"); //B92 projectile
-                    mixins.add("client.hbm.client.MixinRenderBeam6"); //B92 projectile
-                    mixins.add("client.hbm.client.MixinRenderBlackHole"); //Jet from the center along the poles
-                    mixins.add("client.hbm.client.MixinRenderBobble"); //Pu-238 Bobble
-                    mixins.add("client.hbm.client.MixinRenderCloudRainbow"); //Flickering field, during a DFC explosion, from a B93 projectile
-                    mixins.add("client.hbm.client.MixinRenderCore"); //Sphere of the block itself, additional spheres when it works
-                    mixins.add("client.hbm.client.MixinRenderCraneConsole"); //Buttons on the console
-                    mixins.add("client.hbm.client.MixinRenderDeathBlast"); //From the orbital death ray
-                    mixins.add("client.hbm.client.MixinRenderDemonLamp"); //Disk of blue light, brighter with shaders
-                    mixins.add("client.hbm.client.MixinRenderFlare"); //Flare grenade, brighter with shaders
-                    mixins.add("client.hbm.client.MixinRenderFOEQ"); //Fire behind the falling shuttle
-                    mixins.add("client.hbm.client.MixinRenderLantern"); //Light in the lamp
-                    mixins.add("client.hbm.client.MixinRenderLanternINNER"); //Light in the lamp
-                    mixins.add("client.hbm.client.MixinRenderLanternBehemoth"); //Light in the lamp
-                    mixins.add("client.hbm.client.MixinRenderMachineForceField"); //Green lines forming a sphere
-                    mixins.add("client.hbm.client.MixinRenderMixer"); //Liquid inside
-                    mixins.add("client.hbm.client.MixinRenderOverhead"); //Red square near entities
-                    mixins.add("client.hbm.client.MixinRenderPumpjack"); //Pumpjack bridle
-                    mixins.add("client.hbm.client.MixinRenderRadarScreen"); //Green bar going from top to bottom
-                    mixins.add("client.hbm.client.MixinRenderRadGen"); //2 lights on top of engine
-                    mixins.add("client.hbm.client.MixinRenderRBMKConsole"); //Buttons on the console
-                    mixins.add("client.hbm.client.MixinRenderRBMKLid"); //Cherenkov radiation
-                    mixins.add("client.hbm.client.MixinRenderSiegeCraft"); //4 lights on top
-                    mixins.add("client.hbm.client.MixinRenderSiegeLaser"); //UFO projectile
-                    mixins.add("client.hbm.client.MixinRenderSmallReactor"); //Cherenkov's radiation, brighter with shaders
-                    mixins.add("client.hbm.client.MixinRenderSolarBoiler"); //Rays of light
-                    mixins.add("client.hbm.client.MixinRenderSparks"); //Lightning in a breeding reactor/DFC
-                    mixins.add("client.hbm.client.MixinRenderSpear"); //Rays of light from the digamma spear
-                    mixins.add("client.hbm.client.MixinRenderOrbus"); //Liquid inside
-                    if(specjork) {
-                        mixins.add("client.hbm.client.MixinSkyProviderCelestial");  //Sky
-                        mixins.add("client.hbm.client.MixinSkyProviderLaytheSunset"); //"Fix" for angelica
-                    }
-                    mixins.add("client.hbm.client.MixinRenderBullet"); //!GLASS/TAU
-                    mixins.add("client.hbm.client.MixinRenderRainbow"); //!ZOMG
-
-                    mixins.add("client.hbm.client.sedna.MixinLegoClient"); //Bullet render
-                    mixins.add("client.hbm.client.sedna.MixinModEventHandlerRenderer"); //Redirect to out system
-                    mixins.add("client.hbm.client.sedna.MixinItemRenderWeaponBase"); //Smoke, flash brightness
-
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderAtlas"); //Patch texture after smoke
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderDANI"); //Patch dual texture
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderHenry"); //Patch texture after smoke
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderMaresleg"); //Patch texture after smoke
-                    mixins.add("client.hbm.client.sedna.guns.MixinItemRenderMareslegAkimbo"); //Patch texture after smoke
-
-                    mixins.add("client.hbm.client.MixinRenderChemical"); //Antimatter thing
-                    mixins.add("client.hbm.client.MixinRenderSolidifier"); //Liquid inside
-                    mixins.add("client.hbm.client.MixinRenderLiquefactor"); //Liquid inside
-    
-                    mixins.add("client.hbm.client.MixinRenderRefueler"); //Liquid & glClipPlane
-                    mixins.add("client.hbm.client.MixinModelNo9"); //Lamp
-                    mixins.add("client.hbm.client.MixinRenderCharger"); //Lamp
-                    mixins.add("client.hbm.client.MixinRenderFurnaceSteel"); //Heat thing
-                    mixins.add("client.hbm.client.MixinModelArmorWingsPheo"); //idk (I know)
-    
-                    mixins.add("client.hbm.client.MixinRenderTorex"); //MUSHROOM
-                    mixins.add("client.hbm.client.MixinDiamondPronter"); //NFPA 704 (on barrels, tanks)
-                    
-                    if(ShaderFixerConfig.HbmExtendedHazardDescriptions) {
-                        mixins.add("client.hbm.client.descr.MixinHazardTypeAsbestos");
-                        mixins.add("client.hbm.client.descr.MixinHazardTypeBlinding");
-                        mixins.add("client.hbm.client.descr.MixinHazardTypeCoal");
-                        mixins.add("client.hbm.client.descr.MixinHazardTypeExplosive");
-                        mixins.add("client.hbm.client.descr.MixinHazardTypeHot");
-                        mixins.add("client.hbm.client.descr.MixinHazardTypeHydroactive");
-                    }
-                }
-                
-                if (ShaderFixerConfig.FixDSShaders) {
-                    ShadersFixer.logger.info("Trying to integrate DynamicSurroundings mixins...");
-                    mixins.add("client.DynamicSurroundings.client.MixinAuroraRenderer");
-                }
-
-                if (ShaderFixerConfig.FixLMMEShaders) {
-                    ShadersFixer.logger.warn("Trying to integrate LittleMaidMobEnhanced mixins...");
-                    mixins.add("client.lmme.MixinGuiInventory");
-                }
-                if (ShaderFixerConfig.FixHEEhaders) {
-                    ShadersFixer.logger.info("Trying to integrate HardcoreEnderExpansion mixins...");
-                    mixins.add("client.HEE.MixinRenderBossDragon");
-                    mixins.add("client.HEE.MixinRenderWeatherLightningBoltPurple");
-                    mixins.add("client.HEE.MixinModClientProxy");
-                }
-                
-                if (ShaderFixerConfig.PatchHBMAngelica) {
-                    ShadersFixer.logger.info("Trying to integrate Angelica mixins...");
-                    mixins.add("client.angelica.MixinHandRenderer");
-                }
-    
-                if (ShaderFixerConfig.FixCNPCShaders) {
-                    ShadersFixer.logger.info("Trying to integrate CustomNPC mixins...");
-                    mixins.add("client.cnpc.MixinRenderChatMessages");
-                    mixins.add("client.cnpc.MixinRenderNPCInterface");
+        if (side == MixinEnvironment.Side.CLIENT) {
+            for (Object[] fix : getFixes()) {
+                if ((boolean) fix[0]) {
+                    handleFix(fix[1], mixins);
                 }
             }
+        }
 
         return mixins;
     }
-
+    
+    private boolean getCurrentConfigState(String modId) {
+        return switch (modId) {
+            case "fiskheroes" -> ShaderFixerConfig.FixFisksuperheroesShaders;
+            case "NotEnoughItems" -> ShaderFixerConfig.FixNEIShaders;
+            case "Techguns" -> ShaderFixerConfig.FixTechgunsShaders;
+            case "jinryuubetterrenderaddon", "jinryuudragonblockc" -> ShaderFixerConfig.FixDragonBlockCShaders;
+            case "zeldaswordskills" -> ShaderFixerConfig.FixZeldaSwordSkillsShaders;
+            case "mcheli" -> ShaderFixerConfig.FixMcheliOShaders;
+            case "rivalrebels" -> ShaderFixerConfig.FixRivalRebelsShaders;
+            case "Schematica" -> ShaderFixerConfig.FixSchematicaShaders;
+            case "journeymap" -> ShaderFixerConfig.FixJourneymapShaders;
+            case "Avaritia" -> ShaderFixerConfig.FixAvaritiaShaders;
+            case "ThaumicConcilium" -> ShaderFixerConfig.FixThaumicConciliumShaders;
+            case "OpenComputers" -> ShaderFixerConfig.FixOpenComputersShaders;
+            case "Eln" -> ShaderFixerConfig.FixElnShaders;
+            case "hbm" -> ShaderFixerConfig.FixHbmShaders;
+            case "dsurround" -> ShaderFixerConfig.FixDSShaders;
+            case "lmmx" -> ShaderFixerConfig.FixLMMEShaders;
+            case "HardcoreEnderExpansion" -> ShaderFixerConfig.FixHEEhaders;
+            case "angelica" -> ShaderFixerConfig.PatchHBMAngelica;
+            case "customnpcs" -> ShaderFixerConfig.FixCNPCShaders;
+            
+            //ADD THERE ^
+            
+            default -> false;
+        };
+    }
+    
+    private Object[][] getFixes() {
+        return new Object[][] {
+                {ShaderFixerConfig.FixFisksuperheroesShaders, new String[] {
+                        "client.FiskHeroes.client.pack.json.beam.MixinBeamRendererLightning",
+                        "client.FiskHeroes.client.pack.json.beam.MixinBeamRendererLine",
+                        "client.FiskHeroes.client.pack.json.shape.MixinShapeFormatCircles",
+                        "client.FiskHeroes.client.pack.json.shape.MixinShapeFormatLines",
+                        "client.FiskHeroes.client.pack.json.shape.MixinShapeFormatWireframe",
+                        "client.FiskHeroes.client.particle.MixinEntitySHSpellWaveFX",
+                        "client.FiskHeroes.client.render.effect.MixinEffectTentacles",
+                        "client.FiskHeroes.client.render.entity.effect.MixinRenderEarthCrack",
+                        "client.FiskHeroes.client.render.entity.effect.MixinRenderGravityWave",
+                        "client.FiskHeroes.client.render.entity.effect.MixinRenderSpeedBlur",
+                        "client.FiskHeroes.client.render.entity.projectile.MixinRenderEnergyBolt",
+                        "client.FiskHeroes.client.render.entity.projectile.MixinRenderGrapplingHook",
+                        "client.FiskHeroes.client.render.entity.projectile.MixinRenderSonicWave",
+                        "client.FiskHeroes.client.render.entity.projectile.MixinRenderSpellWhip",
+                        "client.FiskHeroes.client.render.entity.MixinRenderGrappleRope",
+                        "client.FiskHeroes.client.render.projectile.MixinBulletProjectileRenderer",
+                        "client.FiskHeroes.client.render.projectile.MixinProjectileRenderHandler",
+                        "client.FiskHeroes.client.render.tile.MixinRenderSuitFabricator",
+                        "client.FiskHeroes.client.render.tile.MixinRenderSuitDatabase",
+                        "client.FiskHeroes.client.MixinSHRenderHooks",
+                }},
+                {ShaderFixerConfig.FixNEIShaders, new String[] {
+                    oldNEI ? "client.NotEnoughItems.client.MixinWorldOverlayRendererLEGACY" : "client.NotEnoughItems.client.MixinWorldOverlayRenderer",
+                }},
+                {ShaderFixerConfig.FixTechgunsShaders, new String[] {
+                    "client.Techguns.client.renderer.tileentity.MixinRenderTGChest",
+                    "client.Techguns.client.renderer.MixinTGRenderHelper",
+                    "client.Techguns.utils.MixinEntityDeathUtils",
+                }},
+                {ShaderFixerConfig.FixDragonBlockCShaders, new String[] {
+                        "client.DragonBlockC.client.MixinRenderPlayerJBRA",
+                        "client.DragonBlockC.client.MixinRenderAura",
+                        "client.DragonBlockC.client.MixinRenderAura2",
+                        "client.DragonBlockC.client.MixinRenderDBC",
+                }},
+                {ShaderFixerConfig.FixZeldaSwordSkillsShaders, new String[] {
+                        "client.Zeldaswordskills.client.render.entity.MixinRenderEntityWhip",
+                        "client.Zeldaswordskills.client.render.entity.MixinRenderEntityHookShot",
+                }},
+                {ShaderFixerConfig.FixMcheliOShaders, new String[] {
+                       "client.mchelio.MixinMCH_GuiTargetMarker",
+                       "client.mchelio.MixinMCH_HudItem",
+                       "client.mchelio.MixinMCH_RenderAircraft",
+                }},
+                {ShaderFixerConfig.FixRivalRebelsShaders, new String[] {
+                    "client.rivalrebels.client.entity.MixinRenderLaserBurst",
+                    "client.rivalrebels.client.entity.MixinRenderLaserLink",
+                    "client.rivalrebels.client.entity.MixinRenderLightningBolt2",
+                    "client.rivalrebels.client.entity.MixinRenderLightningLink",
+                    "client.rivalrebels.client.entity.MixinRenderPlasmoid",
+                    "client.rivalrebels.client.model.MixinModelAstroBlasterBody",
+                    "client.rivalrebels.client.model.MixinAstroBlasterRenderer",
+                    "client.rivalrebels.client.model.MixinModelBlastRing",
+                    "client.rivalrebels.client.entity.MixinRenderSphereBlast",
+                    "client.rivalrebels.client.entity.MixinRenderTachyonBombBlast",
+                    "client.rivalrebels.client.entity.MixinRenderTheoreticalTsarBlast",
+                    "client.rivalrebels.client.entity.MixinRenderTsarBlast",
+                    "client.rivalrebels.client.entity.MixinRenderAntimatterBombBlast",
+                    "client.rivalrebels.client.entity.MixinRenderRhodes",
+                    "client.rivalrebels.client.entity.MixinTileEntityForceFieldNodeRenderer",
+                    "client.rivalrebels.client.entity.MixinRenderLibrary",
+                    "client.rivalrebels.client.entity.MixinRenderBlood",
+                    "client.rivalrebels.client.entity.MixinEntityBloodFX",
+                    "client.rivalrebels.client.entity.MixinTileEntityPlasmaExplosionRenderer",
+                }},
+                {ShaderFixerConfig.FixSchematicaShaders, new String[] {
+                        "client.Schematica.client.MixinRendererSchematicChunk",
+                        "client.Schematica.client.MixinRendererSchematicGlobal",
+                        "client.Schematica.client.MixinRenderHelper",
+                }},
+                {ShaderFixerConfig.FixJourneymapShaders, new String[] {
+                        "client.Journeymap.MixinDrawUtil",
+                }},
+                {ShaderFixerConfig.FixAvaritiaShaders, new String[] {
+                   "client.avaritia.client.MixinCosmicItemRenderer",
+                   "client.avaritia.client.MixinModelArmorInfinity",
+                   "client.avaritia.client.MixinRenderHeavenArrow",
+                }},
+                {ShaderFixerConfig.FixThaumicConciliumShaders, new String[] {
+                   "client.ThaumicConcilium.client.MixinAstralMonitorRenderer",
+                   "client.ThaumicConcilium.client.MixinCrimsonOrbEntityRenderer",
+                   "client.ThaumicConcilium.client.MixinDissolvedRenderer",
+                   "client.ThaumicConcilium.client.MixinDistortionEffectRenderer",
+                   "client.ThaumicConcilium.client.MixinHexOfPredictabilityTileRenderer",
+                   "client.ThaumicConcilium.client.MixinMaterialPeelerRenderer",
+                   "client.ThaumicConcilium.client.MixinQuicksilverElementalRenderer",
+                   "client.ThaumicConcilium.client.MixinRiftRenderer",
+                }},
+                {ShaderFixerConfig.FixOpenComputersShaders, new String[] {
+                    "client.oc.client.MixinScreenRenderer",
+                    "client.oc.client.MixinHologramRenderer",
+                    "client.oc.client.MixinRobotRenderer",
+                    "client.oc.client.MixinRenderState",
+                }},
+                {ShaderFixerConfig.FixElnShaders, ShaderFixerConfig.ElnLightMixins
+                        ? new String[] {
+                        "client.eln.client.MixinDataLogs",
+                        "client.eln.client.MixinUtilsClient",
+                        "client.eln.client.MixinLampSocketStandardObjRender",
+                        "client.eln.client.MixinLampSocketSuspendedObjRender",
+                        "client.eln.client.MixinNixieTubeDescriptor"
+                    }
+                        : new String[] {
+                        "client.eln.client.MixinDataLogs",
+                        "client.eln.client.MixinUtilsClient",
+                        "client.eln.client.MixinNixieTubeDescriptor"
+                }},
+                
+                {ShaderFixerConfig.FixHbmShaders,
+                        Stream.concat(
+                        Stream.concat(
+                        Arrays.stream(new String[] {
+                            "client.hbm.client.MixinParticleAmatFlash",     //Antimatter explosion
+                            "client.hbm.client.MixinParticleDebugLine",     //Drone path lines
+                            "client.hbm.client.MixinParticleRadiationFog",  //GL11.GL_LIGHTING
+                            "client.hbm.client.MixinParticleSpark",         //"Tauon" turret, arc welder
+                            "client.hbm.client.MixinParticleSpentCasing",   //Smoke on bullets/shells
+                            specjork ? "client.hbm.client.MixinBeamPronter" : "client.hbm.client.MixinBeamPronterORIG", //FEL laser, ICF laser
+                            "client.hbm.client.MixinItemRenderDetonatorLaser", //LED on top, sine wave on the side
+                            "client.hbm.client.MixinItemRendererMeteorSword", //Lighting glitch in 3rd person view
+                            "client.hbm.client.MixinItemRenderLibrary", //Radiation-Powered Engine lights render in hand
+                            "client.hbm.client.MixinModelArmorEnvsuit", //Armor helmet lamps
+                            "client.hbm.client.MixinRenderBAT9000", //Liquid inside
+                            "client.hbm.client.MixinRenderBeam", //Immolator/ HPP LaserJet projectile
+                            "client.hbm.client.MixinRenderBeam2", //Power Fist (Zapper) projectile
+                            "client.hbm.client.MixinRenderBeam3", //Power Fist (Extracting Mining Laser) projectile
+                            "client.hbm.client.MixinRenderBeam4", //Spark Plug projectile
+                            "client.hbm.client.MixinRenderBeam5", //B92 projectile
+                            "client.hbm.client.MixinRenderBeam6", //B92 projectile
+                            "client.hbm.client.MixinRenderBlackHole", //Jet from the center along the poles
+                            "client.hbm.client.MixinRenderBobble", //Pu-238 Bobble
+                            "client.hbm.client.MixinRenderCloudRainbow", //Flickering field, during a DFC explosion, from a B93 projectile
+                            "client.hbm.client.MixinRenderCore", //Sphere of the block itself, additional spheres when it works
+                            "client.hbm.client.MixinRenderCraneConsole", //Buttons on the console
+                            "client.hbm.client.MixinRenderDeathBlast", //From the orbital death ray
+                            "client.hbm.client.MixinRenderDemonLamp", //Disk of blue light, brighter with shaders
+                            "client.hbm.client.MixinRenderFlare", //Flare grenade, brighter with shaders
+                            "client.hbm.client.MixinRenderFOEQ", //Fire behind the falling shuttle
+                            "client.hbm.client.MixinRenderLantern", //Light in the lamp
+                            "client.hbm.client.MixinRenderLanternINNER", //Light in the lamp
+                            "client.hbm.client.MixinRenderLanternBehemoth", //Light in the lamp
+                            "client.hbm.client.MixinRenderMachineForceField", //Green lines forming a sphere
+                            "client.hbm.client.MixinRenderMixer", //Liquid inside
+                            "client.hbm.client.MixinRenderOverhead", //Red square near entities
+                            "client.hbm.client.MixinRenderPumpjack", //Pumpjack bridle
+                            "client.hbm.client.MixinRenderRadarScreen", //Green bar going from top to bottom
+                            "client.hbm.client.MixinRenderRadGen", //2 lights on top of engine
+                            "client.hbm.client.MixinRenderRBMKConsole", //Buttons on the console
+                            "client.hbm.client.MixinRenderRBMKLid", //Cherenkov radiation
+                            "client.hbm.client.MixinRenderSiegeCraft", //4 lights on top
+                            "client.hbm.client.MixinRenderSiegeLaser", //UFO projectile
+                            "client.hbm.client.MixinRenderSmallReactor", //Cherenkov's radiation, brighter with shaders
+                            "client.hbm.client.MixinRenderSolarBoiler", //Rays of light
+                            "client.hbm.client.MixinRenderSparks", //Lightning in a breeding reactor/DFC
+                            "client.hbm.client.MixinRenderSpear", //Rays of light from the digamma spear
+                            "client.hbm.client.MixinRenderOrbus", //Liquid inside
+                            "client.hbm.client.MixinRenderBullet", //!GLASS/TAU
+                            "client.hbm.client.MixinRenderRainbow", //!ZOMG
+                            "client.hbm.client.sedna.MixinLegoClient", //Bullet render
+                            "client.hbm.client.sedna.MixinModEventHandlerRenderer", //Redirect to out system
+                            "client.hbm.client.sedna.MixinItemRenderWeaponBase", //Smoke, flash brightness
+                            "client.hbm.client.sedna.guns.MixinItemRenderAtlas", //Patch texture after smoke
+                            "client.hbm.client.sedna.guns.MixinItemRenderDANI", //Patch dual texture
+                            "client.hbm.client.sedna.guns.MixinItemRenderHenry", //Patch texture after smoke
+                            "client.hbm.client.sedna.guns.MixinItemRenderMaresleg", //Patch texture after smoke
+                            "client.hbm.client.sedna.guns.MixinItemRenderMareslegAkimbo", //Patch texture after smoke
+                            "client.hbm.client.MixinRenderChemical", //Antimatter thing
+                            "client.hbm.client.MixinRenderSolidifier", //Liquid inside
+                            "client.hbm.client.MixinRenderLiquefactor", //Liquid inside
+                            "client.hbm.client.MixinRenderRefueler", //Liquid & glClipPlane
+                            "client.hbm.client.MixinModelNo9", //Lamp
+                            "client.hbm.client.MixinRenderCharger", //Lamp
+                            "client.hbm.client.MixinRenderFurnaceSteel", //Heat thing
+                            "client.hbm.client.MixinModelArmorWingsPheo", //idk (I know)
+                            "client.hbm.client.MixinRenderTorex", //MUSHROOM
+                            "client.hbm.client.MixinDiamondPronter", //NFPA 704 (on barrels, tanks)
+                        }),
+                            specjork ? Arrays.stream(new String[] {
+                                "client.hbm.client.MixinSkyProviderCelestial",  //Sky
+                                "client.hbm.client.MixinSkyProviderLaytheSunset",   //"Fix" for angelica
+                            }) : Stream.empty()
+                        ),
+                            ShaderFixerConfig.HbmExtendedHazardDescriptions ? Arrays.stream(new String[] {
+                                "client.hbm.client.descr.MixinHazardTypeAsbestos",
+                                "client.hbm.client.descr.MixinHazardTypeBlinding",
+                                "client.hbm.client.descr.MixinHazardTypeCoal",
+                                "client.hbm.client.descr.MixinHazardTypeExplosive",
+                                "client.hbm.client.descr.MixinHazardTypeHot",
+                                "client.hbm.client.descr.MixinHazardTypeHydroactive",
+                            }) : Stream.empty()
+                        ).toArray(String[]::new)
+                },
+            {ShaderFixerConfig.FixDSShaders, new String[] {
+                "client.DynamicSurroundings.client.MixinAuroraRenderer",
+            }},
+            {ShaderFixerConfig.FixLMMEShaders, new String[] {
+                "client.lmme.MixinGuiInventory",
+            }},
+            {ShaderFixerConfig.FixHEEhaders, new String[] {
+                "client.HEE.MixinRenderBossDragon",
+                "client.HEE.MixinRenderWeatherLightningBoltPurple",
+                "client.HEE.MixinModClientProxy",
+            }},
+            {ShaderFixerConfig.PatchHBMAngelica, new String[] {
+                "client.angelica.MixinHandRenderer",
+            }},
+            {ShaderFixerConfig.FixCNPCShaders, new String[] {
+                "client.cnpc.MixinRenderChatMessages",
+                "client.cnpc.MixinRenderNPCInterface",
+            }},
+                
+            //ADD THERE ^
+                
+        };
+    }
+    
+    private void handleFix(Object mixinData, List<String> mixins) {
+        if (mixinData instanceof String) {
+            addMixin((String) mixinData, mixins);
+        } else if (mixinData instanceof String[]) {
+            for (String mixin : (String[]) mixinData) {
+                addMixin(mixin, mixins);
+            }
+        }
+    }
+    private void addMixin(String mixinClass, List<String> mixins) {
+        String[] parts = mixinClass.split("\\.");
+        
+        for (String part : parts) {
+            if (part.startsWith("Mixin")) {
+                ShadersFixer.logger.info("Integrating {}...", part);
+                break;
+            }
+        }
+        
+        mixins.add(mixinClass);
+    }
+    private boolean checkNEIVersion() {
+        if (Loader.isModLoaded("NotEnoughItems")) {
+            return Loader.instance().getIndexedModList().get("NotEnoughItems").getVersion().equals("1.0.5.120");
+        }
+        return false;
+    }
+    private boolean checkCCCVersion() {
+        if (Loader.isModLoaded("CodeChickenCore")) {
+            return Loader.instance().getIndexedModList().get("CodeChickenCore").getVersion().equals("1.0.7.48");
+        }
+        return false;
+    }
+    private boolean checkAvaritiaVersion() {
+        if (Loader.isModLoaded("Avaritia")) {
+            return Loader.instance().getIndexedModList().get("Avaritia").getVersion().equals("1.13");
+        }
+        return false;
+    }
+    
     public static void handleInterpolation(float interp) {
         if (ishbmLoaded) {
             try {

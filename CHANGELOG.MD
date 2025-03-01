@@ -1,6 +1,8 @@
-# 3.4?
+# 3.4
 * **[Hbm's NTM]** Fixed fire diamond (NFPA 704) brightness with angelica shaders
 * **[Hbm's NTM]** Fixed nuclear explosion brightness (was completely black) with angelica shaders 
+* **[Vanilla]** Fixed bug due to which the hand wouldn't update rotation when the player was riding (sitting)
+* Huge mixin loading code cleanup
 
 # 3.3 hot-fix-patch-5
 *Last patch (I hope)*
