@@ -59,6 +59,13 @@ public class ClientHandler {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public void onClientTick(TickEvent.ClientTickEvent event) {
+        World world = FMLClientHandler.instance().getWorldClient();
+        EntityPlayer player = FMLClientHandler.instance().getClientPlayerEntity();
+    
+        if (world == null || event.phase == TickEvent.Phase.START || mc.isGamePaused()) {
+            return;
+        }
+        
 //My
             if (Loader.isModLoaded("lightsabers")) {if (!Loader.instance().getIndexedModList().get("lightsabers").getVersion().contains("kotmatross edition")) {Lightsabers = false;}}
             if (Loader.isModLoaded("Neat")) {if (!Loader.instance().getIndexedModList().get("Neat").getVersion().contains("kotmatross edition")) {Neat = false;}}
@@ -78,13 +85,6 @@ public class ClientHandler {
                 Avaritia = false;
             }
             
-            World world = FMLClientHandler.instance().getWorldClient();
-            EntityPlayer player = FMLClientHandler.instance().getClientPlayerEntity();
-
-            if (world == null || event.phase == TickEvent.Phase.START || mc.isGamePaused()) {
-                return;
-            }
-
             ChatComponentText textSF = new ChatComponentText(EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + I18n.format( "kotmatross.SF") + EnumChatFormatting.RESET);
             ChatComponentText textdepr0 = new ChatComponentText(I18n.format("kotmatross.depr0"));
             ChatComponentText textdepr1 = new ChatComponentText(I18n.format("kotmatross.depr1"));
