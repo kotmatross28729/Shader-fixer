@@ -49,11 +49,14 @@ public class ShadersFixerEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLo
     
     @Override
     public List<String> getMixins(Set<String> loadedCoreMods) {
+        
         ShadersFixer.logger.info("Starting Shaderfixer engine...");
         String configFolder = "config" + File.separator + Tags.MODID + File.separator;
         ShaderFixerConfig.loadEarlyMixinConfig(new File(Launch.minecraftHome, configFolder + "mixinsEarly.cfg"));
         boolean client = FMLLaunchHandler.side().isClient();
-
+        
+//        long startTime = System.nanoTime();
+        
         List<String> mixins = new ArrayList<>();
 
         if(client) {
@@ -63,7 +66,13 @@ public class ShadersFixerEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLo
                 }
             }
         }
-
+    
+//        long endTime = System.nanoTime();
+//        long elapsedTime = (endTime - startTime);
+        
+//        ShadersFixer.logger.info("Execution time: {} ms", elapsedTime / 1_000_000);
+//        ShadersFixer.logger.info("Execution time: {} ns", elapsedTime);
+    
         return mixins;
     }
     

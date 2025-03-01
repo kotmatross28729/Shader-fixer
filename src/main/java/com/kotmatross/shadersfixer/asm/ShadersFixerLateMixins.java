@@ -56,6 +56,8 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
         }
         ishbmLoaded = Loader.isModLoaded("hbm");
     
+//        long startTime = System.nanoTime();
+        
         Map<String, Consumer<Boolean>> modConfigMap = new HashMap<>();
     
         modConfigMap.put("fiskheroes", value -> ShaderFixerConfig.FixFisksuperheroesShaders = value);
@@ -96,7 +98,13 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 }
             }
         }
+    
+//        long endTime = System.nanoTime();
+//        long elapsedTime = (endTime - startTime);
 
+//        ShadersFixer.logger.info("Execution time: {} ms", elapsedTime / 1_000_000);
+//        ShadersFixer.logger.info("Execution time: {} ns", elapsedTime);
+        
         return mixins;
     }
     
