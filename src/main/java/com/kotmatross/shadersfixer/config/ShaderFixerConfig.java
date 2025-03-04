@@ -39,6 +39,8 @@ public class ShaderFixerConfig {
     public static boolean PatchHBMAngelica;
     
     public static boolean FixCNPCShaders;
+    
+    public static boolean FixSignPictureShaders;
 
     public static boolean TechgunsGoreLogger;
     public static List<String> TechgunsGoreList = new ArrayList<>();
@@ -74,7 +76,7 @@ public class ShaderFixerConfig {
         FixHEEhaders = config.getBoolean("FixHEEhaders", categoryShadersfixes, true, "Fixes rendering errors in HardcoreEnderExpansion mod when using shaders.");
         PatchHBMAngelica = config.getBoolean("PatchHBMAngelica", categoryShadersfixes, true, "Patches the HandRenderer class to work correctly with Hbm's NTM gun fix.");
         FixCNPCShaders = config.getBoolean("FixCNPCShaders", categoryShadersfixes, true, "Fixes rendering errors in CustomNPC mod when using shaders.");
-        
+        FixSignPictureShaders = config.getBoolean("FixSignPictureShaders", categoryShadersfixes, true, "Fixes rendering errors in SignPicture mod when using shaders.");
         
         ElnLightMixins = config.getBoolean("ElnLightMixins", categorytweaks, true, "Slightly modifies the code for rendering the light sprite to avoid an issue with bsl shaders that renders object with full alpha when the object's alpha is close to 0 (below 0.1). Use carefully with new versions, as it calls the old sprite rendering code");
 

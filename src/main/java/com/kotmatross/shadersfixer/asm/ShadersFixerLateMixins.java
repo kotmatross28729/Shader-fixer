@@ -109,6 +109,9 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
         if(!loadedMods.contains("customnpcs")) {
             ShaderFixerConfig.FixCNPCShaders = false;
         }
+        if(!loadedMods.contains("signpic")) {
+            ShaderFixerConfig.FixSignPictureShaders = false;
+        }
         
         List<String> mixins = new ArrayList<>();
         
@@ -343,6 +346,12 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 ShadersFixer.logger.info("Trying to integrate CustomNPC mixins...");
                 mixins.add("client.cnpc.MixinRenderChatMessages");
                 mixins.add("client.cnpc.MixinRenderNPCInterface");
+            }
+            if (ShaderFixerConfig.FixSignPictureShaders) {
+                ShadersFixer.logger.info("Trying to integrate SignPicture mixins...");
+                mixins.add("client.signPicture.MixinCustomTileEntitySignRenderer");
+                mixins.add("client.signPicture.MixinRenderHelper");
+                mixins.add("client.signPicture.MixinStateRender");
             }
         }
         

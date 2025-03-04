@@ -1,3 +1,8 @@
+# 3.4-patch-1
+* **[JourneyMap]** Fixed crash with new versions (5.2.3+)
+* **[SignPicture]** Fixed rendering with shaders
+* **[SignPicture]** Fixed brightness when rendering vanilla signs with angelica shaders
+
 # 3.4
 * **[Hbm's NTM]** Fixed fire diamond (NFPA 704) brightness with angelica shaders
 * **[Hbm's NTM]** Fixed nuclear explosion brightness (was completely black) with angelica shaders 
