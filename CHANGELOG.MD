@@ -1,5 +1,6 @@
 # 3.4-patch-1
 * **[JourneyMap]** Fixed crash with new versions (5.2.3+)
+* **[Hbm's NTM]** Fixed wires (pylons) brightness with angelica shaders
 * **[SignPicture]** Fixed rendering with shaders
 * **[SignPicture]** Fixed brightness when rendering vanilla signs with angelica shaders
 

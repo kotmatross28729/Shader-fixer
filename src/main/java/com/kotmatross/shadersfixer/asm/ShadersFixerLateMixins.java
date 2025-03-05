@@ -314,6 +314,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 mixins.add("client.hbm.client.MixinModelArmorWingsPheo"); //idk (I know)
                 mixins.add("client.hbm.client.MixinRenderTorex"); //MUSHROOM
                 mixins.add("client.hbm.client.MixinDiamondPronter"); //NFPA 704 (on barrels, tanks)
+                mixins.add("client.hbm.client.MixinRenderPylonBase"); //WIRES
                 
                 if(ShaderFixerConfig.HbmExtendedHazardDescriptions) {
                     mixins.add("client.hbm.client.descr.MixinHazardTypeAsbestos");
