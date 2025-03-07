@@ -33,7 +33,6 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
     public static boolean oldCCC = false;
     public static boolean oldAvaritia = false;
     public static boolean specjork = false;
-    
     public static boolean ishbmLoaded = false;
     
     @Override

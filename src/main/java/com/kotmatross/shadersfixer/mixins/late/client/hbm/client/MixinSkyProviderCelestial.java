@@ -16,6 +16,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -26,6 +27,10 @@ import java.util.List;
 public class MixinSkyProviderCelestial {
     // FOR NTM:SPACE
     //!Sensitive to changes
+    
+    //TODO:
+    // Planet render works on moho, even with complementary (getSunBrightness related?)
+    // Make sun bright (On moho (late sunset-night), it just appears as a floating white square, Utils)
     
     // Fix sky with shaders
    @Inject(method = "render",
@@ -59,13 +64,7 @@ public class MixinSkyProviderCelestial {
     @Redirect(method = "render",
             at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glColor4f(FFFF)V", ordinal = 1), remap = false)
     private void transformGLColor(float r, float g, float b, float a) {
-        float alpha = a;
-        
-        if(AngelicaUtils.isShaderEnabled()) {
-            alpha = MathHelper.clamp_float(alpha, 0.1F, 1.0F);
-        }
-        
-        GL11.glColor4f(r, g, b, alpha);
+        GL11.glColor4f(r, g, b, AngelicaUtils.isShaderEnabled() ? MathHelper.clamp_float(a, 0.1F, 1.0F) : a);
     }
     
     //glSkyList2 is ignored by shaders anyway.
@@ -88,6 +87,33 @@ public class MixinSkyProviderCelestial {
     )
     private boolean disableBlendShaders(int i, int j) {
         return !AngelicaUtils.isShaderEnabled();
+    }
+    
+    //Offsets Tessellator's y by 0.1, preventing z-fighting with shader skybox
+    @ModifyArg(method = "renderSun",
+            slice = @Slice(from = @At(value = "INVOKE",
+                    target = "Lnet/minecraft/client/renderer/Tessellator;addVertexWithUV(DDDDD)V",
+                    ordinal = 8),
+                    to = @At(value = "INVOKE",
+                            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
+                            ordinal = 3)),
+            at = @At(value = "INVOKE",
+                    target = "Lnet/minecraft/client/renderer/Tessellator;addVertexWithUV(DDDDD)V"), index = 1)
+    private double fixSunZFighting(double original) {
+        return AngelicaUtils.isShaderEnabled() ? original - 0.1D : original;
+    }
+    //Offset y for flare accordingly
+    @ModifyArg(method = "renderSun",
+            slice = @Slice(from = @At(value = "INVOKE",
+                    target = "Lnet/minecraft/client/renderer/Tessellator;addVertexWithUV(DDDDD)V",
+                    ordinal = 12),
+                    to = @At(value = "INVOKE",
+                            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
+                            ordinal = 4)),
+            at = @At(value = "INVOKE",
+                    target = "Lnet/minecraft/client/renderer/Tessellator;addVertexWithUV(DDDDD)V"), index = 1)
+    private double fixSunZFighting2(double original) {
+        return AngelicaUtils.isShaderEnabled() ? original - 0.1D : original;
     }
     
     /**
@@ -131,7 +157,6 @@ public class MixinSkyProviderCelestial {
     private boolean disableDraw(Tessellator instance) {
         return !AngelicaUtils.isShaderEnabled();
     }
-    
     
     /**
      *  All these WrapWithConditions are aimed at removing this block of code:

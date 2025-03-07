@@ -1,7 +1,10 @@
 package com.kotmatross.shadersfixer;
 
+import com.kotmatross.shadersfixer.asm.ShadersFixerLateMixins;
 import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
 import com.kotmatross.shadersfixer.proxy.CommonProxy;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -39,12 +42,6 @@ public class ShadersFixer {
         if(Loader.isModLoaded("angelica")) {
             IS_ANGELICA_PRESENT = true;
         }
-    }
-    
-    @Mod.EventHandler
-    public void init(FMLInitializationEvent event) {
-        proxy.registerEvents();
-        proxy.init(this);
         if(ShaderFixerConfig.FixRivalRebelsShaders) {
             if (Loader.isModLoaded("rivalrebels")) {
                 if (!Loader.instance().getIndexedModList().get("rivalrebels").getVersion().contains(" fixed")) {
@@ -52,6 +49,27 @@ public class ShadersFixer {
                 }
             }
         }
+    
+        if(ShaderFixerConfig.optifineNTMSpaceCrash) {
+            if(FMLCommonHandler.instance().getSide() == Side.CLIENT) {
+                if (ShadersFixerLateMixins.specjork && FMLClientHandler.instance().hasOptifine()) {
+                    logger.fatal("Detected Optifine with NTM:Space, immediate crash");
+                    throw new RuntimeException(
+                            "Please do NOT use Optifine with Hbm's NTM:Space. " +
+                                    "Some bugs can be EXTREMELY intense, and may even cause seizures. " +
+                                    "Use Angelica for shaders instead. " +
+                                    "You can disable this crash in `.minecraft\\config\\shadersfixer\\mixinsEarly.cfg | optifineNTMSpaceCrash=false.` " +
+                                    "Only turn this off if you are ABSOLUTELY SURE about what you are doing."
+                    );
+                }
+            }
+        }
+    }
+    
+    @Mod.EventHandler
+    public void init(FMLInitializationEvent event) {
+        proxy.registerEvents();
+        proxy.init(this);
     }
 
     private static final boolean IS_SHADERS_MOD_PRESENT;

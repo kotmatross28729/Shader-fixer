@@ -1,6 +1,10 @@
 # 3.4-patch-1
+* **Added crash if Optifine and Hbm's NTM:Space are installed**
+  * Due to horrible flickering bugs
+  * **Can still be disabled in config**, but not recommended
 * **[JourneyMap]** Fixed crash with new versions (5.2.3+)
 * **[Hbm's NTM]** Fixed wires (pylons) brightness with angelica shaders
+* **[Hbm's NTM:Space]** Fixed sun Z-fighting with angelica shaders
 * **[SignPicture]** Fixed rendering with shaders
 * **[SignPicture]** Fixed brightness when rendering vanilla signs with angelica shaders
 

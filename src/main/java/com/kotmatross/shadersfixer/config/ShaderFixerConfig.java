@@ -116,6 +116,8 @@ public class ShaderFixerConfig {
     
     public static boolean DisableRiddingHandRotation;
     
+    public static boolean optifineNTMSpaceCrash;
+    
     public static void loadEarlyMixinConfig(File configFile) {
         Configuration config = new Configuration(configFile);
 
@@ -139,6 +141,8 @@ public class ShaderFixerConfig {
     
         FixRiddingHand = config.getBoolean("FixRiddingHand", categorytweaks, true, "Fixes bug due to which the hand wouldn't update rotation when the player was riding/sitting.");
         DisableRiddingHandRotation = config.getBoolean("DisableRiddingHandRotation", categorytweaks, false, "Disables 1st person hand rotation when the player is riding/sitting (similar to newer versions). Requires FixRiddingHand to be false.");
+    
+        optifineNTMSpaceCrash = config.getBoolean("optifineNTMSpaceCrash", categorytweaks, true, "Crashes the game if it detects optifine with Hbm's NTM:Space. Only disable it if you know what you are doing...");
     
         if(config.hasChanged()) {
             config.save();
