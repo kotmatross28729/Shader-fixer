@@ -5,6 +5,7 @@
 * **[JourneyMap]** Fixed crash with new versions (5.2.3+)
 * **[Hbm's NTM]** Fixed wires (pylons) brightness with angelica shaders
 * **[Hbm's NTM:Space]** Fixed sun Z-fighting with angelica shaders
+* **[Hbm's NTM:Space]** Bring back Laythe sunset, should now be fixed without disabling glBlendFunc
 * **[SignPicture]** Fixed rendering with shaders
 * **[SignPicture]** Fixed brightness when rendering vanilla signs with angelica shaders
 

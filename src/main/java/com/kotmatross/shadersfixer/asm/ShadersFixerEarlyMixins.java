@@ -32,6 +32,9 @@ public class ShadersFixerEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLo
         List<String> mixins = new ArrayList<>();
         
         if(client) {
+            
+            //VANILLA
+            
             if(ShaderFixerConfig.FixMinecraftHitboxesRender) {
                 ShadersFixer.logger.info("Integrating drawOutlinedBoundingBox mixin...");
                 mixins.add("client.minecraft.client.renderer.entity.MixinRenderGlobal");
@@ -82,6 +85,16 @@ public class ShadersFixerEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLo
                 ShadersFixer.logger.info("Integrating MixinRenderPlayer...");
                 mixins.add("client.minecraft.client.renderer.entity.MixinRenderPlayer");
             }
+            
+            //SPECIAL MIXINS
+    
+            if(loadedCoreMods.contains("com.gtnewhorizons.angelica.loading.AngelicaTweaker")) {
+                if(ShaderFixerConfig.FixAngelicaShaderPackScreenGLLeak) {
+                    ShadersFixer.logger.info("Integrating MixinShaderPackScreen...");
+                    mixins.add("client.special.MixinShaderPackScreen");
+                }
+            }
+            
         }
         
         return mixins;

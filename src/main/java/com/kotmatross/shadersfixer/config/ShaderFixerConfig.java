@@ -118,6 +118,8 @@ public class ShaderFixerConfig {
     
     public static boolean optifineNTMSpaceCrash;
     
+    public static boolean FixAngelicaShaderPackScreenGLLeak;
+    
     public static void loadEarlyMixinConfig(File configFile) {
         Configuration config = new Configuration(configFile);
 
@@ -131,7 +133,8 @@ public class ShaderFixerConfig {
         FixMinecraftLightningBoltRender = config.getBoolean("FixMinecraftLightningBoltRender", categoryShadersfixes, true, "Fixes rendering of lightning bolt with shaders.");
         FixMinecraftNameTagsRender = config.getBoolean("FixMinecraftNameTagsRender", categoryShadersfixes, true, "Fixes rendering of name tags with shaders.");
         FixMinecraftEffectGUIBlending = config.getBoolean("FixMinecraftEffectGUIBlending", categoryShadersfixes, true, "Fixes an annoying bug due to which the effect bar in the creative menu turns black.");
-      
+        FixAngelicaShaderPackScreenGLLeak = config.getBoolean("FixAngelicaShaderPackScreenGLLeak", categoryShadersfixes, true, "Fixes GL leak when opening shader menu");
+    
         enableNotifications = config.getBoolean("enableNotifications", categorytweaks, true, "Turns on a notification in the chat when detected 'old version' mods.");
         startTicksOffset = config.getInt("startTicksOffset", categorytweaks, 50,0, 1024, "First update notification will be delayed by n ticks to be displayed last at chat.");
         ticksInterval = config.getInt("ticksInterval", categorytweaks, 10,0, 1024, "Update notifications will be delayed by n ticks after the last notification (to avoid a sudden influx of notifications).");
@@ -143,7 +146,7 @@ public class ShaderFixerConfig {
         DisableRiddingHandRotation = config.getBoolean("DisableRiddingHandRotation", categorytweaks, false, "Disables 1st person hand rotation when the player is riding/sitting (similar to newer versions). Requires FixRiddingHand to be false.");
     
         optifineNTMSpaceCrash = config.getBoolean("optifineNTMSpaceCrash", categorytweaks, true, "Crashes the game if it detects optifine with Hbm's NTM:Space. Only disable it if you know what you are doing...");
-    
+        
         if(config.hasChanged()) {
             config.save();
         }
