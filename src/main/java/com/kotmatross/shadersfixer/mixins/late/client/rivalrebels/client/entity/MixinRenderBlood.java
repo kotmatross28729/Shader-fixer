@@ -5,10 +5,12 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+
 import rivalrebels.RivalRebels;
 import rivalrebels.client.renderentity.RenderBlood;
 
@@ -20,10 +22,8 @@ public abstract class MixinRenderBlood extends Render {
      * @reason fix particle render issue
      */
     @Overwrite(remap = false)
-    public void func_76986_a(Entity entity, double x, double y, double z, float f, float f1)
-    {
-        if (entity.ticksExisted > 1)
-        {
+    public void func_76986_a(Entity entity, double x, double y, double z, float f, float f1) {
+        if (entity.ticksExisted > 1) {
             GL11.glPushMatrix();
             GL11.glTranslatef((float) x, (float) y, (float) z);
             GL11.glScalef(0.25F, 0.25F, 0.25F);
@@ -34,8 +34,7 @@ public abstract class MixinRenderBlood extends Render {
     }
 
     @Shadow(remap = false)
-    private void renderFaceMe()
-    {
+    private void renderFaceMe() {
         float var7 = 1.0F;
         float var8 = 0.5F;
         float var9 = 0.25F;
@@ -52,8 +51,7 @@ public abstract class MixinRenderBlood extends Render {
     }
 
     @Shadow(remap = false)
-    protected ResourceLocation func_110775_a(Entity entity)
-    {
+    protected ResourceLocation func_110775_a(Entity entity) {
         return null;
     }
 }

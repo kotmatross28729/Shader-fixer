@@ -1,11 +1,13 @@
 package com.kotmatross.shadersfixer.mixins.early.client.minecraft.client.renderer.entity.sedna;
 
-import com.kotmatross.shadersfixer.shrimp.Vibe;
+import static net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON;
+
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.IItemRenderer;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,15 +15,16 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON;
+import com.kotmatross.shadersfixer.shrimp.Vibe;
 
 @Mixin(value = ForgeHooksClient.class, priority = 1003)
 public class MixinForgeHooksClient {
 
     @Inject(method = "renderEquippedItem", at = @At("HEAD"), cancellable = true, remap = false)
-    private static void onRenderEquippedItem(IItemRenderer.ItemRenderType type, IItemRenderer customRenderer, RenderBlocks renderBlocks, EntityLivingBase entity, ItemStack item, CallbackInfo ci) {
+    private static void onRenderEquippedItem(IItemRenderer.ItemRenderType type, IItemRenderer customRenderer,
+        RenderBlocks renderBlocks, EntityLivingBase entity, ItemStack item, CallbackInfo ci) {
         if (customRenderer instanceof Vibe) {
-            if(type.equals(EQUIPPED_FIRST_PERSON)) {
+            if (type.equals(EQUIPPED_FIRST_PERSON)) {
                 GL11.glPushMatrix();
                 customRenderer.renderItem(type, item, renderBlocks, entity);
                 GL11.glPopMatrix();

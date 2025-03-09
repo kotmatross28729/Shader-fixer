@@ -1,15 +1,18 @@
 package com.kotmatross.shadersfixer.mixins.late.client.oc.client;
 
-import com.kotmatross.shadersfixer.Utils;
-import li.cil.oc.util.RenderState$;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import com.kotmatross.shadersfixer.Utils;
+
+import li.cil.oc.util.RenderState$;
+
 @Mixin(value = RenderState$.class, priority = 999)
 public class MixinRenderState {
+
     @Unique
     private static float shaders_fixer$lbx;
     @Unique

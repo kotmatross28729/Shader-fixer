@@ -1,9 +1,7 @@
 package com.kotmatross.shadersfixer.mixins.late.client.lmme;
 
-import com.kotmatross.shadersfixer.shrimp.nonsense.FuckingCursed;
-import littleMaidMobX.entity.EntityLittleMaid;
-import littleMaidMobX.gui.GuiInventory;
-import littleMaidMobX.inventory.ContainerInventory;
+import java.util.Random;
+
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
@@ -11,17 +9,23 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.StatCollector;
+
 import org.lwjgl.opengl.EXTRescaleNormal;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
-import java.util.Random;
+import com.kotmatross.shadersfixer.shrimp.nonsense.FuckingCursed;
+
+import littleMaidMobX.entity.EntityLittleMaid;
+import littleMaidMobX.gui.GuiInventory;
+import littleMaidMobX.inventory.ContainerInventory;
 
 @FuckingCursed
 @Mixin(value = GuiInventory.class, priority = 998)
-public abstract class MixinGuiInventory extends GuiContainer{
+public abstract class MixinGuiInventory extends GuiContainer {
+
     @Shadow(remap = false)
     private Random rand;
     @Shadow(remap = false)
@@ -59,16 +63,17 @@ public abstract class MixinGuiInventory extends GuiContainer{
     @Overwrite(remap = false)
     protected void func_146979_b(int par1, int par2) {
         String ls;
-        mc.fontRenderer.drawString(StatCollector.translateToLocal(
-            lowerChestInventory.getInventoryName()), 8, 64, 0x404040);
-        mc.fontRenderer.drawString(StatCollector.translateToLocal(
-            upperChestInventory.getInventoryName()), 8, 114, 0x404040);
-        mc.fontRenderer.drawString(StatCollector.translateToLocal(
-            "littleMaidMob.text.STATUS"), 86, 8, 0x404040);
-        mc.fontRenderer.drawString(StatCollector.translateToLocal(
-            "littleMaidMob.mode.".concat(entitylittlemaid.getMaidModeString())), 86, 61, 0x404040);
+        mc.fontRenderer
+            .drawString(StatCollector.translateToLocal(lowerChestInventory.getInventoryName()), 8, 64, 0x404040);
+        mc.fontRenderer
+            .drawString(StatCollector.translateToLocal(upperChestInventory.getInventoryName()), 8, 114, 0x404040);
+        mc.fontRenderer.drawString(StatCollector.translateToLocal("littleMaidMob.text.STATUS"), 86, 8, 0x404040);
+        mc.fontRenderer.drawString(
+            StatCollector.translateToLocal("littleMaidMob.mode.".concat(entitylittlemaid.getMaidModeString())),
+            86,
+            61,
+            0x404040);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-
 
         int lj = 0;
         int lk = 0;
@@ -83,8 +88,8 @@ public abstract class MixinGuiInventory extends GuiContainer{
         float f3 = entitylittlemaid.rotationYaw;
         float f4 = entitylittlemaid.rotationYawHead;
         float f5 = entitylittlemaid.rotationPitch;
-        float f8 = (float)(guiLeft + 51 - par1);
-        float f9 = (float)(guiTop + 22 - par2);
+        float f8 = (float) (guiLeft + 51 - par1);
+        float f9 = (float) (guiTop + 22 - par2);
         GL11.glRotatef(135F, 0.0F, 1.0F, 0.0F);
         RenderHelper.enableStandardItemLighting();
         GL11.glRotatef(-135F, 0.0F, 1.0F, 0.0F);
@@ -94,7 +99,7 @@ public abstract class MixinGuiInventory extends GuiContainer{
         entitylittlemaid.rotationPitch = -(float) Math.atan(f9 / 40F) * 20F;
         GL11.glTranslatef(0.0F, entitylittlemaid.yOffset, 0.0F);
         RenderManager.instance.playerViewY = 180F;
-        //RenderManager.instance.renderEntityWithPosYaw(entitylittlemaid, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F);
+        // RenderManager.instance.renderEntityWithPosYaw(entitylittlemaid, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F);
         entitylittlemaid.renderYawOffset = f2;
         entitylittlemaid.rotationYaw = f3;
         entitylittlemaid.rotationYawHead = f4;

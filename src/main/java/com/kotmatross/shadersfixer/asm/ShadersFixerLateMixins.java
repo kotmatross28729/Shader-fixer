@@ -1,19 +1,5 @@
 package com.kotmatross.shadersfixer.asm;
 
-import com.gtnewhorizon.gtnhmixins.ILateMixinLoader;
-import com.gtnewhorizon.gtnhmixins.LateMixin;
-import com.hbm.config.ClientConfig;
-import com.hbm.render.item.weapon.sedna.ItemRenderWeaponBase;
-import com.kotmatross.shadersfixer.ShadersFixer;
-import com.kotmatross.shadersfixer.Tags;
-import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
-import cpw.mods.fml.common.Loader;
-import net.minecraft.item.ItemStack;
-import net.minecraft.launchwrapper.Launch;
-import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.MinecraftForgeClient;
-import org.spongepowered.asm.mixin.MixinEnvironment;
-
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -21,25 +7,45 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.launchwrapper.Launch;
+import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.MinecraftForgeClient;
+
+import org.spongepowered.asm.mixin.MixinEnvironment;
+
+import com.gtnewhorizon.gtnhmixins.ILateMixinLoader;
+import com.gtnewhorizon.gtnhmixins.LateMixin;
+import com.hbm.config.ClientConfig;
+import com.hbm.render.item.weapon.sedna.ItemRenderWeaponBase;
+import com.kotmatross.shadersfixer.ShadersFixer;
+import com.kotmatross.shadersfixer.Tags;
+import com.kotmatross.shadersfixer.config.ShaderFixerConfig;
+
+import cpw.mods.fml.common.Loader;
+
 @LateMixin
 public class ShadersFixerLateMixins implements ILateMixinLoader {
+
     @Override
     public String getMixinConfig() {
         return "mixins.shadersfixer.late.json";
     }
-    public static final MixinEnvironment.Side side = MixinEnvironment.getCurrentEnvironment().getSide();
-    
+
+    public static final MixinEnvironment.Side side = MixinEnvironment.getCurrentEnvironment()
+        .getSide();
+
     public static boolean oldNEI = false;
     public static boolean oldCCC = false;
     public static boolean oldAvaritia = false;
     public static boolean specjork = false;
     public static boolean ishbmLoaded = false;
-    
+
     @Override
     public List<String> getMixins(Set<String> loadedMods) {
         String configFolder = "config" + File.separator + Tags.MODID + File.separator;
         ShaderFixerConfig.loadMixinConfig(new File(Launch.minecraftHome, configFolder + "mixins.cfg"));
-    
+
         oldNEI = checkNEIVersion();
         oldCCC = checkCCCVersion();
         oldAvaritia = checkAvaritiaVersion();
@@ -49,74 +55,74 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
             specjork = false;
         }
         ishbmLoaded = Loader.isModLoaded("hbm");
-        
-        //don't integrate mixins if there are no suitable mods
-        if(!loadedMods.contains("fiskheroes")) {
+
+        // don't integrate mixins if there are no suitable mods
+        if (!loadedMods.contains("fiskheroes")) {
             ShaderFixerConfig.FixFisksuperheroesShaders = false;
         }
-        if(!loadedMods.contains("NotEnoughItems")) {
+        if (!loadedMods.contains("NotEnoughItems")) {
             ShaderFixerConfig.FixNEIShaders = false;
         }
-        if(!loadedMods.contains("Techguns")) {
+        if (!loadedMods.contains("Techguns")) {
             ShaderFixerConfig.FixTechgunsShaders = false;
         }
-        if(!loadedMods.contains("jinryuubetterrenderaddon") && !loadedMods.contains("jinryuudragonblockc")) {
+        if (!loadedMods.contains("jinryuubetterrenderaddon") && !loadedMods.contains("jinryuudragonblockc")) {
             ShaderFixerConfig.FixDragonBlockCShaders = false;
         }
-        if(!loadedMods.contains("zeldaswordskills")) {
+        if (!loadedMods.contains("zeldaswordskills")) {
             ShaderFixerConfig.FixZeldaSwordSkillsShaders = false;
         }
-        if(!loadedMods.contains("mcheli")) {
+        if (!loadedMods.contains("mcheli")) {
             ShaderFixerConfig.FixMcheliOShaders = false;
         }
-        if(!loadedMods.contains("rivalrebels")) {
+        if (!loadedMods.contains("rivalrebels")) {
             ShaderFixerConfig.FixRivalRebelsShaders = false;
         }
-        if(!loadedMods.contains("Schematica")) {
+        if (!loadedMods.contains("Schematica")) {
             ShaderFixerConfig.FixSchematicaShaders = false;
         }
-        if(!loadedMods.contains("journeymap")) {
+        if (!loadedMods.contains("journeymap")) {
             ShaderFixerConfig.FixJourneymapShaders = false;
         }
-        if(!loadedMods.contains("Avaritia")) {
+        if (!loadedMods.contains("Avaritia")) {
             ShaderFixerConfig.FixAvaritiaShaders = false;
         }
-        if(!loadedMods.contains("ThaumicConcilium")) {
+        if (!loadedMods.contains("ThaumicConcilium")) {
             ShaderFixerConfig.FixThaumicConciliumShaders = false;
         }
-        if(!loadedMods.contains("OpenComputers")) {
+        if (!loadedMods.contains("OpenComputers")) {
             ShaderFixerConfig.FixOpenComputersShaders = false;
         }
-        if(!loadedMods.contains("Eln")) {
+        if (!loadedMods.contains("Eln")) {
             ShaderFixerConfig.FixElnShaders = false;
         }
-        if(!loadedMods.contains("hbm")) {
+        if (!loadedMods.contains("hbm")) {
             ShaderFixerConfig.FixHbmShaders = false;
         }
-        if(!loadedMods.contains("dsurround")) {
+        if (!loadedMods.contains("dsurround")) {
             ShaderFixerConfig.FixDSShaders = false;
         }
-        if(!loadedMods.contains("lmmx")) {
+        if (!loadedMods.contains("lmmx")) {
             ShaderFixerConfig.FixLMMEShaders = false;
         }
-        if(!loadedMods.contains("HardcoreEnderExpansion")) {
+        if (!loadedMods.contains("HardcoreEnderExpansion")) {
             ShaderFixerConfig.FixHEEhaders = false;
         }
-        if(!loadedMods.contains("angelica")) {
+        if (!loadedMods.contains("angelica")) {
             ShaderFixerConfig.PatchHBMAngelica = false;
         }
-        if(!loadedMods.contains("customnpcs")) {
+        if (!loadedMods.contains("customnpcs")) {
             ShaderFixerConfig.FixCNPCShaders = false;
         }
-        if(!loadedMods.contains("signpic")) {
+        if (!loadedMods.contains("signpic")) {
             ShaderFixerConfig.FixSignPictureShaders = false;
         }
-        
+
         List<String> mixins = new ArrayList<>();
-        
+
         if (side == MixinEnvironment.Side.CLIENT) {
             ShadersFixer.logger.info("Integrating Shaderfixer late client mixins...");
-            
+
             if (ShaderFixerConfig.FixFisksuperheroesShaders) {
                 ShadersFixer.logger.info("Trying to integrate fiskheroes mixins...");
                 mixins.add("client.FiskHeroes.client.pack.json.beam.MixinBeamRendererLightning");
@@ -142,7 +148,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
             }
             if (ShaderFixerConfig.FixNEIShaders) {
                 ShadersFixer.logger.info("Trying to integrate NotEnoughItems mixins...");
-                if(oldNEI){
+                if (oldNEI) {
                     ShadersFixer.logger.warn("old NEI detected, mixin may be unstable!");
                     mixins.add("client.NotEnoughItems.client.MixinWorldOverlayRendererLEGACY");
                 } else {
@@ -233,7 +239,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 ShadersFixer.logger.info("Trying to integrate ElectricalAge mixins...");
                 mixins.add("client.eln.client.MixinDataLogs");
                 mixins.add("client.eln.client.MixinUtilsClient");
-                if(ShaderFixerConfig.ElnLightMixins) {
+                if (ShaderFixerConfig.ElnLightMixins) {
                     mixins.add("client.eln.client.MixinLampSocketStandardObjRender");
                     mixins.add("client.eln.client.MixinLampSocketSuspendedObjRender");
                 }
@@ -241,80 +247,83 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
             }
             if (ShaderFixerConfig.FixHbmShaders) {
                 ShadersFixer.logger.info("Trying to integrate Hbm's NTM mixins...");
-                mixins.add("client.hbm.client.MixinParticleAmatFlash"); //Antimatter explosion
-                mixins.add("client.hbm.client.MixinParticleDebugLine"); //Drone path lines
-                mixins.add("client.hbm.client.MixinParticleRadiationFog"); //GL11.GL_LIGHTING
-                mixins.add("client.hbm.client.MixinParticleSpark"); //"Tauon" turret, arc welder
-                mixins.add("client.hbm.client.MixinParticleSpentCasing"); //Smoke on bullets/shells
-                if(specjork) {
-                    mixins.add("client.hbm.client.MixinBeamPronter"); //FEL laser, ICF laser, but for fork
+                mixins.add("client.hbm.client.MixinParticleAmatFlash"); // Antimatter explosion
+                mixins.add("client.hbm.client.MixinParticleDebugLine"); // Drone path lines
+                mixins.add("client.hbm.client.MixinParticleRadiationFog"); // GL11.GL_LIGHTING
+                mixins.add("client.hbm.client.MixinParticleSpark"); // "Tauon" turret, arc welder
+                mixins.add("client.hbm.client.MixinParticleSpentCasing"); // Smoke on bullets/shells
+                if (specjork) {
+                    mixins.add("client.hbm.client.MixinBeamPronter"); // FEL laser, ICF laser, but for fork
                 } else {
-                    mixins.add("client.hbm.client.MixinBeamPronterORIG"); //FEL laser, ICF laser
+                    mixins.add("client.hbm.client.MixinBeamPronterORIG"); // FEL laser, ICF laser
                 }
-                mixins.add("client.hbm.client.MixinItemRenderDetonatorLaser"); //LED on top, sine wave on the side
-                mixins.add("client.hbm.client.MixinItemRendererMeteorSword"); //Lighting glitch in 3rd person view
-                mixins.add("client.hbm.client.MixinItemRenderLibrary"); //Radiation-Powered Engine lights render in hand
-                mixins.add("client.hbm.client.MixinModelArmorEnvsuit"); //Armor helmet lamps
-                mixins.add("client.hbm.client.MixinRenderBAT9000"); //Liquid inside
-                mixins.add("client.hbm.client.MixinRenderBeam"); //Immolator/ HPP LaserJet projectile
-                mixins.add("client.hbm.client.MixinRenderBeam2"); //Power Fist (Zapper) projectile
-                mixins.add("client.hbm.client.MixinRenderBeam3"); //Power Fist (Extracting Mining Laser) projectile
-                mixins.add("client.hbm.client.MixinRenderBeam4"); //Spark Plug projectile
-                mixins.add("client.hbm.client.MixinRenderBeam5"); //B92 projectile
-                mixins.add("client.hbm.client.MixinRenderBeam6"); //B92 projectile
-                mixins.add("client.hbm.client.MixinRenderBlackHole"); //Jet from the center along the poles
-                mixins.add("client.hbm.client.MixinRenderBobble"); //Pu-238 Bobble
-                mixins.add("client.hbm.client.MixinRenderCloudRainbow"); //Flickering field, during a DFC explosion, from a B93 projectile
-                mixins.add("client.hbm.client.MixinRenderCore"); //Sphere of the block itself, additional spheres when it works
-                mixins.add("client.hbm.client.MixinRenderCraneConsole"); //Buttons on the console
-                mixins.add("client.hbm.client.MixinRenderDeathBlast"); //From the orbital death ray
-                mixins.add("client.hbm.client.MixinRenderDemonLamp"); //Disk of blue light, brighter with shaders
-                mixins.add("client.hbm.client.MixinRenderFlare"); //Flare grenade, brighter with shaders
-                mixins.add("client.hbm.client.MixinRenderFOEQ"); //Fire behind the falling shuttle
-                mixins.add("client.hbm.client.MixinRenderLantern"); //Light in the lamp
-                mixins.add("client.hbm.client.MixinRenderLanternINNER"); //Light in the lamp
-                mixins.add("client.hbm.client.MixinRenderLanternBehemoth"); //Light in the lamp
-                mixins.add("client.hbm.client.MixinRenderMachineForceField"); //Green lines forming a sphere
-                mixins.add("client.hbm.client.MixinRenderMixer"); //Liquid inside
-                mixins.add("client.hbm.client.MixinRenderOverhead"); //Red square near entities
-                mixins.add("client.hbm.client.MixinRenderPumpjack"); //Pumpjack bridle
-                mixins.add("client.hbm.client.MixinRenderRadarScreen"); //Green bar going from top to bottom
-                mixins.add("client.hbm.client.MixinRenderRadGen"); //2 lights on top of engine
-                mixins.add("client.hbm.client.MixinRenderRBMKConsole"); //Buttons on the console
-                mixins.add("client.hbm.client.MixinRenderRBMKLid"); //Cherenkov radiation
-                mixins.add("client.hbm.client.MixinRenderSiegeCraft"); //4 lights on top
-                mixins.add("client.hbm.client.MixinRenderSiegeLaser"); //UFO projectile
-                mixins.add("client.hbm.client.MixinRenderSmallReactor"); //Cherenkov's radiation, brighter with shaders
-                mixins.add("client.hbm.client.MixinRenderSolarBoiler"); //Rays of light
-                mixins.add("client.hbm.client.MixinRenderSparks"); //Lightning in a breeding reactor/DFC
-                mixins.add("client.hbm.client.MixinRenderSpear"); //Rays of light from the digamma spear
-                mixins.add("client.hbm.client.MixinRenderOrbus"); //Liquid inside
-                if(specjork) {
-                    mixins.add("client.hbm.client.MixinSkyProviderCelestial");  //Sky
+                mixins.add("client.hbm.client.MixinItemRenderDetonatorLaser"); // LED on top, sine wave on the side
+                mixins.add("client.hbm.client.MixinItemRendererMeteorSword"); // Lighting glitch in 3rd person view
+                mixins.add("client.hbm.client.MixinItemRenderLibrary"); // Radiation-Powered Engine lights render in
+                                                                        // hand
+                mixins.add("client.hbm.client.MixinModelArmorEnvsuit"); // Armor helmet lamps
+                mixins.add("client.hbm.client.MixinRenderBAT9000"); // Liquid inside
+                mixins.add("client.hbm.client.MixinRenderBeam"); // Immolator/ HPP LaserJet projectile
+                mixins.add("client.hbm.client.MixinRenderBeam2"); // Power Fist (Zapper) projectile
+                mixins.add("client.hbm.client.MixinRenderBeam3"); // Power Fist (Extracting Mining Laser) projectile
+                mixins.add("client.hbm.client.MixinRenderBeam4"); // Spark Plug projectile
+                mixins.add("client.hbm.client.MixinRenderBeam5"); // B92 projectile
+                mixins.add("client.hbm.client.MixinRenderBeam6"); // B92 projectile
+                mixins.add("client.hbm.client.MixinRenderBlackHole"); // Jet from the center along the poles
+                mixins.add("client.hbm.client.MixinRenderBobble"); // Pu-238 Bobble
+                mixins.add("client.hbm.client.MixinRenderCloudRainbow"); // Flickering field, during a DFC explosion,
+                                                                         // from a B93 projectile
+                mixins.add("client.hbm.client.MixinRenderCore"); // Sphere of the block itself, additional spheres when
+                                                                 // it works
+                mixins.add("client.hbm.client.MixinRenderCraneConsole"); // Buttons on the console
+                mixins.add("client.hbm.client.MixinRenderDeathBlast"); // From the orbital death ray
+                mixins.add("client.hbm.client.MixinRenderDemonLamp"); // Disk of blue light, brighter with shaders
+                mixins.add("client.hbm.client.MixinRenderFlare"); // Flare grenade, brighter with shaders
+                mixins.add("client.hbm.client.MixinRenderFOEQ"); // Fire behind the falling shuttle
+                mixins.add("client.hbm.client.MixinRenderLantern"); // Light in the lamp
+                mixins.add("client.hbm.client.MixinRenderLanternINNER"); // Light in the lamp
+                mixins.add("client.hbm.client.MixinRenderLanternBehemoth"); // Light in the lamp
+                mixins.add("client.hbm.client.MixinRenderMachineForceField"); // Green lines forming a sphere
+                mixins.add("client.hbm.client.MixinRenderMixer"); // Liquid inside
+                mixins.add("client.hbm.client.MixinRenderOverhead"); // Red square near entities
+                mixins.add("client.hbm.client.MixinRenderPumpjack"); // Pumpjack bridle
+                mixins.add("client.hbm.client.MixinRenderRadarScreen"); // Green bar going from top to bottom
+                mixins.add("client.hbm.client.MixinRenderRadGen"); // 2 lights on top of engine
+                mixins.add("client.hbm.client.MixinRenderRBMKConsole"); // Buttons on the console
+                mixins.add("client.hbm.client.MixinRenderRBMKLid"); // Cherenkov radiation
+                mixins.add("client.hbm.client.MixinRenderSiegeCraft"); // 4 lights on top
+                mixins.add("client.hbm.client.MixinRenderSiegeLaser"); // UFO projectile
+                mixins.add("client.hbm.client.MixinRenderSmallReactor"); // Cherenkov's radiation, brighter with shaders
+                mixins.add("client.hbm.client.MixinRenderSolarBoiler"); // Rays of light
+                mixins.add("client.hbm.client.MixinRenderSparks"); // Lightning in a breeding reactor/DFC
+                mixins.add("client.hbm.client.MixinRenderSpear"); // Rays of light from the digamma spear
+                mixins.add("client.hbm.client.MixinRenderOrbus"); // Liquid inside
+                if (specjork) {
+                    mixins.add("client.hbm.client.MixinSkyProviderCelestial"); // Sky
                 }
-                mixins.add("client.hbm.client.MixinRenderBullet"); //!GLASS/TAU
-                mixins.add("client.hbm.client.MixinRenderRainbow"); //!ZOMG
-                mixins.add("client.hbm.client.sedna.MixinLegoClient"); //Bullet render
-                mixins.add("client.hbm.client.sedna.MixinModEventHandlerRenderer"); //Redirect to out system
-                mixins.add("client.hbm.client.sedna.MixinItemRenderWeaponBase"); //Smoke, flash brightness
-                mixins.add("client.hbm.client.sedna.guns.MixinItemRenderAtlas"); //Patch texture after smoke
-                mixins.add("client.hbm.client.sedna.guns.MixinItemRenderDANI"); //Patch dual texture
-                mixins.add("client.hbm.client.sedna.guns.MixinItemRenderHenry"); //Patch texture after smoke
-                mixins.add("client.hbm.client.sedna.guns.MixinItemRenderMaresleg"); //Patch texture after smoke
-                mixins.add("client.hbm.client.sedna.guns.MixinItemRenderMareslegAkimbo"); //Patch texture after smoke
-                mixins.add("client.hbm.client.MixinRenderChemical"); //Antimatter thing
-                mixins.add("client.hbm.client.MixinRenderSolidifier"); //Liquid inside
-                mixins.add("client.hbm.client.MixinRenderLiquefactor"); //Liquid inside
-                mixins.add("client.hbm.client.MixinRenderRefueler"); //Liquid & glClipPlane
-                mixins.add("client.hbm.client.MixinModelNo9"); //Lamp
-                mixins.add("client.hbm.client.MixinRenderCharger"); //Lamp
-                mixins.add("client.hbm.client.MixinRenderFurnaceSteel"); //Heat thing
-                mixins.add("client.hbm.client.MixinModelArmorWingsPheo"); //idk (I know)
-                mixins.add("client.hbm.client.MixinRenderTorex"); //MUSHROOM
-                mixins.add("client.hbm.client.MixinDiamondPronter"); //NFPA 704 (on barrels, tanks)
-                mixins.add("client.hbm.client.MixinRenderPylonBase"); //WIRES
-                
-                if(ShaderFixerConfig.HbmExtendedHazardDescriptions) {
+                mixins.add("client.hbm.client.MixinRenderBullet"); // !GLASS/TAU
+                mixins.add("client.hbm.client.MixinRenderRainbow"); // !ZOMG
+                mixins.add("client.hbm.client.sedna.MixinLegoClient"); // Bullet render
+                mixins.add("client.hbm.client.sedna.MixinModEventHandlerRenderer"); // Redirect to out system
+                mixins.add("client.hbm.client.sedna.MixinItemRenderWeaponBase"); // Smoke, flash brightness
+                mixins.add("client.hbm.client.sedna.guns.MixinItemRenderAtlas"); // Patch texture after smoke
+                mixins.add("client.hbm.client.sedna.guns.MixinItemRenderDANI"); // Patch dual texture
+                mixins.add("client.hbm.client.sedna.guns.MixinItemRenderHenry"); // Patch texture after smoke
+                mixins.add("client.hbm.client.sedna.guns.MixinItemRenderMaresleg"); // Patch texture after smoke
+                mixins.add("client.hbm.client.sedna.guns.MixinItemRenderMareslegAkimbo"); // Patch texture after smoke
+                mixins.add("client.hbm.client.MixinRenderChemical"); // Antimatter thing
+                mixins.add("client.hbm.client.MixinRenderSolidifier"); // Liquid inside
+                mixins.add("client.hbm.client.MixinRenderLiquefactor"); // Liquid inside
+                mixins.add("client.hbm.client.MixinRenderRefueler"); // Liquid & glClipPlane
+                mixins.add("client.hbm.client.MixinModelNo9"); // Lamp
+                mixins.add("client.hbm.client.MixinRenderCharger"); // Lamp
+                mixins.add("client.hbm.client.MixinRenderFurnaceSteel"); // Heat thing
+                mixins.add("client.hbm.client.MixinModelArmorWingsPheo"); // idk (I know)
+                mixins.add("client.hbm.client.MixinRenderTorex"); // MUSHROOM
+                mixins.add("client.hbm.client.MixinDiamondPronter"); // NFPA 704 (on barrels, tanks)
+                mixins.add("client.hbm.client.MixinRenderPylonBase"); // WIRES
+
+                if (ShaderFixerConfig.HbmExtendedHazardDescriptions) {
                     mixins.add("client.hbm.client.descr.MixinHazardTypeAsbestos");
                     mixins.add("client.hbm.client.descr.MixinHazardTypeBlinding");
                     mixins.add("client.hbm.client.descr.MixinHazardTypeCoal");
@@ -353,70 +362,91 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 mixins.add("client.signPicture.MixinStateRender");
             }
         }
-        
+
         return mixins;
     }
-    
+
     private boolean checkNEIVersion() {
         if (Loader.isModLoaded("NotEnoughItems")) {
-            return Loader.instance().getIndexedModList().get("NotEnoughItems").getVersion().equals("1.0.5.120");
+            return Loader.instance()
+                .getIndexedModList()
+                .get("NotEnoughItems")
+                .getVersion()
+                .equals("1.0.5.120");
         }
         return false;
     }
+
     private boolean checkCCCVersion() {
         if (Loader.isModLoaded("CodeChickenCore")) {
-            return Loader.instance().getIndexedModList().get("CodeChickenCore").getVersion().equals("1.0.7.48");
+            return Loader.instance()
+                .getIndexedModList()
+                .get("CodeChickenCore")
+                .getVersion()
+                .equals("1.0.7.48");
         }
         return false;
     }
+
     private boolean checkAvaritiaVersion() {
         if (Loader.isModLoaded("Avaritia")) {
-            return Loader.instance().getIndexedModList().get("Avaritia").getVersion().equals("1.13");
+            return Loader.instance()
+                .getIndexedModList()
+                .get("Avaritia")
+                .getVersion()
+                .equals("1.13");
         }
         return false;
     }
-    
+
     public static void handleInterpolation(float interp) {
         if (ishbmLoaded) {
             try {
                 ItemRenderWeaponBase.interp = interp;
-            } catch (NoSuchFieldError ignored){}
+            } catch (NoSuchFieldError ignored) {}
         }
     }
+
     public static float getGunsSwayMagnitude(ItemStack stack) {
         return invokeHbmRenderGetters(stack, "getSwayMagnitude");
     }
+
     public static float getGunsSwayPeriod(ItemStack stack) {
         return invokeHbmRenderGetters(stack, "getSwayPeriod");
     }
+
     public static float getGunsTurnMagnitude(ItemStack stack) {
         return invokeHbmRenderGetters(stack, "getTurnMagnitude");
     }
+
     public static float getGunsBaseFOV(ItemStack stack) {
         return invokeHbmRenderGetters(stack, "getBaseFOV");
     }
+
     public static boolean getFOVConf() {
         if (ishbmLoaded) {
             try {
                 return ClientConfig.GUN_MODEL_FOV.get();
-            } catch (NoSuchFieldError ignored){
-            }
+            } catch (NoSuchFieldError ignored) {}
         }
         return false;
     }
-    
-    //Because "protected"
+
+    // Because "protected"
     public static float invokeHbmRenderGetters(ItemStack stack, String name) {
         if (ishbmLoaded && stack != null) {
             try {
-                IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(stack, IItemRenderer.ItemRenderType.EQUIPPED);
-                if(customRenderer instanceof ItemRenderWeaponBase) {
+                IItemRenderer customRenderer = MinecraftForgeClient
+                    .getItemRenderer(stack, IItemRenderer.ItemRenderType.EQUIPPED);
+                if (customRenderer instanceof ItemRenderWeaponBase) {
                     Method method = ItemRenderWeaponBase.class.getDeclaredMethod(name, ItemStack.class);
                     method.setAccessible(true);
                     return (float) method.invoke(customRenderer, stack);
                 }
             } catch (Exception ignored) {}
         }
-        return name.equals("getSwayMagnitude") ? 0.5F : name.equals("getSwayPeriod") ? 0.75F : name.equals("getTurnMagnitude") ? 2.75F : name.equals("getBaseFOV") ? 70.0F: 0;
+        return name.equals("getSwayMagnitude") ? 0.5F
+            : name.equals("getSwayPeriod") ? 0.75F
+                : name.equals("getTurnMagnitude") ? 2.75F : name.equals("getBaseFOV") ? 70.0F : 0;
     }
 }
