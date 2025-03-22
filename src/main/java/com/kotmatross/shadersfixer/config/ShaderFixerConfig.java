@@ -42,6 +42,9 @@ public class ShaderFixerConfig {
 
     public static boolean FixSignPictureShaders;
 
+    public static boolean FixManeuverGearShaders;
+    public static boolean FixBalkonsWeaponModShaders;
+
     public static boolean TechgunsGoreLogger;
     public static List<String> TechgunsGoreList = new ArrayList<>();
 
@@ -157,6 +160,18 @@ public class ShaderFixerConfig {
             categoryShadersfixes,
             true,
             "Fixes rendering errors in SignPicture mod when using shaders.");
+
+        FixManeuverGearShaders = config.getBoolean(
+            "FixManeuverGearShaders",
+            categoryShadersfixes,
+            true,
+            "Fixes rendering errors in 3D Maneuver Gear mod when using shaders.");
+
+        FixBalkonsWeaponModShaders = config.getBoolean(
+            "FixBalkonsWeaponModShaders",
+            categoryShadersfixes,
+            true,
+            "Fixes rendering errors in Balkon's Weapon mod when using shaders.");
 
         ElnLightMixins = config.getBoolean(
             "ElnLightMixins",

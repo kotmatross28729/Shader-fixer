@@ -1,3 +1,9 @@
+# 3.4-patch-2
+* **[Hbm's NTM]** Fixed some b-side guns using the texture of the original gun
+  * !!! Need to wait until the full release of both the main and space fork, otherwise crash
+* **[3DManeuverGear]** Fixed rendering with shaders
+* **[Balkon's WeaponMod]** Fixed rendering with shaders
+
 # 3.4-patch-1
 * **Added crash if Optifine and Hbm's NTM:Space are installed**
   * Due to horrible flickering bugs

@@ -60,7 +60,9 @@ dependencies {
     compileOnly name: 'angelica-1.0.0-beta35-dev'
     compileOnly name: 'CustomNPC-Plus-1.9.3-dev'
     compileOnly name: 'SignPicture-1.7.10-2.8.0-universal'
-
+    compileOnly name: '3DManeuverGear-1.7.10-0.6'
+    compileOnly name: 'weaponmod-forge-1.7.10-1.23.1'
+    
     compileOnly fileTree(dir: 'libs', include: '*.jar')
     compileOnly fileTree(dir: 'libs', include: '*.zip')
 }

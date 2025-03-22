@@ -117,6 +117,12 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
         if (!loadedMods.contains("signpic")) {
             ShaderFixerConfig.FixSignPictureShaders = false;
         }
+        if (!loadedMods.contains("3DManeuverGear")) {
+            ShaderFixerConfig.FixManeuverGearShaders = false;
+        }
+        if (!loadedMods.contains("weaponmod")) {
+            ShaderFixerConfig.FixBalkonsWeaponModShaders = false;
+        }
 
         List<String> mixins = new ArrayList<>();
 
@@ -361,6 +367,16 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 mixins.add("client.signPicture.MixinRenderHelper");
                 mixins.add("client.signPicture.MixinStateRender");
             }
+
+            if (ShaderFixerConfig.FixManeuverGearShaders) {
+                ShadersFixer.logger.info("Trying to integrate 3D Maneuver Gear mixins...");
+                mixins.add("client.ManeuverGear.MixinRenderEntityDart");
+            }
+            if (ShaderFixerConfig.FixBalkonsWeaponModShaders) {
+                ShadersFixer.logger.info("Trying to integrate Balkon's WeaponMod mixins...");
+                mixins.add("client.weaponmod.MixinRenderFlail");
+            }
+
         }
 
         return mixins;
