@@ -62,6 +62,7 @@ dependencies {
     compileOnly name: 'SignPicture-1.7.10-2.8.0-universal'
     compileOnly name: '3DManeuverGear-1.7.10-0.6'
     compileOnly name: 'weaponmod-forge-1.7.10-1.23.1'
+    compileOnly name: 'CustomPlayerModels-1.7.10-0.6.21a'
     
     compileOnly fileTree(dir: 'libs', include: '*.jar')
     compileOnly fileTree(dir: 'libs', include: '*.zip')

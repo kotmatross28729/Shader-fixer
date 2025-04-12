@@ -376,6 +376,10 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 ShadersFixer.logger.info("Trying to integrate Balkon's WeaponMod mixins...");
                 mixins.add("client.weaponmod.MixinRenderFlail");
             }
+            if (ShaderFixerConfig.FixCPMShaders) {
+                ShadersFixer.logger.info("Trying to integrate Custom Player Models mixins...");
+                mixins.add("client.cpm.MixinClientProxy");
+            }
 
         }
 
