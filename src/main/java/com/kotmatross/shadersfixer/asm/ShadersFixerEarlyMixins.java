@@ -90,6 +90,13 @@ public class ShadersFixerEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLo
                 mixins.add("client.minecraft.client.renderer.entity.MixinRenderPlayer");
             }
 
+            if (ShaderFixerConfig.FixHbmGunArmorRender) {
+                ShadersFixer.logger.info("Integrating MixinModelBiped...");
+                mixins.add("client.minecraft.client.renderer.entity.armorfix.MixinModelBiped");
+                ShadersFixer.logger.info("Integrating MixinRenderBiped...");
+                mixins.add("client.minecraft.client.renderer.entity.armorfix.MixinRenderBiped");
+            }
+
             // SPECIAL MIXINS
 
             if (loadedCoreMods.contains("com.gtnewhorizons.angelica.loading.AngelicaTweaker")) {

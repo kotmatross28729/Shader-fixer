@@ -238,6 +238,8 @@ public class ShaderFixerConfig {
 
     public static boolean FixAngelicaShaderPackScreenGLLeak;
 
+    public static boolean FixHbmGunArmorRender;
+
     public static void loadEarlyMixinConfig(File configFile) {
         Configuration config = new Configuration(configFile);
 
@@ -246,6 +248,12 @@ public class ShaderFixerConfig {
             categoryShadersfixes,
             true,
             "Uses a fairly complex mixin system to fix new guns with shaders.");
+
+        FixHbmGunArmorRender = config.getBoolean(
+            "FixHbmGunArmorRender",
+            categorytweaks,
+            true,
+            "Fixes rendering of akimbo weapons on mobs (+ mobs with NTM armor) + fixes rendering of akimbo weapons with CPM.");
 
         FixMinecraftHitboxesRender = config.getBoolean(
             "FixMinecraftHitboxesRender",

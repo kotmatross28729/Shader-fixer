@@ -427,6 +427,30 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
         }
     }
 
+    public static boolean handleVibe(IItemRenderer customRenderer) {
+        if (ishbmLoaded) {
+            try {
+                if (customRenderer instanceof ItemRenderWeaponBase renderWeapon) {
+                    if (renderWeapon.isAkimbo()) {
+                        return true;
+                    }
+                }
+            } catch (NoSuchFieldError ignored) {}
+        }
+        return false;
+    }
+
+    public static void akimboSetupNRender(IItemRenderer customRenderer, ItemStack held) {
+        if (ishbmLoaded) {
+            try {
+                if (customRenderer instanceof ItemRenderWeaponBase renderWeapon) {
+                    renderWeapon.setupThirdPersonAkimbo(held);
+                    renderWeapon.renderEquippedAkimbo(held);
+                }
+            } catch (NoSuchFieldError ignored) {}
+        }
+    }
+
     public static float getGunsSwayMagnitude(ItemStack stack) {
         return invokeHbmRenderGetters(stack, "getSwayMagnitude");
     }
