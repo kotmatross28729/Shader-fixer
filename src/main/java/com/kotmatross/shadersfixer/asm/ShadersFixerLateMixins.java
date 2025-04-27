@@ -157,6 +157,11 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 mixins.add("client.FiskHeroes.client.render.tile.MixinRenderSuitFabricator");
                 mixins.add("client.FiskHeroes.client.render.tile.MixinRenderSuitDatabase");
                 mixins.add("client.FiskHeroes.client.MixinSHRenderHooks");
+
+                if (ShaderFixerConfig.FixFisksuperheroesCPMCompat) {
+                    mixins.add("client.FiskHeroes.client.CPMCompat.MixinModelBipedMultiLayer");
+                }
+
             }
             if (ShaderFixerConfig.FixNEIShaders) {
                 ShadersFixer.logger.info("Trying to integrate NotEnoughItems mixins...");

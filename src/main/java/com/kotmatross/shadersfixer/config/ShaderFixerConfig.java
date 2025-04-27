@@ -53,6 +53,7 @@ public class ShaderFixerConfig {
 
     public static boolean ElnLightMixins;
     public static boolean HbmExtendedHazardDescriptions;
+    public static boolean FixFisksuperheroesCPMCompat;
 
     // Category
     static final String categoryShadersfixes = "Shaders fixes";
@@ -200,11 +201,18 @@ public class ShaderFixerConfig {
             true,
             "Adds additional information to dangerous items [HBM's NTM]");
 
-        TechgunsGoreLogger = config.getBoolean(
-            "TechgunsGoreLogger",
+        FixFisksuperheroesCPMCompat = config.getBoolean(
+            "FixFisksuperheroesCPMCompat",
             categorytweaks,
-            false,
-            "Prints the name of the killed mob( using techguns weapons) in the log, useful for TechgunsGoreList, where 1 parameter is the name of the mob.");
+            true,
+            "Fixes a bug where CPM animations wouldn't work with Fisksuperheroes armor");
+
+        // TechgunsGoreLogger = config.getBoolean(
+        // "TechgunsGoreLogger",
+        // categorytweaks,
+        // false,
+        // "Prints the name of the killed mob( using techguns weapons) in the log, useful for TechgunsGoreList, where 1
+        // parameter is the name of the mob.");
         // TechgunsGoreList = new ArrayList<>(Arrays.asList(config.getStringList("TechgunsGoreList", categorytweaks, new
         // String[]{"entity_glyphid:6:0.66:85:156:17"}, "Adds an entity to the gore Techguns entity list. The syntax is:
         // mobname:GibsNumber:GibsScale:BloodСolorR:BloodColorG:BloodColorBlue . Please note that Blood R-G-B colors can

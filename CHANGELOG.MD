@@ -1,3 +1,10 @@
+# 3.5
+* **[Customizable Player Models]** Fixed nametag rendering
+* **[Hbm's NTM]** Fixed rendering of akimbo weapons for non-player mobs
+* **[FindIt]** Fixed highlighter rendering
+* **[Fisk's Superheroes]** Fixed armor -> Customizable Player Models compat (by Darek505)
+* **[Fisk's Superheroes]** Fixed tentacles z-buffer with shaders
+
 # 3.4-patch-2
 * **[Hbm's NTM]** Fixed some b-side guns using the texture of the original gun
   * !!! Need to wait until the full release of both the main and space fork, otherwise crash
