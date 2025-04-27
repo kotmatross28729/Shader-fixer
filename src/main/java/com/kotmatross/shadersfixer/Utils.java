@@ -26,11 +26,11 @@ public class Utils {
     }
 
     // numbers
-    public static int INT_2X16 = 65536;
-    public static int INT_MAX = 2147483647;
+    public static int INT_2X16 = 65_536;
+    public static int INT_MAX = 2_147_483_647;
 
     // LIGHT
-    public static int MAX_LIGHT_COORD = 15728880;
+    public static int MAX_LIGHT_COORD = 15_728_880;
 
     /*
      * Lighting docs

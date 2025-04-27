@@ -64,6 +64,7 @@ dependencies {
     compileOnly name: 'weaponmod-forge-1.7.10-1.23.1'
     compileOnly name: 'CustomPlayerModels-1.7.10-0.6.21a'
 	compileOnly name: 'findit-1.3.10-dev'
+	compileOnly name: 'MapleTree Forge v1.1.33m'
     
     compileOnly fileTree(dir: 'libs', include: '*.jar')
     compileOnly fileTree(dir: 'libs', include: '*.zip')

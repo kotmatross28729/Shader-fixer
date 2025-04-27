@@ -106,7 +106,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
             ShaderFixerConfig.FixLMMEShaders = false;
         }
         if (!loadedMods.contains("HardcoreEnderExpansion")) {
-            ShaderFixerConfig.FixHEEhaders = false;
+            ShaderFixerConfig.FixHEEShaders = false;
         }
         if (!loadedMods.contains("angelica")) {
             ShaderFixerConfig.PatchHBMAngelica = false;
@@ -128,6 +128,9 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
         }
         if (!loadedMods.contains("findit")) {
             ShaderFixerConfig.FixFindItShaders = false;
+        }
+        if (!loadedMods.contains("mod_ecru_MapleTree")) {
+            ShaderFixerConfig.FixMapleTreeShaders = false;
         }
 
         List<String> mixins = new ArrayList<>();
@@ -357,7 +360,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 ShadersFixer.logger.warn("Trying to integrate LittleMaidMobEnhanced mixins...");
                 mixins.add("client.lmme.MixinGuiInventory");
             }
-            if (ShaderFixerConfig.FixHEEhaders) {
+            if (ShaderFixerConfig.FixHEEShaders) {
                 ShadersFixer.logger.info("Trying to integrate HardcoreEnderExpansion mixins...");
                 mixins.add("client.HEE.MixinRenderBossDragon");
                 mixins.add("client.HEE.MixinRenderWeatherLightningBoltPurple");
@@ -378,7 +381,6 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 mixins.add("client.signPicture.MixinRenderHelper");
                 mixins.add("client.signPicture.MixinStateRender");
             }
-
             if (ShaderFixerConfig.FixManeuverGearShaders) {
                 ShadersFixer.logger.info("Trying to integrate 3D Maneuver Gear mixins...");
                 mixins.add("client.ManeuverGear.MixinRenderEntityDart");
@@ -396,7 +398,11 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 mixins.add("client.findit.MixinEntityHighlighter");
                 mixins.add("client.findit.MixinBlockHighlighter");
             }
-
+            if (ShaderFixerConfig.FixMapleTreeShaders) {
+                ShadersFixer.logger.info("Trying to integrate MapleTree mixins...");
+                mixins.add("client.mapleTree.Mixin_ecru_TileEntityLighthouseIlluminationRender");
+                mixins.add("client.mapleTree.Mixin_ecru_TileEntitySLightRender");
+            }
         }
 
         return mixins;

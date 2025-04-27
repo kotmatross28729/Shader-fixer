@@ -1,8 +1,6 @@
 package com.kotmatross.shadersfixer.config;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import net.minecraftforge.common.config.Configuration;
 
@@ -10,6 +8,7 @@ public class ShaderFixerConfig {
     // Definitely does NOT look like a BugTorch config
 
     // LATE MIXINS
+
     // Base things
     public static boolean FixFisksuperheroesShaders;
     public static boolean FixNEIShaders;
@@ -17,40 +16,27 @@ public class ShaderFixerConfig {
     public static boolean FixDragonBlockCShaders;
     public static boolean FixZeldaSwordSkillsShaders;
     public static boolean FixMcheliOShaders;
-
     public static boolean FixRivalRebelsShaders;
     public static boolean FixSchematicaShaders;
     public static boolean FixJourneymapShaders;
-
     public static boolean FixAvaritiaShaders;
-
     public static boolean FixThaumicConciliumShaders;
-
     public static boolean FixOpenComputersShaders;
     public static boolean FixElnShaders;
-
     public static boolean FixHbmShaders;
-
     public static boolean FixDSShaders;
-
     public static boolean FixLMMEShaders;
-
-    public static boolean FixHEEhaders;
+    public static boolean FixHEEShaders;
     public static boolean PatchHBMAngelica;
-
     public static boolean FixCNPCShaders;
-
     public static boolean FixSignPictureShaders;
-
     public static boolean FixManeuverGearShaders;
     public static boolean FixBalkonsWeaponModShaders;
     public static boolean FixCPMShaders;
-
     public static boolean FixFindItShaders;
+    public static boolean FixMapleTreeShaders;
 
-    public static boolean TechgunsGoreLogger;
-    public static List<String> TechgunsGoreList = new ArrayList<>();
-
+    // Tweaks
     public static boolean ElnLightMixins;
     public static boolean HbmExtendedHazardDescriptions;
     public static boolean FixFisksuperheroesCPMCompat;
@@ -118,7 +104,6 @@ public class ShaderFixerConfig {
             categoryShadersfixes,
             true,
             "Fixes rendering errors in Thaumic Concilium mod when using shaders.");
-
         FixOpenComputersShaders = config.getBoolean(
             "FixOpenComputersShaders",
             categoryShadersfixes,
@@ -144,8 +129,8 @@ public class ShaderFixerConfig {
             categoryShadersfixes,
             true,
             "Disables mob rendering in LittleMaidMobEnhanced interaction GUI to fix shaders.");
-        FixHEEhaders = config.getBoolean(
-            "FixHEEhaders",
+        FixHEEShaders = config.getBoolean(
+            "FixHEEShaders",
             categoryShadersfixes,
             true,
             "Fixes rendering errors in HardcoreEnderExpansion mod when using shaders.");
@@ -164,43 +149,43 @@ public class ShaderFixerConfig {
             categoryShadersfixes,
             true,
             "Fixes rendering errors in SignPicture mod when using shaders.");
-
         FixManeuverGearShaders = config.getBoolean(
             "FixManeuverGearShaders",
             categoryShadersfixes,
             true,
             "Fixes rendering errors in 3D Maneuver Gear mod when using shaders.");
-
         FixBalkonsWeaponModShaders = config.getBoolean(
             "FixBalkonsWeaponModShaders",
             categoryShadersfixes,
             true,
             "Fixes rendering errors in Balkon's Weapon mod when using shaders.");
-
         FixCPMShaders = config.getBoolean(
             "FixCPMShaders",
             categoryShadersfixes,
             true,
             "Fixes rendering errors in Custom Player Models mod when using shaders.");
-
         FixFindItShaders = config.getBoolean(
             "FixFindItShaders",
             categoryShadersfixes,
             true,
             "Fixes rendering errors in FindIt mod when using shaders.");
+        FixMapleTreeShaders = config.getBoolean(
+            "FixMapleTreeShaders",
+            categoryShadersfixes,
+            true,
+            "Fixes rendering errors in MapleTree mod when using shaders.");
 
+        // Tweaks
         ElnLightMixins = config.getBoolean(
             "ElnLightMixins",
             categorytweaks,
             true,
             "Slightly modifies the code for rendering the light sprite to avoid an issue with bsl shaders that renders object with full alpha when the object's alpha is close to 0 (below 0.1). Use carefully with new versions, as it calls the old sprite rendering code");
-
         HbmExtendedHazardDescriptions = config.getBoolean(
             "HbmExtendedHazardDescriptions",
             categorytweaks,
             true,
             "Adds additional information to dangerous items [HBM's NTM]");
-
         FixFisksuperheroesCPMCompat = config.getBoolean(
             "FixFisksuperheroesCPMCompat",
             categorytweaks,
@@ -265,7 +250,6 @@ public class ShaderFixerConfig {
             categoryShadersfixes,
             true,
             "Uses a fairly complex mixin system to fix new guns with shaders.");
-
         FixHbmGunArmorRender = config.getBoolean(
             "FixHbmGunArmorRender",
             categorytweaks,
@@ -361,7 +345,6 @@ public class ShaderFixerConfig {
             categorytweaks,
             false,
             "Disables 1st person hand rotation when the player is riding/sitting (similar to newer versions). Requires FixRiddingHand to be false.");
-
         ModernRidingLegsPos = config.getBoolean(
             "ModernRidingLegsPos",
             categorytweaks,
