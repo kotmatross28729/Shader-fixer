@@ -60,7 +60,8 @@ public class MixinEntityRenderer {
 
     @Redirect(
         method = "renderHand",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glTranslatef(FFF)V", ordinal = 1))
+        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glTranslatef(FFF)V", ordinal = 1),
+        remap = false)
     public void skip1(float X, float XX, float XXX) {
         if (!shaders_fixer$checkVibe()) {
             GL11.glTranslatef((float) this.cameraYaw, (float) (-this.cameraPitch), 0.0F);
@@ -69,7 +70,8 @@ public class MixinEntityRenderer {
 
     @Redirect(
         method = "renderHand",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glScaled(DDD)V", ordinal = 0))
+        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glScaled(DDD)V", ordinal = 0),
+        remap = false)
     public void skip2(double X, double XX, double XXX) {
         if (!shaders_fixer$checkVibe()) {
             GL11.glScaled(this.cameraZoom, this.cameraZoom, 1.0D);

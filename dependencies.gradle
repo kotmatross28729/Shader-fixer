@@ -63,6 +63,7 @@ dependencies {
     compileOnly name: '3DManeuverGear-1.7.10-0.6'
     compileOnly name: 'weaponmod-forge-1.7.10-1.23.1'
     compileOnly name: 'CustomPlayerModels-1.7.10-0.6.21a'
+	compileOnly name: 'findit-1.3.10-dev'
     
     compileOnly fileTree(dir: 'libs', include: '*.jar')
     compileOnly fileTree(dir: 'libs', include: '*.zip')

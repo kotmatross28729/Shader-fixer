@@ -44,8 +44,9 @@ public class ShaderFixerConfig {
 
     public static boolean FixManeuverGearShaders;
     public static boolean FixBalkonsWeaponModShaders;
-
     public static boolean FixCPMShaders;
+
+    public static boolean FixFindItShaders;
 
     public static boolean TechgunsGoreLogger;
     public static List<String> TechgunsGoreList = new ArrayList<>();
@@ -180,6 +181,12 @@ public class ShaderFixerConfig {
             categoryShadersfixes,
             true,
             "Fixes rendering errors in Custom Player Models mod when using shaders.");
+
+        FixFindItShaders = config.getBoolean(
+            "FixFindItShaders",
+            categoryShadersfixes,
+            true,
+            "Fixes rendering errors in FindIt mod when using shaders.");
 
         ElnLightMixins = config.getBoolean(
             "ElnLightMixins",

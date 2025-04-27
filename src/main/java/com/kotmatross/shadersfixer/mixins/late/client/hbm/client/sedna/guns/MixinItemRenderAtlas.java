@@ -15,7 +15,7 @@ import com.hbm.render.item.weapon.sedna.ItemRenderAtlas;
 @Mixin(value = ItemRenderAtlas.class, priority = 999)
 public class MixinItemRenderAtlas {
 
-    @Shadow
+    @Shadow(remap = false)
     public ResourceLocation texture;
 
     @Inject(

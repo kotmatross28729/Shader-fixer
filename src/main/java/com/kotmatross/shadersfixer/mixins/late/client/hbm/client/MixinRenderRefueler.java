@@ -24,15 +24,15 @@ import com.kotmatross.shadersfixer.Utils;
 @Mixin(value = RenderRefueler.class, priority = 999)
 public abstract class MixinRenderRefueler extends TileEntitySpecialRenderer implements IItemRendererProvider {
 
-    @Shadow
+    @Shadow(remap = false)
     private static DoubleBuffer clip = null;
 
     /**
      * @author kotmatross
      * @reason fix liquid rendering (glClipPlane doesn't work with shaders)
      */
-    @Overwrite
-    public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float interp) {
+    @Overwrite(remap = false)
+    public void func_147500_a(TileEntity tile, double x, double y, double z, float interp) {
         TileEntityRefueler refueler = (TileEntityRefueler) tile;
 
         GL11.glPushMatrix();

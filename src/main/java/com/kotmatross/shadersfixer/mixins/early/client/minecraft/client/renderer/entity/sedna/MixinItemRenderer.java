@@ -102,7 +102,8 @@ public class MixinItemRenderer {
     @ModifyArg(
         method = "renderItemInFirstPerson",
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glRotatef(FFFF)V", ordinal = 2),
-        index = 0)
+        index = 0,
+        remap = false)
     private float modifyPitchRotation(float angle) {
         if (shaders_fixer$checkVibe())
             return (shaders_fixer$player.rotationPitch - shaders_fixer$armPitch) * 0.1F * shaders_fixer$turnMagnitude;
@@ -112,7 +113,8 @@ public class MixinItemRenderer {
     @ModifyArg(
         method = "renderItemInFirstPerson",
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glRotatef(FFFF)V", ordinal = 3),
-        index = 0)
+        index = 0,
+        remap = false)
     private float modifyYawRotation(float angle) {
         if (shaders_fixer$checkVibe())
             return (shaders_fixer$player.rotationYaw - shaders_fixer$armYaw) * 0.1F * shaders_fixer$turnMagnitude;
@@ -121,7 +123,8 @@ public class MixinItemRenderer {
 
     @Redirect(
         method = "renderItemInFirstPerson",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glTranslatef(FFF)V", ordinal = 7))
+        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glTranslatef(FFF)V", ordinal = 7),
+        remap = false)
     public void skipET(float x, float y, float z) {
         if (!shaders_fixer$checkVibe()) {
             float f13 = 0.8F;
@@ -131,7 +134,8 @@ public class MixinItemRenderer {
 
     @Redirect(
         method = "renderItemInFirstPerson",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glRotatef(FFFF)V", ordinal = 18))
+        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glRotatef(FFFF)V", ordinal = 18),
+        remap = false)
     public void skipER(float angle, float x, float y, float z) {
         if (!shaders_fixer$checkVibe()) {
             GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
@@ -140,7 +144,8 @@ public class MixinItemRenderer {
 
     @Redirect(
         method = "renderItemInFirstPerson",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glScalef(FFF)V", ordinal = 3))
+        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glScalef(FFF)V", ordinal = 3),
+        remap = false)
     public void skipES(float x, float y, float z) {
         if (!shaders_fixer$checkVibe()) {
             GL11.glScalef(0.4F, 0.4F, 0.4F);
@@ -152,7 +157,8 @@ public class MixinItemRenderer {
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/ItemRenderer;renderItem(Lnet/minecraft/entity/EntityLivingBase;Lnet/minecraft/item/ItemStack;ILnet/minecraftforge/client/IItemRenderer$ItemRenderType;)V",
-            shift = At.Shift.BEFORE))
+            shift = At.Shift.BEFORE),
+        remap = false)
     private void renderItemInFirstPersonGAMMA(float interp, CallbackInfo ci) {
         if (shaders_fixer$checkVibe()) {
             GL11.glRotated(180, 0, 1, 0);
@@ -164,7 +170,8 @@ public class MixinItemRenderer {
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/ItemRenderer;renderItem(Lnet/minecraft/entity/EntityLivingBase;Lnet/minecraft/item/ItemStack;ILnet/minecraftforge/client/IItemRenderer$ItemRenderType;)V",
-            shift = At.Shift.BEFORE))
+            shift = At.Shift.BEFORE),
+        remap = false)
     private void renderItemInFirstPersonGAMMAZ(float interp, CallbackInfo ci) {
         if (shaders_fixer$checkVibe()) {
             if (shaders_fixer$mc.renderViewEntity instanceof EntityPlayer) {

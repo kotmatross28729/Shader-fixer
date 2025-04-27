@@ -123,6 +123,12 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
         if (!loadedMods.contains("weaponmod")) {
             ShaderFixerConfig.FixBalkonsWeaponModShaders = false;
         }
+        if (!loadedMods.contains("customplayermodels")) {
+            ShaderFixerConfig.FixCPMShaders = false;
+        }
+        if (!loadedMods.contains("findit")) {
+            ShaderFixerConfig.FixFindItShaders = false;
+        }
 
         List<String> mixins = new ArrayList<>();
 
@@ -379,6 +385,11 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
             if (ShaderFixerConfig.FixCPMShaders) {
                 ShadersFixer.logger.info("Trying to integrate Custom Player Models mixins...");
                 mixins.add("client.cpm.MixinClientProxy");
+            }
+            if (ShaderFixerConfig.FixFindItShaders) {
+                ShadersFixer.logger.info("Trying to integrate FindIt mixins...");
+                mixins.add("client.findit.MixinEntityHighlighter");
+                mixins.add("client.findit.MixinBlockHighlighter");
             }
 
         }

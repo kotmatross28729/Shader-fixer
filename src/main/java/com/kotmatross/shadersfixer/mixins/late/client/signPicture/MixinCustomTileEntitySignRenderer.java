@@ -87,7 +87,7 @@ public class MixinCustomTileEntitySignRenderer extends TileEntitySignRenderer {
         OpenGL.glPopAttrib(); // [0] Restores: GL_LIGHTING | GL_BLEND | GL_TEXTURE_2D
     }
 
-    @Shadow
+    @Shadow(remap = false)
     public void translateBase(@Nonnull TileEntitySign tile, double x, double y, double z) {
         Block block = tile.getBlockType();
         float f1 = 0.6666667F;
@@ -101,7 +101,7 @@ public class MixinCustomTileEntitySignRenderer extends TileEntitySignRenderer {
         }
     }
 
-    @Shadow
+    @Shadow(remap = false)
     @Nonnull
     public Quat4f getSignRotate(@Nonnull TileEntitySign tile) {
         Block block = tile.getBlockType();

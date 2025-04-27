@@ -15,7 +15,7 @@ import com.hbm.render.item.weapon.sedna.ItemRenderMaresleg;
 @Mixin(value = ItemRenderMaresleg.class, priority = 999)
 public class MixinItemRenderMaresleg {
 
-    @Shadow
+    @Shadow(remap = false)
     public ResourceLocation texture;
 
     @Inject(
