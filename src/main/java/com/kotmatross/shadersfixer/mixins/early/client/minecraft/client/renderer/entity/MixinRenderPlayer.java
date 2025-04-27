@@ -26,10 +26,10 @@ public abstract class MixinRenderPlayer extends RendererLivingEntity {
 
     @Inject(method = "renderFirstPersonArm", at = @At(value = "HEAD"))
     protected void renderFirstPersonArm(EntityPlayer p_82441_1_, CallbackInfo ci) {
-        if (ShaderFixerConfig.DisableRiddingHandRotation) {
+        if (ShaderFixerConfig.DisableRidingHandRotation) {
             this.modelBipedMain.isRiding = false;
-        } else if (ShaderFixerConfig.FixRiddingHand) {
-            this.modelBipedMain.isRiding = p_82441_1_.isRiding(); // Peak mjoang codding
+        } else if (ShaderFixerConfig.FixRidingHand) {
+            this.modelBipedMain.isRiding = p_82441_1_.isRiding(); // Peak mjoang coding
         }
     }
 }

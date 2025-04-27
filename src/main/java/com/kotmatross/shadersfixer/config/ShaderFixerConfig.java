@@ -245,15 +245,17 @@ public class ShaderFixerConfig {
     public static boolean UnlockMainMenuFPS;
     public static int MainMenuFPSValue;
 
-    public static boolean FixRiddingHand;
+    public static boolean FixRidingHand;
 
-    public static boolean DisableRiddingHandRotation;
+    public static boolean DisableRidingHandRotation;
 
     public static boolean optifineNTMSpaceCrash;
 
     public static boolean FixAngelicaShaderPackScreenGLLeak;
 
     public static boolean FixHbmGunArmorRender;
+
+    public static boolean ModernRidingLegsPos;
 
     public static void loadEarlyMixinConfig(File configFile) {
         Configuration config = new Configuration(configFile);
@@ -349,16 +351,22 @@ public class ShaderFixerConfig {
             1024,
             "Maximum number of frames in the main menu (see UnlockMainMenuFPS). -1 or 0 to use fps limit in settings.");
 
-        FixRiddingHand = config.getBoolean(
+        FixRidingHand = config.getBoolean(
             "FixRiddingHand",
             categorytweaks,
             true,
             "Fixes bug due to which the hand wouldn't update rotation when the player was riding/sitting.");
-        DisableRiddingHandRotation = config.getBoolean(
+        DisableRidingHandRotation = config.getBoolean(
             "DisableRiddingHandRotation",
             categorytweaks,
             false,
             "Disables 1st person hand rotation when the player is riding/sitting (similar to newer versions). Requires FixRiddingHand to be false.");
+
+        ModernRidingLegsPos = config.getBoolean(
+            "ModernRidingLegsPos",
+            categorytweaks,
+            true,
+            "Changes the position of the legs when riding, in accordance with new versions (fixes legs passing through boat/minecart).");
 
         optifineNTMSpaceCrash = config.getBoolean(
             "optifineNTMSpaceCrash",

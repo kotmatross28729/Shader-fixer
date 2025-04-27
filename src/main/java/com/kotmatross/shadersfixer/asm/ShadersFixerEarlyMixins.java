@@ -85,9 +85,14 @@ public class ShadersFixerEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLo
                 ShadersFixer.logger.info("Integrating MixinMinecraft...");
                 mixins.add("client.minecraft.client.renderer.entity.MixinMinecraft");
             }
-            if (ShaderFixerConfig.FixRiddingHand || ShaderFixerConfig.DisableRiddingHandRotation) {
+            if (ShaderFixerConfig.FixRidingHand || ShaderFixerConfig.DisableRidingHandRotation) {
                 ShadersFixer.logger.info("Integrating MixinRenderPlayer...");
                 mixins.add("client.minecraft.client.renderer.entity.MixinRenderPlayer");
+            }
+
+            if (ShaderFixerConfig.ModernRidingLegsPos) {
+                ShadersFixer.logger.info("Integrating MixinModelBiped2...");
+                mixins.add("client.minecraft.client.renderer.entity.MixinModelBiped2");
             }
 
             if (ShaderFixerConfig.FixHbmGunArmorRender) {
