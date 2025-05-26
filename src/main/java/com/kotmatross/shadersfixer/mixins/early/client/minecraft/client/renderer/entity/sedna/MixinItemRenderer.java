@@ -1,15 +1,11 @@
 package com.kotmatross.shadersfixer.mixins.early.client.minecraft.client.renderer.entity.sedna;
 
-import static net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
-import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.MinecraftForgeClient;
 
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
@@ -22,8 +18,22 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.kotmatross.shadersfixer.asm.ShadersFixerLateMixins;
-import com.kotmatross.shadersfixer.shrimp.Vibe;
+import com.kotmatross.shadersfixer.shrimp.ShitUtils;
 
+/**
+ * Main NTM gun fix
+ * <p>
+ * How does it do that?
+ * <p>
+ * I just looked at the NTM code and compared it to the vanilla code (what was added/removed)
+ * <p>
+ * Then I implemented all of these things into the vanilla code if the player is holding a gun
+ * <p>
+ * In short, instead of completely rewriting the renderer like NTM does, move gun renderer to the vanilla render
+ * pipeline
+ * 
+ * @author kotmatross
+ */
 @Mixin(value = ItemRenderer.class, priority = 1003)
 public class MixinItemRenderer {
 
@@ -63,7 +73,6 @@ public class MixinItemRenderer {
             ShadersFixerLateMixins.handleInterpolation(interp);
         } catch (NoClassDefFoundError ignored) {} // INTERPOLATE AIM
 
-        // GETTERS
         shaders_fixer$f1 = prevEquippedProgress + (equippedProgress - prevEquippedProgress) * interp;
 
         ItemStack stack = itemToRender;
@@ -89,69 +98,67 @@ public class MixinItemRenderer {
         shaders_fixer$swing = shaders_fixer$player.getSwingProgress(interp);
     }
 
-    // Don't even ask, I don't give a fuck what that means
-    @Unique
-    public boolean shaders_fixer$checkVibe() {
-        if (itemToRender != null) {
-            IItemRenderer renderer = MinecraftForgeClient.getItemRenderer(itemToRender, EQUIPPED_FIRST_PERSON);
-            return renderer instanceof Vibe;
-        }
-        return false;
-    }
-
+    // CHANGED IN NTM
     @ModifyArg(
         method = "renderItemInFirstPerson",
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glRotatef(FFFF)V", ordinal = 2),
         index = 0,
         remap = false)
     private float modifyPitchRotation(float angle) {
-        if (shaders_fixer$checkVibe())
+        if (ShitUtils.shaders_fixer$checkVibe())
             return (shaders_fixer$player.rotationPitch - shaders_fixer$armPitch) * 0.1F * shaders_fixer$turnMagnitude;
         return (shaders_fixer$player.rotationPitch - shaders_fixer$armPitch) * 0.1F;
     }
 
+    // CHANGED IN NTM
     @ModifyArg(
         method = "renderItemInFirstPerson",
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glRotatef(FFFF)V", ordinal = 3),
         index = 0,
         remap = false)
     private float modifyYawRotation(float angle) {
-        if (shaders_fixer$checkVibe())
+        if (ShitUtils.shaders_fixer$checkVibe())
             return (shaders_fixer$player.rotationYaw - shaders_fixer$armYaw) * 0.1F * shaders_fixer$turnMagnitude;
         return (shaders_fixer$player.rotationYaw - shaders_fixer$armYaw) * 0.1F;
     }
 
+    // TODO: Redirect -> WrapWithCondition
+
+    // REMOVED IN NTM
     @Redirect(
         method = "renderItemInFirstPerson",
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glTranslatef(FFF)V", ordinal = 7),
         remap = false)
-    public void skipET(float x, float y, float z) {
-        if (!shaders_fixer$checkVibe()) {
+    public void skipGlTranslate(float x, float y, float z) {
+        if (!ShitUtils.shaders_fixer$checkVibe()) {
             float f13 = 0.8F;
             GL11.glTranslatef(0.7F * f13, -0.65F * f13 - (1.0F - shaders_fixer$f1) * 0.6F, -0.9F * f13);
         }
     }
 
+    // REMOVED IN NTM
     @Redirect(
         method = "renderItemInFirstPerson",
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glRotatef(FFFF)V", ordinal = 18),
         remap = false)
-    public void skipER(float angle, float x, float y, float z) {
-        if (!shaders_fixer$checkVibe()) {
+    public void skipGlRotate(float angle, float x, float y, float z) {
+        if (!ShitUtils.shaders_fixer$checkVibe()) {
             GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
         }
     }
 
+    // REMOVED IN NTM
     @Redirect(
         method = "renderItemInFirstPerson",
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glScalef(FFF)V", ordinal = 3),
         remap = false)
-    public void skipES(float x, float y, float z) {
-        if (!shaders_fixer$checkVibe()) {
+    public void skipGlScale(float x, float y, float z) {
+        if (!ShitUtils.shaders_fixer$checkVibe()) {
             GL11.glScalef(0.4F, 0.4F, 0.4F);
         }
     }
 
+    // ADDED IN NTM
     @Inject(
         method = "renderItemInFirstPerson",
         at = @At(
@@ -159,12 +166,13 @@ public class MixinItemRenderer {
             target = "Lnet/minecraft/client/renderer/ItemRenderer;renderItem(Lnet/minecraft/entity/EntityLivingBase;Lnet/minecraft/item/ItemStack;ILnet/minecraftforge/client/IItemRenderer$ItemRenderType;)V",
             shift = At.Shift.BEFORE),
         remap = false)
-    private void renderItemInFirstPersonGAMMA(float interp, CallbackInfo ci) {
-        if (shaders_fixer$checkVibe()) {
+    private void addGlRotated(float interp, CallbackInfo ci) {
+        if (ShitUtils.shaders_fixer$checkVibe()) {
             GL11.glRotated(180, 0, 1, 0);
         }
     }
 
+    // ADDED IN NTM
     @Inject(
         method = "renderItemInFirstPerson",
         at = @At(
@@ -172,10 +180,9 @@ public class MixinItemRenderer {
             target = "Lnet/minecraft/client/renderer/ItemRenderer;renderItem(Lnet/minecraft/entity/EntityLivingBase;Lnet/minecraft/item/ItemStack;ILnet/minecraftforge/client/IItemRenderer$ItemRenderType;)V",
             shift = At.Shift.BEFORE),
         remap = false)
-    private void renderItemInFirstPersonGAMMAZ(float interp, CallbackInfo ci) {
-        if (shaders_fixer$checkVibe()) {
-            if (shaders_fixer$mc.renderViewEntity instanceof EntityPlayer) {
-                EntityPlayer entityplayer = (EntityPlayer) shaders_fixer$mc.renderViewEntity;
+    private void addFinalPreRenderStuff(float interp, CallbackInfo ci) {
+        if (ShitUtils.shaders_fixer$checkVibe()) {
+            if (shaders_fixer$mc.renderViewEntity instanceof EntityPlayer entityplayer) {
                 float distanceDelta = entityplayer.distanceWalkedModified - entityplayer.prevDistanceWalkedModified;
                 float distanceInterp = -(entityplayer.distanceWalkedModified + distanceDelta * interp);
                 float camYaw = entityplayer.prevCameraYaw
@@ -205,5 +212,4 @@ public class MixinItemRenderer {
             }
         }
     }
-
 }

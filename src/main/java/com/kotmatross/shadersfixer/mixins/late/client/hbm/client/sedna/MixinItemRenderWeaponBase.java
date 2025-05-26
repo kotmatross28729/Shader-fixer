@@ -1,6 +1,5 @@
 package com.kotmatross.shadersfixer.mixins.late.client.hbm.client.sedna;
 
-import java.lang.annotation.Annotation;
 import java.util.List;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,14 +12,12 @@ import com.hbm.items.weapon.sedna.ItemGunBaseNT;
 import com.hbm.render.item.weapon.sedna.ItemRenderWeaponBase;
 import com.kotmatross.shadersfixer.Utils;
 import com.kotmatross.shadersfixer.shrimp.Vibe;
+import com.kotmatross.shadersfixer.shrimp.nonsense.FuckingCursed;
 
+@FuckingCursed
 @Mixin(value = ItemRenderWeaponBase.class, priority = 999)
-public class MixinItemRenderWeaponBase implements Vibe {
-
-    @Override
-    public Class<? extends Annotation> annotationType() {
-        return Vibe.class;
-    }
+public abstract class MixinItemRenderWeaponBase implements Vibe {
+    // "implements annotation interface" - shut the fuck up
 
     @Inject(method = "renderSmokeNodes", at = @At(value = "HEAD"), remap = false)
     private static void renderSmokeNodes(List<ItemGunBaseNT.SmokeNode> nodes, double scale, CallbackInfo ci) {

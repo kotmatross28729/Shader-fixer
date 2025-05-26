@@ -17,6 +17,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.kotmatross.shadersfixer.shrimp.Vibe;
 
+/**
+ * Undo unnecessary forge item rotations (for NTM gun fix)
+ *
+ * @author kotmatross
+ */
+
 @Mixin(value = ForgeHooksClient.class, priority = 1003)
 public class MixinForgeHooksClient {
 

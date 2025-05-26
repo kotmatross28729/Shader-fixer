@@ -104,12 +104,8 @@ public class ShadersFixerEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLo
 
             // SPECIAL MIXINS
 
-            if (loadedCoreMods.contains("com.gtnewhorizons.angelica.loading.AngelicaTweaker")) {
-                if (ShaderFixerConfig.FixAngelicaShaderPackScreenGLLeak) {
-                    ShadersFixer.logger.info("Integrating MixinShaderPackScreen...");
-                    mixins.add("client.special.MixinShaderPackScreen");
-                }
-            }
+            // if (loadedCoreMods.contains("com.gtnewhorizons.angelica.loading.AngelicaTweaker")) {
+            // }
 
         }
 

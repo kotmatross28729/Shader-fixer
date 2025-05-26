@@ -236,8 +236,6 @@ public class ShaderFixerConfig {
 
     public static boolean optifineNTMSpaceCrash;
 
-    public static boolean FixAngelicaShaderPackScreenGLLeak;
-
     public static boolean FixHbmGunArmorRender;
 
     public static boolean ModernRidingLegsPos;
@@ -296,11 +294,6 @@ public class ShaderFixerConfig {
             categoryShadersfixes,
             true,
             "Fixes an annoying bug due to which the effect bar in the creative menu turns black.");
-        FixAngelicaShaderPackScreenGLLeak = config.getBoolean(
-            "FixAngelicaShaderPackScreenGLLeak",
-            categoryShadersfixes,
-            true,
-            "Fixes GL leak when opening shader menu");
 
         enableNotifications = config.getBoolean(
             "enableNotifications",
