@@ -23,8 +23,18 @@ public class MixinModelBiped2 extends ModelBase {
 
     @ModifyConstant(method = "setRotationAngles", constant = @Constant(floatValue = -((float) Math.PI * 2F / 5F)))
     public float transformLegRotateAngleX(float angle) {
-        return ((float) (-Math.PI * 9F / 19F)); // 20 in vanilla (or not, the fuck is that 1.4137167), but at 20, there
-                                                // are still triangles on the very edge (so 19)
+        return ((float) (-Math.PI * 9F / 18F)); // 20 in vanilla (or not, the fuck is that 1.4137167), but at 20, there
+                                                // are still triangles on the very edge (so 18 (1.5707963))
+    }
+
+    @ModifyConstant(method = "setRotationAngles", constant = @Constant(floatValue = ((float) Math.PI / 10F)))
+    public float transformLegRotateAngleYRIGHT(float angle) {
+        return ((float) Math.PI / 12);
+    }
+
+    @ModifyConstant(method = "setRotationAngles", constant = @Constant(floatValue = -((float) Math.PI / 10F)))
+    public float transformLegRotateAngleYLEFT(float angle) {
+        return -((float) Math.PI / 12);
     }
 
     @Inject(method = "setRotationAngles", at = @At(value = "TAIL"))
