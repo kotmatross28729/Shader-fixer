@@ -1,3 +1,8 @@
+# 3.6
+* **[Hbm's NTM]** Fixed charge thrower grappling hook's line brightness with angelica shaders
+* **[Vanilla]** Changed the position of the legs so that they no longer extend beyond Et Futurum Requiem boat 
+  * Config option - [`ModernRidingLegsPos`]
+
 # 3.5
 * **[Customizable Player Models]** Fixed nametag rendering
 * **[Hbm's NTM]** Fixed rendering of akimbo weapons for non-player mobs
