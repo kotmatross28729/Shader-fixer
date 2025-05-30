@@ -133,6 +133,12 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
             ShaderFixerConfig.FixMapleTreeShaders = false;
         }
 
+        boolean TEMP = false;
+
+        if (loadedMods.contains("backhand")) {
+            TEMP = true;
+        }
+
         List<String> mixins = new ArrayList<>();
 
         if (side == MixinEnvironment.Side.CLIENT) {
@@ -402,6 +408,10 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 ShadersFixer.logger.info("Trying to integrate MapleTree mixins...");
                 mixins.add("client.mapleTree.Mixin_ecru_TileEntityLighthouseIlluminationRender");
                 mixins.add("client.mapleTree.Mixin_ecru_TileEntitySLightRender");
+            }
+            if (TEMP && false) {
+                ShadersFixer.logger.fatal("what am i doing...");
+                mixins.add("client.backhand.MixinItemRendererHooks");
             }
         }
 
