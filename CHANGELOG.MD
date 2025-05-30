@@ -1,3 +1,6 @@
+# 3.6-patch-1
+* **[Hbm's NTM]** Fixed potential crash related to I18n in future versions (X5336+)
+
 # 3.6
 * **[Hbm's NTM]** Fixed charge thrower grappling hook's line brightness with angelica shaders
 * **[Vanilla]** Changed the position of the legs so that they no longer extend beyond Et Futurum Requiem boat 

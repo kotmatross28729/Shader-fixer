@@ -2,6 +2,7 @@ package com.kotmatross.shadersfixer.mixins.late.client.hbm.client.descr;
 
 import java.util.List;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
@@ -13,7 +14,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.hbm.hazard.modifier.HazardModifier;
 import com.hbm.hazard.type.HazardTypeBlinding;
-import com.hbm.util.I18nUtil;
 
 @Mixin(value = HazardTypeBlinding.class, priority = 999)
 public class MixinHazardTypeBlinding {
@@ -23,11 +23,7 @@ public class MixinHazardTypeBlinding {
         List<HazardModifier> modifiers, CallbackInfo ci) {
         double H = (Math.floor(level * 1000) / 1000);
         list.add(
-            EnumChatFormatting.BLUE + I18nUtil.resolveKey("trait.danger.level.blinding")
-                + " "
-                + (H / 20)
-                + " "
-                + I18nUtil.resolveKey("info.template__seconds")
-                + "  ");
+            EnumChatFormatting.BLUE + I18n.format(
+                "trait.danger.level.blinding") + " " + (H / 20) + " " + I18n.format("info.template__seconds") + "  ");
     }
 }

@@ -2,6 +2,7 @@ package com.kotmatross.shadersfixer.mixins.late.client.hbm.client.descr;
 
 import java.util.List;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -15,7 +16,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.hbm.hazard.modifier.HazardModifier;
 import com.hbm.hazard.type.HazardTypeHot;
-import com.hbm.util.I18nUtil;
 import com.llamalad7.mixinextras.sugar.Local;
 
 @Mixin(value = HazardTypeHot.class, priority = 999)
@@ -38,20 +38,12 @@ public class MixinHazardTypeHot {
         if (level > 0) {
             if (shaders_fixer$reacher) {
                 list.add(
-                    EnumChatFormatting.STRIKETHROUGH + I18nUtil.resolveKey("trait.danger.level.hot")
-                        + " "
-                        + H
-                        + " "
-                        + I18nUtil.resolveKey("info.template__seconds")
-                        + "  ");
+                    EnumChatFormatting.STRIKETHROUGH + I18n.format(
+                        "trait.danger.level.hot") + " " + H + " " + I18n.format("info.template__seconds") + "  ");
             } else {
                 list.add(
-                    EnumChatFormatting.RED + I18nUtil.resolveKey("trait.danger.level.hot")
-                        + " "
-                        + H
-                        + " "
-                        + I18nUtil.resolveKey("info.template__seconds")
-                        + "  ");
+                    EnumChatFormatting.RED + I18n.format(
+                        "trait.danger.level.hot") + " " + H + " " + I18n.format("info.template__seconds") + "  ");
             }
         }
 
