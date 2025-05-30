@@ -409,7 +409,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 mixins.add("client.mapleTree.Mixin_ecru_TileEntityLighthouseIlluminationRender");
                 mixins.add("client.mapleTree.Mixin_ecru_TileEntitySLightRender");
             }
-            if (TEMP && false) {
+            if (TEMP) {
                 ShadersFixer.logger.fatal("what am i doing...");
                 mixins.add("client.backhand.MixinItemRendererHooks");
             }

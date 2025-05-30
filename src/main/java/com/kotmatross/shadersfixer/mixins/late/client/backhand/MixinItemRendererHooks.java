@@ -2,6 +2,8 @@ package com.kotmatross.shadersfixer.mixins.late.client.backhand;
 
 import static org.spongepowered.asm.mixin.injection.At.Shift.BEFORE;
 
+import net.minecraft.client.renderer.ItemRenderer;
+
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,15 +15,14 @@ import com.kotmatross.shadersfixer.shrimp.nonsense.DoubleFuckingCursedAward;
 import com.kotmatross.shadersfixer.shrimp.nonsense.FuckingCursed;
 
 import xonin.backhand.client.hooks.ItemRendererHooks;
+import xonin.backhand.client.utils.BackhandRenderHelper;
 
 @FuckingCursed // I'm as dumb as a fucking brick
-
 @DoubleFuckingCursedAward
-
 @Mixin(value = ItemRendererHooks.class, priority = 999)
 public class MixinItemRendererHooks {
 
-    // TODO: FUCK FUCK FUCK FUCK
+    // TODO: 3rd person (BackhandRenderHelper)
 
     /**
      * Adds (should), compatibility with NTM weapon renderer in the main hand (gun in the right, something else in the
@@ -47,24 +48,16 @@ public class MixinItemRendererHooks {
             target = "xonin/backhand/api/core/BackhandUtils.useOffhandItem (Lnet/minecraft/entity/player/EntityPlayer;ZLjava/lang/Runnable;)V",
             shift = BEFORE),
         remap = false)
-    private static void renderOffhandReturn(float frame, CallbackInfo ci) {
+    private static void renderOffhandReturnANTITRANSFORMER(float frame, CallbackInfo ci) {
         if (ShitUtils.shaders_fixer$checkVibe()) {
-
-            // spotless:off
-			// It should actually be `prevEquippedProgress + (equippedProgress- prevEquippedProgress)` * frame`
-			// but FUCKING MOJANK MAKES IT PRIVATE (I'll still deal with AT)
-			// spotless:on
-
-            float shaders_fixer$f1 = 1 + (0) * frame;
-
+            ItemRenderer itemRenderer = BackhandRenderHelper.itemRenderer;
+            float f1 = itemRenderer.prevEquippedProgress
+                + (itemRenderer.equippedProgress - itemRenderer.prevEquippedProgress) * frame;
             float f13 = 0.8F;
-            GL11.glTranslatef(0.7F * f13, -0.65F * f13 - (1.0F - shaders_fixer$f1) * 0.6F, -0.9F * f13);
+            GL11.glTranslatef(0.7F * f13, -0.65F * f13 - (1.0F - f1) * 0.6F, -0.9F * f13);
             GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
             GL11.glScalef(0.4F, 0.4F, 0.4F);
-
             GL11.glRotated(-180, 0, 1, 0);
-
-            // And that's not even fucking all
         }
     }
 }
