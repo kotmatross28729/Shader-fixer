@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.kotmatross.shadersfixer.asm.ShadersFixerLateMixins;
 import com.kotmatross.shadersfixer.shrimp.ShitUtils;
-import com.kotmatross.shadersfixer.shrimp.nonsense.FuckingCursed;
 import com.llamalad7.mixinextras.sugar.Local;
 
 /**
@@ -21,7 +20,6 @@ import com.llamalad7.mixinextras.sugar.Local;
  *
  * @author kotmatross
  */
-@FuckingCursed
 @Mixin(value = EntityRenderer.class, priority = 1003)
 public class MixinEntityRenderer {
     // FOR VANILLA / PARTIALLY (ANGEL)ICA (NOT FOR SHITFINE)

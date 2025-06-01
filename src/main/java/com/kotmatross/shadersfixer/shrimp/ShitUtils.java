@@ -1,5 +1,6 @@
 package com.kotmatross.shadersfixer.shrimp;
 
+import static net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED;
 import static net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON;
 
 import net.minecraft.client.Minecraft;
@@ -13,6 +14,14 @@ public class ShitUtils {
         ItemStack toRender = Minecraft.getMinecraft().entityRenderer.itemRenderer.itemToRender;
         if (toRender != null) {
             return MinecraftForgeClient.getItemRenderer(toRender, EQUIPPED_FIRST_PERSON) instanceof Vibe;
+        }
+        return false;
+    }
+
+    public static boolean shaders_fixer$checkVibe2() {
+        ItemStack toRender = Minecraft.getMinecraft().thePlayer.getHeldItem();
+        if (toRender != null) {
+            return MinecraftForgeClient.getItemRenderer(toRender, EQUIPPED) instanceof Vibe;
         }
         return false;
     }

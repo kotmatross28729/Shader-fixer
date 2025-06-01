@@ -133,10 +133,8 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
             ShaderFixerConfig.FixMapleTreeShaders = false;
         }
 
-        boolean TEMP = false;
-
-        if (loadedMods.contains("backhand")) {
-            TEMP = true;
+        if (!loadedMods.contains("backhand")) {
+            ShaderFixerConfig.DisableBackhandRenderWithGunFix = false;
         }
 
         List<String> mixins = new ArrayList<>();
@@ -409,9 +407,10 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 mixins.add("client.mapleTree.Mixin_ecru_TileEntityLighthouseIlluminationRender");
                 mixins.add("client.mapleTree.Mixin_ecru_TileEntitySLightRender");
             }
-            if (TEMP) {
-                ShadersFixer.logger.fatal("what am i doing...");
-                mixins.add("client.backhand.MixinItemRendererHooks");
+            if (ShaderFixerConfig.DisableBackhandRenderWithGunFix && ShaderFixerConfig.FixHbmGunsRender) {
+                ShadersFixer.logger.fatal("Trying to integrate Backhand mixins...");
+                mixins.add("client.backhand.sedna.MixinBackhandRenderHelper");
+                mixins.add("client.backhand.sedna.MixinItemRendererHooks");
             }
         }
 

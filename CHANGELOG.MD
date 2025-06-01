@@ -1,3 +1,7 @@
+# 3.6-patch-2
+* **[Backhand]** Disabled offhand rendering if NTM gun is in main hand (render conflict)
+  * Config option - [`DisableBackhandRenderWithGunFix`] (Not recommended to turn it off)
+
 # 3.6-patch-1
 * **[Hbm's NTM]** Fixed potential crash related to I18n in future versions (X5336+)
 

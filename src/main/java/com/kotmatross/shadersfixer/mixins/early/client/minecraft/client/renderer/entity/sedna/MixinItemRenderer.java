@@ -19,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.kotmatross.shadersfixer.asm.ShadersFixerLateMixins;
 import com.kotmatross.shadersfixer.shrimp.ShitUtils;
+import com.kotmatross.shadersfixer.shrimp.nonsense.FuckingCursed;
 
 /**
  * Main NTM gun fix
@@ -34,6 +35,8 @@ import com.kotmatross.shadersfixer.shrimp.ShitUtils;
  * 
  * @author kotmatross
  */
+
+@FuckingCursed
 @Mixin(value = ItemRenderer.class, priority = 1003)
 public class MixinItemRenderer {
 
