@@ -1,3 +1,7 @@
+# 3.6-patch-3
+* **[Hbm's NTM:Space]** Fixed orbit (space station) rendering (again) [Need to check]
+* **[Hbm's NTM]** Fixed black hole discs/swirls brightness with angelica shaders
+
 # 3.6-patch-2
 * **[Backhand]** Disabled offhand rendering if NTM gun is in main hand (render conflict)
   * Config option - [`DisableBackhandRenderWithGunFix`] (Not recommended to turn it off)

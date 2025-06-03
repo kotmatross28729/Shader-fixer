@@ -1,5 +1,6 @@
 package com.kotmatross.shadersfixer.mixins.late.client.hbm.client;
 
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.Entity;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -9,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.hbm.render.entity.effect.RenderBlackHole;
 import com.kotmatross.shadersfixer.Utils;
+import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
@@ -32,6 +34,17 @@ public class MixinRenderBlackHole {
         Utils.DisableFullBrightness(shaders_fixer$lbx.get(), shaders_fixer$lby.get());
     }
 
+    // Fix for angelica (brightness)
+    @Inject(
+        method = "renderDisc",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
+            shift = At.Shift.AFTER))
+    public void renderDisc3(Entity entity, float interp, CallbackInfo ci, @Local Tessellator tess) {
+        tess.setNormal(0.0F, 1.0F, 0.0F);
+    }
+
     @Inject(method = "renderSwirl", at = @At(value = "HEAD"), remap = false)
     public void renderSwirl(Entity entity, float interp, CallbackInfo ci,
         @Share("shaders_fixer$lbx2") LocalFloatRef shaders_fixer$lbx2,
@@ -46,6 +59,17 @@ public class MixinRenderBlackHole {
         @Share("shaders_fixer$lbx2") LocalFloatRef shaders_fixer$lbx2,
         @Share("shaders_fixer$lby2") LocalFloatRef shaders_fixer$lby2) {
         Utils.DisableFullBrightness(shaders_fixer$lbx2.get(), shaders_fixer$lby2.get());
+    }
+
+    // Fix for angelica (brightness)
+    @Inject(
+        method = "renderSwirl",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
+            shift = At.Shift.AFTER))
+    public void renderSwirl3(Entity entity, float interp, CallbackInfo ci, @Local Tessellator tess) {
+        tess.setNormal(0.0F, 1.0F, 0.0F);
     }
 
     @Inject(
