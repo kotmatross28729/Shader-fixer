@@ -8,21 +8,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.kotmatross.shadersfixer.Utils;
+import com.llamalad7.mixinextras.sugar.Share;
+import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
+import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 
 import fox.spiteful.avaritia.render.CosmicItemRenderer;
 
 @Mixin(value = CosmicItemRenderer.class, priority = 999)
 public class MixinCosmicItemRenderer {
     // !Not working with angelica
-
-    @Unique
-    public int shaders_fixer$program; // Делей программ
 
     @Inject(
         method = "renderItem",
@@ -32,8 +31,9 @@ public class MixinCosmicItemRenderer {
             ordinal = 0,
             shift = BEFORE),
         remap = false)
-    private void beforeUseShader(IItemRenderer.ItemRenderType type, ItemStack item, Object[] data, CallbackInfo ci) {
-        shaders_fixer$program = Utils.GLGetCurrentProgram();
+    private void beforeUseShader(IItemRenderer.ItemRenderType type, ItemStack item, Object[] data, CallbackInfo ci,
+        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
+        shaders_fixer$program.set(Utils.GLGetCurrentProgram());
     }
 
     @Inject(
@@ -44,16 +44,10 @@ public class MixinCosmicItemRenderer {
             ordinal = 0,
             shift = AFTER),
         remap = false)
-    private void afterUseShader(IItemRenderer.ItemRenderType type, ItemStack item, Object[] data, CallbackInfo ci) {
-        Utils.GLUseProgram(shaders_fixer$program);
+    private void afterUseShader(IItemRenderer.ItemRenderType type, ItemStack item, Object[] data, CallbackInfo ci,
+        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
+        Utils.GLUseProgram(shaders_fixer$program.get());
     }
-
-    @Unique
-    public int shaders_fixer$program2;// Энозер делей программ
-    @Unique
-    public float shaders_fixer$lbx;// Ласт брайтнесс икс
-    @Unique
-    public float shaders_fixer$lby;// Ласт брайтнесс игрик
 
     @Inject(
         method = "render",
@@ -63,10 +57,13 @@ public class MixinCosmicItemRenderer {
             ordinal = 0,
             shift = BEFORE),
         remap = false)
-    private void beforeUseShader2(ItemStack item, EntityPlayer player, CallbackInfo ci) {
-        shaders_fixer$program2 = Utils.GLGetCurrentProgram();
-        shaders_fixer$lbx = Utils.GetLastBrightnessX();
-        shaders_fixer$lby = Utils.GetLastBrightnessY();
+    private void beforeUseShader2(ItemStack item, EntityPlayer player, CallbackInfo ci,
+        @Share("shaders_fixer$program2") LocalIntRef shaders_fixer$program2,
+        @Share("shaders_fixer$lbx") LocalFloatRef shaders_fixer$lbx,
+        @Share("shaders_fixer$lby") LocalFloatRef shaders_fixer$lby) {
+        shaders_fixer$program2.set(Utils.GLGetCurrentProgram());
+        shaders_fixer$lbx.set(Utils.GetLastBrightnessX());
+        shaders_fixer$lby.set(Utils.GetLastBrightnessY());
         Utils.EnableFullBrightness();
     }
 
@@ -78,8 +75,11 @@ public class MixinCosmicItemRenderer {
             ordinal = 0,
             shift = AFTER),
         remap = false)
-    private void afterUseShader2(ItemStack item, EntityPlayer player, CallbackInfo ci) {
-        Utils.GLUseProgram(shaders_fixer$program2);
-        Utils.DisableFullBrightness(shaders_fixer$lbx, shaders_fixer$lby);
+    private void afterUseShader2(ItemStack item, EntityPlayer player, CallbackInfo ci,
+        @Share("shaders_fixer$program2") LocalIntRef shaders_fixer$program2,
+        @Share("shaders_fixer$lbx") LocalFloatRef shaders_fixer$lbx,
+        @Share("shaders_fixer$lby") LocalFloatRef shaders_fixer$lby) {
+        Utils.GLUseProgram(shaders_fixer$program2.get());
+        Utils.DisableFullBrightness(shaders_fixer$lbx.get(), shaders_fixer$lby.get());
     }
 }

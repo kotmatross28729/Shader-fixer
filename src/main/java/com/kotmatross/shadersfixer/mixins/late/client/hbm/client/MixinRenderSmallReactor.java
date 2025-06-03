@@ -4,19 +4,17 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.hbm.render.tileentity.RenderSmallReactor;
 import com.kotmatross.shadersfixer.Utils;
+import com.llamalad7.mixinextras.sugar.Share;
+import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 
 @Mixin(value = RenderSmallReactor.class, priority = 999)
 public class MixinRenderSmallReactor {
-
-    @Unique
-    public int shaders_fixer$program;
 
     @Inject(
         method = "func_147500_a",
@@ -25,9 +23,10 @@ public class MixinRenderSmallReactor {
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
             ordinal = 0,
             shift = At.Shift.BEFORE))
-    public void func_147500_aPR(TileEntity tileEntity, double x, double y, double z, float f, CallbackInfo ci) {
+    public void func_147500_aPR(TileEntity tileEntity, double x, double y, double z, float f, CallbackInfo ci,
+        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
         GL11.glDepthMask(false);
-        shaders_fixer$program = Utils.GLGetCurrentProgram();
+        shaders_fixer$program.set(Utils.GLGetCurrentProgram());
         Utils.GLUseDefaultProgram();
     }
 
@@ -38,8 +37,9 @@ public class MixinRenderSmallReactor {
             target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
             ordinal = 0,
             shift = At.Shift.AFTER))
-    public void func_147500_aPRE(TileEntity tileEntity, double x, double y, double z, float f, CallbackInfo ci) {
-        Utils.GLUseProgram(shaders_fixer$program);
+    public void func_147500_aPRE(TileEntity tileEntity, double x, double y, double z, float f, CallbackInfo ci,
+        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
+        Utils.GLUseProgram(shaders_fixer$program.get());
         GL11.glDepthMask(true);
     }
 

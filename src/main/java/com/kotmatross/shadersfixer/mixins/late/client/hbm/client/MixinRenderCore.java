@@ -1,7 +1,6 @@
 package com.kotmatross.shadersfixer.mixins.late.client.hbm.client;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -9,6 +8,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.hbm.render.tileentity.RenderCore;
 import com.hbm.tileentity.machine.TileEntityCore;
 import com.kotmatross.shadersfixer.Utils;
+import com.llamalad7.mixinextras.sugar.Share;
+import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 
 @Mixin(value = RenderCore.class, priority = 999)
 public class MixinRenderCore {
@@ -31,17 +32,15 @@ public class MixinRenderCore {
         Utils.Fix();
     }
 
-    @Unique
-    public int shaders_fixer$program;
-
     @Inject(
         method = "renderFlare",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
             shift = At.Shift.BEFORE))
-    public void renderFlarePR(TileEntityCore core, CallbackInfo ci) {
-        shaders_fixer$program = Utils.GLGetCurrentProgram();
+    public void renderFlarePR(TileEntityCore core, CallbackInfo ci,
+        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
+        shaders_fixer$program.set(Utils.GLGetCurrentProgram());
         Utils.GLUseDefaultProgram();
     }
 
@@ -51,8 +50,9 @@ public class MixinRenderCore {
             value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
             shift = At.Shift.AFTER))
-    public void renderFlarePRE(TileEntityCore core, CallbackInfo ci) {
-        Utils.GLUseProgram(shaders_fixer$program);
+    public void renderFlarePRE(TileEntityCore core, CallbackInfo ci,
+        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
+        Utils.GLUseProgram(shaders_fixer$program.get());
     }
 
 }

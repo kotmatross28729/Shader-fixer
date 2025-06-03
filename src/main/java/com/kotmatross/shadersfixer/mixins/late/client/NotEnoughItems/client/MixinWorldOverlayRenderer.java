@@ -14,6 +14,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.kotmatross.shadersfixer.Utils;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
+import com.llamalad7.mixinextras.sugar.Share;
+import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 
 import codechicken.nei.WorldOverlayRenderer;
 
@@ -31,9 +33,6 @@ public class MixinWorldOverlayRenderer {
         Utils.Fix();
     }
 
-    @Unique
-    private static int shaders_fixer$program;
-
     @Inject(
         method = "renderMobSpawnOverlay",
         at = @At(
@@ -43,8 +42,8 @@ public class MixinWorldOverlayRenderer {
             shift = BEFORE),
         remap = false)
     private static void renderMobSpawnOverlay$programS(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
-        CallbackInfo ci) {
-        shaders_fixer$program = Utils.GLGetCurrentProgram();
+        CallbackInfo ci, @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
+        shaders_fixer$program.set(Utils.GLGetCurrentProgram());
         Utils.GLUseDefaultProgram();
     }
 
@@ -57,8 +56,8 @@ public class MixinWorldOverlayRenderer {
             shift = AFTER),
         remap = false)
     private static void renderMobSpawnOverlay$programE(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
-        CallbackInfo ci) {
-        Utils.GLUseProgram(shaders_fixer$program);
+        CallbackInfo ci, @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
+        Utils.GLUseProgram(shaders_fixer$program.get());
     }
 
     @Inject(
@@ -70,9 +69,6 @@ public class MixinWorldOverlayRenderer {
         Utils.Fix();
     }
 
-    @Unique
-    private static int shaders_fixer$program2;
-
     @Inject(
         method = "renderChunkBounds",
         at = @At(
@@ -82,8 +78,8 @@ public class MixinWorldOverlayRenderer {
             shift = BEFORE),
         remap = false)
     private static void renderChunkBounds$programS(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
-        CallbackInfo ci) {
-        shaders_fixer$program2 = Utils.GLGetCurrentProgram();
+        CallbackInfo ci, @Share("shaders_fixer$program2") LocalIntRef shaders_fixer$program2) {
+        shaders_fixer$program2.set(Utils.GLGetCurrentProgram());
         Utils.GLUseDefaultProgram();
     }
 
@@ -96,9 +92,11 @@ public class MixinWorldOverlayRenderer {
             shift = AFTER),
         remap = false)
     private static void renderChunkBounds$programE(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
-        CallbackInfo ci) {
-        Utils.GLUseProgram(shaders_fixer$program2);
+        CallbackInfo ci, @Share("shaders_fixer$program2") LocalIntRef shaders_fixer$program2) {
+        Utils.GLUseProgram(shaders_fixer$program2.get());
     }
+
+    // TODO: attrib?
 
     @Unique
     private static boolean shaders_fixer$lightingM;

@@ -5,7 +5,6 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -13,13 +12,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.hbm.main.ResourceManager;
 import com.hbm.render.tileentity.RenderMachineForceField;
 import com.kotmatross.shadersfixer.Utils;
+import com.llamalad7.mixinextras.sugar.Share;
+import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 
 @Mixin(value = RenderMachineForceField.class, priority = 999)
 public class MixinRenderMachineForceField {
 
     // WE'RE SO FUCKING BACK
-    @Unique
-    public int shaders_fixer$program;
 
     @Inject(
         method = "generateSphere",
@@ -29,9 +28,10 @@ public class MixinRenderMachineForceField {
             ordinal = 0,
             shift = At.Shift.BEFORE),
         remap = false)
-    public void generateSpherePR(int l, int s, float rad, int hex, CallbackInfo ci) {
+    public void generateSpherePR(int l, int s, float rad, int hex, CallbackInfo ci,
+        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
         GL11.glDepthMask(false);
-        shaders_fixer$program = Utils.GLGetCurrentProgram();
+        shaders_fixer$program.set(Utils.GLGetCurrentProgram());
         Utils.GLUseDefaultProgram();
     }
 
@@ -43,8 +43,9 @@ public class MixinRenderMachineForceField {
             ordinal = 0,
             shift = At.Shift.AFTER),
         remap = false)
-    public void generateSpherePRE(int l, int s, float rad, int hex, CallbackInfo ci) {
-        Utils.GLUseProgram(shaders_fixer$program);
+    public void generateSpherePRE(int l, int s, float rad, int hex, CallbackInfo ci,
+        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
+        Utils.GLUseProgram(shaders_fixer$program.get());
         GL11.glDepthMask(true);
     }
 
@@ -56,9 +57,6 @@ public class MixinRenderMachineForceField {
         Utils.Fix();
     }
 
-    @Unique
-    public int shaders_fixer$program2;
-
     @Inject(
         method = "generateSphere2",
         at = @At(
@@ -67,9 +65,10 @@ public class MixinRenderMachineForceField {
             ordinal = 0,
             shift = At.Shift.BEFORE),
         remap = false)
-    public void generateSpherePR2(int l, int s, float rad, int hex, CallbackInfo ci) {
+    public void generateSpherePR2(int l, int s, float rad, int hex, CallbackInfo ci,
+        @Share("shaders_fixer$program2") LocalIntRef shaders_fixer$program2) {
         GL11.glDepthMask(false);
-        shaders_fixer$program2 = Utils.GLGetCurrentProgram();
+        shaders_fixer$program2.set(Utils.GLGetCurrentProgram());
         Utils.GLUseDefaultProgram();
     }
 
@@ -81,8 +80,9 @@ public class MixinRenderMachineForceField {
             ordinal = 0,
             shift = At.Shift.AFTER),
         remap = false)
-    public void generateSpherePRE2(int l, int s, float rad, int hex, CallbackInfo ci) {
-        Utils.GLUseProgram(shaders_fixer$program2);
+    public void generateSpherePRE2(int l, int s, float rad, int hex, CallbackInfo ci,
+        @Share("shaders_fixer$program2") LocalIntRef shaders_fixer$program2) {
+        Utils.GLUseProgram(shaders_fixer$program2.get());
         GL11.glDepthMask(true);
     }
 

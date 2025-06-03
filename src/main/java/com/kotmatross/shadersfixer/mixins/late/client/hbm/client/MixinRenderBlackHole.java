@@ -3,59 +3,57 @@ package com.kotmatross.shadersfixer.mixins.late.client.hbm.client;
 import net.minecraft.entity.Entity;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.hbm.render.entity.effect.RenderBlackHole;
 import com.kotmatross.shadersfixer.Utils;
+import com.llamalad7.mixinextras.sugar.Share;
+import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
+import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 
 @Mixin(value = RenderBlackHole.class, priority = 999)
 public class MixinRenderBlackHole {
 
-    @Unique
-    private static float shaders_fixer$lbx;
-    @Unique
-    private static float shaders_fixer$lby;
-
-    @Unique
-    private static float shaders_fixer$lbx2;
-    @Unique
-    private static float shaders_fixer$lby2;
-
     @Inject(method = "renderDisc", at = @At(value = "HEAD"), remap = false)
-    public void renderDisc(Entity entity, float interp, CallbackInfo ci) {
-        shaders_fixer$lbx = Utils.GetLastBrightnessX();
-        shaders_fixer$lby = Utils.GetLastBrightnessY();
+    public void renderDisc(Entity entity, float interp, CallbackInfo ci,
+        @Share("shaders_fixer$lbx") LocalFloatRef shaders_fixer$lbx,
+        @Share("shaders_fixer$lby") LocalFloatRef shaders_fixer$lby) {
+        shaders_fixer$lbx.set(Utils.GetLastBrightnessX());
+        shaders_fixer$lby.set(Utils.GetLastBrightnessY());
         Utils.EnableFullBrightness();
     }
 
     @Inject(method = "renderDisc", at = @At(value = "TAIL"), remap = false)
-    public void renderDisc2(Entity entity, float interp, CallbackInfo ci) {
-        Utils.DisableFullBrightness(shaders_fixer$lbx, shaders_fixer$lby);
+    public void renderDisc2(Entity entity, float interp, CallbackInfo ci,
+        @Share("shaders_fixer$lbx") LocalFloatRef shaders_fixer$lbx,
+        @Share("shaders_fixer$lby") LocalFloatRef shaders_fixer$lby) {
+        Utils.DisableFullBrightness(shaders_fixer$lbx.get(), shaders_fixer$lby.get());
     }
 
     @Inject(method = "renderSwirl", at = @At(value = "HEAD"), remap = false)
-    public void renderSwirl(Entity entity, float interp, CallbackInfo ci) {
-        shaders_fixer$lbx2 = Utils.GetLastBrightnessX();
-        shaders_fixer$lby2 = Utils.GetLastBrightnessY();
+    public void renderSwirl(Entity entity, float interp, CallbackInfo ci,
+        @Share("shaders_fixer$lbx2") LocalFloatRef shaders_fixer$lbx2,
+        @Share("shaders_fixer$lby2") LocalFloatRef shaders_fixer$lby2) {
+        shaders_fixer$lbx2.set(Utils.GetLastBrightnessX());
+        shaders_fixer$lby2.set(Utils.GetLastBrightnessY());
         Utils.EnableFullBrightness();
     }
 
     @Inject(method = "renderSwirl", at = @At(value = "TAIL"), remap = false)
-    public void renderSwirl2(Entity entity, float interp, CallbackInfo ci) {
-        Utils.DisableFullBrightness(shaders_fixer$lbx2, shaders_fixer$lby2);
+    public void renderSwirl2(Entity entity, float interp, CallbackInfo ci,
+        @Share("shaders_fixer$lbx2") LocalFloatRef shaders_fixer$lbx2,
+        @Share("shaders_fixer$lby2") LocalFloatRef shaders_fixer$lby2) {
+        Utils.DisableFullBrightness(shaders_fixer$lbx2.get(), shaders_fixer$lby2.get());
     }
-
-    @Unique
-    public int shaders_fixer$program;
 
     @Inject(
         method = "renderJets",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
-    public void renderJetsPR(Entity entity, float interp, CallbackInfo ci) {
-        shaders_fixer$program = Utils.GLGetCurrentProgram();
+    public void renderJetsPR(Entity entity, float interp, CallbackInfo ci,
+        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
+        shaders_fixer$program.set(Utils.GLGetCurrentProgram());
         Utils.GLUseDefaultProgram();
     }
 
@@ -65,8 +63,9 @@ public class MixinRenderBlackHole {
             value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
             shift = At.Shift.AFTER))
-    public void renderJetsPRE(Entity entity, float interp, CallbackInfo ci) {
-        Utils.GLUseProgram(shaders_fixer$program);
+    public void renderJetsPRE(Entity entity, float interp, CallbackInfo ci,
+        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
+        Utils.GLUseProgram(shaders_fixer$program.get());
     }
 
     @Inject(

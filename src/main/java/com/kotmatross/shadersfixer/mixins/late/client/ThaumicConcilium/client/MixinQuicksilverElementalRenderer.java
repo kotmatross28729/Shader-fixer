@@ -6,19 +6,17 @@ import static org.spongepowered.asm.mixin.injection.At.Shift.BEFORE;
 import net.minecraft.entity.EntityLivingBase;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.ilya3point999k.thaumicconcilium.client.render.mob.QuicksilverElementalRenderer;
 import com.kotmatross.shadersfixer.Utils;
+import com.llamalad7.mixinextras.sugar.Share;
+import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 
 @Mixin(value = QuicksilverElementalRenderer.class, priority = 999)
 public class MixinQuicksilverElementalRenderer {
-
-    @Unique
-    public int shaders_fixer$program;
 
     @Inject(
         method = "func_77036_a",
@@ -29,11 +27,12 @@ public class MixinQuicksilverElementalRenderer {
             shift = BEFORE),
         remap = false)
     private void beforeUseShader(EntityLivingBase p_77036_1_, float p_77036_2_, float p_77036_3_, float p_77036_4_,
-        float p_77036_5_, float p_77036_6_, float p_77036_7_, CallbackInfo ci) {
+        float p_77036_5_, float p_77036_6_, float p_77036_7_, CallbackInfo ci,
+        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
         // if(ShaderFixerConfig.ThaumicConciliumExtraMixins) {
         // GL11.glDepthMask(false);
         // }
-        shaders_fixer$program = Utils.GLGetCurrentProgram();
+        shaders_fixer$program.set(Utils.GLGetCurrentProgram());
     }
 
     @Inject(
@@ -45,8 +44,9 @@ public class MixinQuicksilverElementalRenderer {
             shift = AFTER),
         remap = false)
     private void afterUseShader(EntityLivingBase p_77036_1_, float p_77036_2_, float p_77036_3_, float p_77036_4_,
-        float p_77036_5_, float p_77036_6_, float p_77036_7_, CallbackInfo ci) {
-        Utils.GLUseProgram(shaders_fixer$program);
+        float p_77036_5_, float p_77036_6_, float p_77036_7_, CallbackInfo ci,
+        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
+        Utils.GLUseProgram(shaders_fixer$program.get());
         // if(ShaderFixerConfig.ThaumicConciliumExtraMixins) {
         // GL11.glDepthMask(true);
         // }
