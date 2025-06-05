@@ -34,7 +34,7 @@ public class MixinSkyProviderCelestial {
 
     // TODO:
     // Planet render works on moho, even with complementary (getSunBrightness related?)
-    // Make sun bright (On moho (late sunset-night), it just appears as a floating white square, Utils)
+    // JAMES PLEASE make citylights as a shader (These yonky sponky GL blend DO NOT WORK)
 
     // Fix sky with shaders
     @Inject(method = "render", at = @At(value = "HEAD"), remap = false)
@@ -109,7 +109,7 @@ public class MixinSkyProviderCelestial {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;addVertexWithUV(DDDDD)V"),
         index = 1)
     private double fixSunZFighting(double original) {
-        return AngelicaUtils.isShaderEnabled() ? original - 0.1D : original;
+        return AngelicaUtils.isShaderEnabled() ? original - 0.3D : original;
     }
 
     // Offset y for flare accordingly
@@ -124,7 +124,7 @@ public class MixinSkyProviderCelestial {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;addVertexWithUV(DDDDD)V"),
         index = 1)
     private double fixSunZFighting2(double original) {
-        return AngelicaUtils.isShaderEnabled() ? original - 0.1D : original;
+        return AngelicaUtils.isShaderEnabled() ? original - 0.3D : original;
     }
 
     /**
@@ -206,7 +206,7 @@ public class MixinSkyProviderCelestial {
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
-            ordinal = 7))
+            ordinal = 9))
     private boolean disableStartDrawingQuadsORBIT(Tessellator instance,
         @Share("shaders_fixer$GET_IS_ORBIT") LocalRef<CelestialBody> shaders_fixer$GET_IS_ORBIT) {
         return !AngelicaUtils.isShaderEnabled() || (shaders_fixer$GET_IS_ORBIT.get() == null);
@@ -218,8 +218,8 @@ public class MixinSkyProviderCelestial {
             from = @At(
                 value = "INVOKE",
                 target = "Lnet/minecraft/client/renderer/Tessellator;addVertexWithUV(DDDDD)V",
-                ordinal = 28),
-            to = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;draw()I", ordinal = 7)),
+                ordinal = 36),
+            to = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;draw()I", ordinal = 9)),
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;addVertexWithUV(DDDDD)V"))
     private boolean disableAddVertexWithUVORBIT(Tessellator instance, double p_78377_1_, double p_78377_3_,
         double p_78377_5_, double p_78374_7_, double p_78374_9_,
@@ -229,7 +229,7 @@ public class MixinSkyProviderCelestial {
 
     @WrapWithCondition(
         method = "renderCelestials",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;draw()I", ordinal = 7))
+        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;draw()I", ordinal = 9))
     private boolean disableDrawORBIT(Tessellator instance,
         @Share("shaders_fixer$GET_IS_ORBIT") LocalRef<CelestialBody> shaders_fixer$GET_IS_ORBIT) {
         return !AngelicaUtils.isShaderEnabled() || (shaders_fixer$GET_IS_ORBIT.get() == null);

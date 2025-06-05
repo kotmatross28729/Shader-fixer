@@ -408,7 +408,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 mixins.add("client.mapleTree.Mixin_ecru_TileEntitySLightRender");
             }
             if (ShaderFixerConfig.DisableBackhandRenderWithGunFix && ShaderFixerConfig.FixHbmGunsRender) {
-                ShadersFixer.logger.fatal("Trying to integrate Backhand mixins...");
+                ShadersFixer.logger.info("Trying to integrate Backhand mixins...");
                 mixins.add("client.backhand.sedna.MixinBackhandRenderHelper");
                 mixins.add("client.backhand.sedna.MixinItemRendererHooks");
             }
