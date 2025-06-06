@@ -1,5 +1,5 @@
 # 3.6-patch-3
-* **[Hbm's NTM:Space]** Fixed orbit (space station) rendering (again) [Need to check]
+* **[Hbm's NTM:Space]** Fixed orbit (space station) rendering (again)
 * **[Hbm's NTM:Space]** Fixed sun Z-fighting with angelica shaders (again)
 * **[Hbm's NTM]** Fixed black hole discs/swirls brightness with angelica shaders
 

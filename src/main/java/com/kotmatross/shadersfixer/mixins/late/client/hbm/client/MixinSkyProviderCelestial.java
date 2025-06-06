@@ -175,6 +175,66 @@ public class MixinSkyProviderCelestial {
     }
 
     /**
+     * Here:
+     *
+     * <pre>
+     *  {@code
+     *   if(metric.body == tidalLockedBody) {
+     *   GL11.glRotated(celestialAngle * -360.0 - 60.0, 1.0, 0.0, 0.0);
+     *   } else {
+     *   GL11.glRotated(metric.angle, 1.0, 0.0, 0.0);
+     *   }
+     *   GL11.glRotatef(axialTilt + 90.0F, 0.0F, 1.0F, 0.0F);
+     *   
+     *   
+     *   INJECT(shaders_fixer$programORBIT.set(Utils.GLGetCurrentProgram()), Utils.GLUseDefaultProgram())
+     *   
+     *   tessellator.startDrawingQuads();
+     *   tessellator.addVertexWithUV(-size, 100.0D, -size, 0.0D + uvOffset, 0.0D);
+     *   tessellator.addVertexWithUV(size, 100.0D, -size, 1.0D + uvOffset, 0.0D);
+     *   tessellator.addVertexWithUV(size, 100.0D, size, 1.0D + uvOffset, 1.0D);
+     *   tessellator.addVertexWithUV(-size, 100.0D, size, 0.0D + uvOffset, 1.0D);
+     *   tessellator.draw();
+     *   
+     *   INJECT(Utils.GLUseProgram(shaders_fixer$programORBIT.get()))
+     *   
+     *  }
+     * </pre>
+     *
+     * Fixes orbit... for fucking 2 time already
+     * 
+     */
+
+    @Inject(
+        method = "renderCelestials",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
+            ordinal = 0,
+            shift = At.Shift.BEFORE))
+    private void fixOrbitProgram(float partialTicks, WorldClient world, Minecraft mc,
+        List<SolarSystem.AstroMetric> metrics, float celestialAngle, CelestialBody tidalLockedBody, Vec3 planetTint,
+        float visibility, float blendAmount, CelestialBody orbiting, float maxSize, CallbackInfo ci,
+        @Share("shaders_fixer$programORBIT") LocalIntRef shaders_fixer$programORBIT) {
+        shaders_fixer$programORBIT.set(Utils.GLGetCurrentProgram());
+        Utils.GLUseDefaultProgram();
+    }
+
+    @Inject(
+        method = "renderCelestials",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
+            ordinal = 0,
+            shift = At.Shift.AFTER))
+    private void fixOrbitProgram2(float partialTicks, WorldClient world, Minecraft mc,
+        List<SolarSystem.AstroMetric> metrics, float celestialAngle, CelestialBody tidalLockedBody, Vec3 planetTint,
+        float visibility, float blendAmount, CelestialBody orbiting, float maxSize, CallbackInfo ci,
+        @Share("shaders_fixer$programORBIT") LocalIntRef shaders_fixer$programORBIT) {
+        Utils.GLUseProgram(shaders_fixer$programORBIT.get());
+    }
+
+    /**
      * All these WrapWithConditions are aimed at removing this block of code:
      * 
      * <pre>
