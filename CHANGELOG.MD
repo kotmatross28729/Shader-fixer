@@ -1,7 +1,8 @@
-# 3.6-patch-3
+# 3.7
 * **[Hbm's NTM:Space]** Fixed orbit (space station) rendering (again)
 * **[Hbm's NTM:Space]** Fixed sun Z-fighting with angelica shaders (again)
 * **[Hbm's NTM]** Fixed black hole discs/swirls brightness with angelica shaders
+* **[Hbm's NTM]** Fixed flickering of fast tools/weapons (chainsaw/minigun) when used
 
 # 3.6-patch-2
 * **[Backhand]** Disabled offhand rendering if NTM gun is in main hand (render conflict)

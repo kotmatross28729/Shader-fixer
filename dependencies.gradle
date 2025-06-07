@@ -65,7 +65,7 @@ dependencies {
     compileOnly name: 'CustomPlayerModels-1.7.10-0.6.21a'
 	compileOnly name: 'findit-1.3.10-dev'
 	compileOnly name: 'MapleTree Forge v1.1.33m'
-    compileOnly name: 'backhand-1.6.16-pre'
+    compileOnly name: 'backhand-1.6.17'
     
     compileOnly fileTree(dir: 'libs', include: '*.jar')
     compileOnly fileTree(dir: 'libs', include: '*.zip')
