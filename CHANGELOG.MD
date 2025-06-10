@@ -1,8 +1,12 @@
 # 3.7
+#### NTM:Space fixes require version [X5356_H261](https://github.com/JameH2/Hbm-s-Nuclear-Tech-GIT/releases/tag/xspace33b)!
+
+---
 * **[Hbm's NTM:Space]** Fixed orbit (space station) rendering (again)
 * **[Hbm's NTM:Space]** Fixed sun Z-fighting with angelica shaders (again)
 * **[Hbm's NTM]** Fixed black hole discs/swirls brightness with angelica shaders
 * **[Hbm's NTM]** Fixed flickering of fast tools/weapons (chainsaw/minigun) when used
+* **[Hbm's NTM:Space]** Fixed impact effects from tom (gerald) on other planets are rendered "forever" (freeze)
 
 # 3.6-patch-2
 * **[Backhand]** Disabled offhand rendering if NTM gun is in main hand (render conflict)
