@@ -1,3 +1,8 @@
+# 3.7-patch-1
+#### NTM:Space require version [insert next release](insert next release)!
+* **[Hbm's NTM:Space]** Removed fixes that are now included in the fork
+* **[Hbm's NTM:Space]** City Lights now work with shaders (thanks to Mellow!)
+
 # 3.7
 #### NTM:Space fixes require version [X5356_H261](https://github.com/JameH2/Hbm-s-Nuclear-Tech-GIT/releases/tag/xspace33b)!
 

@@ -22,24 +22,15 @@ import com.hbm.dim.SkyProviderCelestial;
 import com.hbm.dim.SolarSystem;
 import com.kotmatross.shadersfixer.AngelicaUtils;
 import com.kotmatross.shadersfixer.Utils;
-import com.kotmatross.shadersfixer.shrimp.nonsense.DoubleFuckingCursedAward;
-import com.kotmatross.shadersfixer.shrimp.nonsense.FuckingCursed;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
-import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 
-@FuckingCursed
-@DoubleFuckingCursedAward // I wonder if such a large amount of mixins could be harmful
 @Mixin(value = SkyProviderCelestial.class, priority = 999)
 public class MixinSkyProviderCelestial {
     // FOR NTM:SPACE
     // !Sensitive to changes
-
-    // TODO:
-    // Planet render works on moho, even with complementary (getSunBrightness related?)
-    // JAMES PLEASE make citylights as a shader (These yonky sponky GL blend DO NOT WORK)
 
     // Fix sky with shaders
     @Inject(method = "render", at = @At(value = "HEAD"), remap = false)
@@ -180,106 +171,6 @@ public class MixinSkyProviderCelestial {
     }
 
     /**
-     * All these WrapWithConditions are aimed at removing this block of code:
-     *
-     * <pre>
-     *  {@code
-     *  tessellator.startDrawingQuads();
-     *  tessellator.addVertexWithUV(-impactSize, 100.0D, -impactSize, 0.0D, 0.0D);
-     *  tessellator.addVertexWithUV(impactSize, 100.0D, -impactSize, 1.0D, 0.0D);
-     *  tessellator.addVertexWithUV(impactSize, 100.0D, impactSize, 1.0D, 1.0D);
-     *  tessellator.addVertexWithUV(-impactSize, 100.0D, impactSize, 0.0D, 1.0D);
-     *  tessellator.draw();
-     *  }
-     * </pre>
-     *
-     * If angelica shaders are enabled (Fixes shockwave freezing)
-     */
-
-    // Inject where "impact shockwave, increases in size and fades out"
-
-    @WrapWithCondition(
-        method = "renderCelestials",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
-            ordinal = 7))
-    private boolean disableStartDrawingQuadsShockwave(Tessellator instance, @Local(ordinal = 9) double impactAlpha) {
-        return !AngelicaUtils.isShaderEnabled() || (impactAlpha != 0);
-    }
-
-    @WrapWithCondition(
-        method = "renderCelestials",
-        slice = @Slice(
-            from = @At(
-                value = "INVOKE",
-                target = "Lnet/minecraft/client/renderer/Tessellator;addVertexWithUV(DDDDD)V",
-                ordinal = 28),
-            to = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;draw()I", ordinal = 7)),
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;addVertexWithUV(DDDDD)V"))
-    private boolean disableAddVertexWithUVShockwave(Tessellator instance, double p_78377_1_, double p_78377_3_,
-        double p_78377_5_, double p_78374_7_, double p_78374_9_, @Local(ordinal = 9) double impactAlpha) {
-        return !AngelicaUtils.isShaderEnabled() || (impactAlpha != 0);
-    }
-
-    @WrapWithCondition(
-        method = "renderCelestials",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;draw()I", ordinal = 7))
-    private boolean disableDrawShockwave(Tessellator instance, @Local(ordinal = 9) double impactAlpha) {
-        return !AngelicaUtils.isShaderEnabled() || (impactAlpha != 0);
-    }
-
-    /**
-     * All these WrapWithConditions are aimed at removing this block of code:
-     *
-     * <pre>
-     *  {@code
-     *  tessellator.startDrawingQuads();
-     *  tessellator.addVertexWithUV(-flareSize, 100.0D, -flareSize, 0.0D, 0.0D);
-     *  tessellator.addVertexWithUV(flareSize, 100.0D, -flareSize, 1.0D, 0.0D);
-     *  tessellator.addVertexWithUV(flareSize, 100.0D, flareSize, 1.0D, 1.0D);
-     *  tessellator.addVertexWithUV(-flareSize, 100.0D, flareSize, 0.0D, 1.0D);
-     *  tessellator.draw();
-     *  }
-     * </pre>
-     *
-     * If angelica shaders are enabled (Fixes flare freezing)
-     */
-
-    // Inject where "impact flare, remains static in size and fades out"
-
-    @WrapWithCondition(
-        method = "renderCelestials",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
-            ordinal = 8))
-    private boolean disableStartDrawingQuadsFlare(Tessellator instance, @Local(ordinal = 11) double flareAlpha) {
-        return !AngelicaUtils.isShaderEnabled() || (flareAlpha != 0);
-    }
-
-    @WrapWithCondition(
-        method = "renderCelestials",
-        slice = @Slice(
-            from = @At(
-                value = "INVOKE",
-                target = "Lnet/minecraft/client/renderer/Tessellator;addVertexWithUV(DDDDD)V",
-                ordinal = 32),
-            to = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;draw()I", ordinal = 8)),
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;addVertexWithUV(DDDDD)V"))
-    private boolean disableAddVertexWithUVFlare(Tessellator instance, double p_78377_1_, double p_78377_3_,
-        double p_78377_5_, double p_78374_7_, double p_78374_9_, @Local(ordinal = 11) double flareAlpha) {
-        return !AngelicaUtils.isShaderEnabled() || (flareAlpha != 0);
-    }
-
-    @WrapWithCondition(
-        method = "renderCelestials",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;draw()I", ordinal = 8))
-    private boolean disableDrawFlare(Tessellator instance, @Local(ordinal = 11) double flareAlpha) {
-        return !AngelicaUtils.isShaderEnabled() || (flareAlpha != 0);
-    }
-
-    /**
      * Here:
      *
      * <pre>
@@ -371,7 +262,7 @@ public class MixinSkyProviderCelestial {
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
-            ordinal = 9))
+            ordinal = 5))
     private boolean disableStartDrawingQuadsORBIT(Tessellator instance,
         @Share("shaders_fixer$GET_IS_ORBIT") LocalRef<CelestialBody> shaders_fixer$GET_IS_ORBIT) {
         return !AngelicaUtils.isShaderEnabled() || (shaders_fixer$GET_IS_ORBIT.get() == null);
@@ -383,8 +274,8 @@ public class MixinSkyProviderCelestial {
             from = @At(
                 value = "INVOKE",
                 target = "Lnet/minecraft/client/renderer/Tessellator;addVertexWithUV(DDDDD)V",
-                ordinal = 36),
-            to = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;draw()I", ordinal = 9)),
+                ordinal = 20),
+            to = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;draw()I", ordinal = 5)),
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;addVertexWithUV(DDDDD)V"))
     private boolean disableAddVertexWithUVORBIT(Tessellator instance, double p_78377_1_, double p_78377_3_,
         double p_78377_5_, double p_78374_7_, double p_78374_9_,
@@ -394,7 +285,7 @@ public class MixinSkyProviderCelestial {
 
     @WrapWithCondition(
         method = "renderCelestials",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;draw()I", ordinal = 9))
+        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;draw()I", ordinal = 5))
     private boolean disableDrawORBIT(Tessellator instance,
         @Share("shaders_fixer$GET_IS_ORBIT") LocalRef<CelestialBody> shaders_fixer$GET_IS_ORBIT) {
         return !AngelicaUtils.isShaderEnabled() || (shaders_fixer$GET_IS_ORBIT.get() == null);
