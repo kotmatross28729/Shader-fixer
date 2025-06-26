@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.hbm.main.ResourceManager;
+import com.hbm.inventory.gui.GUIMachineRadarNT;
 import com.hbm.render.tileentity.RenderRadarScreen;
 import com.kotmatross.shadersfixer.Utils;
 
@@ -19,9 +19,9 @@ public class MixinRenderRadarScreen {
         method = "func_147500_a",
         at = @At(
             value = "INVOKE",
-            target = "Lorg/lwjgl/opengl/GL11;glDepthMask(Z)V",
+            target = "net/minecraft/client/renderer/Tessellator.func_78382_b ()V",
             ordinal = 0,
-            shift = At.Shift.AFTER),
+            shift = At.Shift.BEFORE),
         remap = false)
     public void func_147500_a(TileEntity tileEntity, double x, double y, double z, float f, CallbackInfo ci) {
         Utils.Fix();
@@ -31,11 +31,11 @@ public class MixinRenderRadarScreen {
         method = "func_147500_a",
         at = @At(
             value = "INVOKE",
-            target = "Lorg/lwjgl/opengl/GL11;glDepthMask(Z)V",
-            ordinal = 1,
+            target = "net/minecraft/client/renderer/Tessellator.func_78381_a()I",
+            ordinal = 0,
             shift = At.Shift.AFTER),
         remap = false)
     public void func_147500_a2(TileEntity tileEntity, double x, double y, double z, float f, CallbackInfo ci) {
-        Minecraft.getMinecraft().renderEngine.bindTexture(ResourceManager.radar_screen_tex);
+        Minecraft.getMinecraft().renderEngine.bindTexture(GUIMachineRadarNT.texture);
     }
 }
