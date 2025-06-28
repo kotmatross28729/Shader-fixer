@@ -356,6 +356,11 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                     mixins.add("client.hbm.client.descr.MixinHazardTypeHot");
                     mixins.add("client.hbm.client.descr.MixinHazardTypeHydroactive");
                 }
+
+                if (ShaderFixerConfig.HbmMuzzleFlashEnableDepth) {
+                    mixins.add("client.hbm.client.sedna.MixinItemRenderWeaponBase_DEPTH");
+                }
+
             }
             if (ShaderFixerConfig.FixDSShaders) {
                 ShadersFixer.logger.info("Trying to integrate DynamicSurroundings mixins...");

@@ -36,12 +36,12 @@ public class ShaderFixerConfig {
     public static boolean FixFindItShaders;
     public static boolean FixMapleTreeShaders;
 
-    public static boolean DisableBackhandRenderWithGunFix;
-
     // Tweaks
     public static boolean ElnLightMixins;
     public static boolean HbmExtendedHazardDescriptions;
     public static boolean FixFisksuperheroesCPMCompat;
+    public static boolean DisableBackhandRenderWithGunFix;
+    public static boolean HbmMuzzleFlashEnableDepth;
 
     // Category
     static final String categoryShadersfixes = "Shaders fixes";
@@ -193,12 +193,16 @@ public class ShaderFixerConfig {
             categorytweaks,
             true,
             "Fixes a bug where CPM animations wouldn't work with Fisksuperheroes armor");
-
         DisableBackhandRenderWithGunFix = config.getBoolean(
             "DisableBackhandRenderWithGunFix",
             categorytweaks,
             true,
             "If FixHbmGunsRender enabled, cancel rendering of the offhand item if item in the main hand is NTM gun (otherwise it causes rendering bugs)");
+        HbmMuzzleFlashEnableDepth = config.getBoolean(
+            "HbmMuzzleFlashEnableDepth",
+            categorytweaks,
+            false,
+            "Turns glDepthMask back on when rendering muzzle flash. Only turn it on if the \"NTM texture patch for shaders\" resource pack is enabled");
 
         // TechgunsGoreLogger = config.getBoolean(
         // "TechgunsGoreLogger",

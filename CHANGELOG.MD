@@ -1,8 +1,14 @@
 # 3.8
-#### NTM:Space fixes require version [insert next release](insert next release)!
+#### NTM require version [insert next release](insert next release)!
+#### NTM:Space require version [insert next release](insert next release)!
+
+---
 * **[Hbm's NTM:Space]** Removed fixes that are now included in the fork
 * **[Hbm's NTM:Space]** City Lights now work with shaders (thanks to Mellow!)
 * **[Hbm's NTM]** Fixed white squares (instead of missile symbols) on the radar screen
+* **[Hbm's NTM]** Added `HbmMuzzleFlashEnableDepth` config option 
+  * Disabled by default, enable only if the resource pack ["NTM texture patch for shaders"](https://modrinth.com/resourcepack/ntm-texture-patch-for-shaders) is enabled
+  * Enables writing to the depth buffer back, fixes all sorts of errors with shader effects (clouds/water, etc.)
 
 # 3.7
 #### NTM:Space fixes require version [X5356_H261](https://github.com/JameH2/Hbm-s-Nuclear-Tech-GIT/releases/tag/xspace33b)!
