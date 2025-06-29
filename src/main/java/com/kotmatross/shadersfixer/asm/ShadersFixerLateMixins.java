@@ -277,7 +277,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 mixins.add("client.hbm.client.MixinParticleSpark"); // "Tauon" turret, arc welder
                 mixins.add("client.hbm.client.MixinParticleSpentCasing"); // Smoke on bullets/shells
                 if (specjork) {
-                    mixins.add("client.hbm.client.MixinBeamPronter"); // FEL laser, ICF laser, but for fork
+                    mixins.add("client.hbm.client.space.MixinBeamPronter"); // FEL laser, ICF laser, but for fork
                 } else {
                     mixins.add("client.hbm.client.MixinBeamPronterORIG"); // FEL laser, ICF laser
                 }
@@ -323,7 +323,7 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 mixins.add("client.hbm.client.MixinRenderSpear"); // Rays of light from the digamma spear
                 mixins.add("client.hbm.client.MixinRenderOrbus"); // Liquid inside
                 if (specjork) {
-                    mixins.add("client.hbm.client.MixinSkyProviderCelestial"); // Sky
+                    mixins.add("client.hbm.client.space.MixinSkyProviderCelestial"); // Sky
                 }
                 mixins.add("client.hbm.client.MixinRenderBullet"); // !GLASS/TAU
                 mixins.add("client.hbm.client.MixinRenderRainbow"); // !ZOMG
@@ -347,6 +347,12 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 mixins.add("client.hbm.client.MixinDiamondPronter"); // NFPA 704 (on barrels, tanks)
                 mixins.add("client.hbm.client.MixinRenderPylonBase"); // WIRES
                 mixins.add("client.hbm.client.MixinHbmAnimations"); // Fix flickering
+                if (specjork) {
+                    mixins.add("client.hbm.client.space.MixinMissilePronter"); // "Fix" (just scale it a little)
+                                                                               // fuselage
+                    // Z-fighting (glClipPlane not
+                    // working with shaders)
+                }
 
                 if (ShaderFixerConfig.HbmExtendedHazardDescriptions) {
                     mixins.add("client.hbm.client.descr.MixinHazardTypeAsbestos");
