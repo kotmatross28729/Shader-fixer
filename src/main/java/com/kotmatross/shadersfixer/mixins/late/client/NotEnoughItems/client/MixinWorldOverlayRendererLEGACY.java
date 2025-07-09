@@ -93,26 +93,22 @@ public class MixinWorldOverlayRendererLEGACY {
     // GETTERS
 
     @Inject(method = "renderMobSpawnOverlay", at = @At(value = "HEAD"), remap = false)
-    private static void shaders_fixer$lightingGETM(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
-        CallbackInfo ci) {
+    private static void shaders_fixer$lightingGETM(Entity entity, CallbackInfo ci) {
         shaders_fixer$lightingM = GL11.glGetBoolean(GL11.GL_LIGHTING);
     }
 
     @Inject(method = "renderMobSpawnOverlay", at = @At(value = "HEAD"), remap = false)
-    private static void shaders_fixer$blendingGETM(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
-        CallbackInfo ci) {
+    private static void shaders_fixer$blendingGETM(Entity entity, CallbackInfo ci) {
         shaders_fixer$blendingM = GL11.glGetBoolean(GL11.GL_BLEND);
     }
 
     @Inject(method = "renderChunkBounds", at = @At(value = "HEAD"), remap = false)
-    private static void shaders_fixer$lightingGETC(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
-        CallbackInfo ci) {
+    private static void shaders_fixer$lightingGETC(Entity entity, CallbackInfo ci) {
         shaders_fixer$lightingC = GL11.glGetBoolean(GL11.GL_LIGHTING);
     }
 
     @Inject(method = "renderChunkBounds", at = @At(value = "HEAD"), remap = false)
-    private static void shaders_fixer$blendingGETC(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
-        CallbackInfo ci) {
+    private static void shaders_fixer$blendingGETC(Entity entity, CallbackInfo ci) {
         shaders_fixer$blendingC = GL11.glGetBoolean(GL11.GL_BLEND);
     }
 
