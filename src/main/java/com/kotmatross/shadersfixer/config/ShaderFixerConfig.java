@@ -226,14 +226,14 @@ public class ShaderFixerConfig {
     public static boolean FixMinecraftFishinglineRender;
     public static boolean FixMinecraftLeashRender;
 
-    public static boolean EnableXMixinRenderLiving;
+    public static boolean EnableXXMixinRenderLiving;
     public static boolean FixMinecraftEnderdragonDeathEffectsRender;
     public static boolean FixMinecraftLightningBoltRender;
     public static boolean FixMinecraftNameTagsRender;
 
     public static boolean FixMinecraftEffectGUIBlending;
 
-    public static boolean enableNotifications;
+    public static boolean enableXNotifications;
     public static int startTicksOffset;
     public static int ticksInterval;
 
@@ -281,10 +281,10 @@ public class ShaderFixerConfig {
             categoryShadersfixes,
             true,
             "Fixes leash line rendering with shaders.");
-        EnableXMixinRenderLiving = config.getBoolean(
+        EnableXXMixinRenderLiving = config.getBoolean(
             "EnableXMixinRenderLiving",
             categoryShadersfixes,
-            true,
+            false,
             "Enables XMixinRenderLiving which should fix DamageIndicators GUI rendering with shaders.");
         FixMinecraftEnderdragonDeathEffectsRender = config.getBoolean(
             "FixMinecraftEnderdragonDeathEffectsRender",
@@ -307,10 +307,10 @@ public class ShaderFixerConfig {
             true,
             "Fixes an annoying bug due to which the effect bar in the creative menu turns black.");
 
-        enableNotifications = config.getBoolean(
+        enableXNotifications = config.getBoolean(
             "enableNotifications",
             categorytweaks,
-            true,
+            false,
             "Turns on a notification in the chat when detected 'old version' mods.");
         startTicksOffset = config.getInt(
             "startTicksOffset",

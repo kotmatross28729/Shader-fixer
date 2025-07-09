@@ -1,6 +1,6 @@
 package com.kotmatross.shadersfixer.shrimp.nonsense;
 
 /**
- * Use when things are TOO bad
+ * Because it's not possible to use two FuckingCursed annotations
  */
 public @interface DoubleFuckingCursedAward {}

@@ -8,6 +8,10 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+@SideOnly(Side.CLIENT)
 public class Utils {
 
     // OP guys
@@ -27,7 +31,6 @@ public class Utils {
 
     // numbers
     public static int INT_2X16 = 65_536;
-    public static int INT_MAX = 2_147_483_647;
 
     // LIGHT
     public static int MAX_LIGHT_COORD = 15_728_880;
@@ -97,7 +100,7 @@ public class Utils {
         if (ShadersFixer.IS_ANGELICA_PRESENT) {
             Program.unbind(); // For angelica, same glUseProgram(0), but also clears uniforms and samplers
         } else {
-            GL20.glUseProgram(0); // For optifine
+            GL20.glUseProgram(0); // For opt#f*ne
         }
     }
 

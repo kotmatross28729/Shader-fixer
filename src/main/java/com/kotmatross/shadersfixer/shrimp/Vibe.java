@@ -9,5 +9,5 @@ package com.kotmatross.shadersfixer.shrimp;
  * @author kotmatross
  */
 public @interface Vibe {
-
+    // yeah, it's not an annotation, just IDEA highlights it in yellow (cool)
 }

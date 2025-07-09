@@ -1,8 +1,5 @@
 package com.kotmatross.shadersfixer;
 
-import java.io.IOException;
-
-import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.common.config.Configuration;
 
 import org.apache.logging.log4j.LogManager;
@@ -18,17 +15,15 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(
     modid = Tags.MODID,
     version = Tags.VERSION,
     name = Tags.MODNAME,
     acceptedMinecraftVersions = Tags.MCVERSION,
-    dependencies = "required-after:gtnhmixins@[2.0.0,);")
+    dependencies = "")
 public class ShadersFixer {
 
     @Mod.Instance(Tags.MODID)
@@ -78,24 +73,6 @@ public class ShadersFixer {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         proxy.registerEvents();
-        proxy.init(this);
     }
-
-    private static final boolean IS_SHADERS_MOD_PRESENT;
-    static {
-        boolean shadersModPresent = false;
-        try {
-            shadersModPresent = Launch.classLoader.getClassBytes("shadersmod.client.Shaders") != null;
-        } catch (IOException ignored) {}
-        IS_SHADERS_MOD_PRESENT = shadersModPresent;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public static boolean SHADERS_MOD() {
-        return IS_SHADERS_MOD_PRESENT;
-    }
-
-    @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event) {}
 
 }

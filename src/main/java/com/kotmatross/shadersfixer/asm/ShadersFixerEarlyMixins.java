@@ -51,7 +51,7 @@ public class ShadersFixerEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLo
                 ShadersFixer.logger.info("Integrating MixinRenderLiving...");
                 mixins.add("client.minecraft.client.renderer.entity.MixinRenderLiving");
             }
-            if (ShaderFixerConfig.EnableXMixinRenderLiving) {
+            if (ShaderFixerConfig.EnableXXMixinRenderLiving) {
                 ShadersFixer.logger.info("Integrating XMixinRenderLiving... (for Damage Indicators fix)");
                 mixins.add("client.minecraft.client.renderer.entity.XMixinRenderLiving");
             }
