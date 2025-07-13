@@ -1,3 +1,8 @@
+# 3.9
+* Some configuration options are now disabled by default (due to their non-functionality)
+  * They are marked with `[UNSTABLE]`
+* **[Fisk's Superheroes]** TODO
+
 # 3.8
 #### NTM require version [insert next release](insert next release)!
 #### NTM:Space require version [insert next release](insert next release)!
