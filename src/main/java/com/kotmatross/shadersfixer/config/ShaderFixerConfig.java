@@ -39,7 +39,7 @@ public class ShaderFixerConfig {
     // Tweaks
     public static boolean ElnLightMixins;
     public static boolean HbmExtendedHazardDescriptions;
-    public static boolean FixFisksuperheroesCPMCompat;
+    public static boolean FixFisksuperheroesCPMCompatX;
     public static boolean DisableBackhandRenderWithGunFix;
     public static boolean HbmMuzzleFlashEnableDepth;
 
@@ -188,11 +188,11 @@ public class ShaderFixerConfig {
             categorytweaks,
             true,
             "Adds additional information to dangerous items [HBM's NTM]");
-        FixFisksuperheroesCPMCompat = config.getBoolean(
-            "FixFisksuperheroesCPMCompat",
+        FixFisksuperheroesCPMCompatX = config.getBoolean(
+            "FixFisksuperheroesCPMCompatX",
             categorytweaks,
-            true,
-            "Fixes a bug where CPM animations wouldn't work with Fisksuperheroes armor");
+            false,
+            "[UNSTABLE] Fixes a bug where CPM animations wouldn't work with Fisksuperheroes armor");
         DisableBackhandRenderWithGunFix = config.getBoolean(
             "DisableBackhandRenderWithGunFix",
             categorytweaks,
@@ -285,7 +285,7 @@ public class ShaderFixerConfig {
             "EnableXMixinRenderLiving",
             categoryShadersfixes,
             false,
-            "Enables XMixinRenderLiving which should fix DamageIndicators GUI rendering with shaders.");
+            "[UNSTABLE] Enables XMixinRenderLiving which should fix DamageIndicators GUI rendering with shaders.");
         FixMinecraftEnderdragonDeathEffectsRender = config.getBoolean(
             "FixMinecraftEnderdragonDeathEffectsRender",
             categoryShadersfixes,
