@@ -96,6 +96,7 @@ public class Utils {
         return GL11.glGetInteger(GL20.GL_CURRENT_PROGRAM);
     }
 
+    // Sometimes it works, sometimes it causes more bugs
     public static void GLUseDefaultProgram() {
         if (ShadersFixer.IS_ANGELICA_PRESENT) {
             Program.unbind(); // For angelica, same glUseProgram(0), but also clears uniforms and samplers

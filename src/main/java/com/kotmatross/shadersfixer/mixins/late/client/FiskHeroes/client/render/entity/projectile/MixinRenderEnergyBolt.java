@@ -32,7 +32,8 @@ public class MixinRenderEnergyBolt {
     public void renderBolt_PF(EntityEnergyBolt entity, double x, double y, double z, float f, float partialTicks,
         CallbackInfo ci, @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
         shaders_fixer$program.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
+        Utils.GLUseDefaultProgram(); // And this doesn't work with opt*fine, great, now we don't have a single stable
+                                     // shader loader
     }
 
     @Inject(

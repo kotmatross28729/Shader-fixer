@@ -149,7 +149,11 @@ public class ShadersFixerLateMixins implements ILateMixinLoader {
                 mixins.add("client.FiskHeroes.client.pack.json.shape.MixinShapeFormatCircles");
                 mixins.add("client.FiskHeroes.client.pack.json.shape.MixinShapeFormatLines");
                 mixins.add("client.FiskHeroes.client.pack.json.shape.MixinShapeFormatWireframe");
-                mixins.add("client.FiskHeroes.client.pack.json.beam.MixinBeamRendererLaser");
+
+                if (ShaderFixerConfig.FixFisksuperheroesEXPProgramFix) {
+                    mixins.add("client.FiskHeroes.client.pack.json.beam.MixinBeamRendererLaser");
+                }
+
                 mixins.add("client.FiskHeroes.client.particle.MixinEntitySHSpellWaveFX");
                 mixins.add("client.FiskHeroes.client.render.effect.MixinEffectTentacles");
                 mixins.add("client.FiskHeroes.client.render.entity.effect.MixinRenderEarthCrack");

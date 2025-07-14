@@ -17,18 +17,16 @@ import com.fiskmods.heroes.client.render.effect.EffectTentacles;
 @Mixin(value = EffectTentacles.class, priority = 999)
 public abstract class MixinEffectTentacles implements Effect {
 
-    // todo: ok it shouldn't be static but it works and now i'm afraid to touch it / make sure it doesn't break anything
-
     // Avoid leak
     @Inject(method = "doRender", at = @At(value = "HEAD"), remap = false)
-    private static void doRender(Effect.Entry e, EntityLivingBase anchor, boolean isClientPlayer, boolean isFirstPerson,
+    private void doRender(Effect.Entry e, EntityLivingBase anchor, boolean isClientPlayer, boolean isFirstPerson,
         float partialTicks, CallbackInfo ci) {
         GL11.glPushAttrib(GL11.GL_DEPTH_BUFFER_BIT);
     }
 
     @Inject(method = "doRender", at = @At(value = "TAIL"), remap = false)
-    private static void doRender2(Effect.Entry e, EntityLivingBase anchor, boolean isClientPlayer,
-        boolean isFirstPerson, float partialTicks, CallbackInfo ci) {
+    private void doRender2(Effect.Entry e, EntityLivingBase anchor, boolean isClientPlayer, boolean isFirstPerson,
+        float partialTicks, CallbackInfo ci) {
         GL11.glPopAttrib();
     }
 

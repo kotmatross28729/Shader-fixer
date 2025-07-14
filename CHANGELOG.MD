@@ -1,7 +1,11 @@
 # 3.9
 * Some configuration options are now disabled by default (due to their non-functionality)
   * They are marked with `[UNSTABLE]`
-* **[Fisk's Superheroes]** TODO
+* **[NotEnoughItems]** Fixed crash with original version
+* **[Fisk's Superheroes]** ATTEMPT to fix "that one" bug (some things just don't render) with Complementary Shaders 5.x
+  * Disabled by default, config - `FixFisksuperheroesEXPProgramFix` (`minecraft\config\shadersfixer\mixins.cfg`)
+  * It hurts me to say this, but it seems to work with optifine, side effects appear with angelica
+  * If using angelica, only enable if using Complementary Shaders 5.x, not required for other shaders
 
 # 3.8
 #### NTM require version [insert next release](insert next release)!

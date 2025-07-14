@@ -8,11 +8,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import com.fiskmods.heroes.client.pack.json.beam.BeamRendererLaser;
 import com.kotmatross.shadersfixer.Utils;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 
-@Mixin(value = com.fiskmods.heroes.client.pack.json.beam.BeamRendererLaser.class, priority = 999)
+@Mixin(value = BeamRendererLaser.class, priority = 999)
 public class MixinBeamRendererLaser {
 
     @Inject(
@@ -26,8 +27,7 @@ public class MixinBeamRendererLaser {
         boolean isClientPlayer, boolean isFirstPerson, float partialTicks, CallbackInfo ci,
         @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
         shaders_fixer$program.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
-        Utils.EnableFullBrightness();
+        Utils.GLUseDefaultProgram(); // causes problems with angelica
     }
 
     @Inject(

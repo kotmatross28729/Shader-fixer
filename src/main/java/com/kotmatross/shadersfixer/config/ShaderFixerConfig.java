@@ -35,6 +35,7 @@ public class ShaderFixerConfig {
     public static boolean FixCPMShaders;
     public static boolean FixFindItShaders;
     public static boolean FixMapleTreeShaders;
+    public static boolean FixFisksuperheroesEXPProgramFix;
 
     // Tweaks
     public static boolean ElnLightMixins;
@@ -176,6 +177,11 @@ public class ShaderFixerConfig {
             categoryShadersfixes,
             true,
             "Fixes rendering errors in MapleTree mod when using shaders.");
+        FixFisksuperheroesEXPProgramFix = config.getBoolean(
+            "FisksuperheroesProgramFix",
+            categoryShadersfixes,
+            false,
+            "[UNSTABLE] Fixes some things just don't render with Complementary Shaders 5.x.");
 
         // Tweaks
         ElnLightMixins = config.getBoolean(
