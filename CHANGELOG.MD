@@ -1,3 +1,9 @@
+# 4.0
+## Requires [UniMixins 0.1.22+](https://github.com/LegacyModdingMC/UniMixins/releases)!
+
+* Updated mixins to the new MixinsBuilder system
+* General code cleaning
+
 # 3.9
 * Some configuration options are now disabled by default (due to their non-functionality)
   * They are marked with `[UNSTABLE]`

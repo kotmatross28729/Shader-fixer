@@ -3,7 +3,7 @@
 	"modList": [{
 		"modid": "${modId}",
 		"name": "${modName}",
-		"description": "Fixes shaders with mods and some vanilla things",
+		"description": "Fixes multiple bugs with shader ",
 		"version": "${modVersion}",
 		"mcversion": "${minecraftVersion}",
 		"url": "",
