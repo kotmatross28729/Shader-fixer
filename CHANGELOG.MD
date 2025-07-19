@@ -1,3 +1,13 @@
+# 4.2
+## Requires [UniMixins 0.1.22+](https://github.com/LegacyModdingMC/UniMixins/releases)!
+
+* Fixed crash with Fisk's Superheroes
+* Added `VANILLA_DISABLE_HORIZON` config option 
+  * Disables horizon rendering
+* Added `NTM_SPACE_DISABLE_PLANET_RENDER` config option
+  * Disables rendering of the planet under the player, at high altitude
+
+
 # 4.1
 ## Requires [UniMixins 0.1.22+](https://github.com/LegacyModdingMC/UniMixins/releases)!
 

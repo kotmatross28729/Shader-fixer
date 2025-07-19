@@ -18,6 +18,7 @@ public class ShaderFixerConfig {
     // TWEAKS
     public static boolean NTM_ARMORFIX;
     public static boolean NTM_SPACE_OPTIFINE_CRASH;
+    public static boolean VANILLA_DISABLE_HORIZON;
     public static boolean VANILLA_GUI_BLEND_FIX;
     public static boolean VANILLA_MAIN_MENU_FPS_BYPASS;
     public static int VANILLA_MAIN_MENU_FPS_BYPASS_VALUE;
@@ -59,6 +60,12 @@ public class ShaderFixerConfig {
             CAT_TWEAKS,
             true,
             "[HBM'S NTM:SPACE] Crashes the game if it detects optifine. Only disable it if you know what you are doing...");
+
+        VANILLA_DISABLE_HORIZON = config.getBoolean(
+            "VANILLA_DISABLE_HORIZON",
+            CAT_TWEAKS,
+            true,
+            "Removes the incredibly ugly horizon (the thing that cuts off the bottom of the skybox), I have no idea why they added it, it's horrible (Also works with NTM:Space)");
 
         VANILLA_GUI_BLEND_FIX = config.getBoolean(
             "VANILLA_GUI_BLEND_FIX",
@@ -105,23 +112,30 @@ public class ShaderFixerConfig {
 
     // LATE MIXINS
 
-    public static boolean FISK_HEROES_EXP_PF;
+    public static boolean NTM_SPACE_DISABLE_PLANET_RENDER;
+    public static boolean FISKHEROES_EXP_PF;
     public static boolean ELN_LIGHT_MIXINS;
-    public static boolean FISK_HEROES_CPM_COMPAT;
+    public static boolean FISKHEROES_CPM_COMPAT;
     public static boolean HBM_EXTENDED_HAZARD_DESCRIPTIONS;
     public static boolean HBM_MUZZLE_FLASH_DEPTH;
 
     public static void loadLateMixinConfigTweaks(File configFile) {
         Configuration config = new Configuration(configFile);
 
-        FISK_HEROES_EXP_PF = config.getBoolean(
-            "FISK_HEROES_EXP_PF",
+        NTM_SPACE_DISABLE_PLANET_RENDER = config.getBoolean(
+            "NTM_SPACE_DISABLE_PLANET_RENDER",
+            CAT_TWEAKS,
+            false,
+            "[HBM'S NTM:SPACE] Disables rendering of the planet under the player, at high altitude");
+
+        FISKHEROES_EXP_PF = config.getBoolean(
+            "FISKHEROES_EXP_PF",
             CAT_TWEAKS,
             false,
             "[UNSTABLE] [Fisk's Superheroes] Fixes some things just don't render with Complementary Shaders 5.x.");
 
-        FISK_HEROES_CPM_COMPAT = config.getBoolean(
-            "FISK_HEROES_CPM_COMPAT",
+        FISKHEROES_CPM_COMPAT = config.getBoolean(
+            "FISKHEROES_CPM_COMPAT",
             CAT_TWEAKS,
             false,
             "[UNSTABLE] [Fisk's Superheroes] Fixes a bug where CPM animations wouldn't work with Fisksuperheroes armor");

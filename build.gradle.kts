@@ -3,4 +3,4 @@ plugins {
     id("com.gtnewhorizons.gtnhconvention")
 }
 
-version = "4.1"
+version = "4.2"

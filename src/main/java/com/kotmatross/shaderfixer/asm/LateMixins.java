@@ -51,28 +51,28 @@ public enum LateMixins implements IMixins {
     FINDIT(new MixinBuilder().addRequiredMod(TargetMods.FINDIT)
         .addClientMixins("FINDIT.MixinBlockHighlighter", "FINDIT.MixinEntityHighlighter")),
 
-    FISK_HEROES(new MixinBuilder().addRequiredMod(TargetMods.FISKHEROES)
+    FISKHEROES(new MixinBuilder().addRequiredMod(TargetMods.FISKHEROES)
         .addClientMixins(
-            "FISK_HEROES.pack.json.beam.MixinBeamRendererLightning",
-            "FISK_HEROES.pack.json.beam.MixinBeamRendererLine",
-            "FISK_HEROES.pack.json.shape.MixinShapeFormatCircles",
-            "FISK_HEROES.pack.json.shape.MixinShapeFormatLines",
-            "FISK_HEROES.pack.json.shape.MixinShapeFormatWireframe",
-            "FISK_HEROES.particle.MixinEntitySHSpellWaveFX",
-            "FISK_HEROES.render.effect.MixinEffectTentacles",
-            "FISK_HEROES.render.entity.effect.MixinRenderEarthCrack",
-            "FISK_HEROES.render.entity.effect.MixinRenderGravityWave",
-            "FISK_HEROES.render.entity.effect.MixinRenderSpeedBlur",
-            "FISK_HEROES.render.entity.projectile.MixinRenderEnergyBolt",
-            "FISK_HEROES.render.entity.projectile.MixinRenderGrapplingHook",
-            "FISK_HEROES.render.entity.projectile.MixinRenderSonicWave",
-            "FISK_HEROES.render.entity.projectile.MixinRenderSpellWhip",
-            "FISK_HEROES.render.entity.MixinRenderGrappleRope",
-            "FISK_HEROES.render.projectile.MixinBulletProjectileRenderer",
-            "FISK_HEROES.render.projectile.MixinProjectileRenderHandler",
-            "FISK_HEROES.render.tile.MixinRenderSuitFabricator",
-            "FISK_HEROES.render.tile.MixinRenderSuitDatabase",
-            "FISK_HEROES.MixinSHRenderHooks")),
+            "FISKHEROES.pack.json.beam.MixinBeamRendererLightning",
+            "FISKHEROES.pack.json.beam.MixinBeamRendererLine",
+            "FISKHEROES.pack.json.shape.MixinShapeFormatCircles",
+            "FISKHEROES.pack.json.shape.MixinShapeFormatLines",
+            "FISKHEROES.pack.json.shape.MixinShapeFormatWireframe",
+            "FISKHEROES.particle.MixinEntitySHSpellWaveFX",
+            "FISKHEROES.render.effect.MixinEffectTentacles",
+            "FISKHEROES.render.entity.effect.MixinRenderEarthCrack",
+            "FISKHEROES.render.entity.effect.MixinRenderGravityWave",
+            "FISKHEROES.render.entity.effect.MixinRenderSpeedBlur",
+            "FISKHEROES.render.entity.projectile.MixinRenderEnergyBolt",
+            "FISKHEROES.render.entity.projectile.MixinRenderGrapplingHook",
+            "FISKHEROES.render.entity.projectile.MixinRenderSonicWave",
+            "FISKHEROES.render.entity.projectile.MixinRenderSpellWhip",
+            "FISKHEROES.render.entity.MixinRenderGrappleRope",
+            "FISKHEROES.render.projectile.MixinBulletProjectileRenderer",
+            "FISKHEROES.render.projectile.MixinProjectileRenderHandler",
+            "FISKHEROES.render.tile.MixinRenderSuitFabricator",
+            "FISKHEROES.render.tile.MixinRenderSuitDatabase",
+            "FISKHEROES.MixinSHRenderHooks")),
 
     HBM(new MixinBuilder().addRequiredMod(TargetMods.HBM)
         .addClientMixins(
@@ -242,13 +242,13 @@ public enum LateMixins implements IMixins {
         .addClientMixins("ZELDASWORDSKILLS.MixinRenderEntityWhip", "ZELDASWORDSKILLS.MixinRenderEntityHookShot")),
 
     // TWEAKS
-    FISK_HEROES_EXP_PF(new MixinBuilder().addRequiredMod(TargetMods.FISKHEROES)
-        .addClientMixins("FISK_HEROES.pack.json.beam.MixinBeamRendererLaser")
-        .setApplyIf(() -> ShaderFixerConfig.FISK_HEROES_EXP_PF)),
+    FISKHEROES_EXP_PF(new MixinBuilder().addRequiredMod(TargetMods.FISKHEROES)
+        .addClientMixins("FISKHEROES.pack.json.beam.MixinBeamRendererLaser")
+        .setApplyIf(() -> ShaderFixerConfig.FISKHEROES_EXP_PF)),
 
-    FISK_HEROES_CPM_COMPAT(new MixinBuilder().addRequiredMod(TargetMods.FISKHEROES)
-        .addClientMixins("FISK_HEROES.CPMCompat.MixinModelBipedMultiLayer")
-        .setApplyIf(() -> ShaderFixerConfig.FISK_HEROES_CPM_COMPAT)),
+    FISKHEROES_CPM_COMPAT(new MixinBuilder().addRequiredMod(TargetMods.FISKHEROES)
+        .addClientMixins("FISKHEROES.CPMCompat.MixinModelBipedMultiLayer")
+        .setApplyIf(() -> ShaderFixerConfig.FISKHEROES_CPM_COMPAT)),
 
     ELN_LIGHT(new MixinBuilder().addRequiredMod(TargetMods.ELN)
         .addClientMixins("ELN.MixinLampSocketStandardObjRender", "ELN.MixinLampSocketSuspendedObjRender")
