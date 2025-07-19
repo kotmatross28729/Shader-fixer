@@ -174,7 +174,7 @@ public enum LateMixins implements IMixins {
     MAPLETREE(new MixinBuilder().addRequiredMod(TargetMods.MAPLETREE)
         .addClientMixins(
             "MAPLETREE.Mixin_ecru_TileEntityLighthouseIlluminationRender",
-            "MAPLETREE.ecru_TileEntitySLightRender")),
+            "MAPLETREE.Mixin_ecru_TileEntitySLightRender")),
 
     MCHELI(new MixinBuilder().addRequiredMod(TargetMods.MCHELI)
         .addClientMixins(

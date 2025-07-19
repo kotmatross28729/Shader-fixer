@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
+import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,8 +19,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.kotmatross.shaderfixer.shrimp.nonsense.FuckingCursed;
-import com.kotmatross.shaderfixer.utils.NTMUtils;
-import com.kotmatross.shaderfixer.utils.ShitUtils;
+import com.kotmatross.shaderfixer.utils.NTMUtils_WRAPPER;
 
 /**
  * Main NTM gun fix
@@ -72,11 +72,11 @@ public class MixinItemRenderer {
     @Inject(method = "renderItemInFirstPerson", at = @At(value = "HEAD"))
     public void renderItemInFirstPerson(float interp, CallbackInfo ci) {
 
-        if (ShitUtils.checkVibe_FIRST_PERSON()) {
-            NTMUtils.handleInterpolation(interp); // INTERPOLATE AIM
-            shaders_fixer$swayMagnitude = NTMUtils.getGunsSwayMagnitude(itemToRender);
-            shaders_fixer$swayPeriod = NTMUtils.getGunsSwayPeriod(itemToRender);
-            shaders_fixer$turnMagnitude = NTMUtils.getGunsTurnMagnitude(itemToRender);
+        if (NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) {
+            NTMUtils_WRAPPER.handleInterpolation(interp); // INTERPOLATE AIM
+            shaders_fixer$swayMagnitude = NTMUtils_WRAPPER.getGunsSwayMagnitude(itemToRender);
+            shaders_fixer$swayPeriod = NTMUtils_WRAPPER.getGunsSwayPeriod(itemToRender);
+            shaders_fixer$turnMagnitude = NTMUtils_WRAPPER.getGunsTurnMagnitude(itemToRender);
         }
 
         shaders_fixer$f1 = prevEquippedProgress + (equippedProgress - prevEquippedProgress) * interp;
@@ -106,7 +106,7 @@ public class MixinItemRenderer {
         index = 0,
         remap = false)
     private float modifyPitchRotation(float angle) {
-        if (ShitUtils.checkVibe_FIRST_PERSON())
+        if (NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON))
             return (shaders_fixer$player.rotationPitch - shaders_fixer$armPitch) * 0.1F * shaders_fixer$turnMagnitude;
         return (shaders_fixer$player.rotationPitch - shaders_fixer$armPitch) * 0.1F;
     }
@@ -118,7 +118,7 @@ public class MixinItemRenderer {
         index = 0,
         remap = false)
     private float modifyYawRotation(float angle) {
-        if (ShitUtils.checkVibe_FIRST_PERSON())
+        if (NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON))
             return (shaders_fixer$player.rotationYaw - shaders_fixer$armYaw) * 0.1F * shaders_fixer$turnMagnitude;
         return (shaders_fixer$player.rotationYaw - shaders_fixer$armYaw) * 0.1F;
     }
@@ -131,7 +131,7 @@ public class MixinItemRenderer {
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glTranslatef(FFF)V", ordinal = 7),
         remap = false)
     public void skipGlTranslate(float x, float y, float z) {
-        if (!ShitUtils.checkVibe_FIRST_PERSON()) {
+        if (!NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) {
             float f13 = 0.8F;
             GL11.glTranslatef(0.7F * f13, -0.65F * f13 - (1.0F - shaders_fixer$f1) * 0.6F, -0.9F * f13);
         }
@@ -143,7 +143,7 @@ public class MixinItemRenderer {
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glRotatef(FFFF)V", ordinal = 18),
         remap = false)
     public void skipGlRotate(float angle, float x, float y, float z) {
-        if (!ShitUtils.checkVibe_FIRST_PERSON()) {
+        if (!NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) {
             GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
         }
     }
@@ -154,7 +154,7 @@ public class MixinItemRenderer {
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glScalef(FFF)V", ordinal = 3),
         remap = false)
     public void skipGlScale(float x, float y, float z) {
-        if (!ShitUtils.checkVibe_FIRST_PERSON()) {
+        if (!NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) {
             GL11.glScalef(0.4F, 0.4F, 0.4F);
         }
     }
@@ -168,7 +168,7 @@ public class MixinItemRenderer {
             shift = At.Shift.BEFORE),
         remap = false)
     private void addGlRotated(float interp, CallbackInfo ci) {
-        if (ShitUtils.checkVibe_FIRST_PERSON()) {
+        if (NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) {
             GL11.glRotated(180, 0, 1, 0);
         }
     }
@@ -182,7 +182,7 @@ public class MixinItemRenderer {
             shift = At.Shift.BEFORE),
         remap = false)
     private void addFinalPreRenderStuff(float interp, CallbackInfo ci) {
-        if (ShitUtils.checkVibe_FIRST_PERSON()) {
+        if (NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) {
             if (shaders_fixer$mc.renderViewEntity instanceof EntityPlayer entityplayer) {
                 float distanceDelta = entityplayer.distanceWalkedModified - entityplayer.prevDistanceWalkedModified;
                 float distanceInterp = -(entityplayer.distanceWalkedModified + distanceDelta * interp);

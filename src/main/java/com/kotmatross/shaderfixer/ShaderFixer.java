@@ -21,11 +21,15 @@ public class ShaderFixer {
 
     public static final Logger logger = LogManager.getLogger();
     public static boolean IS_ANGELICA_PRESENT = false;
+    public static boolean IS_HBM_NTM_PRESENT = false;
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
         if (Loader.isModLoaded("angelica")) {
             IS_ANGELICA_PRESENT = true;
+        }
+        if (Loader.isModLoaded("hbm")) {
+            IS_HBM_NTM_PRESENT = true;
         }
 
         if (Loader.isModLoaded("rivalrebels")) {

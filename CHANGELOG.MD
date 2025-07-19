@@ -1,3 +1,9 @@
+# 4.1
+## Requires [UniMixins 0.1.22+](https://github.com/LegacyModdingMC/UniMixins/releases)!
+
+* Fixed crash with MapleTree
+* Fixed crash if Hbm's NTM is missing
+
 # 4.0
 ## Requires [UniMixins 0.1.22+](https://github.com/LegacyModdingMC/UniMixins/releases)!
 

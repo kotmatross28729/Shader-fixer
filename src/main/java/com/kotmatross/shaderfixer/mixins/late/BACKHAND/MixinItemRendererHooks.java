@@ -1,11 +1,13 @@
 package com.kotmatross.shaderfixer.mixins.late.BACKHAND;
 
+import net.minecraftforge.client.IItemRenderer;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.kotmatross.shaderfixer.utils.ShitUtils;
+import com.kotmatross.shaderfixer.utils.NTMUtils_WRAPPER;
 
 import xonin.backhand.client.hooks.ItemRendererHooks;
 
@@ -14,7 +16,7 @@ public class MixinItemRendererHooks {
 
     @Inject(method = "renderOffhandReturn", at = @At(value = "HEAD"), cancellable = true, remap = false)
     private static void renderOffhandReturn(float frame, CallbackInfo ci) {
-        if (ShitUtils.checkVibe_FIRST_PERSON()) {
+        if (NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) {
             ci.cancel();
         }
     }
