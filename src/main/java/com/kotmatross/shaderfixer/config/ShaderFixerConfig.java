@@ -112,6 +112,23 @@ public class ShaderFixerConfig {
 
     // LATE MIXINS
 
+    public static boolean NTM_TEXTURE_FIX;
+
+    public static void loadLateMixinConfigGeneral(File configFile) {
+        Configuration config = new Configuration(configFile);
+
+        NTM_TEXTURE_FIX = config.getBoolean(
+            "NTM_TEXTURE_FIX",
+            CAT_SHADER,
+            true,
+            "[HBM'S NTM] Fixes transparency of some NTM textures. I'm not an artist, so it might not look very good without using shaders");
+
+        if (config.hasChanged()) {
+            config.save();
+        }
+
+    }
+
     public static boolean NTM_SPACE_DISABLE_PLANET_RENDER;
     public static boolean FISKHEROES_EXP_PF;
     public static boolean ELN_LIGHT_MIXINS;
@@ -155,8 +172,8 @@ public class ShaderFixerConfig {
         HBM_MUZZLE_FLASH_DEPTH = config.getBoolean(
             "HBM_MUZZLE_FLASH_DEPTH",
             CAT_TWEAKS,
-            false,
-            "[HBM's NTM] Turns glDepthMask back on when rendering muzzle flash. Only turn it on if the \"NTM texture patch for shaders\" resource pack is enabled");
+            true,
+            "[HBM's NTM] Turns glDepthMask back on when rendering muzzle flash. Better to use with NTM_TEXTURE_FIX enabled");
 
         if (config.hasChanged()) {
             config.save();

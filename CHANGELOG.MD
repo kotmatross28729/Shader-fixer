@@ -1,6 +1,12 @@
 # 4.3
-- * + todo:
-+ * + + yam beater
+
+* **[Main]** [NTM texture patch for shaders](https://modrinth.com/resourcepack/ntm-texture-patch-for-shaders) now included in Shader Fixer
+  - Config - `minecraft\config\shaderfixer\mixinsLate_GENERAL.cfg -> NTM_TEXTURE_FIX`
+
+* **[Fisk's Superheroes]** Fixed animations breaking when `VANILLA_MODERN_RIDING_LEG_POS` is enabled
+* **[Hbm's NTM:Space]** Fixed orrery rendering with shaders
+* **[Hbm's NTM / NTM:Space]** Fixed digamma and ~~[͊͆͒l̢o̴̺͎̿̈́͜͝d̸͕̼̾͌̐e̠]~~ stars not rendered with shaders
+
 
 # 4.2
 ## Requires [UniMixins 0.1.22+](https://github.com/LegacyModdingMC/UniMixins/releases)!

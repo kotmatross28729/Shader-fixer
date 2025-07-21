@@ -41,9 +41,6 @@ public class MixinSkyProviderCelestial {
         Utils.Fix2();
     }
 
-    // todo: toast
-    
-    // yam beater
     @ModifyArgs(
         method = "renderDigamma",
         at = @At(value = "INVOKE", target = "org/lwjgl/opengl/GL11.glColor4f(FFFF)V"),
@@ -54,8 +51,7 @@ public class MixinSkyProviderCelestial {
         args.set(2, 1.0F);
         args.set(3, 1.0F);
     }
-    
-    // todo: port to ntmmain
+
     @Inject(method = "renderDigamma", at = @At(value = "HEAD"), remap = false)
     protected void lodeStarFixBrightness(float partialTicks, WorldClient world, Minecraft mc, float celestialAngle,
         CallbackInfo ci) {

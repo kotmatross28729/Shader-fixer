@@ -29,6 +29,10 @@ public class ShaderFixerLateMixins implements ILateMixinLoader {
     public List<String> getMixins(Set<String> loadedMods) {
 
         String configFolder = "config" + File.separator + Tags.MODID + File.separator;
+
+        ShaderFixerConfig
+            .loadLateMixinConfigGeneral(new File(Launch.minecraftHome, configFolder + "mixinsLate_GENERAL.cfg"));
+
         ShaderFixerConfig
             .loadLateMixinConfigTweaks(new File(Launch.minecraftHome, configFolder + "mixinsLate_TWEAKS.cfg"));
 
