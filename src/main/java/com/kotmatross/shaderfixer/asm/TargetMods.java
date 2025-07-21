@@ -17,7 +17,7 @@ public enum TargetMods implements ITargetMod {
     DSURROUND("dsurround"),
     ELN("Eln"),
     FINDIT("findit"),
-    FISKHEROES("fiskheroes"),
+    FISKHEROES("fiskheroes", "com.fiskmods.heroes.asm.SHLoadingPlugin"),
     HBM("hbm"),
     HBM_SPACE("com.hbm.dim.SolarSystem", true),
     HEE("HardcoreEnderExpansion"),

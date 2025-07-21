@@ -40,8 +40,9 @@ public class MixinModelBiped extends ModelBase {
     @Inject(method = "setRotationAngles", at = @At(value = "TAIL"))
     public void setRotationAngles(float walkCycle, float walkAmplitude, float idleCycle, float headYaw, float headPitch,
         float scale, Entity entity, CallbackInfo ci) {
-        this.bipedRightLeg.rotateAngleZ = 0.0F;
-        this.bipedLeftLeg.rotateAngleZ = 0.0F;
+        // What the hell is this for
+        // this.bipedRightLeg.rotateAngleZ = 0.0F;
+        // this.bipedLeftLeg.rotateAngleZ = 0.0F;
         if (this.isRiding) {
             this.bipedRightLeg.rotateAngleZ = ((float) Math.PI / 40F);
             this.bipedLeftLeg.rotateAngleZ = -((float) Math.PI / 40F);

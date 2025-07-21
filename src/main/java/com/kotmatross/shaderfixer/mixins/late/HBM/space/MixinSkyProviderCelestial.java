@@ -7,12 +7,15 @@ import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.Vec3;
 
+import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import com.hbm.dim.CelestialBody;
 import com.hbm.dim.SkyProviderCelestial;
@@ -36,6 +39,27 @@ public class MixinSkyProviderCelestial {
     @Inject(method = "render", at = @At(value = "HEAD"), remap = false)
     public void initSkyFix(float partialTicks, WorldClient world, Minecraft mc, CallbackInfo ci) {
         Utils.Fix2();
+    }
+
+    // todo: toast
+    
+    // yam beater
+    @ModifyArgs(
+        method = "renderDigamma",
+        at = @At(value = "INVOKE", target = "org/lwjgl/opengl/GL11.glColor4f(FFFF)V"),
+        remap = false)
+    private void digammaStarFixBrightness(Args args) {
+        args.set(0, 1.0F);
+        args.set(1, 1.0F);
+        args.set(2, 1.0F);
+        args.set(3, 1.0F);
+    }
+    
+    // todo: port to ntmmain
+    @Inject(method = "renderDigamma", at = @At(value = "HEAD"), remap = false)
+    protected void lodeStarFixBrightness(float partialTicks, WorldClient world, Minecraft mc, float celestialAngle,
+        CallbackInfo ci) {
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
     // Fixes sunset not rendering

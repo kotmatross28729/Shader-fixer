@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.kotmatross.shaderfixer.config.ShaderFixerConfig;
+import com.kotmatross.shaderfixer.utils.BuiltInResourcePack;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -67,6 +68,14 @@ public class ShaderFixer {
                 }
             }
         }
+
+        if (event.getSide() == Side.CLIENT) {
+            if (true) { // TODO: config
+                logger.fatal("REGISTERING FIXES");
+                BuiltInResourcePack.register("NTM_FIX");
+            }
+        }
+
     }
 
 }
