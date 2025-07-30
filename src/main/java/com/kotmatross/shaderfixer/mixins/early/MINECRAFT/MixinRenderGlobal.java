@@ -13,7 +13,7 @@ import com.kotmatross.shaderfixer.config.ShaderFixerConfig;
 import com.kotmatross.shaderfixer.utils.Utils;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 
-@Mixin(value = RenderGlobal.class, priority = 999)
+@Mixin(value = RenderGlobal.class, priority = 1009)
 public abstract class MixinRenderGlobal implements IWorldAccess {
 
     // I fucking hate this thing

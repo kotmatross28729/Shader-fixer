@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = ModelBiped.class, priority = 999)
+@Mixin(value = ModelBiped.class, priority = 1009)
 public class MixinModelBiped extends ModelBase {
 
     @Shadow

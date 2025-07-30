@@ -1,3 +1,8 @@
+# 4.3-patch-1
+
+* **[Hbm's NTM]** Fixed incorrect STG77 aim
+* Fixed crash with MCPatcherForge (Angelica's module)
+
 # 4.3
 
 * **[Main]** [NTM texture patch for shaders](https://modrinth.com/resourcepack/ntm-texture-patch-for-shaders) now included in Shader Fixer

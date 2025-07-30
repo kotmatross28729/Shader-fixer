@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.kotmatross.shaderfixer.utils.Utils;
 
-@Mixin(value = RenderDragon.class, priority = 999)
+@Mixin(value = RenderDragon.class, priority = 1009)
 public abstract class MixinRenderDragon {
 
     // Dragon death beams

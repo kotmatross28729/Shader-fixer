@@ -20,6 +20,7 @@ import com.llamalad7.mixinextras.sugar.Local;
  *
  * @author kotmatross
  */
+@SuppressWarnings("LocalMayBeArgsOnly") // SHUT THE FUCK UP '@Local may be argsOnly = true'
 @Mixin(value = EntityRenderer.class, priority = 1003)
 public class MixinEntityRenderer {
     // FOR VANILLA / PARTIALLY (ANGEL)ICA (NOT FOR SHITFINE)
@@ -48,8 +49,8 @@ public class MixinEntityRenderer {
     }
 
     // Shared, for both Vanilla / Angelica
-    @ModifyConstant(method = "getFOVModifier", constant = @Constant(floatValue = 70.0F))
-    public float ModifyBaseFOV(float fov, @Local(argsOnly = true) EntityLivingBase entityplayer) {
+    @ModifyConstant(method = "getFOVModifier", constant = @Constant(floatValue = 70.0F, ordinal = 0))
+    public float ModifyBaseFOV(float fov, @Local EntityLivingBase entityplayer) {
         if (NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) {
             return NTMUtils_WRAPPER.getGunsBaseFOV(entityplayer.getHeldItem());
         }

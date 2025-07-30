@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.kotmatross.shaderfixer.utils.Utils;
 
-@Mixin(value = RenderLightningBolt.class, priority = 999)
+@Mixin(value = RenderLightningBolt.class, priority = 1009)
 public abstract class MixinRenderLightningBolt extends Render {
 
     @Inject(

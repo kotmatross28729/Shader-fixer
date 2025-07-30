@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.kotmatross.shaderfixer.utils.Utils;
 
-@Mixin(value = RendererLivingEntity.class, priority = 999)
+@Mixin(value = RendererLivingEntity.class, priority = 1009)
 public abstract class MixinRendererLivingEntity extends Render {
 
     @Inject(

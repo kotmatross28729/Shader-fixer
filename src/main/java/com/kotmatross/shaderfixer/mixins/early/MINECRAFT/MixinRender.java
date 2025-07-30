@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.kotmatross.shaderfixer.utils.Utils;
 
-@Mixin(value = Render.class, priority = 999)
+@Mixin(value = Render.class, priority = 1009)
 public class MixinRender {
 
     @Inject(method = "func_147906_a", at = @At(value = "HEAD"))
