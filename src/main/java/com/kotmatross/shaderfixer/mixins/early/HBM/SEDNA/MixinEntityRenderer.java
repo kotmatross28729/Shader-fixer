@@ -25,7 +25,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 public class MixinEntityRenderer {
     // FOR VANILLA / PARTIALLY (ANGEL)ICA (NOT FOR SHITFINE)
 
-    // Vanilla only
+    // Vanilla / MixinHandRenderer for Angelica
     @Inject(method = "renderHand", at = @At(value = "HEAD"))
     public void HandleInterp(float interp, int p_78476_2_, CallbackInfo ci) {
         if (NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) {

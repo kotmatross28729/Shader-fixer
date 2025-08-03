@@ -74,9 +74,7 @@ public class ShaderFixer {
                     logger.info("NTM_TEXTURE_FIX disabled, skip resource pack loading");
                 }
             }
-
         }
-
     }
 
 }

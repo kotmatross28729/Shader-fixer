@@ -1,7 +1,12 @@
-# 4.3-patch-1
+# 4.4
+
+#### NTM require version [insert next release](insert next release)!
+#### NTM:Space require version [insert next release](insert next release)!
 
 * **[Hbm's NTM]** Fixed incorrect STG77 aim
-* Fixed crash with MCPatcherForge (Angelica's module)
+* **[Hbm's NTM]** Fixed rebar placer outline rendering with shaders
+* **[NotEnoughItems]** Fixed bug due to which fixes were not applied
+* **[Main]** Fixed crash with MCPatcherForge (Angelica's module)
 
 # 4.3
 

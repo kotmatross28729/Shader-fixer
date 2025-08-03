@@ -15,7 +15,7 @@ import com.kotmatross.shaderfixer.utils.NTMUtils_WRAPPER;
 
 @Mixin(value = HandRenderer.class, priority = 999)
 public class MixinHandRenderer {
-    // FOR ANGELICA (Optifine can go fuck itself - ✅)
+    // FOR ANGELICA (Opt*f#ne can go fuck itself - ✅)
 
     @Inject(method = "setupGlState", at = @At(value = "HEAD"), remap = false)
     public void HandleInterp(RenderGlobal gameRenderer, Camera camera, float tickDelta, CallbackInfo ci) {

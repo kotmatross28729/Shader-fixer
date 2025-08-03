@@ -140,7 +140,8 @@ public enum LateMixins implements IMixins {
             "HBM.MixinRenderTorex", // MUSHROOM
             "HBM.MixinDiamondPronter", // NFPA 704 (on barrels, tanks)
             "HBM.MixinRenderPylonBase", // WIRES
-            "HBM.MixinHbmAnimations" // Fix flickering
+            "HBM.MixinHbmAnimations", // Fix flickering
+            "HBM.MixinBlockRebar" // Fix outline
         )),
 
     HBM_OG_ONLY(new MixinBuilder().addRequiredMod(TargetMods.HBM)
@@ -184,7 +185,6 @@ public enum LateMixins implements IMixins {
             "MCHELI.MixinMCH_RenderAircraft")),
 
     NEI(new MixinBuilder().addRequiredMod(TargetMods.NEI)
-        .addExcludedMod(TargetMods.NEI_OG)
         .addClientMixins("NEI.MixinWorldOverlayRenderer")
         .setApplyIf(() -> !ShaderFixerLateMixins.OLD_NEI_LOADED)),
 

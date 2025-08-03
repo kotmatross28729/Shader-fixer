@@ -27,7 +27,6 @@ public enum TargetMods implements ITargetMod {
     MAPLETREE("mod_ecru_MapleTree"),
     MCHELI("mcheli"),
     NEI("NotEnoughItems"),
-    NEI_OG("NotEnoughItems"),
     OPENCOMPUTERS("OpenComputers"),
     RIVALREBELS("rivalrebels"),
     SCHEMATICA("Schematica"),
