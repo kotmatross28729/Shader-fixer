@@ -30,6 +30,8 @@ import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 
 @SPEKJORK
+@SuppressWarnings({ "InvalidInjectorMethodSignature", "UnresolvedMixinReference", "MixinAnnotationTarget" })
+// ^^^, SHUT THE FUCK UP
 @Mixin(value = SkyProviderCelestial.class, priority = 999)
 public class MixinSkyProviderCelestial {
 
@@ -41,6 +43,12 @@ public class MixinSkyProviderCelestial {
         Utils.Fix2();
     }
 
+    @Inject(method = "renderDigamma", at = @At(value = "HEAD"), remap = false)
+    protected void lodeStarFixBrightness(float partialTicks, WorldClient world, Minecraft mc, float celestialAngle,
+        CallbackInfo ci) {
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+    }
+
     @ModifyArgs(
         method = "renderDigamma",
         at = @At(value = "INVOKE", target = "org/lwjgl/opengl/GL11.glColor4f(FFFF)V"),
@@ -50,12 +58,6 @@ public class MixinSkyProviderCelestial {
         args.set(1, 1.0F);
         args.set(2, 1.0F);
         args.set(3, 1.0F);
-    }
-
-    @Inject(method = "renderDigamma", at = @At(value = "HEAD"), remap = false)
-    protected void lodeStarFixBrightness(float partialTicks, WorldClient world, Minecraft mc, float celestialAngle,
-        CallbackInfo ci) {
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
     // Fixes sunset not rendering
@@ -243,13 +245,16 @@ public class MixinSkyProviderCelestial {
      *
      * <pre>
      *  {@code
-     *   if(metric.body == tidalLockedBody) {
-     *   GL11.glRotated(celestialAngle * -360.0 - 60.0, 1.0, 0.0, 0.0);
-     *   } else {
+     *  
      *   GL11.glRotated(metric.angle, 1.0, 0.0, 0.0);
-     *   }
+     *   GL11.glRotated(metric.inclination, 0.0, 0.0, 1.0);
      *   GL11.glRotatef(axialTilt + 90.0F, 0.0F, 1.0F, 0.0F);
      *   
+     *   ...
+     *   
+     *   GL11.glDisable(GL11.GL_BLEND);
+     * 	 GL11.glColor4f(1.0F, 1.0F, 1.0F, visibility);
+     * 	 mc.renderEngine.bindTexture(metric.body.texture);
      *   
      *   INJECT(shaders_fixer$programORBIT.set(Utils.GLGetCurrentProgram()), Utils.GLUseDefaultProgram())
      *   
@@ -274,10 +279,10 @@ public class MixinSkyProviderCelestial {
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
-            ordinal = 0,
+            ordinal = 5,
             shift = At.Shift.BEFORE))
     private void fixOrbitProgramStart(float partialTicks, WorldClient world, Minecraft mc,
-        List<SolarSystem.AstroMetric> metrics, float celestialAngle, CelestialBody tidalLockedBody, Vec3 planetTint,
+        List<SolarSystem.AstroMetric> metrics, float solarAngle, CelestialBody tidalLockedBody, Vec3 planetTint,
         float visibility, float blendAmount, CelestialBody orbiting, float maxSize, CallbackInfo ci,
         @Share("shaders_fixer$programORBIT") LocalIntRef shaders_fixer$programORBIT) {
         shaders_fixer$programORBIT.set(Utils.GLGetCurrentProgram());
@@ -289,10 +294,10 @@ public class MixinSkyProviderCelestial {
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-            ordinal = 0,
+            ordinal = 5,
             shift = At.Shift.AFTER))
     private void fixOrbitProgramEnd(float partialTicks, WorldClient world, Minecraft mc,
-        List<SolarSystem.AstroMetric> metrics, float celestialAngle, CelestialBody tidalLockedBody, Vec3 planetTint,
+        List<SolarSystem.AstroMetric> metrics, float solarAngle, CelestialBody tidalLockedBody, Vec3 planetTint,
         float visibility, float blendAmount, CelestialBody orbiting, float maxSize, CallbackInfo ci,
         @Share("shaders_fixer$programORBIT") LocalIntRef shaders_fixer$programORBIT) {
         Utils.GLUseProgram(shaders_fixer$programORBIT.get());
@@ -303,23 +308,27 @@ public class MixinSkyProviderCelestial {
      * 
      * <pre>
      *  {@code
-     * tessellator.func_78382_b();
-     * tessellator.func_78374_a(-size, 100.0, -size, 0.0, 0.0);
-     * tessellator.func_78374_a(size, 100.0, -size, 1.0, 0.0);
-     * tessellator.func_78374_a(size, 100.0, size, 1.0, 1.0);
-     * tessellator.func_78374_a(-size, 100.0, size, 0.0, 1.0);
-     * tessellator.func_78381_a();
+     *  
+     *   // Draw another layer on top to blend with the atmosphere
+     * 	 GL11.glColor4d(planetTint.xCoord - blendDarken, planetTint.yCoord - blendDarken, planetTint.zCoord - blendDarken, (1 - blendAmount * visibility));
+     *   
+     *   // -----DELETE START-----
+     *   tessellator.startDrawingQuads();
+     *   tessellator.addVertexWithUV(-size, 100.0D, -size, 0.0D, 0.0D);
+     *   tessellator.addVertexWithUV(size, 100.0D, -size, 1.0D, 0.0D);
+     *   tessellator.addVertexWithUV(size, 100.0D, size, 1.0D, 1.0D);
+     *   tessellator.addVertexWithUV(-size, 100.0D, size, 0.0D, 1.0D);
+     *   tessellator.draw();
+     *   // -----DELETE END-----
      *  }
      * </pre>
      * 
      * If angelica shaders are enabled AND rendering planet is on orbit (Fixes the horror that is happening in orbit)
      */
 
-    // Inject where "Draw another layer on top to blend with the atmosphere"
-
     @Inject(method = "renderCelestials", at = @At(value = "HEAD"), remap = false)
     public void GET_ORBIT(float partialTicks, WorldClient world, Minecraft mc, List<SolarSystem.AstroMetric> metrics,
-        float celestialAngle, CelestialBody tidalLockedBody, Vec3 planetTint, float visibility, float blendAmount,
+        float solarAngle, CelestialBody tidalLockedBody, Vec3 planetTint, float visibility, float blendAmount,
         CelestialBody orbiting, float maxSize, CallbackInfo ci,
         @Share("shaders_fixer$GET_IS_ORBIT") LocalRef<CelestialBody> shaders_fixer$GET_IS_ORBIT) {
         shaders_fixer$GET_IS_ORBIT.set(orbiting);
@@ -330,7 +339,7 @@ public class MixinSkyProviderCelestial {
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
-            ordinal = 5))
+            ordinal = 10))
     private boolean fixOrbitBlendLayer0(Tessellator instance,
         @Share("shaders_fixer$GET_IS_ORBIT") LocalRef<CelestialBody> shaders_fixer$GET_IS_ORBIT) {
         return !AngelicaUtils.isShaderEnabled() || (shaders_fixer$GET_IS_ORBIT.get() == null);
@@ -342,8 +351,8 @@ public class MixinSkyProviderCelestial {
             from = @At(
                 value = "INVOKE",
                 target = "Lnet/minecraft/client/renderer/Tessellator;addVertexWithUV(DDDDD)V",
-                ordinal = 20),
-            to = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;draw()I", ordinal = 5)),
+                ordinal = 40),
+            to = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;draw()I", ordinal = 10)),
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;addVertexWithUV(DDDDD)V"))
     private boolean fixOrbitBlendLayer1(Tessellator instance, double p_78377_1_, double p_78377_3_, double p_78377_5_,
         double p_78374_7_, double p_78374_9_,
@@ -353,7 +362,7 @@ public class MixinSkyProviderCelestial {
 
     @WrapWithCondition(
         method = "renderCelestials",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;draw()I", ordinal = 5))
+        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;draw()I", ordinal = 10))
     private boolean fixOrbitBlendLayer2(Tessellator instance,
         @Share("shaders_fixer$GET_IS_ORBIT") LocalRef<CelestialBody> shaders_fixer$GET_IS_ORBIT) {
         return !AngelicaUtils.isShaderEnabled() || (shaders_fixer$GET_IS_ORBIT.get() == null);

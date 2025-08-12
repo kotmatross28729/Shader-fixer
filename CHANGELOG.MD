@@ -1,3 +1,9 @@
+# 4.5
+
+#### NTM:Space require version [X5420_H261+](https://github.com/JameH2/Hbm-s-Nuclear-Tech-GIT/releases)!
+
+* **[Hbm's NTM:Space]** Support fixes for X5420_H261 update
+
 # 4.4
 
 #### NTM require version [insert next release](insert next release)!
