@@ -32,6 +32,14 @@ public class Utils {
         Minecraft.getMinecraft().renderEngine.bindTexture(shader_fix2);
     }
 
+    public static int getCurrentTextureID() {
+        return GL11.glGetInteger(GL11.GL_TEXTURE_BINDING_2D);
+    }
+
+    public static void bindTextureByID(int textureID) {
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureID);
+    }
+
     // numbers
     public static int INT_2X16 = 65_536;
     // LIGHT

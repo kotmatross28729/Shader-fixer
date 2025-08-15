@@ -34,6 +34,10 @@ public enum LateMixins implements IMixins {
     CUSTOMPLAYERMODELS(new MixinBuilder().addRequiredMod(TargetMods.CUSTOMPLAYERMODELS)
         .addClientMixins("CUSTOMPLAYERMODELS.MixinClientProxy")),
 
+    CUSTOMPLAYERMODELS_EXP_FIX(new MixinBuilder().addRequiredMod(TargetMods.CUSTOMPLAYERMODELS)
+        .addClientMixins("CUSTOMPLAYERMODELS.MixinRenderStage")
+        .setApplyIf(() -> ShaderFixerConfig.CPM_EXP_FIX)),
+
     DBC(new MixinBuilder().addRequiredMod(TargetMods.DBCR)
         .addRequiredMod(TargetMods.DBC)
         .addClientMixins(

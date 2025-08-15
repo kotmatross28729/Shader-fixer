@@ -1,3 +1,9 @@
+# 4.6
+
+* **[Customizable Player Models]** Added experimental fix for models that have untextured parts
+  - Config - `minecraft\config\shaderfixer\mixinsLate_GENERAL.cfg -> CPM_EXP_FIX`
+* **[Hbm's NTM:Space]** Fixed missing sunspike with shaders
+
 # 4.5
 
 #### NTM:Space require version [X5420_H261+](https://github.com/JameH2/Hbm-s-Nuclear-Tech-GIT/releases)!

@@ -27,6 +27,14 @@ A mod that adds more compatibility with shaders.
 
 * And also some QOL changes (can be found in the configs)
 
+# DISCLAIMER:
+
+Although this mod is called "Shader FIXER", for the most part these "fixes" are just TEMPORARY solutions (aka workarounds) for problems that have NOT been found (and solved) in root yet
+
+This mod isn't a magic solution for all shader problems, it only has explicit "fixes" for vanilla and mods listed above
+
+Also, although this mod shouldn't cause serious problems even in the worst cases, but still, use at your own risk
+
 ## Credits:
 
 #### [jss2a98aj](https://github.com/jss2a98aj) - [Early mixins](https://github.com/jss2a98aj/BugTorch/blob/master/src/main/java/jss/bugtorch/mixinplugin/BugTorchEarlyMixins.java) and [config systems](https://github.com/jss2a98aj/BugTorch/blob/master/src/main/java/jss/bugtorch/config/BugTorchConfig.java)

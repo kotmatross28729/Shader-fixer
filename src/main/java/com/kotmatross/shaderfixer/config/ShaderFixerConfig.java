@@ -114,6 +114,8 @@ public class ShaderFixerConfig {
 
     public static boolean NTM_TEXTURE_FIX;
 
+    public static boolean CPM_EXP_FIX;
+
     public static void loadLateMixinConfigGeneral(File configFile) {
         Configuration config = new Configuration(configFile);
 
@@ -122,6 +124,12 @@ public class ShaderFixerConfig {
             CAT_SHADER,
             true,
             "[HBM'S NTM] Fixes transparency of some NTM textures. I'm not an artist, so it might not look very good without using shaders");
+
+        CPM_EXP_FIX = config.getBoolean(
+            "CPM_EXP_FIX",
+            CAT_SHADER,
+            true,
+            "[Customizable Player Models] Experimental! Fixes models whose cubes don't have texture (Mode: Color)");
 
         if (config.hasChanged()) {
             config.save();
@@ -167,13 +175,13 @@ public class ShaderFixerConfig {
             "HBM_EXTENDED_HAZARD_DESCRIPTIONS",
             CAT_TWEAKS,
             true,
-            "[HBM's NTM] Adds additional information to dangerous items");
+            "[HBM's NTM] Adds additional information to dangerous items (Ignites for / Explosion force / etc.)");
 
         HBM_MUZZLE_FLASH_DEPTH = config.getBoolean(
             "HBM_MUZZLE_FLASH_DEPTH",
             CAT_TWEAKS,
             true,
-            "[HBM's NTM] Turns glDepthMask back on when rendering muzzle flash. Better to use with NTM_TEXTURE_FIX enabled");
+            "[HBM's NTM] Turns glDepthMask back on when rendering muzzle flash. Fixes all sorts of errors with shader effects (clouds/water, etc.). Better to use with NTM_TEXTURE_FIX enabled");
 
         if (config.hasChanged()) {
             config.save();
