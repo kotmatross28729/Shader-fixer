@@ -1,3 +1,6 @@
+# 4.6-patch-1
+* **[Main]** Fixed incorrect limbs rotation when `VANILLA_MODERN_RIDING_LEG_POS` is enabled
+
 # 4.6
 
 * **[Customizable Player Models]** Added experimental fix for models that have untextured parts
