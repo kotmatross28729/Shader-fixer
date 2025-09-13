@@ -1,3 +1,10 @@
+# 4.6-patch-2
+
+#### NTM require version [X5439+](https://github.com/HbmMods/Hbm-s-Nuclear-Tech-GIT/releases)!
+#### NTM:Space require version [X5439_H261+](https://github.com/JameH2/Hbm-s-Nuclear-Tech-GIT/releases)!
+
+* **[Hbm's NTM]** Fixed NI4NI coins display with shaders
+
 # 4.6-patch-1
 * **[Main]** Fixed incorrect limbs rotation when `VANILLA_MODERN_RIDING_LEG_POS` is enabled
 

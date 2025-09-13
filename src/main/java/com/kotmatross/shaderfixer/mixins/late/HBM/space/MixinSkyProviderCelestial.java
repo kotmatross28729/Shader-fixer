@@ -150,19 +150,6 @@ public class MixinSkyProviderCelestial {
         return !ShaderFixerConfig.NTM_SPACE_DISABLE_PLANET_RENDER && !AngelicaUtils.isShaderEnabled();
     }
 
-    @Inject(
-        method = "renderSun",
-        at = @At(
-            value = "INVOKE",
-            target = "net/minecraft/client/renderer/texture/TextureManager.func_110577_a (Lnet/minecraft/util/ResourceLocation;)V",
-            shift = At.Shift.BEFORE,
-            ordinal = 1),
-        remap = false)
-    public void SUN_BRIGHT(float partialTicks, WorldClient world, Minecraft mc, CelestialBody sun, double sunSize,
-        double coronaSize, float visibility, float pressure, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-    }
-
     // Offsets Tessellator's y by 0.1, preventing z-fighting with shader skybox
     @ModifyArg(
         method = "renderSun",

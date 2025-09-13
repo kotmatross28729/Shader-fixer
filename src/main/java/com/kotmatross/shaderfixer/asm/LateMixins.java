@@ -126,7 +126,7 @@ public enum LateMixins implements IMixins {
             "HBM.MixinRenderBullet", // !GLASS/TAU
             "HBM.MixinRenderRainbow", // !ZOMG
             "HBM.sedna.MixinLegoClient", // Bullet render
-            "HBM.sedna.MixinModEventHandlerRenderer", // Redirect to out system
+            "HBM.sedna.MixinModEventHandlerRenderer", // Redirect to our system
             "HBM.sedna.MixinItemRenderWeaponBase", // Smoke, flash brightness
             "HBM.sedna.guns.MixinItemRenderAtlas", // Patch texture after smoke
             "HBM.sedna.guns.MixinItemRenderDANI", // Patch dual texture
@@ -145,7 +145,8 @@ public enum LateMixins implements IMixins {
             "HBM.MixinDiamondPronter", // NFPA 704 (on barrels, tanks)
             "HBM.MixinRenderPylonBase", // WIRES
             "HBM.MixinHbmAnimations", // Fix flickering
-            "HBM.MixinBlockRebar" // Fix outline
+            "HBM.MixinBlockRebar", // Fix outline
+            "HBM.sedna.guns.MixinItemRenderNI4NI" // Coins display
         )),
 
     HBM_OG_ONLY(new MixinBuilder().addRequiredMod(TargetMods.HBM)
