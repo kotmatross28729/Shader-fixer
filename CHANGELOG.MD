@@ -1,3 +1,9 @@
+# 4.whatever
+
+* **[Hbm's NTM]** Fixed Tesla Crab/Meltdown Elemental turning completely white/green respectively when attacking
+* **[Hbm's NTM:Space]** Fixed lasers (Tesla Crab/Meltdown Elemental/Mining Laser) having alpha greater than 1.0 (in `glColor4f`)
+  - A.K.A. something that will burn your eyes if the 'Bloom' option in the shader is enabled
+
 # 4.6-patch-3
 
 * **[Hbm's NTM]** (`EXTENDED_HAZARD_DESCRIPTIONS`) Changed "Blinding for:" to "Blinds for:" / "Danger:" to "Coal dust/s:" and "Asbestos/s:" respectively
