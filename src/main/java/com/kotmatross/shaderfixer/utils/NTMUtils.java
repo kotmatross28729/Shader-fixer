@@ -38,7 +38,7 @@ public class NTMUtils {
             IItemRenderer customRenderer = MinecraftForgeClient
                 .getItemRenderer(stack, IItemRenderer.ItemRenderType.EQUIPPED);
             if (customRenderer instanceof ItemRenderWeaponBase weaponBase) {
-                return ((NTMRenderGetters) weaponBase).shaders_fixer$getGunsSwayMagnitude(stack);
+                return ((NTMRenderGetters) weaponBase).shader_fixer$getGunsSwayMagnitude(stack);
             }
         }
         return 0.5F;
@@ -49,7 +49,7 @@ public class NTMUtils {
             IItemRenderer customRenderer = MinecraftForgeClient
                 .getItemRenderer(stack, IItemRenderer.ItemRenderType.EQUIPPED);
             if (customRenderer instanceof ItemRenderWeaponBase weaponBase) {
-                return ((NTMRenderGetters) weaponBase).shaders_fixer$getGunsSwayPeriod(stack);
+                return ((NTMRenderGetters) weaponBase).shader_fixer$getGunsSwayPeriod(stack);
             }
         }
         return 0.75F;
@@ -60,7 +60,7 @@ public class NTMUtils {
             IItemRenderer customRenderer = MinecraftForgeClient
                 .getItemRenderer(stack, IItemRenderer.ItemRenderType.EQUIPPED);
             if (customRenderer instanceof ItemRenderWeaponBase weaponBase) {
-                return ((NTMRenderGetters) weaponBase).shaders_fixer$getGunsTurnMagnitude(stack);
+                return ((NTMRenderGetters) weaponBase).shader_fixer$getGunsTurnMagnitude(stack);
             }
         }
         return 2.75F;
@@ -71,7 +71,7 @@ public class NTMUtils {
             IItemRenderer customRenderer = MinecraftForgeClient
                 .getItemRenderer(stack, IItemRenderer.ItemRenderType.EQUIPPED);
             if (customRenderer instanceof ItemRenderWeaponBase weaponBase) {
-                return ((NTMRenderGetters) weaponBase).shaders_fixer$getGunsBaseFOV(stack);
+                return ((NTMRenderGetters) weaponBase).shader_fixer$getGunsBaseFOV(stack);
             }
         }
         return 70F;

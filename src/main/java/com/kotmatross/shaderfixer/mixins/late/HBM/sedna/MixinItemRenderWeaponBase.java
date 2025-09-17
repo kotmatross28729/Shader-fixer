@@ -37,8 +37,8 @@ public class MixinItemRenderWeaponBase implements Vibe, NTMRenderGetters {
             ordinal = 0,
             shift = At.Shift.BEFORE))
     private static void renderSmokeNodesPR(List<ItemGunBaseNT.SmokeNode> nodes, double scale, CallbackInfo ci,
-        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        shaders_fixer$program.set(Utils.GLGetCurrentProgram());
+        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        shader_fixer$program.set(Utils.GLGetCurrentProgram());
         Utils.GLUseDefaultProgram();
     }
 
@@ -50,40 +50,40 @@ public class MixinItemRenderWeaponBase implements Vibe, NTMRenderGetters {
             ordinal = 0,
             shift = At.Shift.AFTER))
     private static void renderSmokeNodesPRE(List<ItemGunBaseNT.SmokeNode> nodes, double scale, CallbackInfo ci,
-        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        Utils.GLUseProgram(shaders_fixer$program.get());
+        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        Utils.GLUseProgram(shader_fixer$program.get());
     }
 
     @Inject(method = "renderGapFlash", at = @At(value = "HEAD"), remap = false)
     private static void renderGapFlash(long lastShot, CallbackInfo ci,
-        @Share("shaders_fixer$lbx") LocalFloatRef shaders_fixer$lbx,
-        @Share("shaders_fixer$lby") LocalFloatRef shaders_fixer$lby) {
-        shaders_fixer$lbx.set(Utils.GetLastBrightnessX());
-        shaders_fixer$lby.set(Utils.GetLastBrightnessY());
+        @Share("shader_fixer$lbx") LocalFloatRef shader_fixer$lbx,
+        @Share("shader_fixer$lby") LocalFloatRef shader_fixer$lby) {
+        shader_fixer$lbx.set(Utils.GetLastBrightnessX());
+        shader_fixer$lby.set(Utils.GetLastBrightnessY());
         Utils.EnableFullBrightness();
     }
 
     @Inject(method = "renderGapFlash", at = @At(value = "TAIL"), remap = false)
     private static void renderGapFlash2(long lastShot, CallbackInfo ci,
-        @Share("shaders_fixer$lbx") LocalFloatRef shaders_fixer$lbx,
-        @Share("shaders_fixer$lby") LocalFloatRef shaders_fixer$lby) {
-        Utils.DisableFullBrightness(shaders_fixer$lbx.get(), shaders_fixer$lby.get());
+        @Share("shader_fixer$lbx") LocalFloatRef shader_fixer$lbx,
+        @Share("shader_fixer$lby") LocalFloatRef shader_fixer$lby) {
+        Utils.DisableFullBrightness(shader_fixer$lbx.get(), shader_fixer$lby.get());
     }
 
     @Inject(method = "renderMuzzleFlash(JID)V", at = @At(value = "HEAD"), remap = false)
     private static void renderMuzzleFlash(long lastShot, int duration, double l, CallbackInfo ci,
-        @Share("shaders_fixer$lbx2") LocalFloatRef shaders_fixer$lbx2,
-        @Share("shaders_fixer$lby2") LocalFloatRef shaders_fixer$lby2) {
-        shaders_fixer$lbx2.set(Utils.GetLastBrightnessX());
-        shaders_fixer$lby2.set(Utils.GetLastBrightnessY());
+        @Share("shader_fixer$lbx2") LocalFloatRef shader_fixer$lbx2,
+        @Share("shader_fixer$lby2") LocalFloatRef shader_fixer$lby2) {
+        shader_fixer$lbx2.set(Utils.GetLastBrightnessX());
+        shader_fixer$lby2.set(Utils.GetLastBrightnessY());
         Utils.EnableFullBrightness();
     }
 
     @Inject(method = "renderMuzzleFlash(JID)V", at = @At(value = "TAIL"), remap = false)
     private static void renderMuzzleFlash2(long lastShot, int duration, double l, CallbackInfo ci,
-        @Share("shaders_fixer$lbx2") LocalFloatRef shaders_fixer$lbx2,
-        @Share("shaders_fixer$lby2") LocalFloatRef shaders_fixer$lby2) {
-        Utils.DisableFullBrightness(shaders_fixer$lbx2.get(), shaders_fixer$lby2.get());
+        @Share("shader_fixer$lbx2") LocalFloatRef shader_fixer$lbx2,
+        @Share("shader_fixer$lby2") LocalFloatRef shader_fixer$lby2) {
+        Utils.DisableFullBrightness(shader_fixer$lbx2.get(), shader_fixer$lby2.get());
     }
 
     @Shadow
@@ -107,22 +107,22 @@ public class MixinItemRenderWeaponBase implements Vibe, NTMRenderGetters {
     }
 
     @Override
-    public float shaders_fixer$getGunsBaseFOV(ItemStack stack) {
+    public float shader_fixer$getGunsBaseFOV(ItemStack stack) {
         return getBaseFOV(stack);
     }
 
     @Override
-    public float shaders_fixer$getGunsSwayMagnitude(ItemStack stack) {
+    public float shader_fixer$getGunsSwayMagnitude(ItemStack stack) {
         return getSwayMagnitude(stack);
     }
 
     @Override
-    public float shaders_fixer$getGunsSwayPeriod(ItemStack stack) {
+    public float shader_fixer$getGunsSwayPeriod(ItemStack stack) {
         return getSwayPeriod(stack);
     }
 
     @Override
-    public float shaders_fixer$getGunsTurnMagnitude(ItemStack stack) {
+    public float shader_fixer$getGunsTurnMagnitude(ItemStack stack) {
         return getTurnMagnitude(stack);
     }
 

@@ -30,8 +30,8 @@ public class MixinRenderEnergyBolt {
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
             shift = At.Shift.BEFORE))
     public void renderBolt_PF(EntityEnergyBolt entity, double x, double y, double z, float f, float partialTicks,
-        CallbackInfo ci, @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        shaders_fixer$program.set(Utils.GLGetCurrentProgram());
+        CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        shader_fixer$program.set(Utils.GLGetCurrentProgram());
         Utils.GLUseDefaultProgram(); // And this doesn't work with opt*fine, great, now we don't have a single stable
                                      // shader loader
     }
@@ -43,7 +43,7 @@ public class MixinRenderEnergyBolt {
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
             shift = At.Shift.AFTER))
     public void renderBolt_PFE(EntityEnergyBolt entity, double x, double y, double z, float f, float partialTicks,
-        CallbackInfo ci, @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        Utils.GLUseProgram(shaders_fixer$program.get());
+        CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        Utils.GLUseProgram(shader_fixer$program.get());
     }
 }

@@ -69,8 +69,8 @@ public class MixinSkyProviderCelestial {
             shift = At.Shift.BEFORE),
         remap = false)
     public void sunset_PF_Start(float partialTicks, WorldClient world, Minecraft mc, CallbackInfo ci,
-        @Share("shaders_fixer$programSUNSET") LocalIntRef shaders_fixer$programSUNSET) {
-        shaders_fixer$programSUNSET.set(Utils.GLGetCurrentProgram());
+        @Share("shader_fixer$programSUNSET") LocalIntRef shader_fixer$programSUNSET) {
+        shader_fixer$programSUNSET.set(Utils.GLGetCurrentProgram());
         Utils.GLUseDefaultProgram();
     }
 
@@ -82,8 +82,8 @@ public class MixinSkyProviderCelestial {
             shift = At.Shift.AFTER),
         remap = false)
     public void sunset_PF_End(float partialTicks, WorldClient world, Minecraft mc, CallbackInfo ci,
-        @Share("shaders_fixer$programSUNSET") LocalIntRef shaders_fixer$programSUNSET) {
-        Utils.GLUseProgram(shaders_fixer$programSUNSET.get());
+        @Share("shader_fixer$programSUNSET") LocalIntRef shader_fixer$programSUNSET) {
+        Utils.GLUseProgram(shader_fixer$programSUNSET.get());
     }
 
     // glSkyList2 is ignored by shaders anyway
@@ -243,7 +243,7 @@ public class MixinSkyProviderCelestial {
      * 	 GL11.glColor4f(1.0F, 1.0F, 1.0F, visibility);
      * 	 mc.renderEngine.bindTexture(metric.body.texture);
      *   
-     *   INJECT(shaders_fixer$programORBIT.set(Utils.GLGetCurrentProgram()), Utils.GLUseDefaultProgram())
+     *   INJECT(shader_fixer$programORBIT.set(Utils.GLGetCurrentProgram()), Utils.GLUseDefaultProgram())
      *   
      *   tessellator.startDrawingQuads();
      *   tessellator.addVertexWithUV(-size, 100.0D, -size, 0.0D + uvOffset, 0.0D);
@@ -252,7 +252,7 @@ public class MixinSkyProviderCelestial {
      *   tessellator.addVertexWithUV(-size, 100.0D, size, 0.0D + uvOffset, 1.0D);
      *   tessellator.draw();
      *   
-     *   INJECT(Utils.GLUseProgram(shaders_fixer$programORBIT.get()))
+     *   INJECT(Utils.GLUseProgram(shader_fixer$programORBIT.get()))
      *   
      *  }
      * </pre>
@@ -271,8 +271,8 @@ public class MixinSkyProviderCelestial {
     private void fixOrbitProgramStart(float partialTicks, WorldClient world, Minecraft mc,
         List<SolarSystem.AstroMetric> metrics, float solarAngle, CelestialBody tidalLockedBody, Vec3 planetTint,
         float visibility, float blendAmount, CelestialBody orbiting, float maxSize, CallbackInfo ci,
-        @Share("shaders_fixer$programORBIT") LocalIntRef shaders_fixer$programORBIT) {
-        shaders_fixer$programORBIT.set(Utils.GLGetCurrentProgram());
+        @Share("shader_fixer$programORBIT") LocalIntRef shader_fixer$programORBIT) {
+        shader_fixer$programORBIT.set(Utils.GLGetCurrentProgram());
         Utils.GLUseDefaultProgram();
     }
 
@@ -286,8 +286,8 @@ public class MixinSkyProviderCelestial {
     private void fixOrbitProgramEnd(float partialTicks, WorldClient world, Minecraft mc,
         List<SolarSystem.AstroMetric> metrics, float solarAngle, CelestialBody tidalLockedBody, Vec3 planetTint,
         float visibility, float blendAmount, CelestialBody orbiting, float maxSize, CallbackInfo ci,
-        @Share("shaders_fixer$programORBIT") LocalIntRef shaders_fixer$programORBIT) {
-        Utils.GLUseProgram(shaders_fixer$programORBIT.get());
+        @Share("shader_fixer$programORBIT") LocalIntRef shader_fixer$programORBIT) {
+        Utils.GLUseProgram(shader_fixer$programORBIT.get());
     }
 
     /**
@@ -317,8 +317,8 @@ public class MixinSkyProviderCelestial {
     public void GET_ORBIT(float partialTicks, WorldClient world, Minecraft mc, List<SolarSystem.AstroMetric> metrics,
         float solarAngle, CelestialBody tidalLockedBody, Vec3 planetTint, float visibility, float blendAmount,
         CelestialBody orbiting, float maxSize, CallbackInfo ci,
-        @Share("shaders_fixer$GET_IS_ORBIT") LocalRef<CelestialBody> shaders_fixer$GET_IS_ORBIT) {
-        shaders_fixer$GET_IS_ORBIT.set(orbiting);
+        @Share("shader_fixer$GET_IS_ORBIT") LocalRef<CelestialBody> shader_fixer$GET_IS_ORBIT) {
+        shader_fixer$GET_IS_ORBIT.set(orbiting);
     }
 
     @WrapWithCondition(
@@ -328,8 +328,8 @@ public class MixinSkyProviderCelestial {
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
             ordinal = 10))
     private boolean fixOrbitBlendLayer0(Tessellator instance,
-        @Share("shaders_fixer$GET_IS_ORBIT") LocalRef<CelestialBody> shaders_fixer$GET_IS_ORBIT) {
-        return !AngelicaUtils.isShaderEnabled() || (shaders_fixer$GET_IS_ORBIT.get() == null);
+        @Share("shader_fixer$GET_IS_ORBIT") LocalRef<CelestialBody> shader_fixer$GET_IS_ORBIT) {
+        return !AngelicaUtils.isShaderEnabled() || (shader_fixer$GET_IS_ORBIT.get() == null);
     }
 
     @WrapWithCondition(
@@ -343,15 +343,15 @@ public class MixinSkyProviderCelestial {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;addVertexWithUV(DDDDD)V"))
     private boolean fixOrbitBlendLayer1(Tessellator instance, double p_78377_1_, double p_78377_3_, double p_78377_5_,
         double p_78374_7_, double p_78374_9_,
-        @Share("shaders_fixer$GET_IS_ORBIT") LocalRef<CelestialBody> shaders_fixer$GET_IS_ORBIT) {
-        return !AngelicaUtils.isShaderEnabled() || (shaders_fixer$GET_IS_ORBIT.get() == null);
+        @Share("shader_fixer$GET_IS_ORBIT") LocalRef<CelestialBody> shader_fixer$GET_IS_ORBIT) {
+        return !AngelicaUtils.isShaderEnabled() || (shader_fixer$GET_IS_ORBIT.get() == null);
     }
 
     @WrapWithCondition(
         method = "renderCelestials",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;draw()I", ordinal = 10))
     private boolean fixOrbitBlendLayer2(Tessellator instance,
-        @Share("shaders_fixer$GET_IS_ORBIT") LocalRef<CelestialBody> shaders_fixer$GET_IS_ORBIT) {
-        return !AngelicaUtils.isShaderEnabled() || (shaders_fixer$GET_IS_ORBIT.get() == null);
+        @Share("shader_fixer$GET_IS_ORBIT") LocalRef<CelestialBody> shader_fixer$GET_IS_ORBIT) {
+        return !AngelicaUtils.isShaderEnabled() || (shader_fixer$GET_IS_ORBIT.get() == null);
     }
 }

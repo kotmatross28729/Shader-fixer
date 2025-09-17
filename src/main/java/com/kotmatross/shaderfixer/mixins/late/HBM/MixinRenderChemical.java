@@ -26,8 +26,8 @@ public class MixinRenderChemical {
         method = "renderAmatBeam",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     public void renderAmatBeamPR(EntityChemical chem, float interp, CallbackInfo ci,
-        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        shaders_fixer$program.set(Utils.GLGetCurrentProgram());
+        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        shader_fixer$program.set(Utils.GLGetCurrentProgram());
         Utils.GLUseDefaultProgram();
     }
 
@@ -38,8 +38,8 @@ public class MixinRenderChemical {
             target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
             shift = At.Shift.AFTER))
     public void renderAmatBeamPRE(EntityChemical chem, float interp, CallbackInfo ci,
-        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        Utils.GLUseProgram(shaders_fixer$program.get());
+        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        Utils.GLUseProgram(shader_fixer$program.get());
     }
 
 }

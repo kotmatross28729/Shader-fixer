@@ -24,28 +24,28 @@ public class MixinModelBipedMultiLayer extends ModelBiped {
         float headPitch, float scaleFactor, Entity entity) {
         Render render = RenderManager.instance.getEntityRenderObject(entity);
         if (render instanceof RenderPlayer renderPlayer) {
-            this.shaders_fixer$copyRotations(renderPlayer.modelBipedMain);
+            this.shader_fixer$copyRotations(renderPlayer.modelBipedMain);
         } else if (render instanceof RenderBiped renderBiped) {
-            this.shaders_fixer$copyRotations(renderBiped.modelBipedMain);
+            this.shader_fixer$copyRotations(renderBiped.modelBipedMain);
         }
     }
 
     @Unique
-    private void shaders_fixer$copyRotations(ModelBiped biped) {
+    private void shader_fixer$copyRotations(ModelBiped biped) {
         this.isSneak = biped.isSneak;
         this.isRiding = biped.isRiding;
         this.aimedBow = biped.aimedBow;
 
-        shaders_fixer$copyRotationFromBiped(this.bipedHead, biped.bipedHead);
-        shaders_fixer$copyRotationFromBiped(this.bipedBody, biped.bipedBody);
-        shaders_fixer$copyRotationFromBiped(this.bipedRightArm, biped.bipedRightArm);
-        shaders_fixer$copyRotationFromBiped(this.bipedLeftArm, biped.bipedLeftArm);
-        shaders_fixer$copyRotationFromBiped(this.bipedRightLeg, biped.bipedRightLeg);
-        shaders_fixer$copyRotationFromBiped(this.bipedLeftLeg, biped.bipedLeftLeg);
+        shader_fixer$copyRotationFromBiped(this.bipedHead, biped.bipedHead);
+        shader_fixer$copyRotationFromBiped(this.bipedBody, biped.bipedBody);
+        shader_fixer$copyRotationFromBiped(this.bipedRightArm, biped.bipedRightArm);
+        shader_fixer$copyRotationFromBiped(this.bipedLeftArm, biped.bipedLeftArm);
+        shader_fixer$copyRotationFromBiped(this.bipedRightLeg, biped.bipedRightLeg);
+        shader_fixer$copyRotationFromBiped(this.bipedLeftLeg, biped.bipedLeftLeg);
     }
 
     @Unique
-    private void shaders_fixer$copyRotationFromBiped(ModelRenderer to, ModelRenderer from) {
+    private void shader_fixer$copyRotationFromBiped(ModelRenderer to, ModelRenderer from) {
         to.offsetX = from.offsetX;
         to.offsetY = from.offsetY;
         to.offsetZ = from.offsetZ;

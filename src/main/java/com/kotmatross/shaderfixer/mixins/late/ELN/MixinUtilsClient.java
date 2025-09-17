@@ -14,19 +14,19 @@ import mods.eln.misc.UtilsClient;
 public class MixinUtilsClient {
 
     @Unique
-    private static float shaders_fixer$lbx;
+    private static float shader_fixer$lbx;
     @Unique
-    private static float shaders_fixer$lby;
+    private static float shader_fixer$lby;
 
     @Inject(method = "disableLight", at = @At(value = "HEAD"), remap = false)
     private static void disableLight(CallbackInfo ci) {
-        shaders_fixer$lbx = Utils.GetLastBrightnessX();
-        shaders_fixer$lby = Utils.GetLastBrightnessY();
+        shader_fixer$lbx = Utils.GetLastBrightnessX();
+        shader_fixer$lby = Utils.GetLastBrightnessY();
         Utils.EnableFullBrightness();
     }
 
     @Inject(method = "enableLight", at = @At(value = "HEAD"), remap = false)
     private static void enableLight(CallbackInfo ci) {
-        Utils.DisableFullBrightness(shaders_fixer$lbx, shaders_fixer$lby);
+        Utils.DisableFullBrightness(shader_fixer$lbx, shader_fixer$lby);
     }
 }

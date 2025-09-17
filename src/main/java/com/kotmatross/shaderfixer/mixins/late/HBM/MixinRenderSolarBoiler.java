@@ -23,8 +23,8 @@ public class MixinRenderSolarBoiler {
             ordinal = 0,
             shift = At.Shift.BEFORE))
     public void func_147500_aPR(TileEntity te, double x, double y, double z, float interp, CallbackInfo ci,
-        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        shaders_fixer$program.set(Utils.GLGetCurrentProgram());
+        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        shader_fixer$program.set(Utils.GLGetCurrentProgram());
         Utils.GLUseDefaultProgram();
     }
 
@@ -36,8 +36,8 @@ public class MixinRenderSolarBoiler {
             ordinal = 0,
             shift = At.Shift.AFTER))
     public void func_147500_aPRE(TileEntity te, double x, double y, double z, float interp, CallbackInfo ci,
-        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        Utils.GLUseProgram(shaders_fixer$program.get());
+        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        Utils.GLUseProgram(shader_fixer$program.get());
     }
 
     @Inject(

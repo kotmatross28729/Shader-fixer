@@ -15,18 +15,18 @@ public class MixinRenderSparks {
 
     @Inject(method = "renderSpark", at = @At(value = "HEAD"), remap = false)
     private static void renderSpark(int seed, double x, double y, double z, float length, int min, int max, int color1,
-        int color2, CallbackInfo ci, @Share("shaders_fixer$lbx") LocalFloatRef shaders_fixer$lbx,
-        @Share("shaders_fixer$lby") LocalFloatRef shaders_fixer$lby) {
-        shaders_fixer$lbx.set(Utils.GetLastBrightnessX());
-        shaders_fixer$lby.set(Utils.GetLastBrightnessY());
+        int color2, CallbackInfo ci, @Share("shader_fixer$lbx") LocalFloatRef shader_fixer$lbx,
+        @Share("shader_fixer$lby") LocalFloatRef shader_fixer$lby) {
+        shader_fixer$lbx.set(Utils.GetLastBrightnessX());
+        shader_fixer$lby.set(Utils.GetLastBrightnessY());
         Utils.EnableFullBrightness();
         Utils.Fix();
     }
 
     @Inject(method = "renderSpark", at = @At(value = "TAIL"), remap = false)
     private static void renderSpark2(int seed, double x, double y, double z, float length, int min, int max, int color1,
-        int color2, CallbackInfo ci, @Share("shaders_fixer$lbx") LocalFloatRef shaders_fixer$lbx,
-        @Share("shaders_fixer$lby") LocalFloatRef shaders_fixer$lby) {
-        Utils.DisableFullBrightness(shaders_fixer$lbx.get(), shaders_fixer$lby.get());
+        int color2, CallbackInfo ci, @Share("shader_fixer$lbx") LocalFloatRef shader_fixer$lbx,
+        @Share("shader_fixer$lby") LocalFloatRef shader_fixer$lby) {
+        Utils.DisableFullBrightness(shader_fixer$lbx.get(), shader_fixer$lby.get());
     }
 }

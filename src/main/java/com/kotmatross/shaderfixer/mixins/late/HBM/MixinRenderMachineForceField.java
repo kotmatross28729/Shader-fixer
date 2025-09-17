@@ -29,9 +29,9 @@ public class MixinRenderMachineForceField {
             shift = At.Shift.BEFORE),
         remap = false)
     public void generateSpherePR(int l, int s, float rad, int hex, CallbackInfo ci,
-        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
+        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
         GL11.glDepthMask(false);
-        shaders_fixer$program.set(Utils.GLGetCurrentProgram());
+        shader_fixer$program.set(Utils.GLGetCurrentProgram());
         Utils.GLUseDefaultProgram();
     }
 
@@ -44,8 +44,8 @@ public class MixinRenderMachineForceField {
             shift = At.Shift.AFTER),
         remap = false)
     public void generateSpherePRE(int l, int s, float rad, int hex, CallbackInfo ci,
-        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        Utils.GLUseProgram(shaders_fixer$program.get());
+        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        Utils.GLUseProgram(shader_fixer$program.get());
         GL11.glDepthMask(true);
     }
 
@@ -66,9 +66,9 @@ public class MixinRenderMachineForceField {
             shift = At.Shift.BEFORE),
         remap = false)
     public void generateSpherePR2(int l, int s, float rad, int hex, CallbackInfo ci,
-        @Share("shaders_fixer$program2") LocalIntRef shaders_fixer$program2) {
+        @Share("shader_fixer$program2") LocalIntRef shader_fixer$program2) {
         GL11.glDepthMask(false);
-        shaders_fixer$program2.set(Utils.GLGetCurrentProgram());
+        shader_fixer$program2.set(Utils.GLGetCurrentProgram());
         Utils.GLUseDefaultProgram();
     }
 
@@ -81,8 +81,8 @@ public class MixinRenderMachineForceField {
             shift = At.Shift.AFTER),
         remap = false)
     public void generateSpherePRE2(int l, int s, float rad, int hex, CallbackInfo ci,
-        @Share("shaders_fixer$program2") LocalIntRef shaders_fixer$program2) {
-        Utils.GLUseProgram(shaders_fixer$program2.get());
+        @Share("shader_fixer$program2") LocalIntRef shader_fixer$program2) {
+        Utils.GLUseProgram(shader_fixer$program2.get());
         GL11.glDepthMask(true);
     }
 

@@ -28,8 +28,8 @@ public abstract class MixinShapeFormatLines implements com.fiskmods.heroes.clien
     // target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
     // shift = At.Shift.BEFORE))
     // public void render_PF(com.fiskmods.heroes.client.pack.json.shape.JsonShape shape, Entity entity, float mult,
-    // float ticks, CallbackInfo ci, @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-    // shaders_fixer$program.set(Utils.GLGetCurrentProgram());
+    // float ticks, CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+    // shader_fixer$program.set(Utils.GLGetCurrentProgram());
     // Utils.GLUseDefaultProgram();
     // }
     //
@@ -40,7 +40,7 @@ public abstract class MixinShapeFormatLines implements com.fiskmods.heroes.clien
     // target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
     // shift = At.Shift.AFTER))
     // public void render_PFE(com.fiskmods.heroes.client.pack.json.shape.JsonShape shape, Entity entity, float mult,
-    // float ticks, CallbackInfo ci, @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-    // Utils.GLUseProgram(shaders_fixer$program.get());
+    // float ticks, CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+    // Utils.GLUseProgram(shader_fixer$program.get());
     // }
 }

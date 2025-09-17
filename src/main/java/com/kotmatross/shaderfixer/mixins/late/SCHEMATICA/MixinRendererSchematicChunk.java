@@ -31,8 +31,8 @@ public class MixinRendererSchematicChunk {
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V"),
         remap = false)
     public void updateRenderer$programS(CallbackInfo ci,
-        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        shaders_fixer$program.set(Utils.GLGetCurrentProgram());
+        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        shader_fixer$program.set(Utils.GLGetCurrentProgram());
         Utils.GLUseDefaultProgram();
     }
 
@@ -41,7 +41,7 @@ public class MixinRendererSchematicChunk {
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V"),
         remap = false)
     public void updateRenderer$programE(CallbackInfo ci,
-        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        Utils.GLUseProgram(shaders_fixer$program.get());
+        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        Utils.GLUseProgram(shader_fixer$program.get());
     }
 }

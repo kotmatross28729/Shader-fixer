@@ -14,19 +14,19 @@ import li.cil.oc.util.RenderState$;
 public class MixinRenderState {
 
     @Unique
-    private static float shaders_fixer$lbx;
+    private static float shader_fixer$lbx;
     @Unique
-    private static float shaders_fixer$lby;
+    private static float shader_fixer$lby;
 
     @Inject(method = "disableLighting", at = @At(value = "HEAD"), remap = false)
     private void disableLight(CallbackInfo ci) {
-        shaders_fixer$lbx = Utils.GetLastBrightnessX();
-        shaders_fixer$lby = Utils.GetLastBrightnessY();
+        shader_fixer$lbx = Utils.GetLastBrightnessX();
+        shader_fixer$lby = Utils.GetLastBrightnessY();
         Utils.EnableFullBrightness();
     }
 
     @Inject(method = "enableLighting", at = @At(value = "HEAD"), remap = false)
     private void enableLight(CallbackInfo ci) {
-        Utils.DisableFullBrightness(shaders_fixer$lbx, shaders_fixer$lby);
+        Utils.DisableFullBrightness(shader_fixer$lbx, shader_fixer$lby);
     }
 }

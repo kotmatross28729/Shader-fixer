@@ -23,8 +23,8 @@ public class MixinParticleDebugLine {
             ordinal = 0,
             shift = At.Shift.BEFORE))
     public void func_70539_aPR(Tessellator tess, float interp, float x, float y, float z, float tx, float tz,
-        CallbackInfo ci, @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        shaders_fixer$program.set(Utils.GLGetCurrentProgram());
+        CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        shader_fixer$program.set(Utils.GLGetCurrentProgram());
         Utils.GLUseDefaultProgram();
     }
 
@@ -36,8 +36,8 @@ public class MixinParticleDebugLine {
             ordinal = 0,
             shift = At.Shift.AFTER))
     public void func_70539_aPRE(Tessellator tess, float interp, float x, float y, float z, float tx, float tz,
-        CallbackInfo ci, @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        Utils.GLUseProgram(shaders_fixer$program.get());
+        CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        Utils.GLUseProgram(shader_fixer$program.get());
     }
 
     @Inject(

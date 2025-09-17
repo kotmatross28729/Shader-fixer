@@ -34,8 +34,8 @@ public class MixinScreenRenderer {
             ordinal = 0,
             shift = At.Shift.BEFORE))
     private void BeforeDraw(TileEntity t, double x, double y, double z, float f, CallbackInfo ci,
-        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        shaders_fixer$program.set(Utils.GLGetCurrentProgram());
+        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        shader_fixer$program.set(Utils.GLGetCurrentProgram());
         Utils.GLUseDefaultProgram(); // This: bring back normal colors (no yellow-ish), fixes brightness, real guy
     }
 
@@ -47,7 +47,7 @@ public class MixinScreenRenderer {
             ordinal = 0,
             shift = At.Shift.AFTER))
     private void AfterDraw(TileEntity t, double x, double y, double z, float f, CallbackInfo ci,
-        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        Utils.GLUseProgram(shaders_fixer$program.get());
+        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        Utils.GLUseProgram(shader_fixer$program.get());
     }
 }

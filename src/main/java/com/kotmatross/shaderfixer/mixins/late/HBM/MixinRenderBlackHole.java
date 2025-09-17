@@ -20,18 +20,18 @@ public class MixinRenderBlackHole {
 
     @Inject(method = "renderDisc", at = @At(value = "HEAD"), remap = false)
     public void renderDisc(Entity entity, float interp, CallbackInfo ci,
-        @Share("shaders_fixer$lbx") LocalFloatRef shaders_fixer$lbx,
-        @Share("shaders_fixer$lby") LocalFloatRef shaders_fixer$lby) {
-        shaders_fixer$lbx.set(Utils.GetLastBrightnessX());
-        shaders_fixer$lby.set(Utils.GetLastBrightnessY());
+        @Share("shader_fixer$lbx") LocalFloatRef shader_fixer$lbx,
+        @Share("shader_fixer$lby") LocalFloatRef shader_fixer$lby) {
+        shader_fixer$lbx.set(Utils.GetLastBrightnessX());
+        shader_fixer$lby.set(Utils.GetLastBrightnessY());
         Utils.EnableFullBrightness();
     }
 
     @Inject(method = "renderDisc", at = @At(value = "TAIL"), remap = false)
     public void renderDisc2(Entity entity, float interp, CallbackInfo ci,
-        @Share("shaders_fixer$lbx") LocalFloatRef shaders_fixer$lbx,
-        @Share("shaders_fixer$lby") LocalFloatRef shaders_fixer$lby) {
-        Utils.DisableFullBrightness(shaders_fixer$lbx.get(), shaders_fixer$lby.get());
+        @Share("shader_fixer$lbx") LocalFloatRef shader_fixer$lbx,
+        @Share("shader_fixer$lby") LocalFloatRef shader_fixer$lby) {
+        Utils.DisableFullBrightness(shader_fixer$lbx.get(), shader_fixer$lby.get());
     }
 
     // Fix for angelica (brightness)
@@ -47,18 +47,18 @@ public class MixinRenderBlackHole {
 
     @Inject(method = "renderSwirl", at = @At(value = "HEAD"), remap = false)
     public void renderSwirl(Entity entity, float interp, CallbackInfo ci,
-        @Share("shaders_fixer$lbx2") LocalFloatRef shaders_fixer$lbx2,
-        @Share("shaders_fixer$lby2") LocalFloatRef shaders_fixer$lby2) {
-        shaders_fixer$lbx2.set(Utils.GetLastBrightnessX());
-        shaders_fixer$lby2.set(Utils.GetLastBrightnessY());
+        @Share("shader_fixer$lbx2") LocalFloatRef shader_fixer$lbx2,
+        @Share("shader_fixer$lby2") LocalFloatRef shader_fixer$lby2) {
+        shader_fixer$lbx2.set(Utils.GetLastBrightnessX());
+        shader_fixer$lby2.set(Utils.GetLastBrightnessY());
         Utils.EnableFullBrightness();
     }
 
     @Inject(method = "renderSwirl", at = @At(value = "TAIL"), remap = false)
     public void renderSwirl2(Entity entity, float interp, CallbackInfo ci,
-        @Share("shaders_fixer$lbx2") LocalFloatRef shaders_fixer$lbx2,
-        @Share("shaders_fixer$lby2") LocalFloatRef shaders_fixer$lby2) {
-        Utils.DisableFullBrightness(shaders_fixer$lbx2.get(), shaders_fixer$lby2.get());
+        @Share("shader_fixer$lbx2") LocalFloatRef shader_fixer$lbx2,
+        @Share("shader_fixer$lby2") LocalFloatRef shader_fixer$lby2) {
+        Utils.DisableFullBrightness(shader_fixer$lbx2.get(), shader_fixer$lby2.get());
     }
 
     // Fix for angelica (brightness)
@@ -76,8 +76,8 @@ public class MixinRenderBlackHole {
         method = "renderJets",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     public void renderJetsPR(Entity entity, float interp, CallbackInfo ci,
-        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        shaders_fixer$program.set(Utils.GLGetCurrentProgram());
+        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        shader_fixer$program.set(Utils.GLGetCurrentProgram());
         Utils.GLUseDefaultProgram();
     }
 
@@ -88,8 +88,8 @@ public class MixinRenderBlackHole {
             target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
             shift = At.Shift.AFTER))
     public void renderJetsPRE(Entity entity, float interp, CallbackInfo ci,
-        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        Utils.GLUseProgram(shaders_fixer$program.get());
+        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        Utils.GLUseProgram(shader_fixer$program.get());
     }
 
     @Inject(

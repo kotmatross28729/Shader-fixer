@@ -32,8 +32,8 @@ public class MixinCosmicItemRenderer {
             shift = BEFORE),
         remap = false)
     private void beforeUseShader(IItemRenderer.ItemRenderType type, ItemStack item, Object[] data, CallbackInfo ci,
-        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        shaders_fixer$program.set(Utils.GLGetCurrentProgram());
+        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        shader_fixer$program.set(Utils.GLGetCurrentProgram());
     }
 
     @Inject(
@@ -45,8 +45,8 @@ public class MixinCosmicItemRenderer {
             shift = AFTER),
         remap = false)
     private void afterUseShader(IItemRenderer.ItemRenderType type, ItemStack item, Object[] data, CallbackInfo ci,
-        @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        Utils.GLUseProgram(shaders_fixer$program.get());
+        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        Utils.GLUseProgram(shader_fixer$program.get());
     }
 
     @Inject(
@@ -58,12 +58,12 @@ public class MixinCosmicItemRenderer {
             shift = BEFORE),
         remap = false)
     private void beforeUseShader2(ItemStack item, EntityPlayer player, CallbackInfo ci,
-        @Share("shaders_fixer$program2") LocalIntRef shaders_fixer$program2,
-        @Share("shaders_fixer$lbx") LocalFloatRef shaders_fixer$lbx,
-        @Share("shaders_fixer$lby") LocalFloatRef shaders_fixer$lby) {
-        shaders_fixer$program2.set(Utils.GLGetCurrentProgram());
-        shaders_fixer$lbx.set(Utils.GetLastBrightnessX());
-        shaders_fixer$lby.set(Utils.GetLastBrightnessY());
+        @Share("shader_fixer$program2") LocalIntRef shader_fixer$program2,
+        @Share("shader_fixer$lbx") LocalFloatRef shader_fixer$lbx,
+        @Share("shader_fixer$lby") LocalFloatRef shader_fixer$lby) {
+        shader_fixer$program2.set(Utils.GLGetCurrentProgram());
+        shader_fixer$lbx.set(Utils.GetLastBrightnessX());
+        shader_fixer$lby.set(Utils.GetLastBrightnessY());
         Utils.EnableFullBrightness();
     }
 
@@ -76,10 +76,10 @@ public class MixinCosmicItemRenderer {
             shift = AFTER),
         remap = false)
     private void afterUseShader2(ItemStack item, EntityPlayer player, CallbackInfo ci,
-        @Share("shaders_fixer$program2") LocalIntRef shaders_fixer$program2,
-        @Share("shaders_fixer$lbx") LocalFloatRef shaders_fixer$lbx,
-        @Share("shaders_fixer$lby") LocalFloatRef shaders_fixer$lby) {
-        Utils.GLUseProgram(shaders_fixer$program2.get());
-        Utils.DisableFullBrightness(shaders_fixer$lbx.get(), shaders_fixer$lby.get());
+        @Share("shader_fixer$program2") LocalIntRef shader_fixer$program2,
+        @Share("shader_fixer$lbx") LocalFloatRef shader_fixer$lbx,
+        @Share("shader_fixer$lby") LocalFloatRef shader_fixer$lby) {
+        Utils.GLUseProgram(shader_fixer$program2.get());
+        Utils.DisableFullBrightness(shader_fixer$lbx.get(), shader_fixer$lby.get());
     }
 }

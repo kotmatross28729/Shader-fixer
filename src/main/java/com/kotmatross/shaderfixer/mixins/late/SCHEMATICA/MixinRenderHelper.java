@@ -23,15 +23,15 @@ public class MixinRenderHelper {
 
     @Inject(method = "drawCuboidSurface", at = @At(value = "HEAD"), remap = false)
     private static void drawCuboidSurface$programS(Vector3f zero, Vector3f size, int sides, float red, float green,
-        float blue, float alpha, CallbackInfo ci, @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        shaders_fixer$program.set(Utils.GLGetCurrentProgram());
+        float blue, float alpha, CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        shader_fixer$program.set(Utils.GLGetCurrentProgram());
         Utils.GLUseDefaultProgram();
     }
 
     @Inject(method = "drawCuboidSurface", at = @At(value = "TAIL"), remap = false)
     private static void drawCuboidSurface$programE(Vector3f zero, Vector3f size, int sides, float red, float green,
-        float blue, float alpha, CallbackInfo ci, @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        Utils.GLUseProgram(shaders_fixer$program.get());
+        float blue, float alpha, CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        Utils.GLUseProgram(shader_fixer$program.get());
     }
 
     @Inject(method = "drawCuboidOutline", at = @At(value = "HEAD"), remap = false)
@@ -43,14 +43,14 @@ public class MixinRenderHelper {
 
     @Inject(method = "drawCuboidOutline", at = @At(value = "HEAD"), remap = false)
     private static void drawCuboidOutline$programS(Vector3f zero, Vector3f size, int sides, float red, float green,
-        float blue, float alpha, CallbackInfo ci, @Share("shaders_fixer$program2") LocalIntRef shaders_fixer$program2) {
-        shaders_fixer$program2.set(Utils.GLGetCurrentProgram());
+        float blue, float alpha, CallbackInfo ci, @Share("shader_fixer$program2") LocalIntRef shader_fixer$program2) {
+        shader_fixer$program2.set(Utils.GLGetCurrentProgram());
         Utils.GLUseDefaultProgram();
     }
 
     @Inject(method = "drawCuboidOutline", at = @At(value = "TAIL"), remap = false)
     private static void drawCuboidOutline$programE(Vector3f zero, Vector3f size, int sides, float red, float green,
-        float blue, float alpha, CallbackInfo ci, @Share("shaders_fixer$program2") LocalIntRef shaders_fixer$program2) {
-        Utils.GLUseProgram(shaders_fixer$program2.get());
+        float blue, float alpha, CallbackInfo ci, @Share("shader_fixer$program2") LocalIntRef shader_fixer$program2) {
+        Utils.GLUseProgram(shader_fixer$program2.get());
     }
 }

@@ -48,24 +48,24 @@ public class Utils {
     /*
      * Lighting docs
      * @Inject(method = "METHOD_NAME", at = @At(value = "HEAD"))
-     * private void NAME(PARAMS, CallbackInfo ci, @Share("shaders_fixer$lbx") LocalFloatRef
-     * shaders_fixer$lbx, @Share("shaders_fixer$lby") LocalFloatRef shaders_fixer$lby) {
-     * shaders_fixer$lbx.set(Utils.GetLastBrightnessX());
-     * shaders_fixer$lby.set(Utils.GetLastBrightnessY());
+     * private void NAME(PARAMS, CallbackInfo ci, @Share("shader_fixer$lbx") LocalFloatRef
+     * shader_fixer$lbx, @Share("shader_fixer$lby") LocalFloatRef shader_fixer$lby) {
+     * shader_fixer$lbx.set(Utils.GetLastBrightnessX());
+     * shader_fixer$lby.set(Utils.GetLastBrightnessY());
      * }
      * =================================================================================================================
      * ================
      * @Inject(method = "METHOD_NAME", at = @At(value = "INVOKE", target = "L...", ordinal = 0, shift = BEFORE))
-     * private void beforeUseShader2(ItemStack item, EntityPlayer player, CallbackInfo ci, @Share("shaders_fixer$lbx")
-     * LocalFloatRef shaders_fixer$lbx, @Share("shaders_fixer$lby") LocalFloatRef shaders_fixer$lby) {
-     * shaders_fixer$lbx.set(Utils.GetLastBrightnessX());
-     * shaders_fixer$lby.set(Utils.GetLastBrightnessY());
+     * private void beforeUseShader2(ItemStack item, EntityPlayer player, CallbackInfo ci, @Share("shader_fixer$lbx")
+     * LocalFloatRef shader_fixer$lbx, @Share("shader_fixer$lby") LocalFloatRef shader_fixer$lby) {
+     * shader_fixer$lbx.set(Utils.GetLastBrightnessX());
+     * shader_fixer$lby.set(Utils.GetLastBrightnessY());
      * Utils.EnableFullBrightness();
      * }
      * @Inject(method = "METHOD_NAME", at = @At(value = "INVOKE", target = "L...", ordinal = 0, shift = AFTER))
-     * private void afterUseShader2(ItemStack item, EntityPlayer player, CallbackInfo ci, @Share("shaders_fixer$lbx")
-     * LocalFloatRef shaders_fixer$lbx, @Share("shaders_fixer$lby") LocalFloatRef shaders_fixer$lby) {
-     * Utils.DisableFullBrightness(shaders_fixer$lbx.get(), shaders_fixer$lby.get());
+     * private void afterUseShader2(ItemStack item, EntityPlayer player, CallbackInfo ci, @Share("shader_fixer$lbx")
+     * LocalFloatRef shader_fixer$lbx, @Share("shader_fixer$lby") LocalFloatRef shader_fixer$lby) {
+     * Utils.DisableFullBrightness(shader_fixer$lbx.get(), shader_fixer$lby.get());
      * }
      */
     public static float GetLastBrightnessX() {
@@ -91,15 +91,15 @@ public class Utils {
      * Shader docs
      * @Inject(method = "METHOD_NAME", at = @At(value = "INVOKE", target = "L...;useShader()V", ordinal = 0, shift =
      * BEFORE), remap = false)
-     * private void beforeUseShader(PARAMS, CallbackInfo ci, @Share("shaders_fixer$program") LocalIntRef
-     * shaders_fixer$program) {
-     * shaders_fixer$program.set(Utils.GetGLCurrentProgram());
+     * private void beforeUseShader(PARAMS, CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef
+     * shader_fixer$program) {
+     * shader_fixer$program.set(Utils.GetGLCurrentProgram());
      * }
      * @Inject(method = "METHOD_NAME", at = @At(value = "INVOKE", target = "L...;releaseShader()V", ordinal = 0, shift =
      * AFTER), remap = false)
-     * private void afterUseShader(PARAMS, CallbackInfo ci, @Share("shaders_fixer$program") LocalIntRef
-     * shaders_fixer$program) {
-     * Utils.GLUseCurrentProgram(shaders_fixer$program.get());
+     * private void afterUseShader(PARAMS, CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef
+     * shader_fixer$program) {
+     * Utils.GLUseCurrentProgram(shader_fixer$program.get());
      * }
      */
     public static int GLGetCurrentProgram() {

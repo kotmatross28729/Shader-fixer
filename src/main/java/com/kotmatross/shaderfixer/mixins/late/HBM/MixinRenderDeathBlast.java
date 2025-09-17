@@ -24,8 +24,8 @@ public class MixinRenderDeathBlast {
             shift = At.Shift.BEFORE),
         remap = false)
     private void func_76986_aPR(Entity entity, double x, double y, double z, float p_76986_8_, float p_76986_9_,
-        CallbackInfo ci, @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        shaders_fixer$program.set(Utils.GLGetCurrentProgram());
+        CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        shader_fixer$program.set(Utils.GLGetCurrentProgram());
         Utils.GLUseDefaultProgram();
     }
 
@@ -38,8 +38,8 @@ public class MixinRenderDeathBlast {
             shift = At.Shift.AFTER),
         remap = false)
     private void func_76986_aPRE(Entity entity, double x, double y, double z, float p_76986_8_, float p_76986_9_,
-        CallbackInfo ci, @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        Utils.GLUseProgram(shaders_fixer$program.get());
+        CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        Utils.GLUseProgram(shader_fixer$program.get());
     }
 
     @Inject(method = "func_76986_a", at = @At(value = "HEAD"), remap = false)

@@ -47,56 +47,56 @@ public class MixinItemRenderer {
     @Shadow
     private float equippedProgress;
     @Unique
-    EntityPlayer shaders_fixer$player;
+    EntityPlayer shader_fixer$player;
     @Unique
-    float shaders_fixer$swayMagnitude;
+    float shader_fixer$swayMagnitude;
     @Unique
-    float shaders_fixer$swayPeriod;
+    float shader_fixer$swayPeriod;
     @Unique
-    float shaders_fixer$turnMagnitude;
+    float shader_fixer$turnMagnitude;
     @Unique
-    float shaders_fixer$pitch;
+    float shader_fixer$pitch;
     @Unique
-    float shaders_fixer$yaw;
+    float shader_fixer$yaw;
     @Unique
-    float shaders_fixer$armPitch;
+    float shader_fixer$armPitch;
     @Unique
-    float shaders_fixer$armYaw;
+    float shader_fixer$armYaw;
     @Unique
-    float shaders_fixer$f1;
+    float shader_fixer$f1;
     @Unique
-    Minecraft shaders_fixer$mc;
+    Minecraft shader_fixer$mc;
     @Unique
-    float shaders_fixer$swing;
+    float shader_fixer$swing;
 
     @Inject(method = "renderItemInFirstPerson", at = @At(value = "HEAD"))
     public void renderItemInFirstPerson(float interp, CallbackInfo ci) {
 
         if (NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) {
             NTMUtils_WRAPPER.handleInterpolation(interp); // INTERPOLATE AIM
-            shaders_fixer$swayMagnitude = NTMUtils_WRAPPER.getGunsSwayMagnitude(itemToRender);
-            shaders_fixer$swayPeriod = NTMUtils_WRAPPER.getGunsSwayPeriod(itemToRender);
-            shaders_fixer$turnMagnitude = NTMUtils_WRAPPER.getGunsTurnMagnitude(itemToRender);
+            shader_fixer$swayMagnitude = NTMUtils_WRAPPER.getGunsSwayMagnitude(itemToRender);
+            shader_fixer$swayPeriod = NTMUtils_WRAPPER.getGunsSwayPeriod(itemToRender);
+            shader_fixer$turnMagnitude = NTMUtils_WRAPPER.getGunsTurnMagnitude(itemToRender);
         }
 
-        shaders_fixer$f1 = prevEquippedProgress + (equippedProgress - prevEquippedProgress) * interp;
+        shader_fixer$f1 = prevEquippedProgress + (equippedProgress - prevEquippedProgress) * interp;
 
-        shaders_fixer$mc = Minecraft.getMinecraft();
-        shaders_fixer$player = shaders_fixer$mc.thePlayer;
+        shader_fixer$mc = Minecraft.getMinecraft();
+        shader_fixer$player = shader_fixer$mc.thePlayer;
 
-        shaders_fixer$pitch = shaders_fixer$player.prevRotationPitch
-            + (shaders_fixer$player.rotationPitch - shaders_fixer$player.prevRotationPitch) * interp;
-        shaders_fixer$yaw = shaders_fixer$player.prevRotationYaw
-            + (shaders_fixer$player.rotationYaw - shaders_fixer$player.prevRotationYaw) * interp;
+        shader_fixer$pitch = shader_fixer$player.prevRotationPitch
+            + (shader_fixer$player.rotationPitch - shader_fixer$player.prevRotationPitch) * interp;
+        shader_fixer$yaw = shader_fixer$player.prevRotationYaw
+            + (shader_fixer$player.rotationYaw - shader_fixer$player.prevRotationYaw) * interp;
 
-        EntityPlayerSP entityplayersp = (EntityPlayerSP) shaders_fixer$player;
+        EntityPlayerSP entityplayersp = (EntityPlayerSP) shader_fixer$player;
 
-        shaders_fixer$armPitch = entityplayersp.prevRenderArmPitch
+        shader_fixer$armPitch = entityplayersp.prevRenderArmPitch
             + (entityplayersp.renderArmPitch - entityplayersp.prevRenderArmPitch) * interp;
-        shaders_fixer$armYaw = entityplayersp.prevRenderArmYaw
+        shader_fixer$armYaw = entityplayersp.prevRenderArmYaw
             + (entityplayersp.renderArmYaw - entityplayersp.prevRenderArmYaw) * interp;
 
-        shaders_fixer$swing = shaders_fixer$player.getSwingProgress(interp);
+        shader_fixer$swing = shader_fixer$player.getSwingProgress(interp);
     }
 
     // CHANGED IN NTM
@@ -107,8 +107,8 @@ public class MixinItemRenderer {
         remap = false)
     private float modifyPitchRotation(float angle) {
         if (NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON))
-            return (shaders_fixer$player.rotationPitch - shaders_fixer$armPitch) * 0.1F * shaders_fixer$turnMagnitude;
-        return (shaders_fixer$player.rotationPitch - shaders_fixer$armPitch) * 0.1F;
+            return (shader_fixer$player.rotationPitch - shader_fixer$armPitch) * 0.1F * shader_fixer$turnMagnitude;
+        return (shader_fixer$player.rotationPitch - shader_fixer$armPitch) * 0.1F;
     }
 
     // CHANGED IN NTM
@@ -119,8 +119,8 @@ public class MixinItemRenderer {
         remap = false)
     private float modifyYawRotation(float angle) {
         if (NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON))
-            return (shaders_fixer$player.rotationYaw - shaders_fixer$armYaw) * 0.1F * shaders_fixer$turnMagnitude;
-        return (shaders_fixer$player.rotationYaw - shaders_fixer$armYaw) * 0.1F;
+            return (shader_fixer$player.rotationYaw - shader_fixer$armYaw) * 0.1F * shader_fixer$turnMagnitude;
+        return (shader_fixer$player.rotationYaw - shader_fixer$armYaw) * 0.1F;
     }
 
     // TODO: Redirect -> WrapWithCondition
@@ -133,7 +133,7 @@ public class MixinItemRenderer {
     public void skipGlTranslate(float x, float y, float z) {
         if (!NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) {
             float f13 = 0.8F;
-            GL11.glTranslatef(0.7F * f13, -0.65F * f13 - (1.0F - shaders_fixer$f1) * 0.6F, -0.9F * f13);
+            GL11.glTranslatef(0.7F * f13, -0.65F * f13 - (1.0F - shader_fixer$f1) * 0.6F, -0.9F * f13);
         }
     }
 
@@ -183,7 +183,7 @@ public class MixinItemRenderer {
         remap = false)
     private void addFinalPreRenderStuff(float interp, CallbackInfo ci) {
         if (NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) {
-            if (shaders_fixer$mc.renderViewEntity instanceof EntityPlayer entityplayer) {
+            if (shader_fixer$mc.renderViewEntity instanceof EntityPlayer entityplayer) {
                 float distanceDelta = entityplayer.distanceWalkedModified - entityplayer.prevDistanceWalkedModified;
                 float distanceInterp = -(entityplayer.distanceWalkedModified + distanceDelta * interp);
                 float camYaw = entityplayer.prevCameraYaw
@@ -191,20 +191,19 @@ public class MixinItemRenderer {
                 float camPitch = entityplayer.prevCameraPitch
                     + (entityplayer.cameraPitch - entityplayer.prevCameraPitch) * interp;
                 GL11.glTranslatef(
-                    MathHelper.sin(distanceInterp * (float) Math.PI * shaders_fixer$swayPeriod) * camYaw
+                    MathHelper.sin(distanceInterp * (float) Math.PI * shader_fixer$swayPeriod) * camYaw
                         * 0.5F
-                        * shaders_fixer$swayMagnitude,
-                    -Math.abs(MathHelper.cos(distanceInterp * (float) Math.PI * shaders_fixer$swayPeriod) * camYaw)
-                        * shaders_fixer$swayMagnitude,
+                        * shader_fixer$swayMagnitude,
+                    -Math.abs(MathHelper.cos(distanceInterp * (float) Math.PI * shader_fixer$swayPeriod) * camYaw)
+                        * shader_fixer$swayMagnitude,
                     0.0F);
                 GL11.glRotatef(
-                    MathHelper.sin(distanceInterp * (float) Math.PI * shaders_fixer$swayPeriod) * camYaw * 3.0F,
+                    MathHelper.sin(distanceInterp * (float) Math.PI * shader_fixer$swayPeriod) * camYaw * 3.0F,
                     0.0F,
                     0.0F,
                     1.0F);
                 GL11.glRotatef(
-                    Math.abs(
-                        MathHelper.cos(distanceInterp * (float) Math.PI * shaders_fixer$swayPeriod - 0.2F) * camYaw)
+                    Math.abs(MathHelper.cos(distanceInterp * (float) Math.PI * shader_fixer$swayPeriod - 0.2F) * camYaw)
                         * 5.0F,
                     1.0F,
                     0.0F,

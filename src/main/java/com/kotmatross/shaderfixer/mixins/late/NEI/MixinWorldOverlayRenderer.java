@@ -42,8 +42,8 @@ public class MixinWorldOverlayRenderer {
             shift = BEFORE),
         remap = false)
     private static void renderMobSpawnOverlay$programS(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
-        CallbackInfo ci, @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        shaders_fixer$program.set(Utils.GLGetCurrentProgram());
+        CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        shader_fixer$program.set(Utils.GLGetCurrentProgram());
         Utils.GLUseDefaultProgram();
     }
 
@@ -56,8 +56,8 @@ public class MixinWorldOverlayRenderer {
             shift = AFTER),
         remap = false)
     private static void renderMobSpawnOverlay$programE(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
-        CallbackInfo ci, @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        Utils.GLUseProgram(shaders_fixer$program.get());
+        CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        Utils.GLUseProgram(shader_fixer$program.get());
     }
 
     @Inject(
@@ -78,8 +78,8 @@ public class MixinWorldOverlayRenderer {
             shift = BEFORE),
         remap = false)
     private static void renderChunkBounds$programS(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
-        CallbackInfo ci, @Share("shaders_fixer$program2") LocalIntRef shaders_fixer$program2) {
-        shaders_fixer$program2.set(Utils.GLGetCurrentProgram());
+        CallbackInfo ci, @Share("shader_fixer$program2") LocalIntRef shader_fixer$program2) {
+        shader_fixer$program2.set(Utils.GLGetCurrentProgram());
         Utils.GLUseDefaultProgram();
     }
 
@@ -92,44 +92,44 @@ public class MixinWorldOverlayRenderer {
             shift = AFTER),
         remap = false)
     private static void renderChunkBounds$programE(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
-        CallbackInfo ci, @Share("shaders_fixer$program2") LocalIntRef shaders_fixer$program2) {
-        Utils.GLUseProgram(shaders_fixer$program2.get());
+        CallbackInfo ci, @Share("shader_fixer$program2") LocalIntRef shader_fixer$program2) {
+        Utils.GLUseProgram(shader_fixer$program2.get());
     }
 
     @Unique
-    private static boolean shaders_fixer$lightingM;
+    private static boolean shader_fixer$lightingM;
     @Unique
-    private static boolean shaders_fixer$blendingM;
+    private static boolean shader_fixer$blendingM;
 
     @Unique
-    private static boolean shaders_fixer$lightingC;
+    private static boolean shader_fixer$lightingC;
     @Unique
-    private static boolean shaders_fixer$blendingC;
+    private static boolean shader_fixer$blendingC;
 
     // GETTERS
 
     @Inject(method = "renderMobSpawnOverlay", at = @At(value = "HEAD"), remap = false)
-    private static void shaders_fixer$lightingGETM(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
+    private static void shader_fixer$lightingGETM(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
         CallbackInfo ci) {
-        shaders_fixer$lightingM = GL11.glGetBoolean(GL11.GL_LIGHTING);
+        shader_fixer$lightingM = GL11.glGetBoolean(GL11.GL_LIGHTING);
     }
 
     @Inject(method = "renderMobSpawnOverlay", at = @At(value = "HEAD"), remap = false)
-    private static void shaders_fixer$blendingGETM(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
+    private static void shader_fixer$blendingGETM(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
         CallbackInfo ci) {
-        shaders_fixer$blendingM = GL11.glGetBoolean(GL11.GL_BLEND);
+        shader_fixer$blendingM = GL11.glGetBoolean(GL11.GL_BLEND);
     }
 
     @Inject(method = "renderChunkBounds", at = @At(value = "HEAD"), remap = false)
-    private static void shaders_fixer$lightingGETC(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
+    private static void shader_fixer$lightingGETC(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
         CallbackInfo ci) {
-        shaders_fixer$lightingC = GL11.glGetBoolean(GL11.GL_LIGHTING);
+        shader_fixer$lightingC = GL11.glGetBoolean(GL11.GL_LIGHTING);
     }
 
     @Inject(method = "renderChunkBounds", at = @At(value = "HEAD"), remap = false)
-    private static void shaders_fixer$blendingGETC(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
+    private static void shader_fixer$blendingGETC(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
         CallbackInfo ci) {
-        shaders_fixer$blendingC = GL11.glGetBoolean(GL11.GL_BLEND);
+        shader_fixer$blendingC = GL11.glGetBoolean(GL11.GL_BLEND);
     }
 
     // Only enable/disable if it was on/off in first place
@@ -139,7 +139,7 @@ public class MixinWorldOverlayRenderer {
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 1),
         remap = false)
     private static boolean enableLightingM(int cap) {
-        return shaders_fixer$lightingM;
+        return shader_fixer$lightingM;
     }
 
     @WrapWithCondition(
@@ -147,7 +147,7 @@ public class MixinWorldOverlayRenderer {
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 2),
         remap = false)
     private static boolean disableBlendingM(int cap) {
-        return !shaders_fixer$blendingM;
+        return !shader_fixer$blendingM;
     }
 
     @WrapWithCondition(
@@ -155,7 +155,7 @@ public class MixinWorldOverlayRenderer {
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 1),
         remap = false)
     private static boolean enableLightingC(int cap) {
-        return shaders_fixer$lightingC;
+        return shader_fixer$lightingC;
     }
 
     @WrapWithCondition(
@@ -163,6 +163,6 @@ public class MixinWorldOverlayRenderer {
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 2),
         remap = false)
     private static boolean disableBlendingC(int cap) {
-        return !shaders_fixer$blendingC;
+        return !shader_fixer$blendingC;
     }
 }

@@ -30,8 +30,8 @@ public class MixinModelArmorInfinity {
             shift = BEFORE),
         remap = false)
     private void beforeUseShader(Entity entity, float f, float f1, float f2, float f3, float f4, float f5,
-        CallbackInfo ci, @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program) {
-        shaders_fixer$program.set(Utils.GLGetCurrentProgram());
+        CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
+        shader_fixer$program.set(Utils.GLGetCurrentProgram());
     }
 
     @Inject(
@@ -43,12 +43,12 @@ public class MixinModelArmorInfinity {
             shift = AFTER),
         remap = false)
     private void afterUseShader(Entity entity, float f, float f1, float f2, float f3, float f4, float f5,
-        CallbackInfo ci, @Share("shaders_fixer$program") LocalIntRef shaders_fixer$program,
-        @Share("shaders_fixer$lbx") LocalFloatRef shaders_fixer$lbx,
-        @Share("shaders_fixer$lby") LocalFloatRef shaders_fixer$lby) {
-        Utils.GLUseProgram(shaders_fixer$program.get());
-        shaders_fixer$lbx.set(Utils.GetLastBrightnessX());
-        shaders_fixer$lby.set(Utils.GetLastBrightnessY());
+        CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program,
+        @Share("shader_fixer$lbx") LocalFloatRef shader_fixer$lbx,
+        @Share("shader_fixer$lby") LocalFloatRef shader_fixer$lby) {
+        Utils.GLUseProgram(shader_fixer$program.get());
+        shader_fixer$lbx.set(Utils.GetLastBrightnessX());
+        shader_fixer$lby.set(Utils.GetLastBrightnessY());
         Utils.EnableFullBrightness();
     }
 
@@ -57,9 +57,9 @@ public class MixinModelArmorInfinity {
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glColor4d(DDDD)V", ordinal = 4, shift = AFTER),
         remap = false)
     private void releaseBrightness(Entity entity, float f, float f1, float f2, float f3, float f4, float f5,
-        CallbackInfo ci, @Share("shaders_fixer$lbx") LocalFloatRef shaders_fixer$lbx,
-        @Share("shaders_fixer$lby") LocalFloatRef shaders_fixer$lby) {
-        Utils.DisableFullBrightness(shaders_fixer$lbx.get(), shaders_fixer$lby.get());
+        CallbackInfo ci, @Share("shader_fixer$lbx") LocalFloatRef shader_fixer$lbx,
+        @Share("shader_fixer$lby") LocalFloatRef shader_fixer$lby) {
+        Utils.DisableFullBrightness(shader_fixer$lbx.get(), shader_fixer$lby.get());
     }
 
     @Inject(
@@ -71,8 +71,8 @@ public class MixinModelArmorInfinity {
             shift = BEFORE),
         remap = false)
     private void beforeUseShader2(Entity entity, float f, float f1, float f2, float f3, float f4, float f5,
-        CallbackInfo ci, @Share("shaders_fixer$program2") LocalIntRef shaders_fixer$program2) {
-        shaders_fixer$program2.set(Utils.GLGetCurrentProgram());
+        CallbackInfo ci, @Share("shader_fixer$program2") LocalIntRef shader_fixer$program2) {
+        shader_fixer$program2.set(Utils.GLGetCurrentProgram());
     }
 
     @Inject(
@@ -84,8 +84,8 @@ public class MixinModelArmorInfinity {
             shift = AFTER),
         remap = false)
     private void afterUseShader2(Entity entity, float f, float f1, float f2, float f3, float f4, float f5,
-        CallbackInfo ci, @Share("shaders_fixer$program2") LocalIntRef shaders_fixer$program2) {
-        Utils.GLUseProgram(shaders_fixer$program2.get());
+        CallbackInfo ci, @Share("shader_fixer$program2") LocalIntRef shader_fixer$program2) {
+        Utils.GLUseProgram(shader_fixer$program2.get());
     }
 
     @Inject(
@@ -97,10 +97,10 @@ public class MixinModelArmorInfinity {
             shift = BEFORE),
         remap = false)
     private void WINGSBrightness(Entity entity, float f, float f1, float f2, float f3, float f4, float f5,
-        CallbackInfo ci, @Share("shaders_fixer$lbx2") LocalFloatRef shaders_fixer$lbx2,
-        @Share("shaders_fixer$lby2") LocalFloatRef shaders_fixer$lby2) {
-        shaders_fixer$lbx2.set(Utils.GetLastBrightnessX());
-        shaders_fixer$lby2.set(Utils.GetLastBrightnessY());
+        CallbackInfo ci, @Share("shader_fixer$lbx2") LocalFloatRef shader_fixer$lbx2,
+        @Share("shader_fixer$lby2") LocalFloatRef shader_fixer$lby2) {
+        shader_fixer$lbx2.set(Utils.GetLastBrightnessX());
+        shader_fixer$lby2.set(Utils.GetLastBrightnessY());
         Utils.EnableFullBrightness();
     }
 
@@ -109,8 +109,8 @@ public class MixinModelArmorInfinity {
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glColor4d(DDDD)V", ordinal = 6, shift = AFTER),
         remap = false)
     private void releaseBrightness2(Entity entity, float f, float f1, float f2, float f3, float f4, float f5,
-        CallbackInfo ci, @Share("shaders_fixer$lbx2") LocalFloatRef shaders_fixer$lbx2,
-        @Share("shaders_fixer$lby2") LocalFloatRef shaders_fixer$lby2) {
-        Utils.DisableFullBrightness(shaders_fixer$lbx2.get(), shaders_fixer$lby2.get());
+        CallbackInfo ci, @Share("shader_fixer$lbx2") LocalFloatRef shader_fixer$lbx2,
+        @Share("shader_fixer$lby2") LocalFloatRef shader_fixer$lby2) {
+        Utils.DisableFullBrightness(shader_fixer$lbx2.get(), shader_fixer$lby2.get());
     }
 }
