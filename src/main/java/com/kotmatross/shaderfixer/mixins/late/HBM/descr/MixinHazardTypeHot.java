@@ -22,28 +22,29 @@ import com.llamalad7.mixinextras.sugar.Local;
 public class MixinHazardTypeHot {
 
     @Unique
-    boolean shaders_fixer$reacher;
+    boolean shader_fixer$reacher;
 
     @Inject(method = "onUpdate", at = @At(value = "TAIL"), remap = false)
     public void onUpdate(EntityLivingBase target, float level, ItemStack stack, CallbackInfo ci,
         @Local(ordinal = 0) boolean reacher) {
-        shaders_fixer$reacher = reacher; // вэн зэ эйр тёрнс ред
+        shader_fixer$reacher = reacher; // вэн зэ эйр тёрнс ред
     }
 
     @Inject(method = "addHazardInformation", at = @At(value = "TAIL"), remap = false)
     public void addHazardInformation(EntityPlayer player, List list, float level, ItemStack stack,
         List<HazardModifier> modifiers, CallbackInfo ci) {
-        String H = "" + (Math.floor(level * 1000) / 1000);
 
         if (level > 0) {
-            if (shaders_fixer$reacher) {
+            if (shader_fixer$reacher) {
                 list.add(
-                    EnumChatFormatting.STRIKETHROUGH + I18n.format(
-                        "trait.danger.level.hot") + " " + H + " " + I18n.format("info.template__seconds") + "  ");
+                    EnumChatFormatting.STRIKETHROUGH + I18n.format("trait.danger.level.hot")
+                        + level
+                        + I18n.format("info.template__seconds"));
             } else {
                 list.add(
-                    EnumChatFormatting.RED + I18n.format(
-                        "trait.danger.level.hot") + " " + H + " " + I18n.format("info.template__seconds") + "  ");
+                    EnumChatFormatting.RED + I18n.format("trait.danger.level.hot")
+                        + level
+                        + I18n.format("info.template__seconds"));
             }
         }
 

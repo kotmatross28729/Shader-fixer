@@ -21,7 +21,6 @@ public class MixinHazardTypeCoal {
     @Inject(method = "addHazardInformation", at = @At(value = "TAIL"), remap = false)
     public void addHazardInformation(EntityPlayer player, List list, float level, ItemStack stack,
         List<HazardModifier> modifiers, CallbackInfo ci) {
-        String H = "" + (Math.floor(level * 1000) / 1000);
-        list.add(EnumChatFormatting.GRAY + I18n.format("trait.danger.level.coal") + " " + H + "  ");
+        list.add(EnumChatFormatting.GRAY + I18n.format("trait.danger.level.coal") + (level / 20F));
     }
 }

@@ -1,8 +1,8 @@
 # HbmExtendedHazardDescriptions
-info.template__seconds=секунд(ы)
-trait.danger.level.hydro=Сила взрыва:
-trait.danger.level.hot=Поджигает на:
-trait.danger.level.explosive=Сила взрыва:
-trait.danger.level.coal=Опасность:
-trait.danger.level.blinding=Ослепляет на:
-trait.danger.level.asbestos=Опасность:
+info.template__seconds= секунд(ы)
+trait.danger.level.hydro=Сила взрыва: 
+trait.danger.level.hot=Поджигает на: 
+trait.danger.level.explosive=Сила взрыва: 
+trait.danger.level.coal=Угольной пыли/с: 
+trait.danger.level.blinding=Ослепляет на: 
+trait.danger.level.asbestos=Асбеста/с: 

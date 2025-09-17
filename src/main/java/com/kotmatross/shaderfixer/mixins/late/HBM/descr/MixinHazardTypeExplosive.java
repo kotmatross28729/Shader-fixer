@@ -21,7 +21,6 @@ public class MixinHazardTypeExplosive {
     @Inject(method = "addHazardInformation", at = @At(value = "TAIL"), remap = false)
     public void addHazardInformation(EntityPlayer player, List list, float level, ItemStack stack,
         List<HazardModifier> modifiers, CallbackInfo ci) {
-        String H = "" + (Math.floor(level * 1000) / 1000);
-        list.add(EnumChatFormatting.GOLD + I18n.format("trait.danger.level.explosive") + " " + H + "  ");
+        list.add(EnumChatFormatting.GOLD + I18n.format("trait.danger.level.explosive") + level);
     }
 }

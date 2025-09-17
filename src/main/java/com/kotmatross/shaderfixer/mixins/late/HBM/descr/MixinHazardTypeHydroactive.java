@@ -21,7 +21,6 @@ public class MixinHazardTypeHydroactive {
     @Inject(method = "addHazardInformation", at = @At(value = "TAIL"), remap = false)
     public void addHazardInformation(EntityPlayer player, List list, float level, ItemStack stack,
         List<HazardModifier> modifiers, CallbackInfo ci) {
-        String H = "" + ((Math.floor(level * 1000) / 1000));
-        list.add(EnumChatFormatting.AQUA + I18n.format("trait.danger.level.hydro") + " " + H + "  ");
+        list.add(EnumChatFormatting.AQUA + I18n.format("trait.danger.level.hydro") + level);
     }
 }

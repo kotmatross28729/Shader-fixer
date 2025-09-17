@@ -21,9 +21,9 @@ public class MixinHazardTypeBlinding {
     @Inject(method = "addHazardInformation", at = @At(value = "TAIL"), remap = false)
     public void addHazardInformation(EntityPlayer player, List list, float level, ItemStack stack,
         List<HazardModifier> modifiers, CallbackInfo ci) {
-        double H = (Math.floor(level * 1000) / 1000);
         list.add(
-            EnumChatFormatting.BLUE + I18n.format(
-                "trait.danger.level.blinding") + " " + (H / 20) + " " + I18n.format("info.template__seconds") + "  ");
+            EnumChatFormatting.BLUE + I18n.format("trait.danger.level.blinding")
+                + (level / 20F)
+                + I18n.format("info.template__seconds"));
     }
 }
