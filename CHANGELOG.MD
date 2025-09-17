@@ -1,8 +1,9 @@
 # 4.6-patch-3
 
-* **[Hbm's NTM]** (`EXTENDED_HAZARD_DESCRIPTIONS`) Changed "Blinding for:" to "Blinds for:"
+* **[Hbm's NTM]** (`EXTENDED_HAZARD_DESCRIPTIONS`) Changed "Blinding for:" to "Blinds for:" / "Danger:" to "Coal dust/s:" and "Asbestos/s:" respectively
 * **[Hbm's NTM]** (`EXTENDED_HAZARD_DESCRIPTIONS`) Fixed a time rounding bug where some items had 0 seconds of effect
-
+* **[Hbm's NTM]** `MUZZLE_FLASH_ENABLE_DEPTH` config option is now disabled by default (causes z-fighting)
+  
 # 4.6-patch-2
 
 #### NTM require version [X5439+](https://github.com/HbmMods/Hbm-s-Nuclear-Tech-GIT/releases)!

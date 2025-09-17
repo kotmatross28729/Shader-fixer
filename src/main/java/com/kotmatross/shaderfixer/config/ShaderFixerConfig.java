@@ -142,7 +142,7 @@ public class ShaderFixerConfig {
     public static boolean ELN_LIGHT_MIXINS;
     public static boolean FISKHEROES_CPM_COMPAT;
     public static boolean HBM_EXTENDED_HAZARD_DESCRIPTIONS;
-    public static boolean HBM_MUZZLE_FLASH_DEPTH;
+    public static boolean HBM_MUZZLE_FLASH_ENABLE_DEPTH;
 
     public static void loadLateMixinConfigTweaks(File configFile) {
         Configuration config = new Configuration(configFile);
@@ -177,11 +177,11 @@ public class ShaderFixerConfig {
             true,
             "[HBM's NTM] Adds additional information to dangerous items (Ignites for / Explosion force / etc.)");
 
-        HBM_MUZZLE_FLASH_DEPTH = config.getBoolean(
-            "HBM_MUZZLE_FLASH_DEPTH",
+        HBM_MUZZLE_FLASH_ENABLE_DEPTH = config.getBoolean(
+            "HBM_MUZZLE_FLASH_ENABLE_DEPTH",
             CAT_TWEAKS,
-            true,
-            "[HBM's NTM] Turns glDepthMask back on when rendering muzzle flash. Fixes all sorts of errors with shader effects (clouds/water, etc.). Better to use with NTM_TEXTURE_FIX enabled");
+            false,
+            "[HBM's NTM] (Causes z-fighting!) Turns glDepthMask back on when rendering muzzle flash. Fixes all sorts of errors with shader effects (clouds/water, etc.). Better to use with NTM_TEXTURE_FIX enabled");
 
         if (config.hasChanged()) {
             config.save();

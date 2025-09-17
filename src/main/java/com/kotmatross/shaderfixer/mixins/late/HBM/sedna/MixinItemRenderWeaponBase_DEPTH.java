@@ -10,9 +10,7 @@ import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 public class MixinItemRenderWeaponBase_DEPTH {
 
     // "Disables disable" (enables) glDepthMask
-    // By default, the mixin is not applied, it requires an explicitly enabled config option
-    // It should be enabled only when using the resource pack "NTM texture patch for shaders" (removes black background
-    // -> doesn't overwrite depth buffer -> doesn't need to be disabled)
+    // EDIT 17.09.25: Causes explicit z-fighting, disabled by default
 
     @WrapWithCondition(
         method = "renderMuzzleFlash(JID)V",
@@ -27,6 +25,22 @@ public class MixinItemRenderWeaponBase_DEPTH {
         at = @At(value = "INVOKE", target = "org/lwjgl/opengl/GL11.glDepthMask (Z)V", ordinal = 1),
         remap = false)
     private static boolean reverseDepth2(boolean b) {
+        return false;
+    }
+
+    @WrapWithCondition(
+        method = "renderLaserFlash",
+        at = @At(value = "INVOKE", target = "org/lwjgl/opengl/GL11.glDepthMask (Z)V", ordinal = 0),
+        remap = false)
+    private static boolean reverseLasDepth(boolean b) {
+        return false;
+    }
+
+    @WrapWithCondition(
+        method = "renderLaserFlash",
+        at = @At(value = "INVOKE", target = "org/lwjgl/opengl/GL11.glDepthMask (Z)V", ordinal = 1),
+        remap = false)
+    private static boolean reverseLasDepth2(boolean b) {
         return false;
     }
 

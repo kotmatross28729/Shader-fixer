@@ -272,7 +272,7 @@ public enum LateMixins implements IMixins {
 
     HBM_FLASH_DEPTH(new MixinBuilder().addRequiredMod(TargetMods.HBM)
         .addClientMixins("HBM.sedna.MixinItemRenderWeaponBase_DEPTH")
-        .setApplyIf(() -> ShaderFixerConfig.HBM_MUZZLE_FLASH_DEPTH));
+        .setApplyIf(() -> ShaderFixerConfig.HBM_MUZZLE_FLASH_ENABLE_DEPTH));
 
     private final MixinBuilder builder;
 
