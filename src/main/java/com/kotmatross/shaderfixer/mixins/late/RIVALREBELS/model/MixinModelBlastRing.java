@@ -15,6 +15,6 @@ public class MixinModelBlastRing {
     @Inject(method = "renderModel*", at = @At(value = "HEAD"), remap = false)
     public void renderModel(float size, int segments, float thickness, float height, float pitch, float yaw, float roll,
         float x, float y, float z, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

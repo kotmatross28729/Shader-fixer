@@ -22,6 +22,6 @@ public class MixinRenderMixer {
             shift = At.Shift.BEFORE),
         remap = false)
     public void func_76986_a(TileEntity tile, double x, double y, double z, float interp, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

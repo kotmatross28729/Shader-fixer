@@ -13,7 +13,7 @@ public class MixinModelArmorWingsPheo {
 
     @Inject(method = "renderFlame", at = @At(value = "HEAD"), remap = false)
     private static void renderFlame(CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
 }

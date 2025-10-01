@@ -90,7 +90,7 @@ public abstract class MixinRenderRefueler extends TileEntitySpecialRenderer impl
 
                 double initialY = 0.12; // Min Y on model
 
-                Utils.Fix();
+                Utils.fix();
 
                 tess.startDrawingQuads();
                 tess.setColorOpaque_I(

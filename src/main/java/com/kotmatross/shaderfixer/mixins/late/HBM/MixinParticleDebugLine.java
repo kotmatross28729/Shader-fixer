@@ -24,8 +24,8 @@ public class MixinParticleDebugLine {
             shift = At.Shift.BEFORE))
     public void func_70539_aPR(Tessellator tess, float interp, float x, float y, float z, float tx, float tz,
         CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
+        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram();
     }
 
     @Inject(
@@ -37,15 +37,29 @@ public class MixinParticleDebugLine {
             shift = At.Shift.AFTER))
     public void func_70539_aPRE(Tessellator tess, float interp, float x, float y, float z, float tx, float tz,
         CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.GLUseProgram(shader_fixer$program.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
     }
 
     @Inject(
         method = "func_70539_a",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
+            shift = At.Shift.BEFORE))
     public void func_70539_a(Tessellator tess, float interp, float x, float y, float z, float tx, float tz,
         CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(
+        method = "func_70539_a",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
+            shift = At.Shift.AFTER))
+    public void func_70539_a2(Tessellator tess, float interp, float x, float y, float z, float tx, float tz,
+        CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 }

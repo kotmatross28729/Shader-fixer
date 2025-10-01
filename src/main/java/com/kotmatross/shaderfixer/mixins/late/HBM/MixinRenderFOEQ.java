@@ -19,7 +19,20 @@ public class MixinRenderFOEQ {
         remap = false)
     public void func_76986_a(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_,
         float p_76986_8_, float p_76986_9_, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(
+        method = "func_76986_a",
+        at = @At(
+            value = "INVOKE",
+            target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V",
+            ordinal = 3,
+            shift = At.Shift.BEFORE),
+        remap = false)
+    public void func_76986_a2(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_,
+        float p_76986_8_, float p_76986_9_, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 }

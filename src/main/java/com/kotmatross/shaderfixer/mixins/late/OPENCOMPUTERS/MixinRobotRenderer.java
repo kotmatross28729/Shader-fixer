@@ -18,6 +18,6 @@ public class MixinRobotRenderer {
         method = "renderTileEntityAt",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     private void renderTileEntityAt(TileEntity entity, double x, double y, double z, float f, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

@@ -22,7 +22,7 @@ public abstract class MixinRenderEarthCrack extends Render {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     public void doRender(EntityEarthCrack entity, double x, double y, double z, float entityYaw, float partialTicks,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(
@@ -30,6 +30,6 @@ public abstract class MixinRenderEarthCrack extends Render {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     public void renderLightning(Random rand, Random randPrev, int ticks, int layers, Vec3 src, Vec3 dst, int segments,
         float intensity, float[] color, float alpha, long seed, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

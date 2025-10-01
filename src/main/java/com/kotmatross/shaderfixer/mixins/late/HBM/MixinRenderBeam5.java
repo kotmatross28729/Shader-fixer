@@ -15,10 +15,24 @@ public class MixinRenderBeam5 {
 
     @Inject(
         method = "func_76986_a",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
+            shift = At.Shift.BEFORE))
     public void func_76986_a(Entity rocket, double x, double y, double z, float p_76986_8_, float p_76986_9_,
         CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(
+        method = "func_76986_a",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
+            shift = At.Shift.AFTER))
+    public void func_76986_a2(Entity rocket, double x, double y, double z, float p_76986_8_, float p_76986_9_,
+        CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 }

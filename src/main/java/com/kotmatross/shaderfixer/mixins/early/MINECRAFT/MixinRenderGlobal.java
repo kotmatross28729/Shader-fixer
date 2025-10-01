@@ -27,6 +27,6 @@ public abstract class MixinRenderGlobal implements IWorldAccess {
     // Hitbox (F3+B)
     @Inject(method = "drawOutlinedBoundingBox", at = @At(value = "HEAD"))
     private static void fixHitboxRender(AxisAlignedBB p_147590_0_, int p_147590_1_, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

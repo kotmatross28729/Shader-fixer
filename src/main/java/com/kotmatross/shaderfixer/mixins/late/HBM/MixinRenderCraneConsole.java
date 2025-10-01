@@ -22,7 +22,7 @@ public class MixinRenderCraneConsole {
             shift = At.Shift.BEFORE),
         remap = false)
     public void func_147500_a(TileEntity te, double x, double y, double z, float interp, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(
@@ -30,6 +30,6 @@ public class MixinRenderCraneConsole {
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 1, shift = At.Shift.AFTER),
         remap = false)
     public void func_147500_a2(TileEntity te, double x, double y, double z, float interp, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

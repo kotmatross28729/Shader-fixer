@@ -16,10 +16,23 @@ public class MixinRenderChemical {
 
     @Inject(
         method = "renderAmatBeam",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
+            shift = At.Shift.BEFORE))
     private void renderAmatBeam(EntityChemical chem, float interp, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(
+        method = "renderAmatBeam",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
+            shift = At.Shift.AFTER))
+    private void renderAmatBeam2(EntityChemical chem, float interp, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 
     @Inject(
@@ -27,8 +40,8 @@ public class MixinRenderChemical {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     public void renderAmatBeamPR(EntityChemical chem, float interp, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
+        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram();
     }
 
     @Inject(
@@ -39,7 +52,7 @@ public class MixinRenderChemical {
             shift = At.Shift.AFTER))
     public void renderAmatBeamPRE(EntityChemical chem, float interp, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.GLUseProgram(shader_fixer$program.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
     }
 
 }

@@ -14,7 +14,12 @@ public class MixinHologramRenderer {
 
     @Inject(method = "draw", at = @At(value = "HEAD"), remap = false)
     private void draw(CallbackInfo ci) {
-        Utils.Fix();
-        Utils.EnableFullBrightness();
+        Utils.fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+    }
+
+    @Inject(method = "draw", at = @At(value = "TAIL"), remap = false)
+    private void draw2(CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 }

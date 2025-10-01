@@ -22,8 +22,8 @@ public class MixinRenderSpear {
             shift = At.Shift.BEFORE))
     public void renderFlashPR(double intensity, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
+        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram();
     }
 
     @Inject(
@@ -35,11 +35,11 @@ public class MixinRenderSpear {
             shift = At.Shift.AFTER))
     public void renderFlashPRE(double intensity, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.GLUseProgram(shader_fixer$program.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
     }
 
     @Inject(method = "renderFlash", at = @At(value = "HEAD"), remap = false)
     private void renderFlash(double intensity, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

@@ -27,12 +27,12 @@ public class MixinRenderLightningBolt2 {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     private void renderLightningBolt2(EntityLightningBolt2 par1EntityLightningBolt2, double par2, double par4,
         double par6, float par8, float par9, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(method = "func_76986_a*", at = @At(value = "HEAD"), remap = false)
     private void func_76986_a(Entity par1Entity, double par2, double par4, double par6, float par8, float par9,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

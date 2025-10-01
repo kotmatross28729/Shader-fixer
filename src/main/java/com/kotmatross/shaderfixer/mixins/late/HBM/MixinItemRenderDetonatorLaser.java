@@ -23,14 +23,14 @@ public class MixinItemRenderDetonatorLaser {
             shift = At.Shift.BEFORE),
         remap = false)
     private void renderItem(IItemRenderer.ItemRenderType type, ItemStack item, Object[] data, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(
         method = "renderItem",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     public void renderItem2(IItemRenderer.ItemRenderType type, ItemStack item, Object[] data, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
 }

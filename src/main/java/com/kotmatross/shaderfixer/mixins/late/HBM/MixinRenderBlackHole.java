@@ -12,26 +12,19 @@ import com.hbm.render.entity.effect.RenderBlackHole;
 import com.kotmatross.shaderfixer.utils.Utils;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
-import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 
 @Mixin(value = RenderBlackHole.class, priority = 999)
 public class MixinRenderBlackHole {
 
     @Inject(method = "renderDisc", at = @At(value = "HEAD"), remap = false)
-    public void renderDisc(Entity entity, float interp, CallbackInfo ci,
-        @Share("shader_fixer$lbx") LocalFloatRef shader_fixer$lbx,
-        @Share("shader_fixer$lby") LocalFloatRef shader_fixer$lby) {
-        shader_fixer$lbx.set(Utils.GetLastBrightnessX());
-        shader_fixer$lby.set(Utils.GetLastBrightnessY());
-        Utils.EnableFullBrightness();
+    public void renderDisc(Entity entity, float interp, CallbackInfo ci) {
+        Utils.BrightnessUtils.enableFullBrightness();
     }
 
     @Inject(method = "renderDisc", at = @At(value = "TAIL"), remap = false)
-    public void renderDisc2(Entity entity, float interp, CallbackInfo ci,
-        @Share("shader_fixer$lbx") LocalFloatRef shader_fixer$lbx,
-        @Share("shader_fixer$lby") LocalFloatRef shader_fixer$lby) {
-        Utils.DisableFullBrightness(shader_fixer$lbx.get(), shader_fixer$lby.get());
+    public void renderDisc2(Entity entity, float interp, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 
     // Fix for angelica (brightness)
@@ -46,19 +39,13 @@ public class MixinRenderBlackHole {
     }
 
     @Inject(method = "renderSwirl", at = @At(value = "HEAD"), remap = false)
-    public void renderSwirl(Entity entity, float interp, CallbackInfo ci,
-        @Share("shader_fixer$lbx2") LocalFloatRef shader_fixer$lbx2,
-        @Share("shader_fixer$lby2") LocalFloatRef shader_fixer$lby2) {
-        shader_fixer$lbx2.set(Utils.GetLastBrightnessX());
-        shader_fixer$lby2.set(Utils.GetLastBrightnessY());
-        Utils.EnableFullBrightness();
+    public void renderSwirl(Entity entity, float interp, CallbackInfo ci) {
+        Utils.BrightnessUtils.enableFullBrightness();
     }
 
     @Inject(method = "renderSwirl", at = @At(value = "TAIL"), remap = false)
-    public void renderSwirl2(Entity entity, float interp, CallbackInfo ci,
-        @Share("shader_fixer$lbx2") LocalFloatRef shader_fixer$lbx2,
-        @Share("shader_fixer$lby2") LocalFloatRef shader_fixer$lby2) {
-        Utils.DisableFullBrightness(shader_fixer$lbx2.get(), shader_fixer$lby2.get());
+    public void renderSwirl2(Entity entity, float interp, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 
     // Fix for angelica (brightness)
@@ -77,8 +64,8 @@ public class MixinRenderBlackHole {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     public void renderJetsPR(Entity entity, float interp, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
+        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram();
     }
 
     @Inject(
@@ -89,21 +76,34 @@ public class MixinRenderBlackHole {
             shift = At.Shift.AFTER))
     public void renderJetsPRE(Entity entity, float interp, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.GLUseProgram(shader_fixer$program.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
     }
 
     @Inject(
         method = "renderJets",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
+            shift = At.Shift.BEFORE))
     public void renderJets(Entity entity, float interp, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(
+        method = "renderJets",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
+            shift = At.Shift.AFTER))
+    public void renderJets2(Entity entity, float interp, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 
     @Inject(
         method = "renderFlare",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     public void renderFlare(Entity entity, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

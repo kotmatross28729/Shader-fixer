@@ -17,7 +17,7 @@ public class MixinDrawUtil {
     @Inject(method = "drawRectangle", at = @At(value = "HEAD"), remap = false)
     private static void drawRectangle(double x, double y, double width, double height, int color, int alpha,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     // Fix alpha > 1

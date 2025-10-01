@@ -1,8 +1,9 @@
-# 4.whatever
+# 4.7
 
 * **[Hbm's NTM]** Fixed Tesla Crab/Meltdown Elemental turning completely white/green respectively when attacking
 * **[Hbm's NTM:Space]** Fixed lasers (Tesla Crab/Meltdown Elemental/Mining Laser) having alpha greater than 1.0 (in `glColor4f`)
   - A.K.A. something that will burn your eyes if the 'Bloom' option in the shader is enabled
+* **[Main]** Fixed numerous light leaks (entities are glowing) caused by `Utils.EnableFullBrightness()`
 
 # 4.6-patch-3
 

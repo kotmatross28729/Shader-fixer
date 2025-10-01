@@ -146,7 +146,8 @@ public enum LateMixins implements IMixins {
             "HBM.MixinRenderPylonBase", // WIRES
             "HBM.MixinHbmAnimations", // Fix flickering
             "HBM.MixinBlockRebar", // Fix outline
-            "HBM.sedna.guns.MixinItemRenderNI4NI" // Coins display
+            "HBM.sedna.guns.MixinItemRenderNI4NI", // Coins display
+            "HBM.MixinArmorEnvsuit" // Armor helmet lamps
         )),
 
     HBM_OG_ONLY(new MixinBuilder().addRequiredMod(TargetMods.HBM)

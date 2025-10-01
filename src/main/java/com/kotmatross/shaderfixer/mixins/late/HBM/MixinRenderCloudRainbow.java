@@ -15,7 +15,13 @@ public class MixinRenderCloudRainbow {
     @Inject(method = "render", at = @At(value = "HEAD"), remap = false)
     public void render(EntityCloudFleijaRainbow cloud, double p_76986_2_, double p_76986_4_, double p_76986_6_,
         float p_76986_8_, float p_76986_9_, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(method = "render", at = @At(value = "TAIL"), remap = false)
+    public void render2(EntityCloudFleijaRainbow cloud, double p_76986_2_, double p_76986_4_, double p_76986_6_,
+        float p_76986_8_, float p_76986_9_, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 }

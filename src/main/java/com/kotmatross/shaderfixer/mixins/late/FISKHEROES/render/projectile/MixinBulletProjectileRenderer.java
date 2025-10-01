@@ -18,6 +18,6 @@ public abstract class MixinBulletProjectileRenderer implements ProjectileRendere
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     public void render(TrackingProjectile projectile, double viewX, double viewY, double viewZ, float partialTicks,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

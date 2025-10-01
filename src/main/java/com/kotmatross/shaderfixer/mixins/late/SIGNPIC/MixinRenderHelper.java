@@ -13,26 +13,26 @@ public class MixinRenderHelper {
 
     @Inject(method = "drawLoadingCircle", at = @At(value = "HEAD"), remap = false)
     private static void drawLoadingCircle(int msPerRoundInner, int msPerRoundOuter, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(method = "drawDesignCircle", at = @At(value = "HEAD"), remap = false)
     private static void drawDesignCircle(CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(method = "drawProgressCircle(F)V", at = @At(value = "HEAD"), remap = false)
     private static void drawProgressCircle(float progress, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(method = "drawProgressCircle(IF)V", at = @At(value = "HEAD"), remap = false)
     private static void drawProgressCircle(int mode, float r, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(method = "drawRect(IFFFF)V", at = @At(value = "HEAD"), remap = false)
     private static void drawRect(int mode, float x1, float y1, float x2, float y2, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

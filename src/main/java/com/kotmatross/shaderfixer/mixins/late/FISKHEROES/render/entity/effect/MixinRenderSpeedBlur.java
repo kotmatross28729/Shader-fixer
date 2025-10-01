@@ -17,6 +17,6 @@ public abstract class MixinRenderSpeedBlur extends Render {
     @Inject(method = "doRender", at = @At(value = "HEAD"), remap = false)
     public void doRender(EntitySpeedBlur entity, double x, double y, double z, float entityYaw, float partialTicks,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

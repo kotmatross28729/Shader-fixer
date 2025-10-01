@@ -16,6 +16,6 @@ public class MixinRenderNPCInterface {
     @Inject(method = "renderLivingLabel", at = @At(value = "HEAD"), remap = false)
     public void renderLivingLabel(EntityNPCInterface npc, double d, double d1, double d2, int i, Object[] obs,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

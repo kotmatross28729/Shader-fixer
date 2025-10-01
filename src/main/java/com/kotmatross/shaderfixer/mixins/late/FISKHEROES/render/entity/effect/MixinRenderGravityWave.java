@@ -19,6 +19,6 @@ public abstract class MixinRenderGravityWave extends Render {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     public void doRender(EntityGravityWave entity, double x, double y, double z, float entityYaw, float partialTicks,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

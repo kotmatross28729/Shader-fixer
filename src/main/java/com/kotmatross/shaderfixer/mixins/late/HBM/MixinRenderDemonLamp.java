@@ -24,8 +24,8 @@ public class MixinRenderDemonLamp {
             shift = At.Shift.BEFORE))
     public void func_147500_aPR(TileEntity tileEntity, double x, double y, double z, float f, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
+        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram();
     }
 
     @Inject(
@@ -37,14 +37,27 @@ public class MixinRenderDemonLamp {
             shift = At.Shift.AFTER))
     public void func_147500_aPRE(TileEntity tileEntity, double x, double y, double z, float f, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.GLUseProgram(shader_fixer$program.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
     }
 
     @Inject(
         method = "func_147500_a",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
+            shift = At.Shift.BEFORE))
     public void func_147500_a(TileEntity tileEntity, double x, double y, double z, float f, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(
+        method = "func_147500_a",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
+            shift = At.Shift.AFTER))
+    public void func_147500_a2(TileEntity tileEntity, double x, double y, double z, float f, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 }

@@ -21,6 +21,6 @@ public class MixinRenderBobble {
             shift = At.Shift.BEFORE),
         remap = false)
     private void renderPellet(BlockBobble.BobbleType type, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

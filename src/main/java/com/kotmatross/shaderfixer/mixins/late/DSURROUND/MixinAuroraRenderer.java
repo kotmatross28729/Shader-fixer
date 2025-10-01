@@ -23,8 +23,8 @@ public class MixinAuroraRenderer {
             shift = At.Shift.BEFORE))
     private static void renderAuroraPR(final float partialTick, final Aurora aurora, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
+        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram();
     }
 
     @Inject(
@@ -36,12 +36,12 @@ public class MixinAuroraRenderer {
             shift = At.Shift.AFTER))
     private static void renderAuroraPRE(final float partialTick, final Aurora aurora, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.GLUseProgram(shader_fixer$program.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
     }
 
     @Inject(method = "renderAurora", at = @At(value = "HEAD"), remap = false)
     private static void renderAurora(final float partialTick, final Aurora aurora, CallbackInfo ci) {
-        // Utils.EnableFullBrightness();
-        Utils.Fix();
+        // Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
     }
 }

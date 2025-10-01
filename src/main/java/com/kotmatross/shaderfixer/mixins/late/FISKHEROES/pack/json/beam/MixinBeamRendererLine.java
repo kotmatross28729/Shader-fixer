@@ -15,21 +15,55 @@ public abstract class MixinBeamRendererLine implements com.fiskmods.heroes.clien
 
     @Inject(
         method = "render",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V", ordinal = 0))
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
+            ordinal = 0,
+            shift = At.Shift.BEFORE))
     public void render(Entity anchor, float width, float height, float beamScale, Long seed, Vec3 src, Vec3 dst,
         Vec3 color, float opacity0, float opacity1, float scale0, float scale1, float time, float scale,
         boolean isClientPlayer, boolean isFirstPerson, float partialTicks, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
     }
 
     @Inject(
         method = "render",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V", ordinal = 1))
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
+            ordinal = 0,
+            shift = At.Shift.AFTER))
     public void render2(Entity anchor, float width, float height, float beamScale, Long seed, Vec3 src, Vec3 dst,
         Vec3 color, float opacity0, float opacity1, float scale0, float scale1, float time, float scale,
         boolean isClientPlayer, boolean isFirstPerson, float partialTicks, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.disableFullBrightness();
+    }
+
+    @Inject(
+        method = "render",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
+            ordinal = 1,
+            shift = At.Shift.BEFORE))
+    public void render3(Entity anchor, float width, float height, float beamScale, Long seed, Vec3 src, Vec3 dst,
+        Vec3 color, float opacity0, float opacity1, float scale0, float scale1, float time, float scale,
+        boolean isClientPlayer, boolean isFirstPerson, float partialTicks, CallbackInfo ci) {
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(
+        method = "render",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
+            ordinal = 1,
+            shift = At.Shift.AFTER))
+    public void render4(Entity anchor, float width, float height, float beamScale, Long seed, Vec3 src, Vec3 dst,
+        Vec3 color, float opacity0, float opacity1, float scale0, float scale1, float time, float scale,
+        boolean isClientPlayer, boolean isFirstPerson, float partialTicks, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 }

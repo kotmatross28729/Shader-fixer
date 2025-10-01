@@ -37,12 +37,6 @@ public class MixinSkyProviderCelestial {
 
     // !Sensitive to upstream(?) changes
 
-    // Fix sky with shaders
-    @Inject(method = "render", at = @At(value = "HEAD"), remap = false)
-    public void initSkyFix(float partialTicks, WorldClient world, Minecraft mc, CallbackInfo ci) {
-        Utils.Fix2();
-    }
-
     @Inject(method = "renderDigamma", at = @At(value = "HEAD"), remap = false)
     protected void lodeStarFixBrightness(float partialTicks, WorldClient world, Minecraft mc, float celestialAngle,
         CallbackInfo ci) {
@@ -70,8 +64,8 @@ public class MixinSkyProviderCelestial {
         remap = false)
     public void sunset_PF_Start(float partialTicks, WorldClient world, Minecraft mc, CallbackInfo ci,
         @Share("shader_fixer$programSUNSET") LocalIntRef shader_fixer$programSUNSET) {
-        shader_fixer$programSUNSET.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
+        shader_fixer$programSUNSET.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram();
     }
 
     @Inject(
@@ -83,7 +77,7 @@ public class MixinSkyProviderCelestial {
         remap = false)
     public void sunset_PF_End(float partialTicks, WorldClient world, Minecraft mc, CallbackInfo ci,
         @Share("shader_fixer$programSUNSET") LocalIntRef shader_fixer$programSUNSET) {
-        Utils.GLUseProgram(shader_fixer$programSUNSET.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$programSUNSET.get());
     }
 
     // glSkyList2 is ignored by shaders anyway
@@ -243,7 +237,7 @@ public class MixinSkyProviderCelestial {
      * 	 GL11.glColor4f(1.0F, 1.0F, 1.0F, visibility);
      * 	 mc.renderEngine.bindTexture(metric.body.texture);
      *   
-     *   INJECT(shader_fixer$programORBIT.set(Utils.GLGetCurrentProgram()), Utils.GLUseDefaultProgram())
+     *   INJECT(shader_fixer$programORBIT.set(Utils.ProgramUtils.GLGetCurrentProgram()), Utils.ProgramUtils.GLUseDefaultProgram())
      *   
      *   tessellator.startDrawingQuads();
      *   tessellator.addVertexWithUV(-size, 100.0D, -size, 0.0D + uvOffset, 0.0D);
@@ -252,7 +246,7 @@ public class MixinSkyProviderCelestial {
      *   tessellator.addVertexWithUV(-size, 100.0D, size, 0.0D + uvOffset, 1.0D);
      *   tessellator.draw();
      *   
-     *   INJECT(Utils.GLUseProgram(shader_fixer$programORBIT.get()))
+     *   INJECT(Utils.ProgramUtils.GLUseProgram(shader_fixer$programORBIT.get()))
      *   
      *  }
      * </pre>
@@ -272,8 +266,8 @@ public class MixinSkyProviderCelestial {
         List<SolarSystem.AstroMetric> metrics, float solarAngle, CelestialBody tidalLockedBody, Vec3 planetTint,
         float visibility, float blendAmount, CelestialBody orbiting, float maxSize, CallbackInfo ci,
         @Share("shader_fixer$programORBIT") LocalIntRef shader_fixer$programORBIT) {
-        shader_fixer$programORBIT.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
+        shader_fixer$programORBIT.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram();
     }
 
     @Inject(
@@ -287,7 +281,7 @@ public class MixinSkyProviderCelestial {
         List<SolarSystem.AstroMetric> metrics, float solarAngle, CelestialBody tidalLockedBody, Vec3 planetTint,
         float visibility, float blendAmount, CelestialBody orbiting, float maxSize, CallbackInfo ci,
         @Share("shader_fixer$programORBIT") LocalIntRef shader_fixer$programORBIT) {
-        Utils.GLUseProgram(shader_fixer$programORBIT.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$programORBIT.get());
     }
 
     /**

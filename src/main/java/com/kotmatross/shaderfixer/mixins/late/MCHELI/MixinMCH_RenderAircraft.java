@@ -21,7 +21,7 @@ public class MixinMCH_RenderAircraft {
         method = "drawHitBoxDetail",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     public void drawHitBoxDetail(MCH_BoundingBox bb, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(
@@ -29,7 +29,7 @@ public class MixinMCH_RenderAircraft {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     private static void renderLight(double x, double y, double z, float tickTime, MCH_EntityAircraft ac,
         MCH_AircraftInfo info, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(
@@ -37,14 +37,14 @@ public class MixinMCH_RenderAircraft {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     private static void renderCrawlerTrack(MCH_EntityAircraft ac, MCH_AircraftInfo info, float tickTime,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(
         method = "renderEntityMarker",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     private static void renderEntityMarker(Entity entity, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(
@@ -52,6 +52,6 @@ public class MixinMCH_RenderAircraft {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     private static void renderRope(MCH_EntityAircraft ac, MCH_AircraftInfo info, double x, double y, double z,
         float tickTime, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

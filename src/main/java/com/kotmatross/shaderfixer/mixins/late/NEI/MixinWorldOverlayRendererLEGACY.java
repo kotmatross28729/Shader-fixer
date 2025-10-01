@@ -26,11 +26,19 @@ public class MixinWorldOverlayRendererLEGACY {
 
     @Inject(
         method = "renderMobSpawnOverlay",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glBegin(I)V"),
+        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glBegin(I)V", shift = BEFORE),
         remap = false)
     private static void renderMobSpawnOverlay(Entity entity, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(
+        method = "renderMobSpawnOverlay",
+        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnd()V", shift = AFTER),
+        remap = false)
+    private static void renderMobSpawnOverlay2(Entity entity, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 
     @Inject(
@@ -39,8 +47,8 @@ public class MixinWorldOverlayRendererLEGACY {
         remap = false)
     private static void renderMobSpawnOverlay$programS(Entity entity, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
+        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram();
     }
 
     @Inject(
@@ -49,16 +57,24 @@ public class MixinWorldOverlayRendererLEGACY {
         remap = false)
     private static void renderMobSpawnOverlay$programE(Entity entity, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.GLUseProgram(shader_fixer$program.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
     }
 
     @Inject(
         method = "renderChunkBounds",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glBegin(I)V"),
+        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glBegin(I)V", shift = BEFORE),
         remap = false)
     private static void renderChunkBounds(Entity entity, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(
+        method = "renderChunkBounds",
+        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnd()V", shift = AFTER),
+        remap = false)
+    private static void renderChunkBounds2(Entity entity, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 
     @Inject(
@@ -67,8 +83,8 @@ public class MixinWorldOverlayRendererLEGACY {
         remap = false)
     private static void renderChunkBounds$programS(Entity entity, CallbackInfo ci,
         @Share("shader_fixer$program2") LocalIntRef shader_fixer$program2) {
-        shader_fixer$program2.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
+        shader_fixer$program2.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram();
     }
 
     @Inject(
@@ -77,7 +93,7 @@ public class MixinWorldOverlayRendererLEGACY {
         remap = false)
     private static void renderChunkBounds$programE(Entity entity, CallbackInfo ci,
         @Share("shader_fixer$program2") LocalIntRef shader_fixer$program2) {
-        Utils.GLUseProgram(shader_fixer$program2.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$program2.get());
     }
 
     @Unique

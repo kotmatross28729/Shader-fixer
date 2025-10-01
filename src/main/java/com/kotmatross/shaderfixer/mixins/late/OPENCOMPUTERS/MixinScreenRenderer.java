@@ -23,7 +23,7 @@ public class MixinScreenRenderer {
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glTranslated(DDD)V", shift = At.Shift.AFTER),
         remap = false)
     private void draw(CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(
@@ -35,8 +35,9 @@ public class MixinScreenRenderer {
             shift = At.Shift.BEFORE))
     private void BeforeDraw(TileEntity t, double x, double y, double z, float f, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram(); // This: bring back normal colors (no yellow-ish), fixes brightness, real guy
+        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram(); // This: bring back normal colors (no yellow-ish), fixes brightness,
+                                                  // real guy
     }
 
     @Inject(
@@ -48,6 +49,6 @@ public class MixinScreenRenderer {
             shift = At.Shift.AFTER))
     private void AfterDraw(TileEntity t, double x, double y, double z, float f, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.GLUseProgram(shader_fixer$program.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
     }
 }

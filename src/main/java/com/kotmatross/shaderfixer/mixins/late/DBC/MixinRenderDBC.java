@@ -26,6 +26,6 @@ public class MixinRenderDBC {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     protected void func_77033_b(EntityLivingBase par1EntityLivingBase, double par2, double par4, double par6,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

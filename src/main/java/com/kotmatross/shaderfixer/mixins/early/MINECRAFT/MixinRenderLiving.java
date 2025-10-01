@@ -18,7 +18,7 @@ public abstract class MixinRenderLiving {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     protected void fixLeashRender(EntityLiving p_110827_1_, double p_110827_2_, double p_110827_4_, double p_110827_6_,
         float p_110827_8_, float p_110827_9_, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
 }

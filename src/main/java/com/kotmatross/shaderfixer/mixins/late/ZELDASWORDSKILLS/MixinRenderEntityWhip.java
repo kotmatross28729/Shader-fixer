@@ -18,6 +18,6 @@ public class MixinRenderEntityWhip {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     protected void renderLeash(EntityWhip whip, double x, double y, double z, float yaw, float partialTick,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

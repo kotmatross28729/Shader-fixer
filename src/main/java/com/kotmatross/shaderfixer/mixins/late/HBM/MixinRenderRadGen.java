@@ -24,8 +24,20 @@ public class MixinRenderRadGen {
             shift = At.Shift.AFTER),
         remap = false)
     public void func_147500_a(TileEntity tileEntity, double x, double y, double z, float f, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(
+        method = "func_147500_a",
+        at = @At(
+            value = "INVOKE",
+            target = "Lorg/lwjgl/opengl/GL11;glColor3f(FFF)V",
+            ordinal = 2,
+            shift = At.Shift.AFTER),
+        remap = false)
+    public void func_147500_a22(TileEntity tileEntity, double x, double y, double z, float f, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 
     @Inject(

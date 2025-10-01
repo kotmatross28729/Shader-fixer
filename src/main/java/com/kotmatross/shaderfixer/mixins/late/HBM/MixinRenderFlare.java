@@ -25,8 +25,8 @@ public class MixinRenderFlare {
     public void func_76986_aPR(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_,
         float p_76986_8_, float p_76986_9_, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
+        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram();
     }
 
     @Inject(
@@ -39,15 +39,29 @@ public class MixinRenderFlare {
     public void func_76986_aPRE(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_,
         float p_76986_8_, float p_76986_9_, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.GLUseProgram(shader_fixer$program.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
     }
 
     @Inject(
         method = "func_76986_a",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
+            shift = At.Shift.BEFORE))
     public void func_76986_a(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_,
         float p_76986_8_, float p_76986_9_, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(
+        method = "func_76986_a",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
+            shift = At.Shift.AFTER))
+    public void func_76986_a2(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_,
+        float p_76986_8_, float p_76986_9_, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 }

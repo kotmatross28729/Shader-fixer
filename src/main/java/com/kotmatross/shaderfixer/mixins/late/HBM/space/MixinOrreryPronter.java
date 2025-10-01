@@ -20,6 +20,6 @@ public class MixinOrreryPronter {
         method = "render",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     private static void render(Minecraft mc, World world, float partialTicks, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

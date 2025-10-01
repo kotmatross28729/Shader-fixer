@@ -16,6 +16,6 @@ public abstract class MixinProjectileRenderHandler {
         method = "renderTrail",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     private void renderTrail(ProjectileTrail trail, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

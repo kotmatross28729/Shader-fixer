@@ -17,6 +17,6 @@ public class MixinRenderBAT9000 {
         method = "func_147500_a",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     public void func_147500_a(TileEntity te, double x, double y, double z, float interp, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

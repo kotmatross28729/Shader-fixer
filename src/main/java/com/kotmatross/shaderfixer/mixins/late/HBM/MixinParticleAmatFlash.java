@@ -21,7 +21,7 @@ public class MixinParticleAmatFlash {
         remap = false)
     private void func_70539_a(Tessellator tess, float interp, float x, float y, float z, float tx, float tz,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(
@@ -32,8 +32,8 @@ public class MixinParticleAmatFlash {
             shift = At.Shift.BEFORE))
     public void func_70539_aPR(Tessellator tess, float interp, float x, float y, float z, float tx, float tz,
         CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
+        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram();
     }
 
     @Inject(
@@ -44,15 +44,32 @@ public class MixinParticleAmatFlash {
             shift = At.Shift.AFTER))
     public void func_70539_aPRE(Tessellator tess, float interp, float x, float y, float z, float tx, float tz,
         CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.GLUseProgram(shader_fixer$program.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
     }
 
     @Inject(
         method = "func_70539_a",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDepthMask(Z)V", shift = At.Shift.BEFORE),
+        at = @At(
+            value = "INVOKE",
+            target = "Lorg/lwjgl/opengl/GL11;glDepthMask(Z)V",
+            ordinal = 0,
+            shift = At.Shift.BEFORE),
         remap = false)
     public void func_70539_a1(Tessellator tess, float interp, float x, float y, float z, float tx, float tz,
         CallbackInfo ci) {
-        Utils.EnableFullBrightness();
+        Utils.BrightnessUtils.enableFullBrightness();
+    }
+
+    @Inject(
+        method = "func_70539_a",
+        at = @At(
+            value = "INVOKE",
+            target = "Lorg/lwjgl/opengl/GL11;glDepthMask(Z)V",
+            ordinal = 1,
+            shift = At.Shift.AFTER),
+        remap = false)
+    public void func_70539_a2(Tessellator tess, float interp, float x, float y, float z, float tx, float tz,
+        CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 }

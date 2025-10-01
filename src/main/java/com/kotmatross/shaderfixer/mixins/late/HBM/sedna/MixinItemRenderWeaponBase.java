@@ -17,7 +17,6 @@ import com.kotmatross.shaderfixer.shrimp.Vibe;
 import com.kotmatross.shaderfixer.shrimp.nonsense.FuckingCursed;
 import com.kotmatross.shaderfixer.utils.Utils;
 import com.llamalad7.mixinextras.sugar.Share;
-import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 
 @FuckingCursed
@@ -26,7 +25,7 @@ public class MixinItemRenderWeaponBase implements Vibe, NTMRenderGetters {
 
     @Inject(method = "renderSmokeNodes", at = @At(value = "HEAD"), remap = false)
     private static void renderSmokeNodes(List<ItemGunBaseNT.SmokeNode> nodes, double scale, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(
@@ -38,8 +37,8 @@ public class MixinItemRenderWeaponBase implements Vibe, NTMRenderGetters {
             shift = At.Shift.BEFORE))
     private static void renderSmokeNodesPR(List<ItemGunBaseNT.SmokeNode> nodes, double scale, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
+        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram();
     }
 
     @Inject(
@@ -51,39 +50,27 @@ public class MixinItemRenderWeaponBase implements Vibe, NTMRenderGetters {
             shift = At.Shift.AFTER))
     private static void renderSmokeNodesPRE(List<ItemGunBaseNT.SmokeNode> nodes, double scale, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.GLUseProgram(shader_fixer$program.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
     }
 
     @Inject(method = "renderGapFlash", at = @At(value = "HEAD"), remap = false)
-    private static void renderGapFlash(long lastShot, CallbackInfo ci,
-        @Share("shader_fixer$lbx") LocalFloatRef shader_fixer$lbx,
-        @Share("shader_fixer$lby") LocalFloatRef shader_fixer$lby) {
-        shader_fixer$lbx.set(Utils.GetLastBrightnessX());
-        shader_fixer$lby.set(Utils.GetLastBrightnessY());
-        Utils.EnableFullBrightness();
+    private static void renderGapFlash(long lastShot, CallbackInfo ci) {
+        Utils.BrightnessUtils.enableFullBrightness();
     }
 
     @Inject(method = "renderGapFlash", at = @At(value = "TAIL"), remap = false)
-    private static void renderGapFlash2(long lastShot, CallbackInfo ci,
-        @Share("shader_fixer$lbx") LocalFloatRef shader_fixer$lbx,
-        @Share("shader_fixer$lby") LocalFloatRef shader_fixer$lby) {
-        Utils.DisableFullBrightness(shader_fixer$lbx.get(), shader_fixer$lby.get());
+    private static void renderGapFlash2(long lastShot, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 
     @Inject(method = "renderMuzzleFlash(JID)V", at = @At(value = "HEAD"), remap = false)
-    private static void renderMuzzleFlash(long lastShot, int duration, double l, CallbackInfo ci,
-        @Share("shader_fixer$lbx2") LocalFloatRef shader_fixer$lbx2,
-        @Share("shader_fixer$lby2") LocalFloatRef shader_fixer$lby2) {
-        shader_fixer$lbx2.set(Utils.GetLastBrightnessX());
-        shader_fixer$lby2.set(Utils.GetLastBrightnessY());
-        Utils.EnableFullBrightness();
+    private static void renderMuzzleFlash(long lastShot, int duration, double l, CallbackInfo ci) {
+        Utils.BrightnessUtils.enableFullBrightness();
     }
 
     @Inject(method = "renderMuzzleFlash(JID)V", at = @At(value = "TAIL"), remap = false)
-    private static void renderMuzzleFlash2(long lastShot, int duration, double l, CallbackInfo ci,
-        @Share("shader_fixer$lbx2") LocalFloatRef shader_fixer$lbx2,
-        @Share("shader_fixer$lby2") LocalFloatRef shader_fixer$lby2) {
-        Utils.DisableFullBrightness(shader_fixer$lbx2.get(), shader_fixer$lby2.get());
+    private static void renderMuzzleFlash2(long lastShot, int duration, double l, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 
     @Shadow

@@ -18,7 +18,7 @@ public class MixinRenderEntityDart {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     protected void renderWire(Tessellator tessellator, double x, double y, double z, double X, double Y, double Z,
         double A, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
 }

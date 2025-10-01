@@ -19,6 +19,6 @@ public abstract class MixinRenderGrappleRope extends Render {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     public void renderCable(EntityGrappleRope cable, double x, double y, double z, float f, float partialTicks,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

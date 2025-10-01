@@ -24,6 +24,6 @@ public class MixinTileEntityForceFieldNodeRenderer {
             to = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;draw()I", ordinal = 1)),
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     public void renderAModelAt(TileEntityForceFieldNode tile, double x, double y, double z, float f, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

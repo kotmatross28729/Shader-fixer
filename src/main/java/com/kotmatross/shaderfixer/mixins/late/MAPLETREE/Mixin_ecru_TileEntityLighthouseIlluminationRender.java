@@ -18,7 +18,7 @@ public class Mixin_ecru_TileEntityLighthouseIlluminationRender {
     @Inject(method = "renderIllumination3", at = @At(value = "HEAD"), remap = false)
     protected void renderIllumination3(TileEntity par1TileEntity, float ti, double i, double j, double k,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
 }

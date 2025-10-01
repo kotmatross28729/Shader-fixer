@@ -16,6 +16,6 @@ public class MixinMCH_GuiTargetMarker {
         method = "drawMark",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     private void drawMark(CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

@@ -18,6 +18,6 @@ public class MixinRenderFlail {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     protected void renderFlail(EntityFlail entityflail, double d, double d1, double d2, float f, float f1,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

@@ -22,6 +22,6 @@ public class MixinRenderPumpjack {
             shift = At.Shift.AFTER),
         remap = false)
     public void func_147500_a(TileEntity tileEntity, double x, double y, double z, float f, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

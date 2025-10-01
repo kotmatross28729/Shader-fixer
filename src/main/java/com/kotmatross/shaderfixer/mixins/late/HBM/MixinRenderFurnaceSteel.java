@@ -20,6 +20,6 @@ public class MixinRenderFurnaceSteel {
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
             shift = At.Shift.BEFORE))
     private void func_147500_a(TileEntity tileEntity, double x, double y, double z, float f, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

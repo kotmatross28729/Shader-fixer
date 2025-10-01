@@ -24,7 +24,7 @@ public class MixinBeamPronter_SPACE {
     private static void prontBeam(Vec3 skeleton, BeamPronter.EnumWaveType wave, BeamPronter.EnumBeamType beam,
         int outerColor, int innerColor, int start, int segments, float size, int layers, float thickness, float alpha,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     // Fix alpha > 1

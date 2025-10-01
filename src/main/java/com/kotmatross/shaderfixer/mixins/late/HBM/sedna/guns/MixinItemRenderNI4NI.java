@@ -19,7 +19,7 @@ public class MixinItemRenderNI4NI {
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", shift = At.Shift.AFTER),
         remap = false)
     public void fix(ItemStack stack, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(
@@ -27,7 +27,7 @@ public class MixinItemRenderNI4NI {
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", shift = At.Shift.AFTER),
         remap = false)
     public void fix(ItemStack stack, IItemRenderer.ItemRenderType type, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
 }

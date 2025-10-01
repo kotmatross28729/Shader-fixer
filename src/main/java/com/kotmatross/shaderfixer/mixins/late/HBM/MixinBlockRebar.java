@@ -20,7 +20,7 @@ public class MixinBlockRebar {
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
             shift = At.Shift.BEFORE))
     private static void renderRebar(List tiles, float interp, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
 }

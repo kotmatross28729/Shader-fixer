@@ -31,8 +31,8 @@ public class MixinRenderMachineForceField {
     public void generateSpherePR(int l, int s, float rad, int hex, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
         GL11.glDepthMask(false);
-        shader_fixer$program.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
+        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram();
     }
 
     @Inject(
@@ -45,16 +45,29 @@ public class MixinRenderMachineForceField {
         remap = false)
     public void generateSpherePRE(int l, int s, float rad, int hex, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.GLUseProgram(shader_fixer$program.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
         GL11.glDepthMask(true);
     }
 
     @Inject(
         method = "generateSphere",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
+            shift = At.Shift.BEFORE))
     public void generateSphere(int l, int s, float rad, int hex, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(
+        method = "generateSphere",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
+            shift = At.Shift.AFTER))
+    public void generateSphere22(int l, int s, float rad, int hex, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 
     @Inject(
@@ -68,8 +81,8 @@ public class MixinRenderMachineForceField {
     public void generateSpherePR2(int l, int s, float rad, int hex, CallbackInfo ci,
         @Share("shader_fixer$program2") LocalIntRef shader_fixer$program2) {
         GL11.glDepthMask(false);
-        shader_fixer$program2.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
+        shader_fixer$program2.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram();
     }
 
     @Inject(
@@ -82,16 +95,29 @@ public class MixinRenderMachineForceField {
         remap = false)
     public void generateSpherePRE2(int l, int s, float rad, int hex, CallbackInfo ci,
         @Share("shader_fixer$program2") LocalIntRef shader_fixer$program2) {
-        Utils.GLUseProgram(shader_fixer$program2.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$program2.get());
         GL11.glDepthMask(true);
     }
 
     @Inject(
         method = "generateSphere2",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
+            shift = At.Shift.BEFORE))
     public void generateSphere2(int l, int s, float rad, int hex, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(
+        method = "generateSphere2",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
+            shift = At.Shift.AFTER))
+    public void generateSphere222(int l, int s, float rad, int hex, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 
     @Inject(

@@ -30,7 +30,7 @@ public class MixinRenderStage {
         remap = false)
     public void begin$fix(RetroGL.RetroTessellator buf, CallbackInfo ci) {
         // glIsEnabled is quite slow, but shouldn't be a problem with GLStateManager (I hope)
-        if (!GL11.glIsEnabled(GL11.GL_TEXTURE_2D)) Utils.Fix();
+        if (!GL11.glIsEnabled(GL11.GL_TEXTURE_2D)) Utils.fix();
     }
 
     @Inject(method = "end", at = @At(value = "HEAD"), remap = false)

@@ -16,20 +16,35 @@ public class MixinRenderCore {
 
     @Inject(method = "renderStandby", at = @At(value = "HEAD"), remap = false)
     public void renderStandby(double x, double y, double z, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(method = "renderStandby", at = @At(value = "TAIL"), remap = false)
+    public void renderStandby2(double x, double y, double z, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 
     @Inject(method = "renderOrb", at = @At(value = "HEAD"), remap = false)
     public void renderOrb(TileEntityCore tile, double x, double y, double z, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(method = "renderOrb", at = @At(value = "TAIL"), remap = false)
+    public void renderOrb2(TileEntityCore tile, double x, double y, double z, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 
     @Inject(method = "renderFlare", at = @At(value = "HEAD"), remap = false)
     public void renderFlare(TileEntityCore core, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(method = "renderFlare", at = @At(value = "TAIL"), remap = false)
+    public void renderFlare2(TileEntityCore core, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 
     @Inject(
@@ -40,8 +55,8 @@ public class MixinRenderCore {
             shift = At.Shift.BEFORE))
     public void renderFlarePR(TileEntityCore core, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
+        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram();
     }
 
     @Inject(
@@ -52,7 +67,7 @@ public class MixinRenderCore {
             shift = At.Shift.AFTER))
     public void renderFlarePRE(TileEntityCore core, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.GLUseProgram(shader_fixer$program.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
     }
 
 }

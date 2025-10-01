@@ -23,6 +23,6 @@ public class MixinTileEntityPlasmaExplosionRenderer {
         remap = false)
     public void renderAModelAt(TileEntityPlasmaExplosion tile, double d, double d1, double d2, float f,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

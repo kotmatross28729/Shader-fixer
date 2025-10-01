@@ -16,11 +16,25 @@ public class MixinRenderEnergyBolt {
 
     @Inject(
         method = "renderBolt",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
+            shift = At.Shift.BEFORE))
     public void renderBolt(EntityEnergyBolt entity, double x, double y, double z, float f, float partialTicks,
         CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(
+        method = "renderBolt",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
+            shift = At.Shift.AFTER))
+    public void renderBolt2(EntityEnergyBolt entity, double x, double y, double z, float f, float partialTicks,
+        CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 
     @Inject(
@@ -31,19 +45,20 @@ public class MixinRenderEnergyBolt {
             shift = At.Shift.BEFORE))
     public void renderBolt_PF(EntityEnergyBolt entity, double x, double y, double z, float f, float partialTicks,
         CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram(); // And this doesn't work with opt*fine, great, now we don't have a single stable
-                                     // shader loader
+        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram(); // And this doesn't work with opt*fine, great, now we don't have a
+                                                  // single stable
+        // shader loader
     }
 
     @Inject(
         method = "renderBolt",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
+            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
             shift = At.Shift.AFTER))
     public void renderBolt_PFE(EntityEnergyBolt entity, double x, double y, double z, float f, float partialTicks,
         CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.GLUseProgram(shader_fixer$program.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
     }
 }

@@ -14,6 +14,6 @@ public class MixinNixieTubeDescriptor {
 
     @Inject(method = "draw", at = @At(value = "HEAD"), remap = false)
     private void draw(CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

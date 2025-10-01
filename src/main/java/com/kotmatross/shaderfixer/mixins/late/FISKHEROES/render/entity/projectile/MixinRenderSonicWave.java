@@ -19,6 +19,6 @@ public abstract class MixinRenderSonicWave extends Render {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     public void render(EntitySonicWave entity, double x, double y, double z, float f, float partialTicks,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

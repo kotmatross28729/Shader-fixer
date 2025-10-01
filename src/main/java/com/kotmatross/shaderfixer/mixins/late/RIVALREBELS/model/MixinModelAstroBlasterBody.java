@@ -14,7 +14,6 @@ public class MixinModelAstroBlasterBody {
 
     @Inject(method = "render*", at = @At(value = "HEAD"), remap = false)
     public void render(float size, float red, float green, float blue, float alpha, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.fix();
     }
 }

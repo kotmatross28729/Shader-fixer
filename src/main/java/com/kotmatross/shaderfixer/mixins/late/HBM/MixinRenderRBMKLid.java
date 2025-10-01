@@ -20,10 +20,23 @@ public class MixinRenderRBMKLid {
 
     @Inject(
         method = "func_147500_a",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
+            shift = At.Shift.BEFORE))
     public void func_147500_a(TileEntity te, double x, double y, double z, float i, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(
+        method = "func_147500_a",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
+            shift = At.Shift.AFTER))
+    public void func_147500_a2(TileEntity te, double x, double y, double z, float i, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 
     // Make the effect much brighter (hard to see with Complementary Shaders)
@@ -40,8 +53,8 @@ public class MixinRenderRBMKLid {
             shift = At.Shift.BEFORE))
     public void func_147500_aPR(TileEntity te, double x, double y, double z, float i, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
+        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram();
         GL11.glDepthMask(false);
     }
 
@@ -53,7 +66,7 @@ public class MixinRenderRBMKLid {
             shift = At.Shift.AFTER))
     public void func_147500_aPRE(TileEntity te, double x, double y, double z, float i, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.GLUseProgram(shader_fixer$program.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
         GL11.glDepthMask(true);
     }
 

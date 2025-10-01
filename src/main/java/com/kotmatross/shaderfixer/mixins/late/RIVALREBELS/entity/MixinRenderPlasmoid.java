@@ -24,6 +24,6 @@ public class MixinRenderPlasmoid {
         remap = false)
     public void renderPlasmoid(EntityPlasmoid e, double x, double y, double z, float var8, float var9,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

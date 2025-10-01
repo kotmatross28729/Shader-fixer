@@ -34,7 +34,7 @@ public class MixinRenderSiegeCraft {
             shift = At.Shift.BEFORE),
         remap = false)
     public void func_76986_a(Entity entity, double x, double y, double z, float f0, float f1, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(

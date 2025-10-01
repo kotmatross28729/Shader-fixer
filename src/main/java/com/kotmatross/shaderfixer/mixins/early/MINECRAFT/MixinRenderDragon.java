@@ -19,6 +19,6 @@ public abstract class MixinRenderDragon {
         method = "renderEquippedItems",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     protected void fixDragonDeathBeamsRender(EntityDragon p_77029_1_, float p_77029_2_, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

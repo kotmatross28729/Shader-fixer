@@ -15,9 +15,23 @@ public abstract class MixinRenderSuitDatabase extends TileEntitySpecialRenderer 
 
     @Inject(
         method = "render",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
+            shift = At.Shift.BEFORE))
     public void render(TileEntitySuitDatabase tile, double x, double y, double z, float partialTicks, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(
+        method = "render",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
+            shift = At.Shift.AFTER))
+    public void render2(TileEntitySuitDatabase tile, double x, double y, double z, float partialTicks,
+        CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 }

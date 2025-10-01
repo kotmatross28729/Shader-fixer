@@ -16,7 +16,7 @@ public class MixinSHRenderHooks {
     @Inject(method = "drawLightningLine*", at = @At(value = "HEAD"), remap = false)
     private static void drawLightningLine(Vec3 start, Vec3 end, float lineWidth, float innerLineWidth, Vec3 color,
         float scale, float alphaStart, float alphaEnd, boolean ignoreOld, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(
@@ -24,13 +24,13 @@ public class MixinSHRenderHooks {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     private static void drawUntexturedRectInternal(float x, float y, float width, float height, float zLevel, int color,
         int alpha, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(
         method = "drawLoadingSquares",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     private static void drawLoadingSquares(float x, float y, float width, float height, float zLevel, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

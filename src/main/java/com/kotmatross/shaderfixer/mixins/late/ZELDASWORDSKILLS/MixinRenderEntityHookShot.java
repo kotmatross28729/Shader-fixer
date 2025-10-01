@@ -18,6 +18,6 @@ public class MixinRenderEntityHookShot {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     protected void renderLeash(EntityHookShot hookshot, double x, double y, double z, float yaw, float partialTick,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

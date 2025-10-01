@@ -22,7 +22,7 @@ public class MixinStateRender {
     @Inject(method = "drawLoading", at = @At(value = "HEAD"), remap = false)
     private static void drawLoading(final @Nonnull Progress progress, final @Nonnull StateRender.LoadingCircle type,
         final @Nonnull StateRender.LoadingCircleType speed, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(method = "drawMessage", at = @At(value = "HEAD"), remap = false)

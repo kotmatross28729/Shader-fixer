@@ -18,6 +18,6 @@ public class MixinParticleSpark {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     public void func_70539_a(Tessellator tess, float interp, float x, float y, float z, float tx, float tz,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

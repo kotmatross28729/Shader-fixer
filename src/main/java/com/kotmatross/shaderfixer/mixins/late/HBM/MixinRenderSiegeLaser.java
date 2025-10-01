@@ -14,7 +14,12 @@ public class MixinRenderSiegeLaser {
 
     @Inject(method = "renderDart", at = @At(value = "HEAD"), remap = false)
     private void renderDart(EntitySiegeLaser laser, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(method = "renderDart", at = @At(value = "TAIL"), remap = false)
+    private void renderDar2(EntitySiegeLaser laser, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 }

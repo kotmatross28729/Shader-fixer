@@ -15,9 +15,22 @@ public class MixinRenderBossDragon {
 
     @Inject(
         method = "renderDragonDying",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
+            shift = At.Shift.BEFORE))
     protected void renderDragonDying(EntityBossDragon dragon, float partialTickTime, CallbackInfo ci) {
-        Utils.Fix();
-        Utils.EnableFullBrightness();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(
+        method = "renderDragonDying",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
+            shift = At.Shift.AFTER))
+    protected void renderDragonDying2(EntityBossDragon dragon, float partialTickTime, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 }

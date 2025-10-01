@@ -18,13 +18,13 @@ public class Mixin_ecru_TileEntitySLightRender {
     @Inject(method = "renderIllumination", at = @At(value = "HEAD"), remap = false)
     protected void renderIllumination(TileEntity par1TileEntity, float power, double i, double j, double k,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(method = "renderIllumination2", at = @At(value = "HEAD"), remap = false)
     protected void renderIllumination2(TileEntity par1TileEntity, float power, double i, double j, double k,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
 }

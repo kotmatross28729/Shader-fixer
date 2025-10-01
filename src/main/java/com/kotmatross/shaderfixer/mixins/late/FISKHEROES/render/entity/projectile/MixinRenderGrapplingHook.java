@@ -19,6 +19,6 @@ public abstract class MixinRenderGrapplingHook extends Render {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     public void render(AbstractEntityGrapplingHook entity, double x, double y, double z, float f, float partialTicks,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

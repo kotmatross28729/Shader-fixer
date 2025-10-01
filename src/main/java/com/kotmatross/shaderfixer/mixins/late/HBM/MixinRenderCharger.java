@@ -24,7 +24,7 @@ public abstract class MixinRenderCharger extends TileEntitySpecialRenderer {
             shift = At.Shift.BEFORE),
         remap = false)
     private void func_147500_a(TileEntity tile, double x, double y, double z, float interp, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(

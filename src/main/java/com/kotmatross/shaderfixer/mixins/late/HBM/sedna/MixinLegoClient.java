@@ -19,7 +19,7 @@ public class MixinLegoClient {
         remap = false)
     private static void renderBulletStandard(Tessellator tess, int dark, int light, double length, double widthF,
         double widthB, boolean fullbright, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(method = "drawLineSegment", at = @At(value = "HEAD"), remap = false)

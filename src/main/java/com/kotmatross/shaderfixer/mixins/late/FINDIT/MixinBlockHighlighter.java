@@ -18,7 +18,7 @@ public class MixinBlockHighlighter {
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 1),
         remap = false)
     public void renderHighlightedBlock(RenderWorldLastEvent event, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
 }

@@ -25,8 +25,8 @@ public class MixinRenderDeathBlast {
         remap = false)
     private void func_76986_aPR(Entity entity, double x, double y, double z, float p_76986_8_, float p_76986_9_,
         CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
+        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram();
     }
 
     @Inject(
@@ -39,19 +39,25 @@ public class MixinRenderDeathBlast {
         remap = false)
     private void func_76986_aPRE(Entity entity, double x, double y, double z, float p_76986_8_, float p_76986_9_,
         CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.GLUseProgram(shader_fixer$program.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
     }
 
     @Inject(method = "func_76986_a", at = @At(value = "HEAD"), remap = false)
     public void func_76986_a(Entity entity, double x, double y, double z, float p_76986_8_, float p_76986_9_,
         CallbackInfo ci) {
-        Utils.Fix();
-        Utils.EnableFullBrightness();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(method = "func_76986_a", at = @At(value = "TAIL"), remap = false)
+    public void func_76986_a2(Entity entity, double x, double y, double z, float p_76986_8_, float p_76986_9_,
+        CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 
     @Inject(method = "renderOrb", at = @At(value = "HEAD"), remap = false)
     public void renderOrb(Entity entity, double x, double y, double z, float p_76986_8_, float p_76986_9_,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

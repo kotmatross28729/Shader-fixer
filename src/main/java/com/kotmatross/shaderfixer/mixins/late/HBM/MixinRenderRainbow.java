@@ -16,7 +16,13 @@ public class MixinRenderRainbow {
     @Inject(method = "func_76986_a", at = @At(value = "HEAD"), remap = false)
     public void func_76986_a(Entity rocket, double x, double y, double z, float p_76986_8_, float p_76986_9_,
         CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(method = "func_76986_a", at = @At(value = "TAIL"), remap = false)
+    public void func_76986_a2(Entity rocket, double x, double y, double z, float p_76986_8_, float p_76986_9_,
+        CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 }

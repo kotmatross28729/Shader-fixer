@@ -26,11 +26,22 @@ public class MixinWorldOverlayRenderer {
 
     @Inject(
         method = "renderMobSpawnOverlay",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
+            shift = BEFORE))
     private static void renderMobSpawnOverlay(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
         CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(
+        method = "renderMobSpawnOverlay",
+        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;draw()I", shift = AFTER))
+    private static void renderMobSpawnOverlay2(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
+        CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 
     @Inject(
@@ -43,8 +54,8 @@ public class MixinWorldOverlayRenderer {
         remap = false)
     private static void renderMobSpawnOverlay$programS(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
         CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
+        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram();
     }
 
     @Inject(
@@ -57,16 +68,27 @@ public class MixinWorldOverlayRenderer {
         remap = false)
     private static void renderMobSpawnOverlay$programE(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
         CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.GLUseProgram(shader_fixer$program.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
     }
 
     @Inject(
         method = "renderChunkBounds",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
+            shift = BEFORE))
     private static void renderChunkBounds(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
         CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(
+        method = "renderChunkBounds",
+        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;draw()I", shift = AFTER))
+    private static void renderChunkBounds2(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
+        CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 
     @Inject(
@@ -79,8 +101,8 @@ public class MixinWorldOverlayRenderer {
         remap = false)
     private static void renderChunkBounds$programS(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
         CallbackInfo ci, @Share("shader_fixer$program2") LocalIntRef shader_fixer$program2) {
-        shader_fixer$program2.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
+        shader_fixer$program2.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram();
     }
 
     @Inject(
@@ -93,7 +115,7 @@ public class MixinWorldOverlayRenderer {
         remap = false)
     private static void renderChunkBounds$programE(Entity entity, int intOffsetX, int intOffsetY, int intOffsetZ,
         CallbackInfo ci, @Share("shader_fixer$program2") LocalIntRef shader_fixer$program2) {
-        Utils.GLUseProgram(shader_fixer$program2.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$program2.get());
     }
 
     @Unique

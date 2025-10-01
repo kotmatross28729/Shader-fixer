@@ -16,20 +16,25 @@ public class MixinRendererSchematicGlobal {
 
     @Inject(method = "render", at = @At(value = "HEAD"), remap = false)
     public void render(SchematicWorld schematic, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(method = "render", at = @At(value = "TAIL"), remap = false)
+    public void render2(SchematicWorld schematic, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 
     @Inject(method = "render", at = @At(value = "HEAD"), remap = false)
     public void render$programS(SchematicWorld schematic, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
+        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram();
     }
 
     @Inject(method = "render", at = @At(value = "TAIL"), remap = false)
     public void render$programE(SchematicWorld schematic, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.GLUseProgram(shader_fixer$program.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
     }
 }

@@ -19,6 +19,6 @@ public abstract class MixinRendererLivingEntity extends Render {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     protected void fixNametagRender(EntityLivingBase p_77033_1_, double p_77033_2_, double p_77033_4_,
         double p_77033_6_, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

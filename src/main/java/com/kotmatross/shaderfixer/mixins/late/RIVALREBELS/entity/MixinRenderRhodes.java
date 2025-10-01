@@ -25,7 +25,7 @@ public class MixinRenderRhodes {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
 
     public void renderRhodes(EntityRhodes rhodes, double x, double y, double z, float par8, float tt, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(
@@ -38,7 +38,7 @@ public class MixinRenderRhodes {
 
     public void renderRhodes2(EntityRhodes rhodes, double x, double y, double z, float par8, float tt,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(
@@ -50,6 +50,6 @@ public class MixinRenderRhodes {
         remap = false)
     public void renderRhodes2_5(EntityRhodes rhodes, double x, double y, double z, float par8, float tt,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

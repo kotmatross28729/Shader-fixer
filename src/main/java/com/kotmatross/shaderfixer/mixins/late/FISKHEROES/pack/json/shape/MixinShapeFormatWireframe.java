@@ -14,10 +14,24 @@ public abstract class MixinShapeFormatWireframe implements com.fiskmods.heroes.c
 
     @Inject(
         method = "render",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
+            shift = At.Shift.BEFORE))
     public void render(com.fiskmods.heroes.client.pack.json.shape.JsonShape shape, Entity entity, float mult,
         float ticks, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(
+        method = "render",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
+            shift = At.Shift.AFTER))
+    public void render2(com.fiskmods.heroes.client.pack.json.shape.JsonShape shape, Entity entity, float mult,
+        float ticks, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 }

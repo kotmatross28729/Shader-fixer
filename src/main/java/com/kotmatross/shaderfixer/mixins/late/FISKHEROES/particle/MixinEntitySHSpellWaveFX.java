@@ -23,7 +23,7 @@ public class MixinEntitySHSpellWaveFX {
             ordinal = 0))
     public void func_70539_a(Tessellator tessellator, float partialTicks, float f, float f1, float f2, float f3,
         float f4, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(
@@ -35,8 +35,8 @@ public class MixinEntitySHSpellWaveFX {
             shift = At.Shift.BEFORE))
     public void func_70539_a_PF(Tessellator tessellator, float partialTicks, float f, float f1, float f2, float f3,
         float f4, CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
+        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram();
     }
 
     @Inject(
@@ -48,7 +48,7 @@ public class MixinEntitySHSpellWaveFX {
             shift = At.Shift.AFTER))
     public void func_70539_a_PFE(Tessellator tessellator, float partialTicks, float f, float f1, float f2, float f3,
         float f4, CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.GLUseProgram(shader_fixer$program.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
     }
 
 }

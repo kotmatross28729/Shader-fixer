@@ -24,6 +24,6 @@ public class MixinRenderLibrary {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     public void renderModel(float x1, float y1, float z1, float x, float y, float z, float segDist, float radius,
         int steps, float arcRatio, float rvar, float r, float g, float b, float a, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

@@ -26,8 +26,8 @@ public class MixinBeamRendererLaser {
         Vec3 color, float opacity0, float opacity1, float scale0, float scale1, float time, float scale,
         boolean isClientPlayer, boolean isFirstPerson, float partialTicks, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram(); // causes problems with angelica
+        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram(); // causes problems with angelica
     }
 
     @Inject(
@@ -40,6 +40,6 @@ public class MixinBeamRendererLaser {
         Vec3 color, float opacity0, float opacity1, float scale0, float scale1, float time, float scale,
         boolean isClientPlayer, boolean isFirstPerson, float partialTicks, CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.GLUseProgram(shader_fixer$program.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
     }
 }

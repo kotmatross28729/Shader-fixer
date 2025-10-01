@@ -21,13 +21,13 @@ public class MixinClientProxy {
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
             shift = At.Shift.BEFORE))
     public void onRenderName(RenderLivingEvent.Specials.Pre evt, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(method = "renderLivingLabel0", at = @At(value = "HEAD"), remap = false)
     public void renderLivingLabel0(Entity p_147906_1_, String p_147906_2_, double p_147906_3_, double p_147906_5_,
         double p_147906_7_, int p_147906_9_, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
 }

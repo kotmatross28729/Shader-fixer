@@ -18,20 +18,20 @@ public class MixinMCH_HudItem {
         method = "drawRect",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     private static void drawRect(double par0, double par1, double par2, double par3, int par4, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(
         method = "drawLine*",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     private void drawLine(double[] line, int color, int mode, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(
         method = "drawPoints",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     private void drawPoints(ArrayList points, int color, int pointWidth, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

@@ -19,6 +19,6 @@ public abstract class MixinRenderLightningBolt extends Render {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
     public void fixLightningBoltRender(EntityLightningBolt p_76986_1_, double p_76986_2_, double p_76986_4_,
         double p_76986_6_, float p_76986_8_, float p_76986_9_, CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

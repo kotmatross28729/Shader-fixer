@@ -18,6 +18,6 @@ public class MixinParticleSpentCasing {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     public void func_70539_a(Tessellator tessellator, float interp, float x, float y, float z, float tx, float tz,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

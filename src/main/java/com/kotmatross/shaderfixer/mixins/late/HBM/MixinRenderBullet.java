@@ -15,13 +15,23 @@ public class MixinRenderBullet {
 
     @Inject(method = "renderDart", at = @At(value = "HEAD"), remap = false)
     public void renderDart(int style, int eID, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(method = "renderDart", at = @At(value = "TAIL"), remap = false)
+    public void renderDart2(int style, int eID, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 
     @Inject(method = "renderTau", at = @At(value = "HEAD"), remap = false)
     public void renderTau(Entity bullet, int trail, float interp, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(method = "renderTau", at = @At(value = "TAIL"), remap = false)
+    public void renderTau2(Entity bullet, int trail, float interp, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 }

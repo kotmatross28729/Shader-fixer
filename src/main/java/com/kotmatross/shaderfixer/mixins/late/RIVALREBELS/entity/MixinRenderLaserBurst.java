@@ -27,12 +27,12 @@ public class MixinRenderLaserBurst {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"))
     private void renderLaserBurst(EntityLaserBurst ell, double x, double y, double z, float yaw, float pitch,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 
     @Inject(method = "func_76986_a*", at = @At(value = "HEAD"), remap = false)
     private void func_76986_a(Entity entityLaserBurst, double x, double y, double z, float yaw, float pitch,
         CallbackInfo ci) {
-        Utils.Fix();
+        Utils.fix();
     }
 }

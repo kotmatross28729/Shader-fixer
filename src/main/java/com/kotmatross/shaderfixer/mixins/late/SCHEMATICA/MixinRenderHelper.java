@@ -17,40 +17,52 @@ public class MixinRenderHelper {
     @Inject(method = "drawCuboidSurface", at = @At(value = "HEAD"), remap = false)
     private static void drawCuboidSurface(Vector3f zero, Vector3f size, int sides, float red, float green, float blue,
         float alpha, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(method = "drawCuboidSurface", at = @At(value = "TAIL"), remap = false)
+    private static void drawCuboidSurface2(Vector3f zero, Vector3f size, int sides, float red, float green, float blue,
+        float alpha, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 
     @Inject(method = "drawCuboidSurface", at = @At(value = "HEAD"), remap = false)
     private static void drawCuboidSurface$programS(Vector3f zero, Vector3f size, int sides, float red, float green,
         float blue, float alpha, CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
+        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram();
     }
 
     @Inject(method = "drawCuboidSurface", at = @At(value = "TAIL"), remap = false)
     private static void drawCuboidSurface$programE(Vector3f zero, Vector3f size, int sides, float red, float green,
         float blue, float alpha, CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.GLUseProgram(shader_fixer$program.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
     }
 
     @Inject(method = "drawCuboidOutline", at = @At(value = "HEAD"), remap = false)
     private static void drawCuboidOutline(Vector3f zero, Vector3f size, int sides, float red, float green, float blue,
         float alpha, CallbackInfo ci) {
-        Utils.EnableFullBrightness();
-        Utils.Fix();
+        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.fix();
+    }
+
+    @Inject(method = "drawCuboidOutline", at = @At(value = "TAIL"), remap = false)
+    private static void drawCuboidOutline2(Vector3f zero, Vector3f size, int sides, float red, float green, float blue,
+        float alpha, CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
     }
 
     @Inject(method = "drawCuboidOutline", at = @At(value = "HEAD"), remap = false)
     private static void drawCuboidOutline$programS(Vector3f zero, Vector3f size, int sides, float red, float green,
         float blue, float alpha, CallbackInfo ci, @Share("shader_fixer$program2") LocalIntRef shader_fixer$program2) {
-        shader_fixer$program2.set(Utils.GLGetCurrentProgram());
-        Utils.GLUseDefaultProgram();
+        shader_fixer$program2.set(Utils.ProgramUtils.GLGetCurrentProgram());
+        Utils.ProgramUtils.GLUseDefaultProgram();
     }
 
     @Inject(method = "drawCuboidOutline", at = @At(value = "TAIL"), remap = false)
     private static void drawCuboidOutline$programE(Vector3f zero, Vector3f size, int sides, float red, float green,
         float blue, float alpha, CallbackInfo ci, @Share("shader_fixer$program2") LocalIntRef shader_fixer$program2) {
-        Utils.GLUseProgram(shader_fixer$program2.get());
+        Utils.ProgramUtils.GLUseProgram(shader_fixer$program2.get());
     }
 }
