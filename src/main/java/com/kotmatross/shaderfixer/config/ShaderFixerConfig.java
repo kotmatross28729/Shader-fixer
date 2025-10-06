@@ -138,7 +138,6 @@ public class ShaderFixerConfig {
     }
 
     public static boolean NTM_SPACE_DISABLE_PLANET_RENDER;
-    public static boolean FISKHEROES_EXP_PF;
     public static boolean ELN_LIGHT_MIXINS;
     public static boolean FISKHEROES_CPM_COMPAT;
     public static boolean HBM_EXTENDED_HAZARD_DESCRIPTIONS;
@@ -152,12 +151,6 @@ public class ShaderFixerConfig {
             CAT_TWEAKS,
             false,
             "[HBM'S NTM:SPACE] Disables rendering of the planet under the player, at high altitude");
-
-        FISKHEROES_EXP_PF = config.getBoolean(
-            "FISKHEROES_EXP_PF",
-            CAT_TWEAKS,
-            false,
-            "[UNSTABLE] [Fisk's Superheroes] Fixes some things just don't render with Complementary Shaders 5.x.");
 
         FISKHEROES_CPM_COMPAT = config.getBoolean(
             "FISKHEROES_CPM_COMPAT",

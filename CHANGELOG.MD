@@ -1,3 +1,7 @@
+# 4.8
+* **[Fisk's Superheroes]** Fixed some beams not rendering with Complementary Shaders 5.x
+  - No side effects this time!
+
 # 4.7
 
 * **[Hbm's NTM]** Fixed Tesla Crab/Meltdown Elemental turning completely white/green respectively when attacking

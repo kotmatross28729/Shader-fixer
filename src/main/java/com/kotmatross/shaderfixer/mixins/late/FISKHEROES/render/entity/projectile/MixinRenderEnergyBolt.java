@@ -14,6 +14,8 @@ import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 @Mixin(value = RenderEnergyBolt.class, priority = 999)
 public class MixinRenderEnergyBolt {
 
+    // ALPHA FIX???
+
     @Inject(
         method = "renderBolt",
         at = @At(
@@ -46,9 +48,7 @@ public class MixinRenderEnergyBolt {
     public void renderBolt_PF(EntityEnergyBolt entity, double x, double y, double z, float f, float partialTicks,
         CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
         shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
-        Utils.ProgramUtils.GLUseDefaultProgram(); // And this doesn't work with opt*fine, great, now we don't have a
-                                                  // single stable
-        // shader loader
+        Utils.ProgramUtils.GLUseDefaultProgram();
     }
 
     @Inject(

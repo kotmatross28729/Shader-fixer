@@ -57,6 +57,7 @@ public enum LateMixins implements IMixins {
 
     FISKHEROES(new MixinBuilder().addRequiredMod(TargetMods.FISKHEROES)
         .addClientMixins(
+            "FISKHEROES.pack.json.beam.MixinBeamRendererLaser",
             "FISKHEROES.pack.json.beam.MixinBeamRendererLightning",
             "FISKHEROES.pack.json.beam.MixinBeamRendererLine",
             "FISKHEROES.pack.json.shape.MixinShapeFormatCircles",
@@ -249,10 +250,6 @@ public enum LateMixins implements IMixins {
         .addClientMixins("ZELDASWORDSKILLS.MixinRenderEntityWhip", "ZELDASWORDSKILLS.MixinRenderEntityHookShot")),
 
     // TWEAKS
-    FISKHEROES_EXP_PF(new MixinBuilder().addRequiredMod(TargetMods.FISKHEROES)
-        .addClientMixins("FISKHEROES.pack.json.beam.MixinBeamRendererLaser")
-        .setApplyIf(() -> ShaderFixerConfig.FISKHEROES_EXP_PF)),
-
     FISKHEROES_CPM_COMPAT(new MixinBuilder().addRequiredMod(TargetMods.FISKHEROES)
         .addClientMixins("FISKHEROES.CPMCompat.MixinModelBipedMultiLayer")
         .setApplyIf(() -> ShaderFixerConfig.FISKHEROES_CPM_COMPAT)),
