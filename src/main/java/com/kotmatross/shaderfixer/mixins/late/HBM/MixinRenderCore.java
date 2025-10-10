@@ -47,6 +47,8 @@ public class MixinRenderCore {
         Utils.BrightnessUtils.disableFullBrightness();
     }
 
+    // TODO: alpha fix
+
     @Inject(
         method = "renderFlare",
         at = @At(

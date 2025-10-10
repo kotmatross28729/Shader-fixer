@@ -18,6 +18,8 @@ import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 @Mixin(value = RenderRBMKLid.class, priority = 999)
 public class MixinRenderRBMKLid {
 
+    // TODO: alpha fix
+
     @Inject(
         method = "func_147500_a",
         at = @At(

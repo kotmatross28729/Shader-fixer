@@ -18,6 +18,8 @@ import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 @Mixin(value = RenderMachineForceField.class, priority = 999)
 public class MixinRenderMachineForceField {
 
+    // TODO: alpha fix
+
     // WE'RE SO FUCKING BACK
 
     @Inject(

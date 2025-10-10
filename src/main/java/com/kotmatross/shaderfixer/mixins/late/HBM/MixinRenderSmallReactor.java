@@ -16,6 +16,8 @@ import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 @Mixin(value = RenderSmallReactor.class, priority = 999)
 public class MixinRenderSmallReactor {
 
+    // TODO: alpha fix
+
     @Inject(
         method = "func_147500_a",
         at = @At(

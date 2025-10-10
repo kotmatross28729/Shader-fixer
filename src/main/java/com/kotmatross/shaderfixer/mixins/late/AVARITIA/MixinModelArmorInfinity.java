@@ -1,106 +1,179 @@
 package com.kotmatross.shaderfixer.mixins.late.AVARITIA;
 
-import static org.spongepowered.asm.mixin.injection.At.Shift.AFTER;
-import static org.spongepowered.asm.mixin.injection.At.Shift.BEFORE;
+import java.util.Random;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 
+import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Shadow;
 
-import com.kotmatross.shaderfixer.utils.Utils;
-import com.llamalad7.mixinextras.sugar.Share;
-import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
-
+import fox.spiteful.avaritia.render.CosmicRenderShenanigans;
 import fox.spiteful.avaritia.render.ModelArmorInfinity;
+import fox.spiteful.avaritia.render.RainbowHelper;
 
+// ! NOT FIX, JUST FOR TESTING
 @Mixin(value = ModelArmorInfinity.class, priority = 999)
-public class MixinModelArmorInfinity {
-    // !Not working with angelica
+public class MixinModelArmorInfinity extends ModelBiped {
 
-    @Inject(
-        method = "func_78088_a",
-        at = @At(
-            value = "INVOKE",
-            target = "Lfox/spiteful/avaritia/render/CosmicRenderShenanigans;useShader()V",
-            ordinal = 0,
-            shift = BEFORE),
-        remap = false)
-    private void beforeUseShader(Entity entity, float f, float f1, float f2, float f3, float f4, float f5,
-        CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
+    // TODO
+    // TODO
+    // TODO
+    // TODO
+    // TODO
+    // TODO
+    // TODO
+    // TODO
+    // TODO
+    // TODO
+
+    @Shadow
+    public static ResourceLocation eyeTex = new ResourceLocation("avaritia", "textures/models/infinity_armor_eyes.png");
+    @Shadow
+    public static ResourceLocation wingTex = new ResourceLocation(
+        "avaritia",
+        "textures/models/infinity_armor_wing.png");
+    @Shadow
+    public static ResourceLocation wingGlowTex = new ResourceLocation(
+        "avaritia",
+        "textures/models/infinity_armor_wingglow.png");
+
+    @Shadow
+    private Random randy = new Random();
+
+    @Shadow
+    private ModelArmorInfinity.Overlay overlay;
+    @Shadow
+    private ModelArmorInfinity.Overlay invulnOverlay;
+    @Shadow
+    private boolean invulnRender = true;
+
+    @Shadow
+    public boolean legs = false;
+
+    /**
+     * @author TEST ONLY
+     * @reason TEST ONLY
+     */
+    @Overwrite
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        Minecraft mc = Minecraft.getMinecraft();
+        boolean isFlying = entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isFlying
+            && entity.isAirBorne;
+
+        GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
+        GL11.glPolygonOffset(-1.0f, -1.0f);
+
+        super.render(entity, f, f1, f2, f3, f4, f5);
+
+        GL11.glColor4d(1, 1, 1, 1);
+
+        GL11.glDisable(GL11.GL_ALPHA_TEST);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glDepthMask(false);
+
+        CosmicRenderShenanigans.useShader();
+        CosmicRenderShenanigans.bindItemTexture();
+
+        if (this.invulnRender) {
+            GL11.glColor4d(1, 1, 1, 0.2);
+            this.invulnOverlay.render(entity, f, f1, f2, f3, f4, f5); // Player overlay (S)
+        }
+
+        this.overlay.render(entity, f, f1, f2, f3, f4, f5); // Armor overlay (S)
+        CosmicRenderShenanigans.releaseShader();
+
+        GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
+
+        mc.renderEngine.bindTexture(eyeTex);
+        GL11.glDisable(GL11.GL_LIGHTING);
+        mc.entityRenderer.disableLightmap(0.0);
+
+        this.setGems();
+
+        long time = mc.thePlayer.worldObj.getWorldTime();
+        double pulse = Math.sin(time / 10.0) * 0.5 + 0.5;
+        GL11.glColor4d(0.84, 1, 0.95, pulse * pulse * pulse * pulse * pulse * pulse * 0.5);
+
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+        super.render(entity, f, f1, f2, f3, f4, f5); // Light overlay
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+
+        GL11.glDepthMask(true);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glEnable(GL11.GL_ALPHA_TEST);
+
+        if (this.invulnRender) {
+            long frame = time / 3;
+            randy.setSeed(frame * 1723609l);
+            float o = randy.nextFloat() * 6.0f;
+            float[] col = RainbowHelper.HSVtoRGB(o, 1.0f, 1.0f);
+
+            GL11.glColor4d(col[0], col[1], col[2], 1);
+            this.setEyes();
+            super.render(entity, f, f1, f2, f3, f4, f5);
+        }
+
+        if (!CosmicRenderShenanigans.inventoryRender) {
+            mc.entityRenderer.enableLightmap(15.0);
+        }
+        GL11.glEnable(GL11.GL_LIGHTING);
+        GL11.glColor4d(1, 1, 1, 1);
+
+        // WINGS
+        if (isFlying && !CosmicRenderShenanigans.inventoryRender && !this.legs) {
+            this.setWings();
+            mc.renderEngine.bindTexture(wingTex);
+            super.render(entity, f, f1, f2, f3, f4, f5);
+
+            GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
+            GL11.glPolygonOffset(-1.0f, -1.0f);
+
+            CosmicRenderShenanigans.useShader();
+            CosmicRenderShenanigans.bindItemTexture();
+
+            GL11.glDisable(GL11.GL_ALPHA_TEST);
+            GL11.glEnable(GL11.GL_BLEND);
+            GL11.glDepthMask(false);
+            this.overlay.render(entity, f, f1, f2, f3, f4, f5);
+
+            CosmicRenderShenanigans.releaseShader();
+
+            GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
+
+            mc.renderEngine.bindTexture(wingGlowTex);
+            GL11.glDisable(GL11.GL_LIGHTING);
+            mc.entityRenderer.disableLightmap(0.0);
+
+            GL11.glColor4d(0.84, 1, 0.95, pulse * pulse * pulse * pulse * pulse * pulse * 0.5);
+
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+            super.render(entity, f, f1, f2, f3, f4, f5);
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+
+            GL11.glDepthMask(true);
+            GL11.glDisable(GL11.GL_BLEND);
+            GL11.glEnable(GL11.GL_ALPHA_TEST);
+            if (!CosmicRenderShenanigans.inventoryRender) {
+                mc.entityRenderer.enableLightmap(0.0);
+            }
+            GL11.glEnable(GL11.GL_LIGHTING);
+            GL11.glColor4d(1, 1, 1, 1);
+        }
     }
 
-    @Inject(
-        method = "func_78088_a",
-        at = @At(
-            value = "INVOKE",
-            target = "Lfox/spiteful/avaritia/render/CosmicRenderShenanigans;releaseShader()V",
-            ordinal = 0,
-            shift = AFTER),
-        remap = false)
-    private void afterUseShader(Entity entity, float f, float f1, float f2, float f3, float f4, float f5,
-        CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
-        Utils.BrightnessUtils.enableFullBrightness();
-    }
+    @Shadow
+    public void setEyes() {}
 
-    @Inject(
-        method = "func_78088_a",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glColor4d(DDDD)V", ordinal = 4, shift = AFTER),
-        remap = false)
-    private void releaseBrightness(Entity entity, float f, float f1, float f2, float f3, float f4, float f5,
-        CallbackInfo ci) {
-        Utils.BrightnessUtils.disableFullBrightness();
-    }
+    @Shadow
+    public void setGems() {}
 
-    @Inject(
-        method = "func_78088_a",
-        at = @At(
-            value = "INVOKE",
-            target = "Lfox/spiteful/avaritia/render/CosmicRenderShenanigans;useShader()V",
-            ordinal = 1,
-            shift = BEFORE),
-        remap = false)
-    private void beforeUseShader2(Entity entity, float f, float f1, float f2, float f3, float f4, float f5,
-        CallbackInfo ci, @Share("shader_fixer$program2") LocalIntRef shader_fixer$program2) {
-        shader_fixer$program2.set(Utils.ProgramUtils.GLGetCurrentProgram());
-    }
+    @Shadow
+    public void setWings() {}
 
-    @Inject(
-        method = "func_78088_a",
-        at = @At(
-            value = "INVOKE",
-            target = "Lfox/spiteful/avaritia/render/CosmicRenderShenanigans;releaseShader()V",
-            ordinal = 1,
-            shift = AFTER),
-        remap = false)
-    private void afterUseShader2(Entity entity, float f, float f1, float f2, float f3, float f4, float f5,
-        CallbackInfo ci, @Share("shader_fixer$program2") LocalIntRef shader_fixer$program2) {
-        Utils.ProgramUtils.GLUseProgram(shader_fixer$program2.get());
-    }
-
-    @Inject(
-        method = "func_78088_a",
-        at = @At(
-            value = "INVOKE",
-            target = "Lfox/spiteful/avaritia/render/ModelArmorInfinity;setWings()V",
-            ordinal = 0,
-            shift = BEFORE),
-        remap = false)
-    private void WINGSBrightness(Entity entity, float f, float f1, float f2, float f3, float f4, float f5,
-        CallbackInfo ci) {
-        Utils.BrightnessUtils.enableFullBrightness();
-    }
-
-    @Inject(
-        method = "func_78088_a",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glColor4d(DDDD)V", ordinal = 6, shift = AFTER),
-        remap = false)
-    private void releaseBrightness2(Entity entity, float f, float f1, float f2, float f3, float f4, float f5,
-        CallbackInfo ci) {
-        Utils.BrightnessUtils.disableFullBrightness();
-    }
 }

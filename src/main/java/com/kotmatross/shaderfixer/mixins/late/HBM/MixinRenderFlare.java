@@ -15,6 +15,8 @@ import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 @Mixin(value = RenderFlare.class, priority = 999)
 public class MixinRenderFlare {
 
+    // TODO: alpha fix
+
     @Inject(
         method = "func_76986_a",
         at = @At(

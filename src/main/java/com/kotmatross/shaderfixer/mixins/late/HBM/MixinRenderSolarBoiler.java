@@ -15,6 +15,8 @@ import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 @Mixin(value = RenderSolarBoiler.class, priority = 999)
 public class MixinRenderSolarBoiler {
 
+    // TODO: alpha fix
+
     @Inject(
         method = "func_147500_a",
         at = @At(

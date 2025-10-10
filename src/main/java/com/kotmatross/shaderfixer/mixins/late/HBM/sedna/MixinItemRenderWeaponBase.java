@@ -28,6 +28,8 @@ public class MixinItemRenderWeaponBase implements Vibe, NTMRenderGetters {
         Utils.fix();
     }
 
+    // TODO: alpha fix
+
     @Inject(
         method = "renderSmokeNodes",
         at = @At(

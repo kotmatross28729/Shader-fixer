@@ -5,12 +5,13 @@ import net.minecraft.client.renderer.Tessellator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.fiskmods.heroes.client.particle.EntitySHSpellWaveFX;
 import com.kotmatross.shaderfixer.utils.Utils;
-import com.llamalad7.mixinextras.sugar.Share;
-import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
+import com.llamalad7.mixinextras.sugar.Local;
+import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 
 @Mixin(value = EntitySHSpellWaveFX.class, priority = 999)
 public class MixinEntitySHSpellWaveFX {
@@ -26,29 +27,12 @@ public class MixinEntitySHSpellWaveFX {
         Utils.fix();
     }
 
-    @Inject(
+    @ModifyArg(
         method = "func_70539_a",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
-            ordinal = 0,
-            shift = At.Shift.BEFORE))
-    public void func_70539_a_PF(Tessellator tessellator, float partialTicks, float f, float f1, float f2, float f3,
-        float f4, CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
-        Utils.ProgramUtils.GLUseDefaultProgram();
-    }
-
-    @Inject(
-        method = "func_70539_a",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-            ordinal = 1,
-            shift = At.Shift.AFTER))
-    public void func_70539_a_PFE(Tessellator tessellator, float partialTicks, float f, float f1, float f2, float f3,
-        float f4, CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
+        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;setColorRGBA_F(FFFF)V"),
+        index = 3)
+    private float alphaFix(float alpha, @Local(ordinal = 10) LocalFloatRef opacity) {
+        return alpha == 0 ? opacity.get() : alpha * 3;
     }
 
 }

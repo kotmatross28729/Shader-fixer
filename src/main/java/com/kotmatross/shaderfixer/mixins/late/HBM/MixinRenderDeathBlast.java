@@ -15,6 +15,8 @@ import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 @Mixin(value = RenderDeathBlast.class, priority = 999)
 public class MixinRenderDeathBlast {
 
+    // TODO: alpha fix
+
     @Inject(
         method = "func_76986_a",
         at = @At(

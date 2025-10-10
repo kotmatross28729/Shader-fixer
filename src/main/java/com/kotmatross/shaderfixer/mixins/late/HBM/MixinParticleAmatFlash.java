@@ -5,12 +5,13 @@ import net.minecraft.client.renderer.Tessellator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.hbm.particle.ParticleAmatFlash;
 import com.kotmatross.shaderfixer.utils.Utils;
-import com.llamalad7.mixinextras.sugar.Share;
-import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
+import com.llamalad7.mixinextras.sugar.Local;
+import com.llamalad7.mixinextras.sugar.ref.LocalDoubleRef;
 
 @Mixin(value = ParticleAmatFlash.class, priority = 999)
 public class MixinParticleAmatFlash {
@@ -24,27 +25,12 @@ public class MixinParticleAmatFlash {
         Utils.fix();
     }
 
-    @Inject(
+    @ModifyArg(
         method = "func_70539_a",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
-            shift = At.Shift.BEFORE))
-    public void func_70539_aPR(Tessellator tess, float interp, float x, float y, float z, float tx, float tz,
-        CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
-        Utils.ProgramUtils.GLUseDefaultProgram();
-    }
-
-    @Inject(
-        method = "func_70539_a",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-            shift = At.Shift.AFTER))
-    public void func_70539_aPRE(Tessellator tess, float interp, float x, float y, float z, float tx, float tz,
-        CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
+        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;setColorRGBA_F(FFFF)V"),
+        index = 3)
+    private float alphaFix(float alpha, @Local(ordinal = 4) LocalDoubleRef inverse) {
+        return alpha == 0 ? (float) inverse.get() / 2F : alpha * 10F;
     }
 
     @Inject(
@@ -72,4 +58,5 @@ public class MixinParticleAmatFlash {
         CallbackInfo ci) {
         Utils.BrightnessUtils.disableFullBrightness();
     }
+
 }

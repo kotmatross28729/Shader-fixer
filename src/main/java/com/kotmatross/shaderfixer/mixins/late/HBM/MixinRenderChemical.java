@@ -14,6 +14,8 @@ import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 @Mixin(value = RenderChemical.class, priority = 999)
 public class MixinRenderChemical {
 
+    // TODO: alpha fix
+
     @Inject(
         method = "renderAmatBeam",
         at = @At(

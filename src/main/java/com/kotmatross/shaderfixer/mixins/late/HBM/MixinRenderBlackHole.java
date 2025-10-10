@@ -6,13 +6,12 @@ import net.minecraft.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.hbm.render.entity.effect.RenderBlackHole;
 import com.kotmatross.shaderfixer.utils.Utils;
 import com.llamalad7.mixinextras.sugar.Local;
-import com.llamalad7.mixinextras.sugar.Share;
-import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 
 @Mixin(value = RenderBlackHole.class, priority = 999)
 public class MixinRenderBlackHole {
@@ -59,32 +58,22 @@ public class MixinRenderBlackHole {
         tess.setNormal(0.0F, 1.0F, 0.0F);
     }
 
-    @Inject(
+    @ModifyArg(
         method = "renderJets",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"))
-    public void renderJetsPR(Entity entity, float interp, CallbackInfo ci,
-        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
-        Utils.ProgramUtils.GLUseDefaultProgram();
+        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;setColorRGBA_F(FFFF)V"),
+        index = 3)
+    private float alphaFix(float alpha) {
+        return alpha == 0 ? 0.01F : alpha * 2F; // 0.01 SOMEHOW works there, strange
     }
 
     @Inject(
         method = "renderJets",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-            shift = At.Shift.AFTER))
-    public void renderJetsPRE(Entity entity, float interp, CallbackInfo ci,
-        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
-    }
-
-    @Inject(
-        method = "renderJets",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
-            shift = At.Shift.BEFORE))
+            target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V",
+            ordinal = 1,
+            shift = At.Shift.AFTER),
+        remap = false)
     public void renderJets(Entity entity, float interp, CallbackInfo ci) {
         Utils.BrightnessUtils.enableFullBrightness();
         Utils.fix();
@@ -94,8 +83,10 @@ public class MixinRenderBlackHole {
         method = "renderJets",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-            shift = At.Shift.AFTER))
+            target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V",
+            ordinal = 1,
+            shift = At.Shift.BEFORE),
+        remap = false)
     public void renderJets2(Entity entity, float interp, CallbackInfo ci) {
         Utils.BrightnessUtils.disableFullBrightness();
     }

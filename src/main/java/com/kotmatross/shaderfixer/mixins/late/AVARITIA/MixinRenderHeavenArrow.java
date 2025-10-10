@@ -13,16 +13,15 @@ import fox.spiteful.avaritia.render.RenderHeavenArrow;
 
 @Mixin(value = RenderHeavenArrow.class, priority = 999)
 public class MixinRenderHeavenArrow {
-    // !Not working with angelica
 
     @Inject(method = "func_76986_a", at = @At(value = "HEAD"), remap = false)
-    private void beforeUseShader2(EntityArrow p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_,
+    private void func_76986_a(EntityArrow p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_,
         float p_76986_8_, float p_76986_9_, CallbackInfo ci) {
         Utils.BrightnessUtils.enableFullBrightness();
     }
 
     @Inject(method = "func_76986_a", at = @At(value = "TAIL"), remap = false)
-    private void afterUseShader2(EntityArrow p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_,
+    private void func_76986_a2(EntityArrow p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_,
         float p_76986_8_, float p_76986_9_, CallbackInfo ci) {
         Utils.BrightnessUtils.disableFullBrightness();
     }

@@ -13,6 +13,8 @@ import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 @Mixin(value = RenderSpear.class, priority = 999)
 public class MixinRenderSpear {
 
+    // TODO: alpha fix
+
     @Inject(
         method = "renderFlash",
         at = @At(
