@@ -1,6 +1,10 @@
 # 4.8
 * **[Fisk's Superheroes]** Fixed some beams not rendering with Complementary Shaders 5.x
   - No side effects this time!
+* **[Hbm's NTM]** Many "program fixes" have been moved to "alpha fixes"
+  - Should improve performance a bit and also remove minor artifacts
+* **[Hbm's NTM]** Fixed bullets being black with shaders
+* **[Main]** Fixed ~~peak mojang coding~~ graphical artifacts when rendering nicknames with shaders
 
 # 4.7
 

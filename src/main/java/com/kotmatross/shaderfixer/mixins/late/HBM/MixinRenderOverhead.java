@@ -8,9 +8,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.hbm.render.util.RenderOverhead;
 import com.kotmatross.shaderfixer.utils.Utils;
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 
 @Mixin(value = RenderOverhead.class, priority = 999)
 public class MixinRenderOverhead {
+
+    @WrapWithCondition(
+        method = "drawTag(FDLjava/lang/String;DDDIZII)V",
+        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glNormal3f(FFF)V"),
+        remap = false)
+    private static boolean disableNormalsSetup(float nx, float ny, float nz) {
+        return false; // Peak mjoang coding v2
+    }
 
     @Inject(method = "drawTag(FDLjava/lang/String;DDDIZII)V", at = @At(value = "HEAD"), remap = false)
     private static void drawTag(float offset, double distsq, String name, double x, double y, double z, int dist,
@@ -44,7 +53,6 @@ public class MixinRenderOverhead {
     /**
      * Fixes GL state leak with angelica
      */
-
     @Inject(
         method = "drawTag(FDLjava/lang/String;DDDIZII)V",
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glPushMatrix()V", shift = At.Shift.AFTER),

@@ -5,41 +5,22 @@ import net.minecraft.tileentity.TileEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.hbm.render.tileentity.RenderSolarBoiler;
+import com.kotmatross.shaderfixer.utils.AngelicaUtils;
 import com.kotmatross.shaderfixer.utils.Utils;
-import com.llamalad7.mixinextras.sugar.Share;
-import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 
 @Mixin(value = RenderSolarBoiler.class, priority = 999)
 public class MixinRenderSolarBoiler {
 
-    // TODO: alpha fix
-
-    @Inject(
+    @ModifyArg(
         method = "func_147500_a",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
-            ordinal = 0,
-            shift = At.Shift.BEFORE))
-    public void func_147500_aPR(TileEntity te, double x, double y, double z, float interp, CallbackInfo ci,
-        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
-        Utils.ProgramUtils.GLUseDefaultProgram();
-    }
-
-    @Inject(
-        method = "func_147500_a",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-            ordinal = 0,
-            shift = At.Shift.AFTER))
-    public void func_147500_aPRE(TileEntity te, double x, double y, double z, float interp, CallbackInfo ci,
-        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
+        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;setColorRGBA_F(FFFF)V"),
+        index = 3)
+    private float alphaFix(float alpha) {
+        return AngelicaUtils.isShaderEnabled() ? (alpha == 0.005F ? 0.1F : 0.2F) : alpha;
     }
 
     @Inject(
@@ -51,18 +32,7 @@ public class MixinRenderSolarBoiler {
             shift = At.Shift.AFTER),
         remap = false)
     public void func_147500_a(TileEntity te, double x, double y, double z, float interp, CallbackInfo ci) {
-        Utils.BrightnessUtils.enableFullBrightness();
         Utils.fix();
     }
 
-    @Inject(
-        method = "func_147500_a",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-            shift = At.Shift.AFTER),
-        remap = false)
-    public void func_147500_a2(TileEntity te, double x, double y, double z, float interp, CallbackInfo ci) {
-        Utils.BrightnessUtils.disableFullBrightness();
-    }
 }

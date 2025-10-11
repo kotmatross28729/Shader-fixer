@@ -16,8 +16,6 @@ import com.kotmatross.shaderfixer.shrimp.NTMRenderGetters;
 import com.kotmatross.shaderfixer.shrimp.Vibe;
 import com.kotmatross.shaderfixer.shrimp.nonsense.FuckingCursed;
 import com.kotmatross.shaderfixer.utils.Utils;
-import com.llamalad7.mixinextras.sugar.Share;
-import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 
 @FuckingCursed
 @Mixin(value = ItemRenderWeaponBase.class, priority = 999)
@@ -26,53 +24,6 @@ public class MixinItemRenderWeaponBase implements Vibe, NTMRenderGetters {
     @Inject(method = "renderSmokeNodes", at = @At(value = "HEAD"), remap = false)
     private static void renderSmokeNodes(List<ItemGunBaseNT.SmokeNode> nodes, double scale, CallbackInfo ci) {
         Utils.fix();
-    }
-
-    // TODO: alpha fix
-
-    @Inject(
-        method = "renderSmokeNodes",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
-            ordinal = 0,
-            shift = At.Shift.BEFORE))
-    private static void renderSmokeNodesPR(List<ItemGunBaseNT.SmokeNode> nodes, double scale, CallbackInfo ci,
-        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(Utils.ProgramUtils.GLGetCurrentProgram());
-        Utils.ProgramUtils.GLUseDefaultProgram();
-    }
-
-    @Inject(
-        method = "renderSmokeNodes",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-            ordinal = 0,
-            shift = At.Shift.AFTER))
-    private static void renderSmokeNodesPRE(List<ItemGunBaseNT.SmokeNode> nodes, double scale, CallbackInfo ci,
-        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        Utils.ProgramUtils.GLUseProgram(shader_fixer$program.get());
-    }
-
-    @Inject(method = "renderGapFlash", at = @At(value = "HEAD"), remap = false)
-    private static void renderGapFlash(long lastShot, CallbackInfo ci) {
-        Utils.BrightnessUtils.enableFullBrightness();
-    }
-
-    @Inject(method = "renderGapFlash", at = @At(value = "TAIL"), remap = false)
-    private static void renderGapFlash2(long lastShot, CallbackInfo ci) {
-        Utils.BrightnessUtils.disableFullBrightness();
-    }
-
-    @Inject(method = "renderMuzzleFlash(JID)V", at = @At(value = "HEAD"), remap = false)
-    private static void renderMuzzleFlash(long lastShot, int duration, double l, CallbackInfo ci) {
-        Utils.BrightnessUtils.enableFullBrightness();
-    }
-
-    @Inject(method = "renderMuzzleFlash(JID)V", at = @At(value = "TAIL"), remap = false)
-    private static void renderMuzzleFlash2(long lastShot, int duration, double l, CallbackInfo ci) {
-        Utils.BrightnessUtils.disableFullBrightness();
     }
 
     @Shadow
