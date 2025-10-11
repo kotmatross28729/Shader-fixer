@@ -20,6 +20,18 @@ public class MixinBeamPronter {
     private static void prontBeam(Vec3 skeleton, BeamPronter.EnumWaveType wave, BeamPronter.EnumBeamType beam,
         int outerColor, int innerColor, int start, int segments, float size, int layers, float thickness,
         CallbackInfo ci) {
+        Utils.BrightnessUtils.enableFullBrightness();
         Utils.fix();
     }
+
+    @Inject(
+        method = "prontBeam(Lnet/minecraft/util/Vec3;Lcom/hbm/render/util/BeamPronter$EnumWaveType;Lcom/hbm/render/util/BeamPronter$EnumBeamType;IIIIFIF)V",
+        at = @At(value = "TAIL"),
+        remap = false)
+    private static void prontBeam2(Vec3 skeleton, BeamPronter.EnumWaveType wave, BeamPronter.EnumBeamType beam,
+        int outerColor, int innerColor, int start, int segments, float size, int layers, float thickness,
+        CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
+    }
+
 }

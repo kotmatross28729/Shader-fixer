@@ -17,9 +17,7 @@ public enum LateMixins implements IMixins {
 
     AVARITIA(new MixinBuilder().addRequiredMod(TargetMods.AVARITIA)
         .addClientMixins(
-            // TODO: TODO
             "AVARITIA.MixinCosmicRenderShenanigans",
-            "AVARITIA.MixinCosmicItemRenderer",
             "AVARITIA.MixinModelArmorInfinity",
             "AVARITIA.MixinRenderHeavenArrow")),
 

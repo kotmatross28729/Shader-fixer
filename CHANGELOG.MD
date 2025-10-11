@@ -4,7 +4,11 @@
 * **[Hbm's NTM]** Many "program fixes" have been moved to "alpha fixes"
   - Should improve performance a bit and also remove minor artifacts
 * **[Hbm's NTM]** Fixed bullets being black with shaders
+* **[Hbm's NTM / NTM:Space]** Fixed brightness of various beams with shaders
 * **[Main]** Fixed ~~peak mojang coding~~ graphical artifacts when rendering nicknames with shaders
+* **[Avaritia]** Fixed rendering with Angelica (shaders)
+  - Requires Angelica 1.0.0-beta60 (yes I'm from future)
+  - Works with Complementary 5.x and BSL 8.x (other shaders may have flickering!)
 
 # 4.7
 

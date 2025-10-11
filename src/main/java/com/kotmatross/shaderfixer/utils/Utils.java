@@ -50,11 +50,13 @@ public class Utils {
             lbx = OpenGlHelper.lastBrightnessX;
             lby = OpenGlHelper.lastBrightnessY;
 
+            GL11.glPushAttrib(GL11.GL_CURRENT_BIT); // In case called before entity render
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240F, 240F);
         }
 
         public static void disableFullBrightness() {
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lbx, lby);
+            GL11.glPopAttrib();
         }
     }
 
@@ -69,7 +71,7 @@ public class Utils {
             if (ShaderFixer.IS_ANGELICA_PRESENT) {
                 Program.unbind(); // For angelica, same glUseProgram(0), but also clears uniforms and samplers
             } else {
-                GL20.glUseProgram(0); // For opt#f*ne
+                GL20.glUseProgram(0);
             }
         }
 

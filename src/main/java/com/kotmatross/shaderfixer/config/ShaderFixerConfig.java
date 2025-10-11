@@ -17,7 +17,7 @@ public class ShaderFixerConfig {
 
     // TWEAKS
     public static boolean NTM_ARMORFIX;
-    public static boolean NTM_SPACE_OPTIFINE_CRASH;
+    public static boolean OPTIFINE_CRASH;
     public static boolean VANILLA_DISABLE_HORIZON;
     public static boolean VANILLA_GUI_BLEND_FIX;
     public static boolean VANILLA_MAIN_MENU_FPS_BYPASS;
@@ -55,11 +55,11 @@ public class ShaderFixerConfig {
             true,
             "[HBM'S NTM] Fixes rendering of akimbo weapons on mobs (+ mobs with NTM armor) + fixes rendering of akimbo weapons with CPM");
 
-        NTM_SPACE_OPTIFINE_CRASH = config.getBoolean(
-            "NTM_SPACE_OPTIFINE_CRASH",
+        OPTIFINE_CRASH = config.getBoolean(
+            "OPTIFINE_CRASH",
             CAT_TWEAKS,
             true,
-            "[HBM'S NTM:SPACE] Crashes the game if it detects optifine. Only disable it if you know what you are doing...");
+            "Crashes the game if it detects optifine. Only disable it if you know what you are doing...");
 
         VANILLA_DISABLE_HORIZON = config.getBoolean(
             "VANILLA_DISABLE_HORIZON",

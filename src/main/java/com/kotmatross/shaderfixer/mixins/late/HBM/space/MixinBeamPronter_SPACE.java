@@ -24,15 +24,26 @@ public class MixinBeamPronter_SPACE {
     private static void prontBeam(Vec3 skeleton, BeamPronter.EnumWaveType wave, BeamPronter.EnumBeamType beam,
         int outerColor, int innerColor, int start, int segments, float size, int layers, float thickness, float alpha,
         CallbackInfo ci) {
+        Utils.BrightnessUtils.enableFullBrightness();
         Utils.fix();
     }
 
-    // Fix alpha > 1
-    // For some reason, James put 256 as the alpha value (💀™)
+    @Inject(
+        method = "prontBeam(Lnet/minecraft/util/Vec3;Lcom/hbm/render/util/BeamPronter$EnumWaveType;Lcom/hbm/render/util/BeamPronter$EnumBeamType;IIIIFIFF)V",
+        at = @At(value = "TAIL"),
+        remap = false)
+    private static void prontBeam2(Vec3 skeleton, BeamPronter.EnumWaveType wave, BeamPronter.EnumBeamType beam,
+        int outerColor, int innerColor, int start, int segments, float size, int layers, float thickness, float alpha,
+        CallbackInfo ci) {
+        Utils.BrightnessUtils.disableFullBrightness();
+    }
+
+    // Fix alpha != 1
+    // For some reason, James put 256 (and 0.5) as the alpha value
     @Redirect(
         method = "setColorWithAlpha",
         at = @At(value = "INVOKE", target = "org/lwjgl/opengl/GL11.glColor4f(FFFF)V"))
     private static void transformGLColor(float r, float g, float b, float a) {
-        GL11.glColor4f(r, g, b, Math.min(a, 1F));
+        GL11.glColor4f(r, g, b, 1F);
     }
 }

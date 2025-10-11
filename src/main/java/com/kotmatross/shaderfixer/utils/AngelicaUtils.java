@@ -13,4 +13,13 @@ public class AngelicaUtils {
         }
         return false;
     }
+
+    public static boolean isShadowPass() {
+        if (ShaderFixer.IS_ANGELICA_PRESENT) {
+            return IrisApi.getInstance()
+                .isRenderingShadowPass();
+        }
+        return false;
+    }
+
 }
