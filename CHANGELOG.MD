@@ -1,3 +1,7 @@
+# 4.8-patch-1
+* **[Hbm's NTM]** Fixed crash when rendering RBMK console
+  - ouch
+
 # 4.8
 * **[Fisk's Superheroes]** Fixed some beams not rendering with Complementary Shaders 5.x
   - No side effects this time!

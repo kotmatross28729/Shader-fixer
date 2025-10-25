@@ -17,10 +17,8 @@ public class MixinRenderRBMKConsole {
         method = "func_147500_a",
         at = @At(
             value = "INVOKE",
-            target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V",
-            ordinal = 0,
-            shift = At.Shift.BEFORE),
-        remap = false)
+            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
+            shift = At.Shift.BEFORE))
     public void func_147500_a(TileEntity te, double x, double y, double z, float interp, CallbackInfo ci) {
         Utils.BrightnessUtils.enableFullBrightness();
         Utils.fix();
@@ -31,8 +29,7 @@ public class MixinRenderRBMKConsole {
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-            shift = At.Shift.AFTER),
-        remap = false)
+            shift = At.Shift.AFTER))
     public void func_147500_a2(TileEntity te, double x, double y, double z, float interp, CallbackInfo ci) {
         Utils.BrightnessUtils.disableFullBrightness();
     }
