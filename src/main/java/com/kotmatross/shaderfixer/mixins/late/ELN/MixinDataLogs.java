@@ -15,6 +15,8 @@ public class MixinDataLogs {
     @Inject(method = "draw([BIFFFBFFLjava/lang/String;)V", at = @At(value = "HEAD"), remap = false)
     private static void draw(byte[] value, int size, float samplingPeriod, float maxValue, float minValue,
         byte unitType, float margeX, float margeY, String textHeader, CallbackInfo ci) {
+        if (value == null) return;
+        if (size < 2) return;
         Utils.BrightnessUtils.enableFullBrightness();
         Utils.fix();
     }
