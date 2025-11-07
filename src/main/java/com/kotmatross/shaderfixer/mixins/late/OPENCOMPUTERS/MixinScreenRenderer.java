@@ -15,7 +15,6 @@ import li.cil.oc.client.renderer.tileentity.ScreenRenderer$;
 
 @Mixin(value = ScreenRenderer$.class, priority = 999)
 public class MixinScreenRenderer {
-    // !Not working with angelica
 
     // THE FUCK SCALA ADDS THIS FUCKING "$" - JUST TO BREAK ALL THE METHODS ACCESS???
     @Inject(

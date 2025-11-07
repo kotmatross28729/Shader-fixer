@@ -113,8 +113,9 @@ public class ShaderFixerConfig {
     // LATE MIXINS
 
     public static boolean NTM_TEXTURE_FIX;
-
     public static boolean CPM_EXP_FIX;
+    public static boolean OC_DISABLE_DL;
+    public static boolean ELN_DISABLE_DL;
 
     public static void loadLateMixinConfigGeneral(File configFile) {
         Configuration config = new Configuration(configFile);
@@ -130,6 +131,18 @@ public class ShaderFixerConfig {
             CAT_SHADER,
             true,
             "[Customizable Player Models] Experimental! Fixes models whose cubes don't have texture (Mode: Color)");
+
+        OC_DISABLE_DL = config.getBoolean(
+            "OC_DISABLE_DL",
+            CAT_SHADER,
+            true,
+            "[OpenComputers] Forces OС to not use display lists for rendering. Significantly reduces FPS, but improves rendering with Angelica shaders");
+
+        ELN_DISABLE_DL = config.getBoolean(
+            "ELN_DISABLE_DL",
+            CAT_SHADER,
+            true,
+            "[Electrical Age] Forces Electrical Age to not use display lists for rendering. Significantly reduces FPS, but improves rendering with Angelica shaders");
 
         if (config.hasChanged()) {
             config.save();

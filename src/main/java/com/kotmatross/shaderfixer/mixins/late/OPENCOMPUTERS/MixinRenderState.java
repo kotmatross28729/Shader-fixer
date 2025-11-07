@@ -14,11 +14,7 @@ public class MixinRenderState {
 
     @Inject(method = "disableLighting", at = @At(value = "HEAD"), remap = false)
     private void disableLight(CallbackInfo ci) {
-        Utils.BrightnessUtils.enableFullBrightness();
+        Utils.BrightnessUtils.enableFullBrightnessSafe();
     }
 
-    @Inject(method = "enableLighting", at = @At(value = "HEAD"), remap = false)
-    private void enableLight(CallbackInfo ci) {
-        Utils.BrightnessUtils.disableFullBrightness();
-    }
 }

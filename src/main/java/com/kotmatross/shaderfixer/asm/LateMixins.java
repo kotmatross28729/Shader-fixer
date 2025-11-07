@@ -52,6 +52,11 @@ public enum LateMixins implements IMixins {
     ELN(new MixinBuilder().addRequiredMod(TargetMods.ELN)
         .addClientMixins("ELN.MixinDataLogs", "ELN.MixinUtilsClient", "ELN.MixinNixieTubeDescriptor")),
 
+    ELN_DL_DISABLE(new MixinBuilder().addRequiredMod(TargetMods.ELN)
+        .addRequiredMod(TargetMods.ANGELICA)
+        .addClientMixins("ELN.MixinSixNodeElementRender_disableDisplayList")
+        .setApplyIf(() -> ShaderFixerConfig.ELN_DISABLE_DL)),
+
     FINDIT(new MixinBuilder().addRequiredMod(TargetMods.FINDIT)
         .addClientMixins("FINDIT.MixinBlockHighlighter", "FINDIT.MixinEntityHighlighter")),
 
@@ -205,6 +210,11 @@ public enum LateMixins implements IMixins {
             "OPENCOMPUTERS.MixinHologramRenderer",
             "OPENCOMPUTERS.MixinRobotRenderer",
             "OPENCOMPUTERS.MixinRenderState")),
+
+    OPENCOMPUTERS_DL_DISABLE(new MixinBuilder().addRequiredMod(TargetMods.OPENCOMPUTERS)
+        .addRequiredMod(TargetMods.ANGELICA)
+        .addClientMixins("OPENCOMPUTERS.MixinRenderState_disableDisplayList")
+        .setApplyIf(() -> ShaderFixerConfig.OC_DISABLE_DL)),
 
     RIVALREBELS(new MixinBuilder().addRequiredMod(TargetMods.RIVALREBELS)
         .addClientMixins(

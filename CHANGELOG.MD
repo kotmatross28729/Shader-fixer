@@ -1,3 +1,10 @@
+# 4.9
+* **[Electrical Age (ELN)]** Fixed crash when rendering data logs
+* **[Electrical Age (ELN) && OpenComputers]** Added a workaround(!) for a visual bug with Angelica shaders
+  - May significantly reduce performance (disables the use of display lists)
+  - Config Electrical Age - `minecraft\config\shaderfixer\mixinsLate_GENERAL.cfg -> ELN_DISABLE_DL`
+  - Config OpenComputers - `minecraft\config\shaderfixer\mixinsLate_GENERAL.cfg -> OC_DISABLE_DL`
+
 # 4.8-patch-1
 * **[Hbm's NTM]** Fixed crash when rendering RBMK console
   - ouch
