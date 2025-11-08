@@ -18,7 +18,6 @@ public class ShaderFixerConfig {
     // TWEAKS
     public static boolean NTM_ARMORFIX;
     public static boolean OPTIFINE_CRASH;
-    public static boolean VANILLA_DISABLE_HORIZON;
     public static boolean VANILLA_GUI_BLEND_FIX;
     public static boolean VANILLA_MAIN_MENU_FPS_BYPASS;
     public static int VANILLA_MAIN_MENU_FPS_BYPASS_VALUE;
@@ -60,12 +59,6 @@ public class ShaderFixerConfig {
             CAT_TWEAKS,
             true,
             "Crashes the game if it detects optifine. Only disable it if you know what you are doing...");
-
-        VANILLA_DISABLE_HORIZON = config.getBoolean(
-            "VANILLA_DISABLE_HORIZON",
-            CAT_TWEAKS,
-            true,
-            "Removes the incredibly ugly horizon (the thing that cuts off the bottom of the skybox), I have no idea why they added it, it's horrible (Also works with NTM:Space)");
 
         VANILLA_GUI_BLEND_FIX = config.getBoolean(
             "VANILLA_GUI_BLEND_FIX",

@@ -65,7 +65,14 @@ public class ShaderFixer {
             if (IS_HBM_NTM_PRESENT) {
                 if (ShaderFixerConfig.NTM_TEXTURE_FIX) {
                     logger.info("NTM_TEXTURE_FIX enabled, loading resource pack");
-                    BuiltInResourcePack.register("NTM_FIX");
+
+                    try {
+                        BuiltInResourcePack.register("NTM_FIX");
+                    } catch (NoClassDefFoundError e) {
+                        logger.error("NTM_TEXTURE_FIX resource pack failed to apply:");
+                        e.printStackTrace();
+                    }
+
                 } else {
                     logger.info("NTM_TEXTURE_FIX disabled, skip resource pack loading");
                 }

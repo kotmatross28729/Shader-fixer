@@ -1,3 +1,9 @@
+# 4.9-patch-1
+*Update to this version only if you're using Angelica beta68+, otherwise it's not necessary*
+
+* **[Hbm's NTM:Space]** Skybox fixes have been removed - they're now part of Angelica (starting with beta68)
+* **[Main]** `VANILLA_DISABLE_HORIZON` option has been also removed - it's (also) part of Angelica now (Notfine in the future)
+
 # 4.9
 * **[Electrical Age (ELN)]** Fixed crash when rendering data logs
 * **[Electrical Age (ELN) && OpenComputers]** Added a workaround(!) for a visual bug with Angelica shaders
