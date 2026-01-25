@@ -24,12 +24,7 @@ public class NTMUtils_WRAPPER {
         }
 
         if (toRender != null) {
-            return switch (renderType) {
-                case EQUIPPED_FIRST_PERSON -> MinecraftForgeClient
-                    .getItemRenderer(toRender, EQUIPPED_FIRST_PERSON) instanceof Vibe;
-                case EQUIPPED -> MinecraftForgeClient.getItemRenderer(toRender, EQUIPPED) instanceof Vibe;
-                default -> false;
-            };
+            return MinecraftForgeClient.getItemRenderer(toRender, renderType) instanceof Vibe;
         }
 
         return false;

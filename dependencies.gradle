@@ -33,40 +33,24 @@
  *
  * For more details, see https://docs.gradle.org/8.0.1/userguide/java_library_plugin.html#sec:java_library_configurations_graph
  */
+//file:noinspection DependencyNotationArgument
 dependencies {
-    compileOnly name: '+unimixins-all-1.7.10-0.1.19'
-
-    compileOnly name: 'NotEnoughItems-2.6.51-GTNH'
-    compileOnly name: 'CodeChickenCore-1.3.10'
-    compileOnly name: 'lombok'
-    compileOnly name: 'FiskHeroes-1.7.10-2.4.0'
-    compileOnly name: 'Techguns 1.7.10 fixed'
-    compileOnly name: 'zeldaswordskills-1.7.10-v2.5.3.6'
-    compileOnly name: 'MCHELIO'
-    compileOnly name: 'rivalrebels-2.2'
-    compileOnly name: 'Schematica-1.11.1-GTNH'
-    compileOnly name: 'LunatriusCore-1.2.0-GTNH'
-    compileOnly name: 'journeymap-1.7.10-5.2.8-unlimited'
-    compileOnly name: 'ThaumicConcilium-1.0.8'
-    compileOnly name: 'Avaritia-1.51'
-    compileOnly name: 'Eln-1.22.3'
-    compileOnly name: 'OpenComputers-1.10.23-GTNH-dev'
-    compileOnly name: 'HBM-NTM-[1.0.27_X5357]'
-    compileOnly name: 'HBM-NTM-[1.0.27_X5358_H261]-DUMMY'
-    compileOnly name: 'DynamicSurroundings-1.7.10-1.0.7.5'
-    compileOnly name: 'LittleMaidMobEnhanced-1.7.10-1.4.4'
-    compileOnly name: 'HardcoreEnderExpansion-1.11.3-GTNH'
-    compileOnly name: 'rple-mc1.7.10-1.3.5-dev'
-    compileOnly name: 'angelica-1.0.0-beta35-dev'
-    compileOnly name: 'CustomNPC-Plus-1.9.3-dev'
-    compileOnly name: 'SignPicture-1.7.10-2.8.0-universal'
-    compileOnly name: '3DManeuverGear-1.7.10-0.6'
-    compileOnly name: 'weaponmod-forge-1.7.10-1.23.1'
-    compileOnly name: 'CustomPlayerModels-1.7.10-0.6.21a'
-	compileOnly name: 'findit-1.3.10-dev'
-	compileOnly name: 'MapleTree Forge v1.1.33m'
-    compileOnly name: 'backhand-1.6.17'
     
-    compileOnly fileTree(dir: 'libs', include: '*.jar')
-    compileOnly fileTree(dir: 'libs', include: '*.zip')
+    /// Make everything local at this point, "Read timed out" - shut the fuck up
+ 
+    //implementation(project.files("libs/gtnhlib-0.9.6-dev.jar"))
+    implementation(project.files("libs/angelica-2.0.0-alpha12-dev.jar"))
+    implementation(project.files("libs/CodeChickenCore-1.4.10-dev.jar"))
+    implementation(project.files("libs/NotEnoughItems-2.8.53-GTNH-pre-dev.jar"))
+    implementation(project.files("libs/OpenComputers-1.12.15-GTNH-pre-dev.jar"))
+    implementation(project.files("libs/Avaritia-1.82-pre-dev.jar"))
+    implementation(project.files("libs/DynamicSurroundings-1.7.10-1.0.7.7-dev.jar"))
+    implementation(project.files("libs/backhand-1.8.2-dev.jar"))
+    implementation(project.files("libs/journeymap-1.7.10-5.2.10-dev.jar"))
+    implementation(rfg.deobf(project.files("libs/HBM-NTM-[1.0.27_X5572_H261].jar")))
+    implementation(rfg.deobf(project.files("libs/CustomPlayerModels-1.7.10-0.6.25b.jar")))
+    implementation(rfg.deobf(project.files("libs/Eln-1.23.0.jar")))
+    
+    compileOnly(rfg.deobf(project.files("libs/Techguns 1.7.10 fixed.jar"))) //not working in dev
+    compileOnly(rfg.deobf("curse.maven:fiskheroes-630788:5737543")) //2.4.0 | not working in dev
 }

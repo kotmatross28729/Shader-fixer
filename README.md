@@ -1,42 +1,30 @@
 # Shader Fixer (1.7.10)
 
-## requires [unimixins](https://github.com/LegacyModdingMC/UniMixins/releases)
+**[CurseForge](https://legacy.curseforge.com/minecraft/mc-mods/shader-fixer) | [Modrinth](https://modrinth.com/mod/shader-fixer)**
 
-**[CurseForge](https://legacy.curseforge.com/minecraft/mc-mods/shader-fixer)
-| [Modrinth](https://modrinth.com/mod/shader-fixer)**
+---
 
-A mod that adds more compatibility with shaders.
-#### For now, it fixes:
+A mod (a.k.a. toxic wasteland) that attempts to improve visuals by patching various mods to fix issues with Angelica / Angelica Shaders (as well as minor QOL features :D)
 
-+ **Vanilla Minecraft**
-+ **HBM's NTM**
-+ **NotEnoughItems**
-+ **Fisk Superheroes**
-+ **Journeymap**
-+ **Dragon Block C**
-+ **Techguns**
-+ **Mcheli Overdrive**
-+ **Schematica**
-+ **Electrical Age**
-+ **Dynamic Surroundings**
-+ **Hardcore Ender Expansion**
-+ **CustomNPC**
-+ **RivalRebels**
-+ **Zelda Sword Skills**
-+ **SignPicture**
+**Use this mod at your own risk.** **Or not, as you wish.**
 
-* And also some QOL changes (can be found in the configs)
+## Full list of supported mods:
 
-# DISCLAIMER:
+| Patched Mod          | Patches                                                                                                                                                                    | QOL                                                                                                                                                                                                                                                                                                                                                                                               |
+|----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Vanilla Minecraft    | • Fixed incorrect rendering of many translucent things when rendering the entity's name tag                                                                                | • Removed 30 FPS lock in the main menu + added the ability to set an arbitrary value <br/> <br/> • Fixed an annoying bug due to which the effect bar in the creative menu turns black <br/> <br/> • Fixed bug due to which the hand wouldn't update rotation when the player was riding/sitting + added the ability to turn off hand rotation completely (similar to modern versions) <br/> <br/> |
+| Angelica             | • Added support for `NTM_GUN_FIX` (interpolation / ntmclient's GUN_MODEL_FOV)                                                                                              | -                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Avaritia             | • Fixed broken shadows when rendering tools/armor from the mod with shaders enabled <br/> <br/> • Fixed heaven arrow not having full brightness with shaders enabled <br/> | -                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Backhand             | • Added support for `NTM_GUN_FIX` (broken render otherwise)                                                                                                                | -                                                                                                                                                                                                                                                                                                                                                                                                 |
+| HBM's NTM            | • TBA                                                                                                                                                                      | -                                                                                                                                                                                                                                                                                                                                                                                                 |
+| NotEnoughItems       | • TBA                                                                                                                                                                      | -                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Fisk Superheroes     | • TBA                                                                                                                                                                      | -                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Journeymap           | • TBA                                                                                                                                                                      | -                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Techguns             | • TBA                                                                                                                                                                      | -                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Schematica           | • TBA                                                                                                                                                                      | -                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Electrical Age       | • TBA                                                                                                                                                                      | -                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Dynamic Surroundings | • TBA                                                                                                                                                                      | -                                                                                                                                                                                                                                                                                                                                                                                                 |
+| SignPicture          | • TBA                                                                                                                                                                      | -                                                                                                                                                                                                                                                                                                                                                                                                 |
 
-Although this mod is called "Shader FIXER", for the most part these "fixes" are just TEMPORARY solutions (aka workarounds) for problems that have NOT been found (and solved) in root yet
+## Requires [unimixins](https://github.com/LegacyModdingMC/UniMixins/releases)
 
-This mod isn't a magic solution for all shader problems, it only has explicit "fixes" for vanilla and mods listed above
-
-Also, although this mod shouldn't cause serious problems even in the worst cases, but still, use at your own risk
-
-## Credits:
-
-#### [jss2a98aj](https://github.com/jss2a98aj) - [Early mixins](https://github.com/jss2a98aj/BugTorch/blob/master/src/main/java/jss/bugtorch/mixinplugin/BugTorchEarlyMixins.java) and [config systems](https://github.com/jss2a98aj/BugTorch/blob/master/src/main/java/jss/bugtorch/config/BugTorchConfig.java)
-
-#### [GTNH](https://github.com/orgs/GTNewHorizons/repositories) - [ExampleMod1.7.10](https://github.com/GTNewHorizons/ExampleMod1.7.10)

@@ -29,25 +29,13 @@ public class ShaderFixer {
 
     @Mod.EventHandler
     public static void onConstruction(FMLConstructionEvent event) {
-        if (Loader.isModLoaded("rivalrebels")) {
-            if (!Loader.instance()
-                .getIndexedModList()
-                .get("rivalrebels")
-                .getVersion()
-                .contains(" fixed")) {
-                throw new RuntimeException(
-                    "You are using a version of Rival Rebels that is not compatible with ShaderFixer, please update to: https://github.com/kotmatross28729/Rival-Rebels-Mod/releases");
-            }
-        }
         if (event.getSide() == Side.CLIENT) {
-            if (ShaderFixerConfig.OPTIFINE_CRASH) {
-                if (FMLClientHandler.instance()
-                    .hasOptifine()) {
-                    logger.fatal("Detected Optifine, immediate crash");
-                    proxy.throwIncompatibleModException(
-                        "Optifine is not supported by ShaderFixer",
-                        "Delete Optifine and use Angelica instead");
-                }
+            if (FMLClientHandler.instance()
+                .hasOptifine()) {
+                logger.fatal("Detected Optifine, immediate crash");
+                proxy.throwIncompatibleModException(
+                    "Optifine is not supported by ShaderFixer",
+                    "Delete Optifine and use Angelica instead");
             }
         }
     }
@@ -63,20 +51,25 @@ public class ShaderFixer {
 
         if (event.getSide() == Side.CLIENT) {
             if (IS_HBM_NTM_PRESENT) {
-                if (ShaderFixerConfig.NTM_TEXTURE_FIX) {
-                    logger.info("NTM_TEXTURE_FIX enabled, loading resource pack");
-
-                    try {
-                        BuiltInResourcePack.register("NTM_FIX");
-                    } catch (NoClassDefFoundError e) {
-                        logger.error("NTM_TEXTURE_FIX resource pack failed to apply:");
-                        e.printStackTrace();
-                    }
-
-                } else {
-                    logger.info("NTM_TEXTURE_FIX disabled, skip resource pack loading");
-                }
+                applyTextureFix(ShaderFixerConfig.NTM_TEXTURE_FIX, "NTM_FIX", "NTM_TEXTURE_FIX");
             }
+            if (Loader.isModLoaded("Techguns")) {
+                applyTextureFix(ShaderFixerConfig.TECHGUNS_TEXTURE_FIX, "TECHGUNS_FIX", "TECHGUNS_TEXTURE_FIX");
+            }
+        }
+    }
+
+    public static void applyTextureFix(boolean configValue, String name, String logName) {
+        if (configValue) {
+            logger.info(logName + " enabled, loading resource pack");
+            try {
+                BuiltInResourcePack.register(name);
+            } catch (NoClassDefFoundError e) {
+                logger.error(logName + " resource pack failed to apply:");
+                e.printStackTrace();
+            }
+        } else {
+            logger.info(logName + " disabled, skip resource pack loading");
         }
     }
 

@@ -9,43 +9,26 @@ import com.kotmatross.shaderfixer.config.ShaderFixerConfig;
 @SuppressWarnings("unused")
 public enum EarlyMixins implements IMixins {
 
-    // GENERAL
-    VANILLA_FIX(new MixinBuilder()
-        .addClientMixins(
-            "MINECRAFT.MixinRenderGlobal",
-            "MINECRAFT.MixinRenderFish",
-            "MINECRAFT.MixinRenderLiving",
-            "MINECRAFT.MixinRenderDragon",
-            "MINECRAFT.MixinRenderLightningBolt",
-            "MINECRAFT.MixinRender",
-            "MINECRAFT.MixinRendererLivingEntity")
-        .setApplyIf(() -> ShaderFixerConfig.VANILLA_FIX)),
+    VANILLA_MAIN_MENU_FPS_BYPASS(new MixinBuilder().addClientMixins("minecraft.fpsbypass.MixinMinecraft")
+        .setApplyIf(() -> ShaderFixerConfig.V_MAIN_MENU_FPS_BYPASS)),
+    VANILLA_GUI_BLEND_FIX(new MixinBuilder().addClientMixins("minecraft.guiblendfix.MixinInventoryEffectRenderer")
+        .setApplyIf(() -> ShaderFixerConfig.V_GUI_BLEND_FIX)),
+    VANILLA_RIDING_HAND_ROTATION(new MixinBuilder().addClientMixins("minecraft.riding.MixinRenderPlayer")
+        .setApplyIf(
+            () -> ShaderFixerConfig.V_RIDING_HAND_ROTATION_FIX || ShaderFixerConfig.V_RIDING_HAND_ROTATION_DISABLE)),
+    VANILLA_MODERN_RIDING_LEG_POS(new MixinBuilder().addClientMixins("minecraft.riding.MixinModelBiped")
+        .setApplyIf(() -> ShaderFixerConfig.V_MODERN_RIDING_LEG_POS)),
+
     SEDNA(new MixinBuilder()
         .addClientMixins(
-            "HBM.SEDNA.MixinEntityRenderer",
-            "HBM.SEDNA.MixinItemRenderer",
-            "HBM.SEDNA.MixinForgeHooksClient")
-        .setApplyIf(() -> ShaderFixerConfig.NTM_GUNFIX)),
+            "ntm.gunfix.MixinEntityRenderer",
+            "ntm.gunfix.MixinItemRenderer",
+            "ntm.gunfix.MixinForgeHooksClient")
+        .setApplyIf(() -> ShaderFixerConfig.NTM_GUN_FIX)),
+    NTM_ARMORFIX(new MixinBuilder().addClientMixins("ntm.armorfix.MixinModelBiped", "ntm.armorfix.MixinRenderBiped")
+        .setApplyIf(() -> ShaderFixerConfig.NTM_ARMOR_FIX)),
 
-    // TWEAKS
-
-    NTM_ARMORFIX(new MixinBuilder().addClientMixins("HBM.ARMORFIX.MixinModelBiped", "HBM.ARMORFIX.MixinRenderBiped")
-        .setApplyIf(() -> ShaderFixerConfig.NTM_ARMORFIX)),
-    VANILLA_MAIN_MENU_FPS_BYPASS(new MixinBuilder().addClientMixins("MINECRAFT.FPS_BYPASS.MixinMinecraft")
-        .setApplyIf(() -> ShaderFixerConfig.VANILLA_MAIN_MENU_FPS_BYPASS)),
-    VANILLA_GUI_BLEND_FIX(new MixinBuilder().addClientMixins("MINECRAFT.GUI_BLEND_FIX.MixinInventoryEffectRenderer")
-        .setApplyIf(() -> ShaderFixerConfig.VANILLA_GUI_BLEND_FIX)),
-    VANILLA_RIDING_HAND_ROTATION_FIX(new MixinBuilder().addClientMixins("MINECRAFT.RIDING.MixinRenderPlayer_FIX")
-        .setApplyIf(() -> ShaderFixerConfig.VANILLA_RIDING_HAND_ROTATION_FIX)),
-
-    VANILLA_RIDING_HAND_ROTATION_DISABLE(
-        new MixinBuilder().addClientMixins("MINECRAFT.RIDING.MixinRenderPlayer_DISABLE")
-            .setApplyIf(
-                () -> !ShaderFixerConfig.VANILLA_RIDING_HAND_ROTATION_FIX
-                    && ShaderFixerConfig.VANILLA_RIDING_HAND_ROTATION_DISABLE)),
-
-    VANILLA_MODERN_RIDING_LEG_POS(new MixinBuilder().addClientMixins("MINECRAFT.RIDING.MixinModelBiped")
-        .setApplyIf(() -> ShaderFixerConfig.VANILLA_MODERN_RIDING_LEG_POS));
+    ;
 
     private final MixinBuilder builder;
 
