@@ -1,10 +1,5 @@
 package com.kotmatross.shaderfixer.mixins.late.fiskheroes;
 
-import java.util.function.Consumer;
-
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.Vec3;
-
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,23 +14,19 @@ public abstract class MixinEffectTentacles implements Effect {
 
     // Avoid leak
     @Inject(method = "doRender", at = @At(value = "HEAD"), remap = false)
-    private void doRender(Effect.Entry e, EntityLivingBase anchor, boolean isClientPlayer, boolean isFirstPerson,
-        float partialTicks, CallbackInfo ci) {
+    private void doRender(CallbackInfo ci) {
         GL11.glPushAttrib(GL11.GL_DEPTH_BUFFER_BIT);
     }
 
     @Inject(method = "doRender", at = @At(value = "TAIL"), remap = false)
-    private void doRender2(Effect.Entry e, EntityLivingBase anchor, boolean isClientPlayer, boolean isFirstPerson,
-        float partialTicks, CallbackInfo ci) {
+    private void doRender2(CallbackInfo ci) {
         GL11.glPopAttrib();
     }
 
     @Inject(method = "renderTentacle", at = @At(value = "HEAD"), remap = false)
-    private static void renderTentacle(Consumer<Float> render, Vec3 src, Vec3 mid, Vec3 dst, float segLength,
-        int segments, CallbackInfo ci) {
+    private static void renderTentacle(CallbackInfo ci) {
         if (!GL11.glGetBoolean(GL11.GL_DEPTH_WRITEMASK)) {
-            // Nuh uh
-            GL11.glDepthMask(true);
+            GL11.glDepthMask(true); // Nuh uh
         }
     }
 

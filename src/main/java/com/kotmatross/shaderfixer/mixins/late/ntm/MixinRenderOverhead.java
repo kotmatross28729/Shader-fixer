@@ -31,16 +31,6 @@ public class MixinRenderOverhead {
         ShaderUtils.disableFullBrightness();
     }
 
-    @Inject(method = "renderThermalSight", at = @At(value = "HEAD"), remap = false)
-    private static void renderThermalSight(CallbackInfo ci) {
-        ShaderUtils.enableFullBrightness();
-    }
-
-    @Inject(method = "renderThermalSight", at = @At(value = "TAIL"), remap = false)
-    private static void renderThermalSight2(CallbackInfo ci) {
-        ShaderUtils.disableFullBrightness();
-    }
-
     /**
      * Fixes GL state leak with angelica
      */

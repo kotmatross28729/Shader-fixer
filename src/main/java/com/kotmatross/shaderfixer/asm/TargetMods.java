@@ -16,7 +16,6 @@ public enum TargetMods implements ITargetMod {
     NTM("hbm"),
     NTM_SPACE("com.hbm.dim.SolarSystem", true),
     JOURNEYMAP("journeymap"),
-    NEI("NotEnoughItems"),
     OPENCOMPUTERS("OpenComputers"),
     SCHEMATICA("Schematica"),
     SIGNPIC("signpic"),

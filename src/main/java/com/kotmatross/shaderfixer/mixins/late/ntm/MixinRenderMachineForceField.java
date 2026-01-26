@@ -14,9 +14,11 @@ import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 public class MixinRenderMachineForceField {
 
     @WrapWithCondition(
-        method = "func_147500_a",
-        at = @At(value = "INVOKE", target = "Lcom/hbm/render/tileentity/RenderMachineForceField;generateSphere(IIFI)V"),
-        remap = false)
+        method = "renderTileEntityAt",
+        at = @At(
+            value = "INVOKE",
+            target = "Lcom/hbm/render/tileentity/RenderMachineForceField;generateSphere(IIFI)V",
+            remap = false))
     private boolean dontCastShadow(RenderMachineForceField instance, int l, int s, float rad, int hex) {
         return !AngelicaUtils.isShadowPass();
     }

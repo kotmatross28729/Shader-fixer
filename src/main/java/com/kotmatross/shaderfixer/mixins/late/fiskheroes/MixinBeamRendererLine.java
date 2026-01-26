@@ -5,10 +5,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import com.fiskmods.heroes.client.pack.json.beam.BeamRendererLine;
+import com.fiskmods.heroes.client.pack.json.beam.IBeamRenderer;
 import com.kotmatross.shaderfixer.utils.ShaderUtils;
 
-@Mixin(value = com.fiskmods.heroes.client.pack.json.beam.BeamRendererLine.class, priority = 999)
-public abstract class MixinBeamRendererLine implements com.fiskmods.heroes.client.pack.json.beam.IBeamRenderer {
+@Mixin(value = BeamRendererLine.class, priority = 999)
+public abstract class MixinBeamRendererLine implements IBeamRenderer {
 
     @Inject(
         method = "render",

@@ -5,10 +5,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import com.fiskmods.heroes.client.pack.json.shape.IShapeFormat;
+import com.fiskmods.heroes.client.pack.json.shape.ShapeFormatCircles;
 import com.kotmatross.shaderfixer.utils.ShaderUtils;
 
-@Mixin(value = com.fiskmods.heroes.client.pack.json.shape.ShapeFormatCircles.class, priority = 999)
-public abstract class MixinShapeFormatCircles implements com.fiskmods.heroes.client.pack.json.shape.IShapeFormat {
+@Mixin(value = ShapeFormatCircles.class, priority = 999)
+public abstract class MixinShapeFormatCircles implements IShapeFormat {
 
     @Inject(
         method = "render",

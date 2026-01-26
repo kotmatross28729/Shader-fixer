@@ -26,4 +26,5 @@ public class MixinHazardTypeBlinding {
                 + (level / 20F)
                 + I18n.format("info.template__seconds"));
     }
+
 }

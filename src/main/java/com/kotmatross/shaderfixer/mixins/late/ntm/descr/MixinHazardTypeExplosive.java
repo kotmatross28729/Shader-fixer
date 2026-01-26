@@ -23,4 +23,5 @@ public class MixinHazardTypeExplosive {
         List<HazardModifier> modifiers, CallbackInfo ci) {
         list.add(EnumChatFormatting.GOLD + I18n.format("trait.danger.level.explosive") + level);
     }
+
 }

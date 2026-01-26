@@ -31,4 +31,5 @@ public class MixinRenderSparks {
     private static void renderSpark2(CallbackInfo ci) {
         ShaderUtils.disableFullBrightness();
     }
+
 }

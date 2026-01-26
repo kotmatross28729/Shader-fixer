@@ -13,6 +13,11 @@ import com.kotmatross.shaderfixer.utils.ShaderUtils;
 @Mixin(value = RenderRBMKLid.class, priority = 999)
 public class MixinRenderRBMKLid {
 
+    @ModifyConstant(method = "renderTileEntityAt", constant = @Constant(floatValue = 0.1F), remap = false)
+    public float alphaFix(float brightness) {
+        return 0.4F;
+    }
+
     @Inject(
         method = "renderTileEntityAt",
         at = @At(
@@ -31,11 +36,6 @@ public class MixinRenderRBMKLid {
             shift = At.Shift.AFTER))
     public void func_147500_a2(CallbackInfo ci) {
         ShaderUtils.disableFullBrightness();
-    }
-
-    @ModifyConstant(method = "renderTileEntityAt", constant = @Constant(floatValue = 0.1F), remap = false)
-    public float alphaFix(float brightness) {
-        return 0.4F;
     }
 
 }

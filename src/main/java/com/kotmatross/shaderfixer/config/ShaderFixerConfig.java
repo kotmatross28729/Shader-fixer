@@ -14,7 +14,6 @@ public class ShaderFixerConfig {
     static final String CAT_DSURROUND = "Dynamic Surroundings";
     static final String CAT_FISKHEROES = "Fisk's Superheroes";
     static final String CAT_JOURNEYMAP = "JourneyMap";
-    static final String CAT_NEI = "NotEnoughItems";
     static final String CAT_TECHGUNS = "Techguns";
 
     public static boolean V_GUI_BLEND_FIX;
@@ -34,7 +33,6 @@ public class ShaderFixerConfig {
     public static boolean DSURROUND_FIX;
     public static boolean FISKHEROES_FIX;
     public static boolean JOURNEYMAP_FIX;
-    public static boolean NEI_FIX;
     public static boolean TECHGUNS_FIX;
     public static boolean TECHGUNS_TEXTURE_FIX;
 
@@ -118,8 +116,6 @@ public class ShaderFixerConfig {
         FISKHEROES_FIX = config.getBoolean("FISKHEROES_FIX", CAT_FISKHEROES, true, "ADD LATER");
 
         JOURNEYMAP_FIX = config.getBoolean("JOURNEYMAP_FIX", CAT_JOURNEYMAP, true, "ADD LATER");
-
-        NEI_FIX = config.getBoolean("NEI_FIX", CAT_NEI, true, "ADD LATER");
 
         TECHGUNS_FIX = config.getBoolean("TECHGUNS_FIX", CAT_TECHGUNS, true, "ADD LATER");
         TECHGUNS_TEXTURE_FIX = config.getBoolean("TECHGUNS_TEXTURE_FIX", CAT_TECHGUNS, true, "ADD LATER");

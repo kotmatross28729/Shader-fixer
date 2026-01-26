@@ -40,4 +40,5 @@ public class MixinRenderSmallReactor {
     public void func_147500_a2(CallbackInfo ci) {
         ShaderUtils.disableFullBrightness();
     }
+
 }

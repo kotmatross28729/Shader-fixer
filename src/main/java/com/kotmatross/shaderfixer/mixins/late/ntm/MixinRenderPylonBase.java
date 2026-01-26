@@ -17,4 +17,5 @@ public class MixinRenderPylonBase {
     private void drawLineSegment(CallbackInfo ci, @Local(argsOnly = true) Tessellator tessellator) {
         tessellator.setNormal(0.0F, 1.0F, 0.0F);
     }
+
 }

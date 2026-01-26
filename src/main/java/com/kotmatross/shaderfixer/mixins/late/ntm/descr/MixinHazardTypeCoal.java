@@ -23,4 +23,5 @@ public class MixinHazardTypeCoal {
         List<HazardModifier> modifiers, CallbackInfo ci) {
         list.add(EnumChatFormatting.GRAY + I18n.format("trait.danger.level.coal") + (level / 20F));
     }
+
 }

@@ -7,9 +7,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import com.fiskmods.heroes.client.render.tile.RenderSuitFabricator;
 import com.kotmatross.shaderfixer.utils.ShaderUtils;
 
-@Mixin(value = com.fiskmods.heroes.client.render.tile.RenderSuitFabricator.class, priority = 999)
+@Mixin(value = RenderSuitFabricator.class, priority = 999)
 public abstract class MixinRenderSuitFabricator extends TileEntitySpecialRenderer {
 
     @Inject(

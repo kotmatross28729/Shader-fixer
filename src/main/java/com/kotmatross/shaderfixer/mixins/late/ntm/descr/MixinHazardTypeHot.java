@@ -3,7 +3,6 @@ package com.kotmatross.shaderfixer.mixins.late.ntm.descr;
 import java.util.List;
 
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
@@ -25,8 +24,7 @@ public class MixinHazardTypeHot {
     boolean shader_fixer$reacher;
 
     @Inject(method = "onUpdate", at = @At(value = "TAIL"), remap = false)
-    public void onUpdate(EntityLivingBase target, float level, ItemStack stack, CallbackInfo ci,
-        @Local(ordinal = 0) boolean reacher) {
+    public void onUpdate(CallbackInfo ci, @Local(ordinal = 0) boolean reacher) {
         shader_fixer$reacher = reacher; // вэн зэ эйр тёрнс ред
     }
 
@@ -47,6 +45,6 @@ public class MixinHazardTypeHot {
                         + I18n.format("info.template__seconds"));
             }
         }
-
     }
+
 }

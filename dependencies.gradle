@@ -39,7 +39,7 @@ dependencies {
     /// Make everything local at this point, "Read timed out" - shut the fuck up
  
     //implementation(project.files("libs/gtnhlib-0.9.6-dev.jar"))
-    implementation(project.files("libs/angelica-2.0.0-alpha12-dev.jar"))
+    implementation(project.files("libs/angelica-2.0.0-alpha13-dev.jar"))
     implementation(project.files("libs/CodeChickenCore-1.4.10-dev.jar"))
     implementation(project.files("libs/NotEnoughItems-2.8.53-GTNH-pre-dev.jar"))
     implementation(project.files("libs/OpenComputers-1.12.15-GTNH-pre-dev.jar"))

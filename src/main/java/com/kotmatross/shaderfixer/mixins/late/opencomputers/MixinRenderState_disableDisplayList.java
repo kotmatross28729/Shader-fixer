@@ -12,10 +12,6 @@ public class MixinRenderState_disableDisplayList {
 
     /**
      * Forces OC to not use display lists
-     * <p>
-     * Display lists appear to be broken in Angelica (with shaders?)
-     * <p>
-     * Temporary workaround(!!!); proper fix should be investigated on Angelica's side
      */
     @Inject(method = "compilingDisplayList", at = @At(value = "HEAD"), remap = false, cancellable = true)
     private void compilingDisplayList(CallbackInfoReturnable<Boolean> cir) {

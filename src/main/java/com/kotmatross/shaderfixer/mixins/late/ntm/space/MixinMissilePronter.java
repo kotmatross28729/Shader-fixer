@@ -1,5 +1,7 @@
 package com.kotmatross.shaderfixer.mixins.late.ntm.space;
 
+import net.minecraftforge.client.model.IModelCustom;
+
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -8,31 +10,37 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.hbm.render.util.MissilePronter;
 import com.kotmatross.shaderfixer.shrimp.SPEKJORK;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
 @SPEKJORK
 @Mixin(value = MissilePronter.class, priority = 999)
 public class MixinMissilePronter {
 
     @Inject(
-        method = "prontRocket*",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 0),
+        method = "prontRocket(Lcom/hbm/handler/RocketStruct;Lcom/hbm/entity/missile/EntityRideableRocket;Lnet/minecraft/client/renderer/texture/TextureManager;ZIIF)V",
+        at = @At(value = "HEAD"),
         remap = false)
-    private static void prontRocket(CallbackInfo ci) {
-        GL11.glPushMatrix();
-        // Actually 0.99F also works, but we take it with a reserve (0.99F may flicker at some angles)
-        GL11.glScalef(0.97F, 1.0F, 0.97F);
+    private static void fixZFighting0(CallbackInfo ci) {
+        GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
+    }
+
+    @WrapOperation(
+        method = "prontRocket(Lcom/hbm/handler/RocketStruct;Lcom/hbm/entity/missile/EntityRideableRocket;Lnet/minecraft/client/renderer/texture/TextureManager;ZIIF)V",
+        at = @At(value = "INVOKE", target = "Lnet/minecraftforge/client/model/IModelCustom;renderAll()V", ordinal = 0),
+        remap = false)
+    private static void fixZFighting1(IModelCustom instance, Operation<Void> original) {
+        GL11.glPolygonOffset(4.0f, 4.0f);
+        original.call(instance);
+        GL11.glPolygonOffset(0.0f, 0.0f);
     }
 
     @Inject(
-        method = "prontRocket*",
-        at = @At(
-            value = "INVOKE",
-            target = "org/lwjgl/opengl/GL11.glDisable (I)V",
-            ordinal = 0,
-            shift = At.Shift.AFTER),
+        method = "prontRocket(Lcom/hbm/handler/RocketStruct;Lcom/hbm/entity/missile/EntityRideableRocket;Lnet/minecraft/client/renderer/texture/TextureManager;ZIIF)V",
+        at = @At(value = "TAIL"),
         remap = false)
-    private static void prontRocket2(CallbackInfo ci) {
-        GL11.glPopMatrix();
+    private static void fixZFighting2(CallbackInfo ci) {
+        GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
     }
 
 }

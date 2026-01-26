@@ -23,4 +23,5 @@ public class MixinHazardTypeHydroactive {
         List<HazardModifier> modifiers, CallbackInfo ci) {
         list.add(EnumChatFormatting.AQUA + I18n.format("trait.danger.level.hydro") + level);
     }
+
 }

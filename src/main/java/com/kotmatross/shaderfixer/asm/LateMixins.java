@@ -4,7 +4,6 @@ import javax.annotation.Nonnull;
 
 import com.gtnewhorizon.gtnhmixins.builders.IMixins;
 import com.gtnewhorizon.gtnhmixins.builders.MixinBuilder;
-import com.kotmatross.shaderfixer.asm.plugin.ShaderFixerLateMixins;
 import com.kotmatross.shaderfixer.config.ShaderFixerConfig;
 
 @SuppressWarnings("unused")
@@ -55,17 +54,37 @@ public enum LateMixins implements IMixins {
             "fiskheroes.MixinShapeFormatWireframe")
         .setApplyIf(() -> ShaderFixerConfig.FISKHEROES_FIX)),
 
-    /// TODO: TBA
     NTM(new MixinBuilder().addRequiredMod(TargetMods.NTM)
-        .addClientMixins("ntm.MixinArmorEnvsuit", "ntm.MixinBeamPronter")
+        .addClientMixins(
+            "ntm.MixinArmorEnvsuit",
+            "ntm.MixinDiamondPronter",
+            "ntm.MixinItemRendererMeteorSword",
+            "ntm.MixinParticleAmatFlash",
+            "ntm.MixinRenderBeam",
+            "ntm.MixinRenderBlackHole",
+            "ntm.MixinRenderChemical",
+            "ntm.MixinRenderCore",
+            "ntm.MixinRenderDeathBlast",
+            "ntm.MixinRenderDemonLamp",
+            "ntm.MixinRenderMachineForceField",
+            "ntm.MixinRenderOverhead",
+            "ntm.MixinRenderPylonBase",
+            "ntm.MixinRenderRBMKLid",
+            "ntm.MixinRenderRefueler",
+            "ntm.MixinRenderSiegeLaser",
+            "ntm.MixinRenderSmallReactor",
+            "ntm.MixinRenderSolarBoiler",
+            "ntm.MixinRenderSparks",
+            "ntm.MixinRenderSpear",
+            "ntm.MixinRenderTorex")
         .setApplyIf(() -> ShaderFixerConfig.NTM_MAIN_FIX)),
 
     NTM_GUNFIX(new MixinBuilder().addRequiredMod(TargetMods.NTM)
         .addClientMixins(
-            "ntm.MixinHbmAnimations",
-            "ntm.MixinItemRenderWeaponBase",
-            "ntm.MixinLegoClient",
-            "ntm.MixinModEventHandlerRenderer")
+            "ntm.sedna.MixinHbmAnimations",
+            "ntm.sedna.MixinItemRenderWeaponBase",
+            "ntm.sedna.MixinLegoClient",
+            "ntm.sedna.MixinModEventHandlerRenderer")
         .setApplyIf(() -> ShaderFixerConfig.NTM_GUN_FIX)),
 
     NTM_OG_ONLY(new MixinBuilder().addRequiredMod(TargetMods.NTM)
@@ -83,14 +102,6 @@ public enum LateMixins implements IMixins {
     JOURNEYMAP(new MixinBuilder().addRequiredMod(TargetMods.JOURNEYMAP)
         .addClientMixins("journeymap.MixinDrawUtil")
         .setApplyIf(() -> ShaderFixerConfig.JOURNEYMAP_FIX)),
-
-    NEI(new MixinBuilder().addRequiredMod(TargetMods.NEI)
-        .addClientMixins("nei.MixinWorldOverlayRenderer")
-        .setApplyIf(() -> !ShaderFixerLateMixins.OLD_NEI_LOADED && ShaderFixerConfig.NEI_FIX)),
-
-    NEI_OG(new MixinBuilder().addRequiredMod(TargetMods.NEI)
-        .addClientMixins("nei.MixinWorldOverlayRendererLEGACY")
-        .setApplyIf(() -> ShaderFixerLateMixins.OLD_NEI_LOADED && ShaderFixerConfig.NEI_FIX)),
 
     /// TODO: test with 2.x
 

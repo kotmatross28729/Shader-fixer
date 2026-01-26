@@ -1,45 +1,25 @@
 package com.kotmatross.shaderfixer.mixins.late.ntm;
 
+import net.minecraft.tileentity.TileEntity;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.hbm.render.tileentity.RenderCore;
-import com.kotmatross.shaderfixer.utils.ShaderUtils;
+import com.kotmatross.shaderfixer.utils.AngelicaUtils;
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
 @Mixin(value = RenderCore.class, priority = 999)
 public class MixinRenderCore {
 
-    @Inject(method = "renderStandby", at = @At(value = "HEAD"), remap = false)
-    public void renderStandby(CallbackInfo ci) {
-        ShaderUtils.enableFullBrightness();
-    }
-
-    @Inject(method = "renderStandby", at = @At(value = "TAIL"), remap = false)
-    public void renderStandby2(CallbackInfo ci) {
-        ShaderUtils.disableFullBrightness();
-    }
-
-    @Inject(method = "renderOrb", at = @At(value = "HEAD"), remap = false)
-    public void renderOrb(CallbackInfo ci) {
-        ShaderUtils.enableFullBrightness();
-    }
-
-    @Inject(method = "renderOrb", at = @At(value = "TAIL"), remap = false)
-    public void renderOrb2(CallbackInfo ci) {
-        ShaderUtils.disableFullBrightness();
-    }
-
-    @Inject(method = "renderFlare", at = @At(value = "HEAD"), remap = false)
-    public void renderFlare(CallbackInfo ci) {
-        ShaderUtils.enableFullBrightness();
-    }
-
-    @Inject(method = "renderFlare", at = @At(value = "TAIL"), remap = false)
-    public void renderFlare2(CallbackInfo ci) {
-        ShaderUtils.disableFullBrightness();
+    @WrapMethod(method = "renderTileEntityAt")
+    private void dontCastShadow(TileEntity tileEntity, double x, double y, double z, float f,
+        Operation<Void> original) {
+        if (!AngelicaUtils.isShadowPass()) {
+            original.call(tileEntity, x, y, z, f);
+        }
     }
 
     @ModifyArg(
