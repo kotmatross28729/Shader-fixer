@@ -1,13 +1,17 @@
 package com.kotmatross.shaderfixer;
 
+import net.minecraftforge.common.MinecraftForge;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.kotmatross.shaderfixer.config.ShaderFixerConfig;
 import com.kotmatross.shaderfixer.proxy.CommonProxy;
+import com.kotmatross.shaderfixer.shrimp.BratvaAndTheRing;
 import com.kotmatross.shaderfixer.utils.BuiltInResourcePack;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -55,6 +59,14 @@ public class ShaderFixer {
             }
             if (Loader.isModLoaded("Techguns")) {
                 applyTextureFix(ShaderFixerConfig.TECHGUNS_TEXTURE_FIX, "TECHGUNS_FIX", "TECHGUNS_TEXTURE_FIX");
+            }
+            if (IS_ANGELICA_PRESENT && ShaderFixerConfig.ANGELICA_TE_SHADOW_OFFSET_DEBUG_MODE) {
+                BratvaAndTheRing.regKeys();
+                BratvaAndTheRing SenyaGanjubas = new BratvaAndTheRing();
+                FMLCommonHandler.instance()
+                    .bus()
+                    .register(SenyaGanjubas);
+                MinecraftForge.EVENT_BUS.register(SenyaGanjubas);
             }
         }
     }

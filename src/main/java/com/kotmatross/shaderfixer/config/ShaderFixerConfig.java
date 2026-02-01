@@ -7,12 +7,13 @@ import net.minecraftforge.common.config.Configuration;
 public class ShaderFixerConfig {
 
     static final String CAT_VANILLA = "Minecraft";
-    static final String CAT_NTM = "Hbm's Nuclear Tech Mod";
+    static final String CAT_ANGELICA = "Angelica";
+    static final String CAT_NTM = "HbmsNuclearTechMod";
     static final String CAT_OC = "OpenComputers";
-    static final String CAT_ELN = "Electrical Age";
+    static final String CAT_ELN = "ElectricalAge";
     static final String CAT_AVARITIA = "Avaritia";
-    static final String CAT_DSURROUND = "Dynamic Surroundings";
-    static final String CAT_FISKHEROES = "Fisk's Superheroes";
+    static final String CAT_DSURROUND = "DynamicSurroundings";
+    static final String CAT_FISKHEROES = "FisksSuperheroes";
     static final String CAT_JOURNEYMAP = "JourneyMap";
     static final String CAT_TECHGUNS = "Techguns";
 
@@ -22,6 +23,9 @@ public class ShaderFixerConfig {
     public static boolean V_RIDING_HAND_ROTATION_FIX;
     public static boolean V_RIDING_HAND_ROTATION_DISABLE;
     public static boolean V_MODERN_RIDING_LEG_POS;
+    public static boolean ANGELICA_TE_SHADOW_OFFSET;
+    public static float ANGELICA_TE_SHADOW_OFFSET_FACTOR;
+    public static boolean ANGELICA_TE_SHADOW_OFFSET_DEBUG_MODE;
     public static boolean NTM_MAIN_FIX;
     public static boolean NTM_GUN_FIX;
     public static boolean NTM_ARMOR_FIX;
@@ -77,6 +81,15 @@ public class ShaderFixerConfig {
             true,
             "Changes the position of the legs when riding, in accordance with modern versions (fixes legs passing through boat/minecart)");
 
+        ANGELICA_TE_SHADOW_OFFSET = config
+            .getBoolean("ANGELICA_TE_SHADOW_OFFSET", CAT_ANGELICA, true, "[EXPERIMENTAL] TODO");
+
+        ANGELICA_TE_SHADOW_OFFSET_FACTOR = config
+            .getFloat("ANGELICA_TE_SHADOW_OFFSET_FACTOR", CAT_ANGELICA, 16.0F, 0.0F, 256.0F, "[EXPERIMENTAL] TODO");
+
+        ANGELICA_TE_SHADOW_OFFSET_DEBUG_MODE = config
+            .getBoolean("ANGELICA_TE_SHADOW_OFFSET_DEBUG_MODE", CAT_ANGELICA, false, "[EXPERIMENTAL] TODO");
+
         NTM_MAIN_FIX = config.getBoolean("NTM_MAIN_FIX", CAT_NTM, true, "ADD LATER");
 
         NTM_GUN_FIX = config
@@ -92,7 +105,7 @@ public class ShaderFixerConfig {
             .getBoolean("NTM_TEXTURE_FIX", CAT_NTM, true, "Fixes transparency of some NTM textures");
 
         NTM_EXTENDED_HAZARD_DESCRIPTIONS = config.getBoolean(
-            "HBM_EXTENDED_HAZARD_DESCRIPTIONS",
+            "NTM_EXTENDED_HAZARD_DESCRIPTIONS",
             CAT_NTM,
             true,
             "Adds additional information to dangerous items (Ignites for / Explosion force / etc.)");

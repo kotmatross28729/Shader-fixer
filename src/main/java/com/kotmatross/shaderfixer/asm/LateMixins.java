@@ -15,6 +15,10 @@ public enum LateMixins implements IMixins {
         .addClientMixins("angelica.MixinHandRenderer")
         .setApplyIf(() -> ShaderFixerConfig.NTM_GUN_FIX)),
 
+    ANGELICA_SHADOW_OFFSET_TE(new MixinBuilder().addRequiredMod(TargetMods.ANGELICA)
+        .addClientMixins("angelica.MixinShadowRenderer")
+        .setApplyIf(() -> ShaderFixerConfig.ANGELICA_TE_SHADOW_OFFSET)),
+
     BACKHAND_NTM_GUNFIX_COMPAT(new MixinBuilder(
         "Cancel rendering of the offhand item if item in the main hand is NTM gun (otherwise it causes rendering bugs)")
             .addRequiredMod(TargetMods.BACKHAND)

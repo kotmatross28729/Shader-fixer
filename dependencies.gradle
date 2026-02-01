@@ -39,7 +39,7 @@ dependencies {
     /// Make everything local at this point, "Read timed out" - shut the fuck up
  
     //implementation(project.files("libs/gtnhlib-0.9.6-dev.jar"))
-    implementation(project.files("libs/angelica-2.0.0-alpha13-dev.jar"))
+    implementation(project.files("libs/angelica-2.0.0-alpha17-dev.jar"))
     implementation(project.files("libs/CodeChickenCore-1.4.10-dev.jar"))
     implementation(project.files("libs/NotEnoughItems-2.8.53-GTNH-pre-dev.jar"))
     implementation(project.files("libs/OpenComputers-1.12.15-GTNH-pre-dev.jar"))
@@ -50,7 +50,8 @@ dependencies {
     implementation(rfg.deobf(project.files("libs/HBM-NTM-[1.0.27_X5572_H261].jar")))
     implementation(rfg.deobf(project.files("libs/CustomPlayerModels-1.7.10-0.6.25b.jar")))
     implementation(rfg.deobf(project.files("libs/Eln-1.23.0.jar")))
-    
+
+    compileOnly(project.files("libs/gtnhlib-0.9.6-dev.jar"))
     compileOnly(rfg.deobf(project.files("libs/Techguns 1.7.10 fixed.jar"))) //not working in dev
     compileOnly(rfg.deobf("curse.maven:fiskheroes-630788:5737543")) //2.4.0 | not working in dev
 }
