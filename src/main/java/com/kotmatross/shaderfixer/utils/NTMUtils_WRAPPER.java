@@ -41,6 +41,17 @@ public class NTMUtils_WRAPPER {
         return false;
     }
 
+    public static boolean checkVibe_Left(EntityLivingBase entityLivingBase) {
+        ItemStack held = entityLivingBase.getHeldItem();
+        if (held != null) {
+            IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(held, EQUIPPED);
+            if (customRenderer instanceof Vibe) {
+                return NTMUtils.isLeftRenderer(customRenderer);
+            }
+        }
+        return false;
+    }
+
     public static void handleInterpolation(float interp) {
         NTMUtils.handleInterpolation(interp);
     }
@@ -49,8 +60,12 @@ public class NTMUtils_WRAPPER {
         return NTMUtils.isAkimboRenderer(customRenderer);
     }
 
-    public static void akimboSetupNRender(IItemRenderer customRenderer, ItemStack held) {
-        NTMUtils.akimboSetupNRender(customRenderer, held);
+    public static boolean isLeftRenderer(IItemRenderer customRenderer) {
+        return NTMUtils.isLeftRenderer(customRenderer);
+    }
+
+    public static void akimboSetupNRender(IItemRenderer customRenderer, ItemStack held, EntityLivingBase entity) {
+        NTMUtils.akimboSetupNRender(customRenderer, held, entity);
     }
 
     public static boolean getFOVConf() {

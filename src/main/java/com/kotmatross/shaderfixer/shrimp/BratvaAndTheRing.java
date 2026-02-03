@@ -38,16 +38,18 @@ public class BratvaAndTheRing {
     // !-------------------------!\\
     // !-------------------------!\\
 
-    private static final KeyBinding IncFac = new KeyBinding(
-        "Increment factor",
-        Keyboard.KEY_I,
-        "Братва И Кольцо: glPolygonOffset наносит ответный удар");
-    private static final KeyBinding DecFac = new KeyBinding(
-        "Decrement factor",
-        Keyboard.KEY_K,
-        "Братва И Кольцо: glPolygonOffset наносит ответный удар");
+    private static KeyBinding IncFac;
+    private static KeyBinding DecFac;
 
     public static void regKeys() {
+        IncFac = new KeyBinding(
+            "Increment factor",
+            Keyboard.KEY_I,
+            "Братва И Кольцо: glPolygonOffset наносит ответный удар");
+        DecFac = new KeyBinding(
+            "Decrement factor",
+            Keyboard.KEY_K,
+            "Братва И Кольцо: glPolygonOffset наносит ответный удар");
         ClientRegistry.registerKeyBinding(IncFac);
         ClientRegistry.registerKeyBinding(DecFac);
     }

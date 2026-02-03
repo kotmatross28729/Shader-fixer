@@ -1,5 +1,5 @@
 # 5.0
-**TBA™**
+* **Basically a complete rework, see the mod description**
 
 # 4.9-patch-1
 *Update to this version only if you're using Angelica beta68+, otherwise it's not necessary*

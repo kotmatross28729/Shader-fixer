@@ -13,6 +13,9 @@ public enum EarlyMixins implements IMixins {
         .setApplyIf(() -> ShaderFixerConfig.V_MAIN_MENU_FPS_BYPASS)),
     VANILLA_GUI_BLEND_FIX(new MixinBuilder().addClientMixins("minecraft.guiblendfix.MixinInventoryEffectRenderer")
         .setApplyIf(() -> ShaderFixerConfig.V_GUI_BLEND_FIX)),
+    VANILLA_DISABLE_NORMALS(new MixinBuilder()
+        .addClientMixins("minecraft.disablenormals.MixinRendererLivingEntity", "minecraft.disablenormals.MixinRender")
+        .setApplyIf(() -> ShaderFixerConfig.V_NORMALS_DISABLE_TAG)),
     VANILLA_RIDING_HAND_ROTATION(new MixinBuilder().addClientMixins("minecraft.riding.MixinRenderPlayer")
         .setApplyIf(
             () -> ShaderFixerConfig.V_RIDING_HAND_ROTATION_FIX || ShaderFixerConfig.V_RIDING_HAND_ROTATION_DISABLE)),

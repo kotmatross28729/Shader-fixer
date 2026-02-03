@@ -107,29 +107,18 @@ public enum LateMixins implements IMixins {
         .addClientMixins("journeymap.MixinDrawUtil")
         .setApplyIf(() -> ShaderFixerConfig.JOURNEYMAP_FIX)),
 
-    /// TODO: test with 2.x
-
-    // OPENCOMPUTERS(new MixinBuilder().addRequiredMod(TargetMods.OPENCOMPUTERS)
-    // .addClientMixins("opencomputers.MixinScreenRenderer")),
-
     OPENCOMPUTERS_DL_DISABLE(new MixinBuilder().addRequiredMod(TargetMods.OPENCOMPUTERS)
         .addRequiredMod(TargetMods.ANGELICA)
         .addClientMixins("opencomputers.MixinRenderState_disableDisplayList")
         .setApplyIf(() -> ShaderFixerConfig.OC_DISABLE_DL)),
 
-    /// TODO: TBA
+    SCHEMATICA(new MixinBuilder().addRequiredMod(TargetMods.SCHEMATICA)
+        .addClientMixins("schematica.MixinRendererSchematicChunk", "schematica.MixinRendererSchematicGlobal")
+        .setApplyIf(() -> ShaderFixerConfig.SCHEMATICA_FIX)),
 
-    // SCHEMATICA(new MixinBuilder().addRequiredMod(TargetMods.SCHEMATICA)
-    // .addClientMixins(
-    // "SCHEMATICA.MixinRendererSchematicChunk",
-    // "SCHEMATICA.MixinRendererSchematicGlobal",
-    // "SCHEMATICA.MixinRenderHelper")),
-
-    // SIGNPIC(new MixinBuilder().addRequiredMod(TargetMods.SIGNPIC)
-    // .addClientMixins(
-    // "SIGNPIC.MixinCustomTileEntitySignRenderer",
-    // "SIGNPIC.MixinRenderHelper",
-    // "SIGNPIC.MixinStateRender")),
+    SIGNPIC(new MixinBuilder().addRequiredMod(TargetMods.SIGNPIC)
+        .addClientMixins("signpic.MixinCustomTileEntitySignRenderer", "signpic.MixinStateRender")
+        .setApplyIf(() -> ShaderFixerConfig.SIGNPIC_FIX)),
 
     TECHGUNS(new MixinBuilder().addRequiredMod(TargetMods.TECHGUNS)
         .addClientMixins("techguns.MixinRenderTGChest", "techguns.MixinTGRenderHelper", "techguns.MixinRenderTeslaBeam")

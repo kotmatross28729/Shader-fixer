@@ -21,6 +21,8 @@ public class MixinModelBiped {
     @Shadow
     public ModelRenderer bipedHead;
     @Shadow
+    public ModelRenderer bipedRightArm;
+    @Shadow
     public ModelRenderer bipedLeftArm;
 
     /**
@@ -35,6 +37,10 @@ public class MixinModelBiped {
             if ((entity instanceof EntityLivingBase entityLivingBase)) {
                 if (NTMUtils_WRAPPER.checkVibe_Akimbo(entityLivingBase)) {
                     this.bipedLeftArm.rotateAngleY = 0.1F + this.bipedHead.rotateAngleY;
+                }
+                if (NTMUtils_WRAPPER.checkVibe_Left(entityLivingBase)) {
+                    this.bipedLeftArm.rotateAngleY = 0.1F + this.bipedHead.rotateAngleY;
+                    this.bipedRightArm.rotateAngleY = -0.5F + this.bipedHead.rotateAngleY;
                 }
             }
         }

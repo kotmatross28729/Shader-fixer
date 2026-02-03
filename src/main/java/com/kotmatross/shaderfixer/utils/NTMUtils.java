@@ -1,8 +1,11 @@
 package com.kotmatross.shaderfixer.utils;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
+
+import org.lwjgl.opengl.GL11;
 
 import com.hbm.config.ClientConfig;
 import com.hbm.render.item.weapon.sedna.ItemRenderWeaponBase;
@@ -22,10 +25,23 @@ public class NTMUtils {
         return false;
     }
 
-    protected static void akimboSetupNRender(IItemRenderer customRenderer, ItemStack held) {
+    protected static boolean isLeftRenderer(IItemRenderer customRenderer) {
         if (customRenderer instanceof ItemRenderWeaponBase renderWeapon) {
-            renderWeapon.setupThirdPersonAkimbo(held);
-            renderWeapon.renderEquippedAkimbo(held);
+            return renderWeapon.isLeftHanded();
+        }
+        return false;
+    }
+
+    protected static void akimboSetupNRender(IItemRenderer customRenderer, ItemStack held, EntityLivingBase entity) {
+        if (customRenderer instanceof ItemRenderWeaponBase renderWeapon) {
+            if (renderWeapon.isLeftHanded()) {
+                GL11.glTranslatef(0.1875F, 0F, 0.0F);
+                renderWeapon.setupThirdPerson(held);
+                renderWeapon.renderEquippedAkimbo(held, entity);
+            } else {
+                renderWeapon.setupThirdPersonAkimbo(held);
+                renderWeapon.renderEquippedAkimbo(held, entity);
+            }
         }
     }
 
