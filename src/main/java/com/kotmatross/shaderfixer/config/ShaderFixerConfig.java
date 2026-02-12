@@ -20,6 +20,7 @@ public class ShaderFixerConfig {
     static final String CAT_SCHEMATICA = "Schematica";
 
     public static boolean V_GUI_BLEND_FIX;
+    public static boolean V_XP_BAR_ALPHA_FIX;
     public static boolean V_NORMALS_DISABLE_TAG;
     public static boolean V_MAIN_MENU_FPS_BYPASS;
     public static int V_MAIN_MENU_FPS_BYPASS_VALUE;
@@ -53,6 +54,12 @@ public class ShaderFixerConfig {
             CAT_VANILLA,
             true,
             "Fixes an annoying bug due to which the effect bar in the creative menu turns black");
+
+        V_XP_BAR_ALPHA_FIX = config.getBoolean(
+            "VANILLA_XP_BAR_ALPHA_FIX",
+            CAT_VANILLA,
+            true,
+            "Fixes experience bar black background if there is an item in the hotbar");
 
         V_NORMALS_DISABLE_TAG = config.getBoolean(
             "VANILLA_NORMALS_DISABLE_TAG",

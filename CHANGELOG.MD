@@ -1,3 +1,6 @@
+# 5.1
+* **[Minecraft]** Fixed experience bar black background if there is an item in the hotbar (`VANILLA_XP_BAR_ALPHA_FIX`)
+
 # 5.0
 * **Basically a complete rework, see the mod description**
 
