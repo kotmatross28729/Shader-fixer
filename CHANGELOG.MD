@@ -1,3 +1,6 @@
+# 5.2
+* **[Main]** Fixed translucent particles becoming very dark with Complementary shaders enabled (e.g. cooling tower steam particles from Hbm's NTM)
+
 # 5.1
 * **[Minecraft]** Fixed experience bar black background if there is an item in the hotbar (`VANILLA_XP_BAR_ALPHA_FIX`)
 

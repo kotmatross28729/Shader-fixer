@@ -21,6 +21,7 @@ public class ShaderFixerConfig {
 
     public static boolean V_GUI_BLEND_FIX;
     public static boolean V_XP_BAR_ALPHA_FIX;
+    public static boolean V_PARTICLE_ALPHA_WORKAROUND;
     public static boolean V_NORMALS_DISABLE_TAG;
     public static boolean V_MAIN_MENU_FPS_BYPASS;
     public static int V_MAIN_MENU_FPS_BYPASS_VALUE;
@@ -60,6 +61,12 @@ public class ShaderFixerConfig {
             CAT_VANILLA,
             true,
             "Fixes experience bar black background if there is an item in the hotbar");
+
+        V_PARTICLE_ALPHA_WORKAROUND = config.getBoolean(
+            "VANILLA_PARTICLE_ALPHA_WORKAROUND",
+            CAT_VANILLA,
+            true,
+            "Uses GL_ONE instead of GL_SRC_ALPHA when rendering particles with Complementary shaders enabled. Fixes translucent particles becoming very dark");
 
         V_NORMALS_DISABLE_TAG = config.getBoolean(
             "VANILLA_NORMALS_DISABLE_TAG",

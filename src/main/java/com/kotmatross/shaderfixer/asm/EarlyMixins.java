@@ -9,6 +9,9 @@ import com.kotmatross.shaderfixer.config.ShaderFixerConfig;
 @SuppressWarnings("unused")
 public enum EarlyMixins implements IMixins {
 
+    VANILLA_PARTICLE_ALPHA_WORKAROUND(
+        new MixinBuilder().addClientMixins("minecraft.particleAlphaWorkaround.MixinEffectRenderer")
+            .setApplyIf(() -> ShaderFixerConfig.V_PARTICLE_ALPHA_WORKAROUND)),
     VANILLA_DISABLE_NORMALS(new MixinBuilder()
         .addClientMixins("minecraft.disablenormals.MixinRendererLivingEntity", "minecraft.disablenormals.MixinRender")
         .setApplyIf(() -> ShaderFixerConfig.V_NORMALS_DISABLE_TAG)),

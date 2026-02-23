@@ -12,22 +12,12 @@ import com.kotmatross.shaderfixer.utils.ShaderUtils;
 @Mixin(value = { RenderBeam.class, RenderBeam5.class, }, priority = 999)
 public class MixinRenderBeam {
 
-    @Inject(
-        method = "doRender",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
-            shift = At.Shift.BEFORE))
+    @Inject(method = "doRender", at = @At(value = "HEAD"))
     public void doRender(CallbackInfo ci) {
         ShaderUtils.enableFullBrightness();
     }
 
-    @Inject(
-        method = "doRender",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-            shift = At.Shift.AFTER))
+    @Inject(method = "doRender", at = @At(value = "TAIL"))
     public void doRender_E(CallbackInfo ci) {
         ShaderUtils.disableFullBrightness();
     }
