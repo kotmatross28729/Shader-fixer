@@ -49,7 +49,7 @@ dependencies {
     implementation(project.files("libs/journeymap-1.7.10-5.2.10-dev.jar"))
     implementation(project.files("libs/LunatriusCore-1.2.1-GTNH-dev.jar"))
     implementation(project.files("libs/Schematica-1.12.6-GTNH-dev.jar"))
-    implementation(rfg.deobf(project.files("libs/HBM-NTM-.1.0.27_X5593_H261.jar")))
+    implementation(rfg.deobf(project.files("libs/HBM-NTM-.1.0.27_X5615_H261.jar")))
     implementation(rfg.deobf(project.files("libs/CustomPlayerModels-1.7.10-0.6.25b.jar")))
     implementation(rfg.deobf(project.files("libs/Eln-1.23.0.jar")))
     implementation(rfg.deobf(project.files("libs/SignPicture-1.7.10-2.8.0-universal.jar")))

@@ -18,9 +18,9 @@ public class NTMUtils {
         ItemRenderWeaponBase.interp = interp;
     }
 
-    protected static boolean isAkimboRenderer(IItemRenderer customRenderer) {
+    protected static boolean isAkimboRenderer(IItemRenderer customRenderer, EntityLivingBase entity) {
         if (customRenderer instanceof ItemRenderWeaponBase renderWeapon) {
-            return renderWeapon.isAkimbo();
+            return renderWeapon.isAkimbo(entity);
         }
         return false;
     }

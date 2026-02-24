@@ -35,7 +35,7 @@ public class NTMUtils_WRAPPER {
         if (held != null) {
             IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(held, EQUIPPED);
             if (customRenderer instanceof Vibe) {
-                return NTMUtils.isAkimboRenderer(customRenderer);
+                return isAkimboRenderer(customRenderer, entityLivingBase);
             }
         }
         return false;
@@ -46,7 +46,7 @@ public class NTMUtils_WRAPPER {
         if (held != null) {
             IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(held, EQUIPPED);
             if (customRenderer instanceof Vibe) {
-                return NTMUtils.isLeftRenderer(customRenderer);
+                return isLeftRenderer(customRenderer);
             }
         }
         return false;
@@ -56,8 +56,8 @@ public class NTMUtils_WRAPPER {
         NTMUtils.handleInterpolation(interp);
     }
 
-    public static boolean isAkimboRenderer(IItemRenderer customRenderer) {
-        return NTMUtils.isAkimboRenderer(customRenderer);
+    public static boolean isAkimboRenderer(IItemRenderer customRenderer, EntityLivingBase entityLivingBase) {
+        return NTMUtils.isAkimboRenderer(customRenderer, entityLivingBase);
     }
 
     public static boolean isLeftRenderer(IItemRenderer customRenderer) {

@@ -23,7 +23,7 @@ public class MixinEffectRenderer {
      */
     @ModifyArg(
         method = "renderParticles",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glBlendFunc(II)V"),
+        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glBlendFunc(II)V", remap = false),
         index = 0)
     private int workaroundComplementaryParticleAlpha(int sfactor, int dfactor) {
         return AngelicaUtils.isComplementary() ? GL11.GL_ONE : sfactor;

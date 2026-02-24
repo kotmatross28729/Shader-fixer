@@ -36,7 +36,7 @@ public class MixinRenderBiped {
                 IItemRenderer customRenderer = MinecraftForgeClient
                     .getItemRenderer(held, IItemRenderer.ItemRenderType.EQUIPPED);
 
-                if (NTMUtils_WRAPPER.isAkimboRenderer(customRenderer)
+                if (NTMUtils_WRAPPER.isAkimboRenderer(customRenderer, entity)
                     || NTMUtils_WRAPPER.isLeftRenderer(customRenderer)) {
                     GL11.glPushMatrix();
 
