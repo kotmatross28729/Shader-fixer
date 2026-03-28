@@ -74,7 +74,6 @@ public enum LateMixins implements IMixins {
             "ntm.MixinRenderOverhead",
             "ntm.MixinRenderPylonBase",
             "ntm.MixinRenderRBMKFuelChannel",
-            "ntm.MixinRenderRefueler",
             "ntm.MixinRenderSiegeLaser",
             "ntm.MixinRenderSmallReactor",
             "ntm.MixinRenderSolarBoiler",
