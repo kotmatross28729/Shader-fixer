@@ -1,3 +1,8 @@
+# 5.3
+* **[Hbm's NTM]** Fixed crash with X5634
+* **[Hbm's NTM]** Fixed health bars / thermal sights / bullets rendering during shadow pass
+
+
 # 5.2
 * **[Main]** Fixed translucent particles becoming very dark with Complementary shaders enabled (e.g. cooling tower steam particles from Hbm's NTM)
 * **[Hbm's NTM]** Fixed crash when rendering guns with X5615+

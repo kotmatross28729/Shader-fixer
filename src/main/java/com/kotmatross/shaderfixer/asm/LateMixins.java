@@ -73,14 +73,15 @@ public enum LateMixins implements IMixins {
             "ntm.MixinRenderMachineForceField",
             "ntm.MixinRenderOverhead",
             "ntm.MixinRenderPylonBase",
-            "ntm.MixinRenderRBMKLid",
+            "ntm.MixinRenderRBMKFuelChannel",
             "ntm.MixinRenderRefueler",
             "ntm.MixinRenderSiegeLaser",
             "ntm.MixinRenderSmallReactor",
             "ntm.MixinRenderSolarBoiler",
             "ntm.MixinRenderSparks",
             "ntm.MixinRenderSpear",
-            "ntm.MixinRenderTorex")
+            "ntm.MixinRenderTorex",
+            "ntm.MixinModEventHandlerClient")
         .setApplyIf(() -> ShaderFixerConfig.NTM_MAIN_FIX)),
 
     NTM_GUNFIX(new MixinBuilder().addRequiredMod(TargetMods.NTM)
