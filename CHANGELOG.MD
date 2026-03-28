@@ -1,4 +1,5 @@
 # 5.3
+* **[Minecraft]** Fixed particles rendering during shadow pass
 * **[Hbm's NTM]** Fixed crash with X5634
 * **[Hbm's NTM]** Fixed health bars / thermal sights / bullets rendering during shadow pass
 

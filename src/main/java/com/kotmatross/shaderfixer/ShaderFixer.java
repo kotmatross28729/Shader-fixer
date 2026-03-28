@@ -19,7 +19,15 @@ import cpw.mods.fml.common.event.FMLConstructionEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = Tags.MODID, version = Tags.VERSION, name = Tags.MODNAME, acceptedMinecraftVersions = Tags.MCVERSION)
+@Mod(
+    modid = Tags.MODID,
+    version = Tags.VERSION,
+    name = Tags.MODNAME,
+    acceptedMinecraftVersions = Tags.MCVERSION,
+    customProperties = { @Mod.CustomProperty(k = "license", v = "MIT"),
+        @Mod.CustomProperty(k = "issueTrackerUrl", v = "https://github.com/kotmatross28729/Shader-fixer/issues"),
+        @Mod.CustomProperty(k = "iconFile", v = "shaderfixer.png"),
+        @Mod.CustomProperty(k = "backgroundFile", v = "background.png") })
 public class ShaderFixer {
 
     public static final Logger logger = LogManager.getLogger("SHADER_FIXER");
@@ -46,6 +54,10 @@ public class ShaderFixer {
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
+
+        event.getModMetadata().authorList.clear();
+        event.getModMetadata().authorList.add("§1§lK§1§lo§9§lt§b§lm§f§la§1§lt§1§lr§9§lo§b§ls§f§ls");
+
         if (Loader.isModLoaded("angelica")) {
             IS_ANGELICA_PRESENT = true;
         }

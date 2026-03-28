@@ -3,10 +3,10 @@
 	"modList": [{
 		"modid": "${modId}",
 		"name": "${modName}",
-		"description": "Fixes multiple bugs with shader ",
+		"description": "Fixes multiple bugs with shaders ",
 		"version": "${modVersion}",
 		"mcversion": "${minecraftVersion}",
-		"url": "",
+		"url": "https://github.com/kotmatross28729/Shader-fixer",
 		"updateUrl": "",
 		"authorList": ["Kotmatross28729 (Kotmatross)"],
 		"credits": "jss2a98aj, GTNH",
