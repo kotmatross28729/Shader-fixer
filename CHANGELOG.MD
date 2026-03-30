@@ -1,8 +1,8 @@
 # 5.3
 * **[Minecraft]** Fixed particles rendering during shadow pass
-* **[Hbm's NTM]** Fixed crash with X5634
+* **[Hbm's NTM]** Fixed crash with X5634+
 * **[Hbm's NTM]** Fixed health bars / thermal sights / bullets rendering during shadow pass
-
+* **[Hbm's NTM / Techguns]** Improved texture (black background) fixes
 
 # 5.2
 * **[Main]** Fixed translucent particles becoming very dark with Complementary shaders enabled (e.g. cooling tower steam particles from Hbm's NTM)
