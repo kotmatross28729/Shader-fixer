@@ -1,36 +1,44 @@
-# Shader Fixer (1.7.10)
+# ShaderFixer
 
-**[CurseForge](https://legacy.curseforge.com/minecraft/mc-mods/shader-fixer) | [Modrinth](https://modrinth.com/mod/shader-fixer)**
+[![github](images/badges/github.png)](https://github.com/kotmatross28729/Shader-fixer)
+[![curseforge](images/badges/curse.png)](https://www.curseforge.com/minecraft/mc-mods/shader-fixer)
+[![modrinth](images/badges/modrinth.png)](https://modrinth.com/mod/shader-fixer)
+![forge](images/badges/forge.png)
 
 ---
 
-A mod (a.k.a. toxic wasteland) that attempts to improve visuals by patching various mods to fix issues with Angelica / Angelica Shaders (as well as minor QOL features :D)
+A **set of patches** for various mods, fixes **some** issues with Angelica / Angelica Shaders. Also has QoL features and vanilla fixes
 
-**Use this mod at your own risk.** **Or not, as you wish.**
+*Use this mod at your own risk. Contains experimental fixes.*
 
-## Full list of supported mods:
+## Dependencies
+  - [UniMixins](https://github.com/LegacyModdingMC/UniMixins/releases) [![curse](images/icons/curse.png)](https://www.curseforge.com/minecraft/mc-mods/unimixins) [![modrinth](images/icons/modrinth.png)](https://modrinth.com/mod/unimixins/versions) [![git](images/icons/git.png)](https://github.com/LegacyModdingMC/UniMixins/releases)
 
+## Incompatibilities
+  - [Optifine](https://optifine.net) |  Use [Angelica](https://github.com/GTNewHorizons/Angelica) [![curse](images/icons/curse.png)](https://www.curseforge.com/minecraft/mc-mods/angelica) [![modrinth](images/icons/modrinth.png)](https://modrinth.com/mod/angelica/versions) [![git](images/icons/git.png)](https://github.com/GTNewHorizons/Angelica/releases) instead
 
-### Vanilla Minecraft
+## Supported mods:
+
+**Vanilla Minecraft**
   - Fixed incorrect rendering of many translucent things when rendering the entity's name tag | `VANILLA_NORMALS_DISABLE_TAG`
   - Fixed translucent particles becoming very dark with Complementary shaders enabled | `VANILLA_PARTICLE_ALPHA_WORKAROUND`
   - Removed 30 FPS lock in the main menu + added the ability to set an arbitrary value | `VANILLA_MAIN_MENU_FPS_BYPASS`
   - Fixed annoying bug due to which the effect bar in the creative menu turns black | `VANILLA_GUI_BLEND_FIX`
-  - Fixed bug due to which the hand wouldn't update rotation when the player was sitting + added ability to turn hand's rotation off (similar to modern versions) | `VANILLA_RIDING_HAND_ROTATION_FIX`
+  - Fixed bug due to which the hand wouldn't update rotation when the player was sitting, added ability to turn hand's rotation off (modern minecraft behavior) | `VANILLA_RIDING_HAND_ROTATION_FIX`
   - Fixed experience bar black background if there is an item in the hotbar | `VANILLA_XP_BAR_ALPHA_FIX`
 
-### Angelica
+**Angelica**
   - Added support for NTM_GUN_FIX (interpolation / ntmclient's GUN_MODEL_FOV) | `NTM_GUN_FIX`
 
-### Avaritia [`AVARITIA_FIX`]
+**Avaritia [`AVARITIA_FIX`]**
   - Fixed broken shadows when rendering tools/armor from the mod with shaders enabled
   - Fixed heaven arrow not having full brightness with shaders enabled
 
-### Backhand
+**Backhand**
   - Added support for `NTM_GUN_FIX` (broken render otherwise)
 
-### HBM's NTM [`NTM_MAIN_FIX`]
-  - Fixed holding guns causing various (water/clouds visible through blocks, distorted shadows, other shader effects completely broken) issues with shaders enabled | `NTM_GUN_FIX`
+**HBM's NTM [`NTM_MAIN_FIX`]**
+  - Fixed holding guns causing various issues (water/clouds visible through blocks, distorted shadows, other shader effects completely broken) with shaders enabled | `NTM_GUN_FIX`
   - Fixed various effects/particles have a black background with shaders enabled | `NTM_TEXTURE_FIX`
   - Fixed lamps on the M1TTY suit helmet not glowing with shaders enabled
   - Fixed fire diamond (NFPA 704) brightness with shaders enabled
@@ -55,38 +63,31 @@ A mod (a.k.a. toxic wasteland) that attempts to improve visuals by patching vari
   - Added extended tooltips for hazardous items (Explosion force: n / Ignites for: n second(s) / etc.) | `NTM_EXTENDED_HAZARD_DESCRIPTIONS`
   - Fixed holding two-handed weapons with Customizable Player Models mod | `NTM_ARMOR_FIX`
 
-### HBM's NTM:Space [`NTM_MAIN_FIX`]
+**HBM's NTM:Space [`NTM_MAIN_FIX`]**
   - Fixed z-fighting between rocket thruster/fuselage with shaders enabled
 
-### Fisk Superheroes [`FISKHEROES_FIX`]
+**Fisk Superheroes [`FISKHEROES_FIX`]**
   - Fixed multiple things (lasers/lightnings/etc.) not rendering with shaders enabled
   - Fixed suit database / suit fabricator brightness with shaders enabled
 
-### Journeymap [`JOURNEYMAP_FIX`]
-  - Fixed blinding waypoint (if shader has bloom) having brightness 255 when limit is 1
-
-### Techguns [`TECHGUNS_FIX `]
+**Techguns [`TECHGUNS_FIX `]**
   - Fixed crash (ClassCastException) when breaking a chest with shaders enabled
   - Fixed tesla gun projectile casting a shadow
   - Fixed explosion/rocket trail particles breaking water brightness
   - Fixed various effects/particles have a black background with shaders enabled | `TECHGUNS_TEXTURE_FIX`
 
-### Schematica [`SCHEMATICA_FIX`]
+**Schematica [`SCHEMATICA_FIX`]**
   - Fixed highlight brightness with shaders enabled
 
-### OpenComputers
-  - Fixed screen rendering with shaders enabled | OC_DISABLE_DL
+**OpenComputers**
+  - Fixed screen rendering with shaders enabled | `OC_DISABLE_DL`
 
-### Electrical Age
-  - Fixed wires brightness with shaders enabled | ELN_DISABLE_DL
+**Electrical Age**
+  - Fixed wires brightness with shaders enabled | `ELN_DISABLE_DL`
 
-### Dynamic Surroundings [`DSURROUND_FIX`]
+**Dynamic Surroundings [`DSURROUND_FIX`]**
   - Fixed aurora rendering with shaders enabled
 
-### SignPicture [`SIGNPIC_FIX`]
+**SignPicture [`SIGNPIC_FIX`]**
   - Fixed multiple GL leaks when rendering pictures
   - Fixed pictures casting shadows
-
-
-## Requires [unimixins](https://github.com/LegacyModdingMC/UniMixins/releases)
-

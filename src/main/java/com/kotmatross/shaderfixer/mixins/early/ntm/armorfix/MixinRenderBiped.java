@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.kotmatross.shaderfixer.ShaderFixer;
-import com.kotmatross.shaderfixer.utils.NTMUtils_WRAPPER;
+import com.kotmatross.shaderfixer.utils.ntm.NTMUtils_WRAPPER;
 import com.llamalad7.mixinextras.sugar.Local;
 
 @Mixin(value = RenderBiped.class, priority = 999)

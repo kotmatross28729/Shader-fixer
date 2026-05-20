@@ -14,7 +14,6 @@ public class ShaderFixerConfig {
     static final String CAT_AVARITIA = "Avaritia";
     static final String CAT_DSURROUND = "DynamicSurroundings";
     static final String CAT_FISKHEROES = "FisksSuperheroes";
-    static final String CAT_JOURNEYMAP = "JourneyMap";
     static final String CAT_TECHGUNS = "Techguns";
     static final String CAT_SIGNPIC = "SignPicture";
     static final String CAT_SCHEMATICA = "Schematica";
@@ -37,7 +36,6 @@ public class ShaderFixerConfig {
     public static boolean AVARITIA_FIX;
     public static boolean DSURROUND_FIX;
     public static boolean FISKHEROES_FIX;
-    public static boolean JOURNEYMAP_FIX;
     public static boolean TECHGUNS_FIX;
     public static boolean TECHGUNS_TEXTURE_FIX;
     public static boolean SIGNPIC_FIX;
@@ -137,8 +135,6 @@ public class ShaderFixerConfig {
 
         FISKHEROES_FIX = config
             .getBoolean("FISKHEROES_FIX", CAT_FISKHEROES, true, "Main FisksSuperheroes patch. See README");
-
-        JOURNEYMAP_FIX = config.getBoolean("JOURNEYMAP_FIX", CAT_JOURNEYMAP, true, "Main JourneyMap patch. See README");
 
         TECHGUNS_FIX = config.getBoolean("TECHGUNS_FIX", CAT_TECHGUNS, true, "Main Techguns patch. See README");
         TECHGUNS_TEXTURE_FIX = config

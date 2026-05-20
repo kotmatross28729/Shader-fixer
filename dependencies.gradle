@@ -46,7 +46,6 @@ dependencies {
     compileOnly(project.files("libs/Avaritia-1.82-pre-dev.jar"))
     compileOnly(project.files("libs/DynamicSurroundings-1.7.10-1.0.7.7-dev.jar"))
     implementation(project.files("libs/backhand-1.8.2-dev.jar"))
-    implementation(project.files("libs/journeymap-1.7.10-5.2.10-dev.jar"))
     compileOnly(project.files("libs/LunatriusCore-1.2.1-GTNH-dev.jar"))
     compileOnly(project.files("libs/Schematica-1.12.6-GTNH-dev.jar"))
     implementation(rfg.deobf(project.files("libs/HBM-NTM-.1.0.27_X5687_H261.jar")))

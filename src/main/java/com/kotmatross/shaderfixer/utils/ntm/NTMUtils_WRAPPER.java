@@ -1,0 +1,89 @@
+package com.kotmatross.shaderfixer.utils.ntm;
+
+import static net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.MinecraftForgeClient;
+
+import com.kotmatross.shaderfixer.shrimp.Vibe;
+
+public class NTMUtils_WRAPPER {
+
+    // Don't even ask, I don't give a fuck what that means
+    public static boolean checkVibe(IItemRenderer.ItemRenderType renderType) {
+        ItemStack toRender = null;
+
+        switch (renderType) {
+            case EQUIPPED_FIRST_PERSON -> toRender = Minecraft.getMinecraft().entityRenderer.itemRenderer.itemToRender;
+            case EQUIPPED -> toRender = Minecraft.getMinecraft().thePlayer.getHeldItem();
+        }
+
+        if (toRender != null) {
+            return MinecraftForgeClient.getItemRenderer(toRender, renderType) instanceof Vibe;
+        }
+
+        return false;
+    }
+
+    public static boolean checkVibe_Akimbo(EntityLivingBase entityLivingBase) {
+        ItemStack held = entityLivingBase.getHeldItem();
+        if (held != null) {
+            IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(held, EQUIPPED);
+            if (customRenderer instanceof Vibe) {
+                return isAkimboRenderer(customRenderer, entityLivingBase);
+            }
+        }
+        return false;
+    }
+
+    public static boolean checkVibe_Left(EntityLivingBase entityLivingBase) {
+        ItemStack held = entityLivingBase.getHeldItem();
+        if (held != null) {
+            IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(held, EQUIPPED);
+            if (customRenderer instanceof Vibe) {
+                return isLeftRenderer(customRenderer);
+            }
+        }
+        return false;
+    }
+
+    public static void handleInterpolation(float interp) {
+        NTMUtils.handleInterpolation(interp);
+    }
+
+    public static boolean isAkimboRenderer(IItemRenderer customRenderer, EntityLivingBase entityLivingBase) {
+        return NTMUtils.isAkimboRenderer(customRenderer, entityLivingBase);
+    }
+
+    public static boolean isLeftRenderer(IItemRenderer customRenderer) {
+        return NTMUtils.isLeftRenderer(customRenderer);
+    }
+
+    public static void akimboSetupNRender(IItemRenderer customRenderer, ItemStack held, EntityLivingBase entity) {
+        NTMUtils.akimboSetupNRender(customRenderer, held, entity);
+    }
+
+    public static boolean getFOVConf() {
+        return NTMUtils.getFOVConf();
+    }
+
+    public static float getGunsSwayMagnitude(ItemStack stack) {
+        return NTMUtils.getGunsSwayMagnitude(stack);
+    }
+
+    public static float getGunsSwayPeriod(ItemStack stack) {
+        return NTMUtils.getGunsSwayPeriod(stack);
+    }
+
+    public static float getGunsTurnMagnitude(ItemStack stack) {
+        return NTMUtils.getGunsTurnMagnitude(stack);
+    }
+
+    public static float getGunsBaseFOV(ItemStack stack) {
+        return NTMUtils.getGunsBaseFOV(stack);
+    }
+
+}

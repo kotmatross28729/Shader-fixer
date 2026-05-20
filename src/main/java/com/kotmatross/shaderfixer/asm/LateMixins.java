@@ -76,7 +76,17 @@ public enum LateMixins implements IMixins {
             "ntm.MixinRenderSparks",
             "ntm.MixinRenderSpear",
             "ntm.MixinRenderTorex",
-            "ntm.MixinModEventHandlerClient")
+
+            // TODO: T-E-S-T
+            // Actually move to separate cat.
+
+            "ntm.selfshadowing.MixinRenderChimneyBrick",
+            "ntm.selfshadowing.MixinRenderChimneyIndustrial",
+            "ntm.selfshadowing.MixinRenderCoker",
+
+            "ntm.MixinModEventHandlerClient"
+
+        )
         .setApplyIf(() -> ShaderFixerConfig.NTM_MAIN_FIX)),
 
     NTM_GUNFIX(new MixinBuilder().addRequiredMod(TargetMods.NTM)
@@ -95,10 +105,6 @@ public enum LateMixins implements IMixins {
     NTM_SPACE(new MixinBuilder().addRequiredMod(TargetMods.NTM_SPACE)
         .addClientMixins("ntm.space.MixinBeamPronter_SPACE", "ntm.space.MixinMissilePronter")
         .setApplyIf(() -> ShaderFixerConfig.NTM_MAIN_FIX)),
-
-    JOURNEYMAP(new MixinBuilder().addRequiredMod(TargetMods.JOURNEYMAP)
-        .addClientMixins("journeymap.MixinDrawUtil")
-        .setApplyIf(() -> ShaderFixerConfig.JOURNEYMAP_FIX)),
 
     OPENCOMPUTERS_DL_DISABLE(new MixinBuilder().addRequiredMod(TargetMods.OPENCOMPUTERS)
         .addRequiredMod(TargetMods.ANGELICA)
