@@ -25,8 +25,7 @@ public class ShaderFixerConfig {
     public static boolean V_NORMALS_DISABLE_TAG;
     public static boolean V_MAIN_MENU_FPS_BYPASS;
     public static int V_MAIN_MENU_FPS_BYPASS_VALUE;
-    public static boolean V_RIDING_HAND_ROTATION_FIX;
-    public static boolean V_RIDING_HAND_ROTATION_DISABLE;
+    public static int V_RIDING_HAND_ROTATION_FIX;
     public static boolean V_MODERN_RIDING_LEG_POS;
     public static boolean NTM_MAIN_FIX;
     public static boolean NTM_GUN_FIX;
@@ -85,17 +84,13 @@ public class ShaderFixerConfig {
             8192,
             "Maximum FPS in the main menu (see VANILLA_MAIN_MENU_FPS_BYPASS). 0 to use fps limit in settings");
 
-        V_RIDING_HAND_ROTATION_FIX = config.getBoolean(
+        V_RIDING_HAND_ROTATION_FIX = config.getInt(
             "VANILLA_RIDING_HAND_ROTATION_FIX",
             CAT_VANILLA,
-            true,
-            "Fixes bug due to which the hand wouldn't update rotation when the player was riding/sitting");
-
-        V_RIDING_HAND_ROTATION_DISABLE = config.getBoolean(
-            "VANILLA_RIDING_HAND_ROTATION_DISABLE",
-            CAT_VANILLA,
-            false,
-            "Disables 1st person hand rotation when the player is riding/sitting (similar to modern versions). Requires VANILLA_RIDING_HAND_ROTATION_FIX to be false");
+            0,
+            0,
+            2,
+            "0 - Off. 1 - Updates 1st person hand rotation when player is riding/sitting, 2 - Disables 1st person hand rotation when player is riding/sitting (modern behavior)");
 
         V_MODERN_RIDING_LEG_POS = config.getBoolean(
             "VANILLA_MODERN_RIDING_LEG_POS",

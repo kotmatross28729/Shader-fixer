@@ -20,9 +20,12 @@ public class MixinRenderPlayer {
 
     @Inject(method = "renderFirstPersonArm", at = @At(value = "HEAD"))
     protected void renderFirstPersonArm(EntityPlayer player, CallbackInfo ci) {
-        this.modelBipedMain.isRiding = ShaderFixerConfig.V_RIDING_HAND_ROTATION_FIX && player.isRiding(); // Peak
-                                                                                                          // mjoang
-                                                                                                          // coding
+        // Peak mjoang coding
+        if (ShaderFixerConfig.V_RIDING_HAND_ROTATION_FIX == 1) {
+            this.modelBipedMain.isRiding = player.isRiding();
+        } else if (ShaderFixerConfig.V_RIDING_HAND_ROTATION_FIX == 2) {
+            this.modelBipedMain.isRiding = false;
+        }
     }
 
 }
