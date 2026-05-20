@@ -3,34 +3,27 @@ package com.kotmatross.shaderfixer.utils;
 import net.coderbot.iris.Iris;
 import net.irisshaders.iris.api.v0.IrisApi;
 
-import com.kotmatross.shaderfixer.ShaderFixer;
+/// Use {@link com.kotmatross.shaderfixer.utils.AngelicaUtils_WRAPPER}
+class AngelicaUtils {
 
-public class AngelicaUtils {
-
-    public static boolean isShaderEnabled() {
-        if (ShaderFixer.IS_ANGELICA_PRESENT) {
-            return IrisApi.getInstance()
-                .isShaderPackInUse();
-        }
-        return false;
+    protected static boolean isShaderEnabled() {
+        return IrisApi.getInstance()
+            .isShaderPackInUse();
     }
 
-    public static boolean isComplementary() {
-        if (ShaderFixer.IS_ANGELICA_PRESENT) {
-            return isShaderEnabled() && Iris.getIrisConfig()
-                .getShaderPackName()
-                .map(name -> name.contains("Complementary"))
-                .orElse(false);
+    protected static boolean isComplementary() {
+        if (!isShaderEnabled()) {
+            return false;
         }
-        return false;
+        String name = Iris.getIrisConfig()
+            .getShaderPackName()
+            .orElse(null);
+        return name != null && name.contains("Complementary");
     }
 
-    public static boolean isShadowPass() {
-        if (ShaderFixer.IS_ANGELICA_PRESENT) {
-            return IrisApi.getInstance()
-                .isRenderingShadowPass();
-        }
-        return false;
+    protected static boolean isShadowPass() {
+        return IrisApi.getInstance()
+            .isRenderingShadowPass();
     }
 
 }

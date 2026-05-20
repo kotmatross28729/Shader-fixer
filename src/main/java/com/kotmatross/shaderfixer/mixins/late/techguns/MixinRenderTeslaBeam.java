@@ -4,7 +4,7 @@ import net.minecraft.entity.Entity;
 
 import org.spongepowered.asm.mixin.Mixin;
 
-import com.kotmatross.shaderfixer.utils.AngelicaUtils;
+import com.kotmatross.shaderfixer.utils.AngelicaUtils_WRAPPER;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
@@ -16,7 +16,7 @@ public class MixinRenderTeslaBeam {
     @WrapMethod(method = "doRender")
     private void dontCastShadow(Entity par1Entity, double par2, double par4, double par6, float par8, float par9,
         Operation<Void> original) {
-        if (!AngelicaUtils.isShadowPass()) {
+        if (!AngelicaUtils_WRAPPER.isShadowPass()) {
             original.call(par1Entity, par2, par4, par6, par8, par9);
         }
     }

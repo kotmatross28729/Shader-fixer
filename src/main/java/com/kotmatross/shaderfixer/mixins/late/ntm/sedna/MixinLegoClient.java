@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.hbm.items.weapon.sedna.factory.LegoClient;
-import com.kotmatross.shaderfixer.utils.AngelicaUtils;
+import com.kotmatross.shaderfixer.utils.AngelicaUtils_WRAPPER;
 import com.kotmatross.shaderfixer.utils.ShaderUtils;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -20,7 +20,7 @@ public class MixinLegoClient {
     @WrapMethod(method = "renderBulletStandard(Lnet/minecraft/client/renderer/Tessellator;IIDDDZ)V", remap = false)
     private static void dontCastShadow(Tessellator tess, int dark, int light, double length, double widthF,
         double widthB, boolean fullbright, Operation<Void> original) {
-        if (!AngelicaUtils.isShadowPass()) {
+        if (!AngelicaUtils_WRAPPER.isShadowPass()) {
             original.call(tess, dark, light, length, widthF, widthB, fullbright);
         }
     }
@@ -48,7 +48,7 @@ public class MixinLegoClient {
             target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V",
             shift = At.Shift.AFTER))
     private static void renderBulletStandard3(CallbackInfo ci, @Local(argsOnly = true) Tessellator tess) {
-        if (AngelicaUtils.isShaderEnabled()) tess.setBrightness(240);
+        if (AngelicaUtils_WRAPPER.isShaderEnabled()) tess.setBrightness(240);
     }
 
     @Inject(method = "drawLineSegment", at = @At(value = "HEAD"), remap = false)

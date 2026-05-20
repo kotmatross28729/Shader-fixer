@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
-import com.kotmatross.shaderfixer.utils.AngelicaUtils;
+import com.kotmatross.shaderfixer.utils.AngelicaUtils_WRAPPER;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
@@ -17,14 +17,14 @@ public class MixinEffectRenderer {
 
     @WrapMethod(method = "renderParticles")
     private void dontCastShadowParticles(Entity p_78874_1_, float p_78874_2_, Operation<Void> original) {
-        if (!AngelicaUtils.isShadowPass()) {
+        if (!AngelicaUtils_WRAPPER.isShadowPass()) {
             original.call(p_78874_1_, p_78874_2_);
         }
     }
 
     @WrapMethod(method = "renderLitParticles")
     private void dontCastShadowLitParticles(Entity p_78874_1_, float p_78874_2_, Operation<Void> original) {
-        if (!AngelicaUtils.isShadowPass()) {
+        if (!AngelicaUtils_WRAPPER.isShadowPass()) {
             original.call(p_78874_1_, p_78874_2_);
         }
     }
@@ -43,7 +43,7 @@ public class MixinEffectRenderer {
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glBlendFunc(II)V", remap = false),
         index = 0)
     private int workaroundComplementaryParticleAlpha(int sfactor, int dfactor) {
-        return AngelicaUtils.isComplementary() ? GL11.GL_ONE : sfactor;
+        return AngelicaUtils_WRAPPER.isComplementary() ? GL11.GL_ONE : sfactor;
     }
 
 }

@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.hbm.render.util.RenderSparks;
-import com.kotmatross.shaderfixer.utils.AngelicaUtils;
+import com.kotmatross.shaderfixer.utils.AngelicaUtils_WRAPPER;
 import com.kotmatross.shaderfixer.utils.ShaderUtils;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -17,7 +17,7 @@ public class MixinRenderSparks {
     @WrapMethod(method = "renderSpark", remap = false)
     private static void dontCastShadow(int seed, double x, double y, double z, float length, int min, int max,
         int color1, int color2, Operation<Void> original) {
-        if (!AngelicaUtils.isShadowPass()) {
+        if (!AngelicaUtils_WRAPPER.isShadowPass()) {
             original.call(seed, x, y, z, length, min, max, color1, color2);
         }
     }

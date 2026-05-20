@@ -11,8 +11,8 @@ import com.hbm.config.ClientConfig;
 import com.hbm.render.item.weapon.sedna.ItemRenderWeaponBase;
 import com.kotmatross.shaderfixer.shrimp.NTMRenderGetters;
 
-/// DO NOT USE DIRECTLY. Use {@link com.kotmatross.shaderfixer.utils.NTMUtils_WRAPPER}
-public class NTMUtils {
+/// Use {@link com.kotmatross.shaderfixer.utils.NTMUtils_WRAPPER}
+class NTMUtils {
 
     protected static void handleInterpolation(float interp) {
         ItemRenderWeaponBase.interp = interp;

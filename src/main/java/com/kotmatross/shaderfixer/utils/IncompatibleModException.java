@@ -13,15 +13,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class IncompatibleModException extends CustomModLoadingErrorDisplayException {
 
-    private final String REASON;
-    private final String RESTART;
-    private GuiScreen screen;
+    private final GuiScreen screen;
 
     public IncompatibleModException(String reason, String restart) {
         super(reason, new RuntimeException());
-        this.REASON = reason;
-        this.RESTART = restart;
-        screen = new GuiErrorScreen(this.REASON, RESTART) {
+        screen = new GuiErrorScreen(reason, restart) {
 
             @Override
             public void initGui() {
@@ -36,6 +32,7 @@ public class IncompatibleModException extends CustomModLoadingErrorDisplayExcept
         };
     }
 
+    /// what the fuck
     @Override
     public void initGui(GuiErrorScreen errorScreen, FontRenderer fontRenderer) {
         final Class<?> clz = errorScreen.getClass();

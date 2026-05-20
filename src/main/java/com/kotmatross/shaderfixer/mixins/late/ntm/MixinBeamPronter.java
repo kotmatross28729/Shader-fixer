@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.hbm.render.util.BeamPronter;
-import com.kotmatross.shaderfixer.utils.AngelicaUtils;
+import com.kotmatross.shaderfixer.utils.AngelicaUtils_WRAPPER;
 import com.kotmatross.shaderfixer.utils.ShaderUtils;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -24,7 +24,7 @@ public class MixinBeamPronter {
     private static void dontCastShadow(Vec3 skeleton, BeamPronter.EnumWaveType wave, BeamPronter.EnumBeamType beam,
         int outerColor, int innerColor, int start, int segments, float size, int layers, float thickness,
         Operation<Void> original) {
-        if (!AngelicaUtils.isShadowPass()) {
+        if (!AngelicaUtils_WRAPPER.isShadowPass()) {
             original.call(skeleton, wave, beam, outerColor, innerColor, start, segments, size, layers, thickness);
         }
     }

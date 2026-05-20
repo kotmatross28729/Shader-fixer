@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.hbm.render.tileentity.RenderMachineForceField;
-import com.kotmatross.shaderfixer.utils.AngelicaUtils;
+import com.kotmatross.shaderfixer.utils.AngelicaUtils_WRAPPER;
 import com.kotmatross.shaderfixer.utils.ShaderUtils;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 
@@ -20,7 +20,7 @@ public class MixinRenderMachineForceField {
             target = "Lcom/hbm/render/tileentity/RenderMachineForceField;generateSphere(IIFI)V",
             remap = false))
     private boolean dontCastShadow(RenderMachineForceField instance, int l, int s, float rad, int hex) {
-        return !AngelicaUtils.isShadowPass();
+        return !AngelicaUtils_WRAPPER.isShadowPass();
     }
 
     @Inject(

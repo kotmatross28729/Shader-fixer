@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.hbm.render.tileentity.RenderSmallReactor;
-import com.kotmatross.shaderfixer.utils.AngelicaUtils;
+import com.kotmatross.shaderfixer.utils.AngelicaUtils_WRAPPER;
 import com.kotmatross.shaderfixer.utils.ShaderUtils;
 
 @Mixin(value = RenderSmallReactor.class, priority = 999)
@@ -18,7 +18,7 @@ public class MixinRenderSmallReactor {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;setColorRGBA_F(FFFF)V"),
         index = 3)
     private float alphaFix(float alpha) {
-        return AngelicaUtils.isShaderEnabled() ? (alpha * 3F) : alpha;
+        return AngelicaUtils_WRAPPER.isShaderEnabled() ? (alpha * 3F) : alpha;
     }
 
     @Inject(

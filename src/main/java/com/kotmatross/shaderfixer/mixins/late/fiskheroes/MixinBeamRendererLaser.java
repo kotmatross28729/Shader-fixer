@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.fiskmods.heroes.client.pack.json.beam.BeamRendererLaser;
 import com.fiskmods.heroes.client.pack.json.beam.Bloom;
-import com.kotmatross.shaderfixer.utils.AngelicaUtils;
+import com.kotmatross.shaderfixer.utils.AngelicaUtils_WRAPPER;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 
@@ -31,7 +31,7 @@ public class MixinBeamRendererLaser {
             target = "Lnet/minecraft/util/Vec3;distanceTo(Lnet/minecraft/util/Vec3;)D",
             shift = At.Shift.AFTER))
     public void fixAlpha(CallbackInfo ci, @Local(ordinal = 11) LocalFloatRef alpha) {
-        if (AngelicaUtils.isShaderEnabled()) {
+        if (AngelicaUtils_WRAPPER.isShaderEnabled()) {
             if (this.bloom != null) {
                 // Looks like something dense, high alpha
                 if (1.0F / this.bloom.getStrength() > 1.5F) alpha.set(0.4F);

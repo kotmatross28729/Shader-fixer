@@ -28,9 +28,6 @@ public class ShaderFixerConfig {
     public static boolean V_RIDING_HAND_ROTATION_FIX;
     public static boolean V_RIDING_HAND_ROTATION_DISABLE;
     public static boolean V_MODERN_RIDING_LEG_POS;
-    public static boolean ANGELICA_TE_SHADOW_OFFSET;
-    public static float ANGELICA_TE_SHADOW_OFFSET_FACTOR;
-    public static boolean ANGELICA_TE_SHADOW_OFFSET_DEBUG_MODE;
     public static boolean NTM_MAIN_FIX;
     public static boolean NTM_GUN_FIX;
     public static boolean NTM_ARMOR_FIX;
@@ -105,26 +102,6 @@ public class ShaderFixerConfig {
             CAT_VANILLA,
             true,
             "Changes the position of the legs when riding, in accordance with modern versions (fixes legs passing through boat/minecart)");
-
-        ANGELICA_TE_SHADOW_OFFSET = config.getBoolean(
-            "ANGELICA_TE_SHADOW_OFFSET",
-            CAT_ANGELICA,
-            true,
-            "[EXPERIMENTAL] Enables shadow offset for tile entities, which helps reduce self-shadowing (shadow acne) on huge tile entities. As a side effect, it may break shadows on small tile entities with large ANGELICA_TE_SHADOW_OFFSET_FACTOR values");
-
-        ANGELICA_TE_SHADOW_OFFSET_FACTOR = config.getFloat(
-            "ANGELICA_TE_SHADOW_OFFSET_FACTOR",
-            CAT_ANGELICA,
-            16.0F,
-            0.0F,
-            256.0F,
-            "[EXPERIMENTAL] Shadow offset value. A higher value means less self-shadowing, but some TE elements may stop casting shadows at all");
-
-        ANGELICA_TE_SHADOW_OFFSET_DEBUG_MODE = config.getBoolean(
-            "ANGELICA_TE_SHADOW_OFFSET_DEBUG_MODE",
-            CAT_ANGELICA,
-            false,
-            "[EXPERIMENTAL] Enables the ANGELICA_TE_SHADOW_OFFSET_FACTOR calibration mode. 'I' key to increase, 'K' key to decrease");
 
         NTM_MAIN_FIX = config.getBoolean("NTM_MAIN_FIX", CAT_NTM, true, "Main NTM patch. See README");
 

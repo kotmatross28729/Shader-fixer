@@ -1,5 +1,8 @@
 package com.kotmatross.shaderfixer;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 import net.minecraftforge.common.MinecraftForge;
 
 import org.apache.logging.log4j.LogManager;
@@ -11,7 +14,6 @@ import com.kotmatross.shaderfixer.shrimp.BratvaAndTheRing;
 import com.kotmatross.shaderfixer.utils.BuiltInResourcePack;
 
 import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -72,17 +74,15 @@ public class ShaderFixer {
             if (Loader.isModLoaded("Techguns")) {
                 applyTextureFix(ShaderFixerConfig.TECHGUNS_TEXTURE_FIX, "TECHGUNS_FIX", "TECHGUNS_TEXTURE_FIX");
             }
-            if (IS_ANGELICA_PRESENT && ShaderFixerConfig.ANGELICA_TE_SHADOW_OFFSET_DEBUG_MODE) {
-                BratvaAndTheRing.regKeys();
+            LocalDate date = LocalDate.now();
+            if (date.getMonth() == Month.APRIL && date.getDayOfMonth() == 1) {
                 BratvaAndTheRing SenyaGanjubas = new BratvaAndTheRing();
-                FMLCommonHandler.instance()
-                    .bus()
-                    .register(SenyaGanjubas);
                 MinecraftForge.EVENT_BUS.register(SenyaGanjubas);
             }
         }
     }
 
+    @SuppressWarnings({ "StringConcatenationArgumentToLogCall", "CallToPrintStackTrace" })
     public static void applyTextureFix(boolean configValue, String name, String logName) {
         if (configValue) {
             logger.info(logName + " enabled, loading resource pack");

@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.kamesuta.mc.signpic.render.CustomTileEntitySignRenderer;
-import com.kotmatross.shaderfixer.utils.AngelicaUtils;
+import com.kotmatross.shaderfixer.utils.AngelicaUtils_WRAPPER;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -21,7 +21,7 @@ public class MixinCustomTileEntitySignRenderer extends TileEntitySignRenderer {
     @WrapMethod(method = "renderSignPictureBase", remap = false)
     private void dontCastShadow(TileEntitySign tile, double x, double y, double z, float partialTicks, float opacity,
         Operation<Void> original) {
-        if (!AngelicaUtils.isShadowPass()) {
+        if (!AngelicaUtils_WRAPPER.isShadowPass()) {
             original.call(tile, x, y, z, partialTicks, opacity);
         }
     }

@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 import com.hbm.main.ModEventHandlerClient;
-import com.kotmatross.shaderfixer.utils.AngelicaUtils;
+import com.kotmatross.shaderfixer.utils.AngelicaUtils_WRAPPER;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -20,21 +20,21 @@ public class MixinModEventHandlerClient {
         at = @At(value = "INVOKE", target = "Lcom/hbm/render/util/RenderOverhead;renderThermalSight(F)V"),
         remap = false)
     private void dontCastShadowSights(float partialTicks, Operation<Void> original) {
-        if (!AngelicaUtils.isShadowPass()) {
+        if (!AngelicaUtils_WRAPPER.isShadowPass()) {
             original.call(partialTicks);
         }
     }
 
     @WrapMethod(method = "preRenderEvent(Lnet/minecraftforge/client/event/RenderLivingEvent$Pre;)V", remap = false)
     private void dontCastShadowTag(RenderLivingEvent.Pre event, Operation<Void> original) {
-        if (!AngelicaUtils.isShadowPass()) {
+        if (!AngelicaUtils_WRAPPER.isShadowPass()) {
             original.call(event);
         }
     }
 
     @WrapMethod(method = "renderFrame", remap = false)
     private void dontCastShadowFrame(RenderItemInFrameEvent event, Operation<Void> original) {
-        if (!AngelicaUtils.isShadowPass()) {
+        if (!AngelicaUtils_WRAPPER.isShadowPass()) {
             original.call(event);
         }
     }

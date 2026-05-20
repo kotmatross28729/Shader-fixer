@@ -1,7 +1,6 @@
 package com.kotmatross.shaderfixer.utils;
 
 import static net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED;
-import static net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,7 +10,6 @@ import net.minecraftforge.client.MinecraftForgeClient;
 
 import com.kotmatross.shaderfixer.shrimp.Vibe;
 
-/// Somehow even NTM imports were causing crashes. Simple wrapper to avoid unnecessary imports
 public class NTMUtils_WRAPPER {
 
     // Don't even ask, I don't give a fuck what that means
