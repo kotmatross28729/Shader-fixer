@@ -15,10 +15,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.hbm.hazard.modifier.HazardModifier;
 import com.hbm.hazard.type.HazardTypeHydroactive;
 
-@Mixin(value = HazardTypeHydroactive.class, priority = 999)
+@Mixin(value = HazardTypeHydroactive.class, priority = 999, remap = false)
 public class MixinHazardTypeHydroactive {
 
-    @Inject(method = "addHazardInformation", at = @At(value = "TAIL"), remap = false)
+    @Inject(method = "addHazardInformation"
+            , at = @At(value = "TAIL"))
     public void addHazardInformation(EntityPlayer player, List list, float level, ItemStack stack,
         List<HazardModifier> modifiers, CallbackInfo ci) {
         list.add(EnumChatFormatting.AQUA + I18n.format("trait.danger.level.hydro") + level);

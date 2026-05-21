@@ -13,9 +13,9 @@ import com.llamalad7.mixinextras.injector.ModifyReceiver;
 @Mixin(value = RenderChimneyIndustrial.class, priority = 999)
 public class MixinRenderChimneyIndustrial {
 
-    @ModifyReceiver(
-        method = "renderTileEntityAt",
-        at = @At(value = "INVOKE", target = "Lnet/minecraftforge/client/model/IModelCustom;renderAll()V"))
+    @ModifyReceiver(method = "renderTileEntityAt"
+            , at = @At(value = "INVOKE"
+                    , target = "Lnet/minecraftforge/client/model/IModelCustom;renderAll()V"))
     private IModelCustom fixModel(IModelCustom instance) {
         if (AngelicaUtils_WRAPPER.isShadowPass()) {
             return ModelsSelfShadowingFix.chimney_industrial;

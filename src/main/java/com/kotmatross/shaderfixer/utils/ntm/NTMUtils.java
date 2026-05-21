@@ -1,5 +1,6 @@
 package com.kotmatross.shaderfixer.utils.ntm;
 
+import com.kotmatross.shaderfixer.mixins.late.ntm.sedna.AccessorItemRenderWeaponBase;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
@@ -9,7 +10,6 @@ import org.lwjgl.opengl.GL11;
 
 import com.hbm.config.ClientConfig;
 import com.hbm.render.item.weapon.sedna.ItemRenderWeaponBase;
-import com.kotmatross.shaderfixer.shrimp.NTMRenderGetters;
 
 /// Use {@link NTMUtils_WRAPPER}
 class NTMUtils {
@@ -51,10 +51,9 @@ class NTMUtils {
 
     protected static float getGunsSwayMagnitude(ItemStack stack) {
         if (stack != null) {
-            IItemRenderer customRenderer = MinecraftForgeClient
-                .getItemRenderer(stack, IItemRenderer.ItemRenderType.EQUIPPED);
+            IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(stack, IItemRenderer.ItemRenderType.EQUIPPED);
             if (customRenderer instanceof ItemRenderWeaponBase weaponBase) {
-                return ((NTMRenderGetters) weaponBase).shader_fixer$getGunsSwayMagnitude(stack);
+                return ((AccessorItemRenderWeaponBase) weaponBase).invokeGetSwayMagnitude(stack);
             }
         }
         return 0.5F;
@@ -62,10 +61,9 @@ class NTMUtils {
 
     protected static float getGunsSwayPeriod(ItemStack stack) {
         if (stack != null) {
-            IItemRenderer customRenderer = MinecraftForgeClient
-                .getItemRenderer(stack, IItemRenderer.ItemRenderType.EQUIPPED);
+            IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(stack, IItemRenderer.ItemRenderType.EQUIPPED);
             if (customRenderer instanceof ItemRenderWeaponBase weaponBase) {
-                return ((NTMRenderGetters) weaponBase).shader_fixer$getGunsSwayPeriod(stack);
+                return ((AccessorItemRenderWeaponBase) weaponBase).invokeGetSwayPeriod(stack);
             }
         }
         return 0.75F;
@@ -73,10 +71,9 @@ class NTMUtils {
 
     protected static float getGunsTurnMagnitude(ItemStack stack) {
         if (stack != null) {
-            IItemRenderer customRenderer = MinecraftForgeClient
-                .getItemRenderer(stack, IItemRenderer.ItemRenderType.EQUIPPED);
+            IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(stack, IItemRenderer.ItemRenderType.EQUIPPED);
             if (customRenderer instanceof ItemRenderWeaponBase weaponBase) {
-                return ((NTMRenderGetters) weaponBase).shader_fixer$getGunsTurnMagnitude(stack);
+                return ((AccessorItemRenderWeaponBase) weaponBase).invokeGetTurnMagnitude(stack);
             }
         }
         return 2.75F;
@@ -84,10 +81,9 @@ class NTMUtils {
 
     protected static float getGunsBaseFOV(ItemStack stack) {
         if (stack != null) {
-            IItemRenderer customRenderer = MinecraftForgeClient
-                .getItemRenderer(stack, IItemRenderer.ItemRenderType.EQUIPPED);
+            IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(stack, IItemRenderer.ItemRenderType.EQUIPPED);
             if (customRenderer instanceof ItemRenderWeaponBase weaponBase) {
-                return ((NTMRenderGetters) weaponBase).shader_fixer$getGunsBaseFOV(stack);
+                return ((AccessorItemRenderWeaponBase) weaponBase).invokeGetBaseFOV(stack);
             }
         }
         return 70F;

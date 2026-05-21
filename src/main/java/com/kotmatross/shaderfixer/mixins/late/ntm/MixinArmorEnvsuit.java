@@ -11,26 +11,22 @@ import com.kotmatross.shaderfixer.utils.ShaderUtils;
 public class MixinArmorEnvsuit {
 
     // Pure fucking bytecode reading simulator : 2
-    @Inject(
-        method = "renderCommon",
-        at = @At(
-            value = "INVOKE",
-            target = "Lorg/lwjgl/opengl/GL11;glColor3f(FFF)V",
-            ordinal = 0,
-            shift = At.Shift.BEFORE),
-        remap = false)
+    @Inject(method = "renderCommon"
+            , at = @At(value = "INVOKE"
+                , target = "Lorg/lwjgl/opengl/GL11;glColor3f(FFF)V"
+                , ordinal = 0
+                , shift = At.Shift.BEFORE)
+            , remap = false)
     private void injectBeforeRenderPart(CallbackInfo ci) {
         ShaderUtils.enableFullBrightness();
     }
 
-    @Inject(
-        method = "renderCommon",
-        at = @At(
-            value = "INVOKE",
-            target = "Lorg/lwjgl/opengl/GL11;glColor3f(FFF)V",
-            ordinal = 1,
-            shift = At.Shift.AFTER),
-        remap = false)
+    @Inject(method = "renderCommon"
+            , at = @At(value = "INVOKE"
+                , target = "Lorg/lwjgl/opengl/GL11;glColor3f(FFF)V"
+                , ordinal = 1
+                , shift = At.Shift.AFTER)
+            , remap = false)
     private void injectAfterRenderPart(CallbackInfo ci) {
         ShaderUtils.disableFullBrightness();
     }

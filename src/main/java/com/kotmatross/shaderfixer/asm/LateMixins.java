@@ -9,28 +9,26 @@ import com.kotmatross.shaderfixer.config.ShaderFixerConfig;
 @SuppressWarnings("unused")
 public enum LateMixins implements IMixins {
     
-    ANGELICA(new MixinBuilder()
-            .addRequiredMod(TargetMods.ANGELICA)
+    ANGELICA(new MixinBuilder().addRequiredMod(TargetMods.ANGELICA)
             .addClientMixins("angelica.AccessorDeferredWorldRenderingPipeline")),
     
-    ANGELICA_NTM_GUNFIX_COMPAT(new MixinBuilder("Patches HandRenderer to work correctly with HBM's NTM gunfix")
+    ANGELICA_NTM_GUNFIX_COMPAT(new MixinBuilder()
         .addRequiredMod(TargetMods.ANGELICA)
         .addRequiredMod(TargetMods.NTM)
         .addClientMixins("angelica.MixinHandRenderer")
         .setApplyIf(() -> ShaderFixerConfig.NTM_GUN_FIX)),
 
-    BACKHAND_NTM_GUNFIX_COMPAT(new MixinBuilder(
-        "Cancel rendering of the offhand item if item in the main hand is NTM gun (otherwise it causes rendering bugs)")
-            .addRequiredMod(TargetMods.BACKHAND)
-            .addRequiredMod(TargetMods.NTM)
-            .addClientMixins("backhand.MixinBackhandRenderHelper", "backhand.MixinItemRendererHooks")
-            .setApplyIf(() -> ShaderFixerConfig.NTM_GUN_FIX)),
+    BACKHAND_NTM_GUNFIX_COMPAT(new MixinBuilder()
+        .addRequiredMod(TargetMods.BACKHAND)
+        .addRequiredMod(TargetMods.NTM)
+        .addClientMixins("backhand.MixinBackhandRenderHelper"
+                , "backhand.MixinItemRendererHooks")
+        .setApplyIf(() -> ShaderFixerConfig.NTM_GUN_FIX)),
 
     AVARITIA(new MixinBuilder().addRequiredMod(TargetMods.AVARITIA)
-        .addClientMixins(
-            "avaritia.MixinCosmicRenderShenanigans",
-            "avaritia.MixinModelArmorInfinity",
-            "avaritia.MixinRenderHeavenArrow")
+        .addClientMixins("avaritia.MixinCosmicRenderShenanigans"
+                , "avaritia.MixinModelArmorInfinity"
+                , "avaritia.MixinRenderHeavenArrow")
         .setApplyIf(() -> ShaderFixerConfig.AVARITIA_FIX)),
 
     DSURROUND(new MixinBuilder().addRequiredMod(TargetMods.DSURROUND)
@@ -43,64 +41,58 @@ public enum LateMixins implements IMixins {
         .setApplyIf(() -> ShaderFixerConfig.ELN_DISABLE_DL)),
 
     FISKHEROES(new MixinBuilder().addRequiredMod(TargetMods.FISKHEROES)
-        .addClientMixins(
-            "fiskheroes.MixinBeamRendererLaser",
-            "fiskheroes.MixinBeamRendererLightning",
-            "fiskheroes.MixinBeamRendererLine",
-            "fiskheroes.MixinEffectTentacles",
-            "fiskheroes.MixinEntitySHSpellWaveFX",
-            "fiskheroes.MixinRenderEnergyBolt",
-            "fiskheroes.MixinRenderSpellWhip",
-            "fiskheroes.MixinRenderSuitFabricator",
-            "fiskheroes.MixinRenderSuitDatabase",
-            "fiskheroes.MixinShapeFormatCircles",
-            "fiskheroes.MixinShapeFormatLines",
-            "fiskheroes.MixinShapeFormatWireframe")
+        .addClientMixins("fiskheroes.MixinBeamRendererLaser"
+                , "fiskheroes.MixinBeamRendererLightning"
+                , "fiskheroes.MixinBeamRendererLine"
+                , "fiskheroes.MixinEffectTentacles"
+                , "fiskheroes.MixinEntitySHSpellWaveFX"
+                , "fiskheroes.MixinRenderEnergyBolt"
+                , "fiskheroes.MixinRenderSpellWhip"
+                , "fiskheroes.MixinRenderSuitFabricator"
+                , "fiskheroes.MixinRenderSuitDatabase"
+                , "fiskheroes.MixinShapeFormatCircles"
+                , "fiskheroes.MixinShapeFormatLines"
+                , "fiskheroes.MixinShapeFormatWireframe")
         .setApplyIf(() -> ShaderFixerConfig.FISKHEROES_FIX)),
 
     NTM(new MixinBuilder().addRequiredMod(TargetMods.NTM)
-        .addClientMixins(
-            "ntm.MixinArmorEnvsuit",
-            "ntm.MixinDiamondPronter",
-            "ntm.MixinItemRendererMeteorSword",
-            "ntm.MixinParticleAmatFlash",
-            "ntm.MixinRenderBeam",
-            "ntm.MixinRenderBlackHole",
-            "ntm.MixinRenderChemical",
-            "ntm.MixinRenderCore",
-            "ntm.MixinRenderDeathBlast",
-            "ntm.MixinRenderDemonLamp",
-            "ntm.MixinRenderMachineForceField",
-            "ntm.MixinRenderOverhead",
-            "ntm.MixinRenderPylonBase",
-            "ntm.MixinRenderRBMKFuelChannel",
-            "ntm.MixinRenderSiegeLaser",
-            "ntm.MixinRenderSmallReactor",
-            "ntm.MixinRenderSolarBoiler",
-            "ntm.MixinRenderSparks",
-            "ntm.MixinRenderSpear",
-            "ntm.MixinRenderTorex",
-
-            // TODO: T-E-S-T
-            // Actually move to separate cat.
-
-            "ntm.selfshadowing.MixinRenderChimneyBrick",
-            "ntm.selfshadowing.MixinRenderChimneyIndustrial",
-            "ntm.selfshadowing.MixinRenderCoker",
-                "ntm.selfshadowing.MixinRenderCatalyticCracker",
-                "ntm.selfshadowing.MixinRenderFrackingTower",
-
-            "ntm.MixinModEventHandlerClient"
-
+        .addClientMixins("ntm.MixinArmorEnvsuit"
+                , "ntm.MixinDiamondPronter"
+                , "ntm.MixinItemRendererMeteorSword"
+                , "ntm.MixinParticleAmatFlash"
+                , "ntm.MixinRenderBeam"
+                , "ntm.MixinRenderBlackHole"
+                , "ntm.MixinRenderChemical"
+                , "ntm.MixinRenderCore"
+                , "ntm.MixinRenderDeathBlast"
+                , "ntm.MixinRenderDemonLamp"
+                , "ntm.MixinRenderMachineForceField"
+                , "ntm.MixinRenderOverhead"
+                , "ntm.MixinRenderPylonBase"
+                , "ntm.MixinRenderRBMKFuelChannel"
+                , "ntm.MixinRenderSiegeLaser"
+                , "ntm.MixinRenderSmallReactor"
+                , "ntm.MixinRenderSolarBoiler"
+                , "ntm.MixinRenderSparks"
+                , "ntm.MixinRenderSpear"
+                , "ntm.MixinRenderTorex"
+                , "ntm.MixinModEventHandlerClient"
+                // TODO: T-E-S-T
+                // Actually move to separate cat.
+                , "ntm.selfshadowing.MixinRenderChimneyBrick"
+                , "ntm.selfshadowing.MixinRenderChimneyIndustrial"
+                , "ntm.selfshadowing.MixinRenderCoker"
+                , "ntm.selfshadowing.MixinRenderCatalyticCracker"
+                , "ntm.selfshadowing.MixinRenderFrackingTower"
         )
         .setApplyIf(() -> ShaderFixerConfig.NTM_MAIN_FIX)),
 
     NTM_GUNFIX(new MixinBuilder().addRequiredMod(TargetMods.NTM)
-        .addClientMixins(
-            "ntm.sedna.MixinHbmAnimations",
-            "ntm.sedna.MixinItemRenderWeaponBase",
-            "ntm.sedna.MixinLegoClient",
-            "ntm.sedna.MixinModEventHandlerRenderer")
+        .addClientMixins("ntm.sedna.AccessorItemRenderWeaponBase"
+                , "ntm.sedna.MixinHbmAnimations"
+                , "ntm.sedna.MixinItemRenderWeaponBase"
+                , "ntm.sedna.MixinLegoClient"
+                , "ntm.sedna.MixinModEventHandlerRenderer")
         .setApplyIf(() -> ShaderFixerConfig.NTM_GUN_FIX)),
 
     NTM_OG_ONLY(new MixinBuilder().addRequiredMod(TargetMods.NTM)
@@ -109,7 +101,8 @@ public enum LateMixins implements IMixins {
         .setApplyIf(() -> ShaderFixerConfig.NTM_MAIN_FIX)),
 
     NTM_SPACE(new MixinBuilder().addRequiredMod(TargetMods.NTM_SPACE)
-        .addClientMixins("ntm.space.MixinBeamPronter_SPACE", "ntm.space.MixinMissilePronter")
+        .addClientMixins("ntm.space.MixinBeamPronter_SPACE"
+                , "ntm.space.MixinMissilePronter")
         .setApplyIf(() -> ShaderFixerConfig.NTM_MAIN_FIX)),
 
     OPENCOMPUTERS_DL_DISABLE(new MixinBuilder().addRequiredMod(TargetMods.OPENCOMPUTERS)
@@ -118,27 +111,30 @@ public enum LateMixins implements IMixins {
         .setApplyIf(() -> ShaderFixerConfig.OC_DISABLE_DL)),
 
     SCHEMATICA(new MixinBuilder().addRequiredMod(TargetMods.SCHEMATICA)
-        .addClientMixins("schematica.MixinRendererSchematicChunk", "schematica.MixinRendererSchematicGlobal")
+        .addClientMixins("schematica.MixinRendererSchematicChunk"
+                , "schematica.MixinRendererSchematicGlobal")
         .setApplyIf(() -> ShaderFixerConfig.SCHEMATICA_FIX)),
 
     SIGNPIC(new MixinBuilder().addRequiredMod(TargetMods.SIGNPIC)
-        .addClientMixins("signpic.MixinCustomTileEntitySignRenderer", "signpic.MixinStateRender")
+        .addClientMixins("signpic.MixinCustomTileEntitySignRenderer"
+                , "signpic.MixinStateRender")
         .setApplyIf(() -> ShaderFixerConfig.SIGNPIC_FIX)),
 
     TECHGUNS(new MixinBuilder().addRequiredMod(TargetMods.TECHGUNS)
-        .addClientMixins("techguns.MixinRenderTGChest", "techguns.MixinTGRenderHelper", "techguns.MixinRenderTeslaBeam")
+        .addClientMixins("techguns.MixinRenderTGChest"
+                , "techguns.MixinTGRenderHelper"
+                , "techguns.MixinRenderTeslaBeam")
         .setApplyIf(() -> ShaderFixerConfig.TECHGUNS_FIX)),
 
     // QOL / Other stuff
 
     HBM_EXTENDED_HAZARD(new MixinBuilder().addRequiredMod(TargetMods.NTM)
-        .addClientMixins(
-            "ntm.descr.MixinHazardTypeAsbestos",
-            "ntm.descr.MixinHazardTypeBlinding",
-            "ntm.descr.MixinHazardTypeCoal",
-            "ntm.descr.MixinHazardTypeExplosive",
-            "ntm.descr.MixinHazardTypeHot",
-            "ntm.descr.MixinHazardTypeHydroactive")
+        .addClientMixins("ntm.descr.MixinHazardTypeAsbestos"
+                , "ntm.descr.MixinHazardTypeBlinding"
+                , "ntm.descr.MixinHazardTypeCoal"
+                , "ntm.descr.MixinHazardTypeExplosive"
+                , "ntm.descr.MixinHazardTypeHot"
+                , "ntm.descr.MixinHazardTypeHydroactive")
         .setApplyIf(() -> ShaderFixerConfig.NTM_EXTENDED_HAZARD_DESCRIPTIONS)),
 
     ;

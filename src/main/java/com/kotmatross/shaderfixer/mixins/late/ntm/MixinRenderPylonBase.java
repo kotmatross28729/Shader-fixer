@@ -10,10 +10,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.hbm.render.tileentity.RenderPylonBase;
 import com.llamalad7.mixinextras.sugar.Local;
 
-@Mixin(value = RenderPylonBase.class, priority = 999)
+@Mixin(value = RenderPylonBase.class, priority = 999, remap = false)
 public class MixinRenderPylonBase {
 
-    @Inject(method = "drawLineSegment", at = @At(value = "HEAD"), remap = false)
+    @Inject(method = "drawLineSegment"
+            , at = @At(value = "HEAD"))
     private void drawLineSegment(CallbackInfo ci, @Local(argsOnly = true) Tessellator tessellator) {
         tessellator.setNormal(0.0F, 1.0F, 0.0F);
     }

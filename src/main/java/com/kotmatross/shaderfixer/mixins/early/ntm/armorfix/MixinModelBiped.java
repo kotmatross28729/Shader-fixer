@@ -31,7 +31,8 @@ public class MixinModelBiped {
      * (CustomPlayerModels does the transformation before NTM does it in the forge event, so we do it right in the
      * vanilla code :D)
      */
-    @Inject(method = "setRotationAngles", at = @At(value = "TAIL"))
+    @Inject(method = "setRotationAngles"
+            , at = @At(value = "TAIL"))
     public void setRotationAngles(CallbackInfo ci, @Local(argsOnly = true) Entity entity) {
         if (ShaderFixer.IS_HBM_NTM_PRESENT) {
             if ((entity instanceof EntityLivingBase entityLivingBase)) {

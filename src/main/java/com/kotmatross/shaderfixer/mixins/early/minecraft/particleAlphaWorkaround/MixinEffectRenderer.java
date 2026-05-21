@@ -38,10 +38,10 @@ public class MixinEffectRenderer {
      *         This hack simply changes GL_SRC_ALPHA -> GL_ONE if current shader is Complementary, so the alpha
      *         multiplication only happens once - in the shader
      */
-    @ModifyArg(
-        method = "renderParticles",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glBlendFunc(II)V", remap = false),
-        index = 0)
+    @ModifyArg(method = "renderParticles"
+            , at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glBlendFunc(II)V"
+                , remap = false)
+            , index = 0)
     private int workaroundComplementaryParticleAlpha(int sfactor, int dfactor) {
         return AngelicaUtils_WRAPPER.isComplementary() ? GL11.GL_ONE : sfactor;
     }

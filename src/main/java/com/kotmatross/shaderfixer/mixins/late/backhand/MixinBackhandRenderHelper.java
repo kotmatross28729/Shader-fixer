@@ -11,10 +11,12 @@ import com.kotmatross.shaderfixer.utils.ntm.NTMUtils_WRAPPER;
 
 import xonin.backhand.client.utils.BackhandRenderHelper;
 
-@Mixin(value = BackhandRenderHelper.class, priority = 999)
+@Mixin(value = BackhandRenderHelper.class, priority = 999, remap = false)
 public class MixinBackhandRenderHelper {
 
-    @Inject(method = "renderOffhandItemIn3rdPerson", at = @At(value = "HEAD"), cancellable = true, remap = false)
+    @Inject(method = "renderOffhandItemIn3rdPerson"
+            , at = @At(value = "HEAD")
+            , cancellable = true)
     private static void renderOffhandItemIn3rdPerson(CallbackInfo ci) {
         if (NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED)) {
             ci.cancel();

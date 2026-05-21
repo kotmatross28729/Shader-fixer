@@ -10,18 +10,20 @@ import com.kotmatross.shaderfixer.utils.ShaderUtils;
 
 import fox.spiteful.avaritia.render.CosmicRenderShenanigans;
 
-@Mixin(value = CosmicRenderShenanigans.class, priority = 999)
+@Mixin(value = CosmicRenderShenanigans.class, priority = 999, remap = false)
 public class MixinCosmicRenderShenanigans {
 
     @Unique
     private static int shader_fixer$previousProgram;
 
-    @Inject(method = "useShader", at = @At(value = "HEAD"), remap = false)
+    @Inject(method = "useShader"
+            , at = @At(value = "HEAD"))
     private static void useShader(CallbackInfo ci) {
         shader_fixer$previousProgram = ShaderUtils.getCurrentProgram();
     }
 
-    @Inject(method = "releaseShader", at = @At(value = "TAIL"), remap = false)
+    @Inject(method = "releaseShader"
+            , at = @At(value = "TAIL"))
     private static void releaseShader(CallbackInfo ci) {
         ShaderUtils.useProgram(shader_fixer$previousProgram);
     }

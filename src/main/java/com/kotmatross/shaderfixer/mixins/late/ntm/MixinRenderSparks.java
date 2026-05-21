@@ -11,10 +11,10 @@ import com.kotmatross.shaderfixer.utils.ShaderUtils;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
-@Mixin(value = RenderSparks.class, priority = 999)
+@Mixin(value = RenderSparks.class, priority = 999, remap = false)
 public class MixinRenderSparks {
 
-    @WrapMethod(method = "renderSpark", remap = false)
+    @WrapMethod(method = "renderSpark")
     private static void dontCastShadow(int seed, double x, double y, double z, float length, int min, int max,
         int color1, int color2, Operation<Void> original) {
         if (!AngelicaUtils_WRAPPER.isShadowPass()) {
@@ -22,12 +22,14 @@ public class MixinRenderSparks {
         }
     }
 
-    @Inject(method = "renderSpark", at = @At(value = "HEAD"), remap = false)
+    @Inject(method = "renderSpark"
+            , at = @At(value = "HEAD"))
     private static void renderSpark(CallbackInfo ci) {
         ShaderUtils.enableFullBrightness();
     }
 
-    @Inject(method = "renderSpark", at = @At(value = "TAIL"), remap = false)
+    @Inject(method = "renderSpark"
+            , at = @At(value = "TAIL"))
     private static void renderSpark2(CallbackInfo ci) {
         ShaderUtils.disableFullBrightness();
     }

@@ -11,9 +11,9 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(value = RenderCatalyticCracker.class, priority = 999)
 public class MixinRenderCatalyticCracker {
 	
-	@ModifyReceiver(
-			method = "renderTileEntityAt",
-			at = @At(value = "INVOKE", target = "Lnet/minecraftforge/client/model/IModelCustom;renderAll()V"))
+	@ModifyReceiver(method = "renderTileEntityAt"
+			, at = @At(value = "INVOKE"
+					, target = "Lnet/minecraftforge/client/model/IModelCustom;renderAll()V"))
 	private IModelCustom fixModel(IModelCustom instance) {
 		if (AngelicaUtils_WRAPPER.isShadowPass()) {
 			return ModelsSelfShadowingFix.cracking_tower;

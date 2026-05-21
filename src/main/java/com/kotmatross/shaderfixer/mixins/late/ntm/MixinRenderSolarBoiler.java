@@ -10,10 +10,10 @@ import com.kotmatross.shaderfixer.utils.AngelicaUtils_WRAPPER;
 @Mixin(value = RenderSolarBoiler.class, priority = 999)
 public class MixinRenderSolarBoiler {
 
-    @ModifyArg(
-        method = "renderTileEntityAt",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;setColorRGBA_F(FFFF)V"),
-        index = 3)
+    @ModifyArg(method = "renderTileEntityAt"
+            , at = @At(value = "INVOKE"
+                , target = "Lnet/minecraft/client/renderer/Tessellator;setColorRGBA_F(FFFF)V")
+            , index = 3)
     private float alphaFix(float alpha) {
         return AngelicaUtils_WRAPPER.isShaderEnabled() ? (alpha == 0.005F ? 0.1F : 0.2F) : alpha;
     }

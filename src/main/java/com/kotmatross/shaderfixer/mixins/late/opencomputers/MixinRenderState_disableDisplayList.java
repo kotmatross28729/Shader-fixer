@@ -7,13 +7,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import li.cil.oc.util.RenderState$;
 
-@Mixin(value = RenderState$.class, priority = 999)
+@Mixin(value = RenderState$.class, priority = 999, remap = false)
 public class MixinRenderState_disableDisplayList {
 
     /**
      * Forces OC to not use display lists
      */
-    @Inject(method = "compilingDisplayList", at = @At(value = "HEAD"), remap = false, cancellable = true)
+    @Inject(method = "compilingDisplayList"
+            , at = @At(value = "HEAD")
+            , cancellable = true)
     private void compilingDisplayList(CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(true);
     }

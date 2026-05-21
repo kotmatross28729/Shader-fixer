@@ -17,32 +17,29 @@ import com.hbm.hazard.modifier.HazardModifier;
 import com.hbm.hazard.type.HazardTypeHot;
 import com.llamalad7.mixinextras.sugar.Local;
 
-@Mixin(value = HazardTypeHot.class, priority = 999)
+@Mixin(value = HazardTypeHot.class, priority = 999, remap = false)
 public class MixinHazardTypeHot {
 
     @Unique
     boolean shader_fixer$reacher;
 
-    @Inject(method = "onUpdate", at = @At(value = "TAIL"), remap = false)
-    public void onUpdate(CallbackInfo ci, @Local(ordinal = 0) boolean reacher) {
-        shader_fixer$reacher = reacher; // вэн зэ эйр тёрнс ред
+    @Inject(method = "onUpdate"
+            , at = @At(value = "TAIL"))
+    public void onUpdate(CallbackInfo ci, @Local(name = "reacher") boolean reacher) {
+        shader_fixer$reacher = reacher;
     }
 
-    @Inject(method = "addHazardInformation", at = @At(value = "TAIL"), remap = false)
+    @Inject(method = "addHazardInformation"
+            , at = @At(value = "TAIL"))
     public void addHazardInformation(EntityPlayer player, List list, float level, ItemStack stack,
         List<HazardModifier> modifiers, CallbackInfo ci) {
-
         if (level > 0) {
             if (shader_fixer$reacher) {
-                list.add(
-                    EnumChatFormatting.STRIKETHROUGH + I18n.format("trait.danger.level.hot")
-                        + level
-                        + I18n.format("info.template__seconds"));
+                list.add(EnumChatFormatting.STRIKETHROUGH + I18n.format("trait.danger.level.hot")
+                        + level + I18n.format("info.template__seconds"));
             } else {
-                list.add(
-                    EnumChatFormatting.RED + I18n.format("trait.danger.level.hot")
-                        + level
-                        + I18n.format("info.template__seconds"));
+                list.add(EnumChatFormatting.RED + I18n.format("trait.danger.level.hot")
+                        + level + I18n.format("info.template__seconds"));
             }
         }
     }

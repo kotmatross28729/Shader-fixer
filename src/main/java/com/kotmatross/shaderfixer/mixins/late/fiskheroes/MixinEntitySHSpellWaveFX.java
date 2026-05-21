@@ -11,11 +11,11 @@ import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 @Mixin(value = EntitySHSpellWaveFX.class, priority = 999)
 public class MixinEntitySHSpellWaveFX {
 
-    @ModifyArg(
-        method = "renderParticle",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Tessellator;setColorRGBA_F(FFFF)V"),
-        index = 3)
-    private float alphaFix(float alpha, @Local(ordinal = 10) LocalFloatRef opacity) {
+    @ModifyArg(method = "renderParticle"
+            , at = @At(value = "INVOKE"
+                , target = "Lnet/minecraft/client/renderer/Tessellator;setColorRGBA_F(FFFF)V")
+            , index = 3)
+    private float alphaFix(float alpha, @Local(name = "opacity") LocalFloatRef opacity) {
         return alpha == 0 ? opacity.get() : alpha * 3;
     }
 

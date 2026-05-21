@@ -10,24 +10,21 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import fox.spiteful.avaritia.render.ModelArmorInfinity;
 
-@Mixin(value = ModelArmorInfinity.class, priority = 999)
+@Mixin(value = ModelArmorInfinity.class, priority = 999, remap = false)
 public class MixinModelArmorInfinity extends ModelBiped {
 
-    @Shadow(remap = false)
+    @Shadow
     public boolean legs = false;
 
-    @Inject(
-        method = "render",
-        at = @At(
-            value = "INVOKE",
-            target = "Lfox/spiteful/avaritia/render/ModelArmorInfinity;setWings()V",
-            shift = At.Shift.BEFORE),
-        cancellable = true,
-        remap = false)
+    @Inject(method = "render"
+            , at = @At(value = "INVOKE"
+                , target = "Lfox/spiteful/avaritia/render/ModelArmorInfinity;setWings()V"
+                , shift = At.Shift.BEFORE)
+            , cancellable = true)
     private void render(CallbackInfo ci) {
         if (this.legs) {
-            ci.cancel(); // If wings are rendered with `legs == true`, then it will fuck up lighting on entities
-                         // (somehow)
+            // If wings are rendered with `legs == true`, then it will fuck up lighting on entities (somehow)
+            ci.cancel(); 
         }
     }
 

@@ -12,12 +12,14 @@ import com.kotmatross.shaderfixer.utils.ShaderUtils;
 @Mixin(value = { RenderBeam.class, RenderBeam5.class, }, priority = 999)
 public class MixinRenderBeam {
 
-    @Inject(method = "doRender", at = @At(value = "HEAD"))
+    @Inject(method = "doRender"
+            , at = @At(value = "HEAD"))
     public void doRender(CallbackInfo ci) {
         ShaderUtils.enableFullBrightness();
     }
 
-    @Inject(method = "doRender", at = @At(value = "TAIL"))
+    @Inject(method = "doRender"
+            , at = @At(value = "TAIL"))
     public void doRender_E(CallbackInfo ci) {
         ShaderUtils.disableFullBrightness();
     }

@@ -24,7 +24,8 @@ import com.llamalad7.mixinextras.sugar.Local;
 public class MixinEntityRenderer {
 
     /// Vanilla only
-    @Inject(method = "renderHand", at = @At(value = "HEAD"))
+    @Inject(method = "renderHand"
+            , at = @At(value = "HEAD"))
     public void handleInterp(float interp, int p_78476_2_, CallbackInfo ci) {
         if (NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) {
             NTMUtils_WRAPPER.handleInterpolation(interp);
@@ -32,13 +33,11 @@ public class MixinEntityRenderer {
     }
 
     /// Vanilla only
-    @ModifyArg(
-        method = "renderHand",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/EntityRenderer;getFOVModifier(FZ)F",
-            ordinal = 0),
-        index = 1)
+    @ModifyArg(method = "renderHand"
+            , at = @At(value = "INVOKE"
+                , target = "Lnet/minecraft/client/renderer/EntityRenderer;getFOVModifier(FZ)F"
+                , ordinal = 0)
+            , index = 1)
     private boolean applyFovCFG(boolean useFOVSetting) {
         if (NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) {
             return NTMUtils_WRAPPER.getFOVConf();
@@ -47,8 +46,9 @@ public class MixinEntityRenderer {
     }
 
     /// Shared, Vanilla / Angelica
-    @ModifyConstant(method = "getFOVModifier", constant = @Constant(floatValue = 70.0F, ordinal = 0))
-    public float ModifyBaseFOV(float fov, @Local EntityLivingBase entityplayer) {
+    @ModifyConstant(method = "getFOVModifier"
+            , constant = @Constant(floatValue = 70.0F, ordinal = 0))
+    public float modifyBaseFOV(float fov, @Local(name = "entityplayer") EntityLivingBase entityplayer) {
         if (NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) {
             return NTMUtils_WRAPPER.getGunsBaseFOV(entityplayer.getHeldItem());
         }

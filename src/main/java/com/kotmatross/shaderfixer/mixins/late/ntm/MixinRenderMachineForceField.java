@@ -13,28 +13,23 @@ import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 @Mixin(value = RenderMachineForceField.class, priority = 999)
 public class MixinRenderMachineForceField {
 
-    @WrapWithCondition(
-        method = "renderTileEntityAt",
-        at = @At(
-            value = "INVOKE",
-            target = "Lcom/hbm/render/tileentity/RenderMachineForceField;generateSphere(IIFI)V",
-            remap = false))
+    @WrapWithCondition(method = "renderTileEntityAt"
+            , at = @At(value = "INVOKE"
+                , target = "Lcom/hbm/render/tileentity/RenderMachineForceField;generateSphere(IIFI)V"
+            , remap = false))
     private boolean dontCastShadow(RenderMachineForceField instance, int l, int s, float rad, int hex) {
         return !AngelicaUtils_WRAPPER.isShadowPass();
     }
 
-    @Inject(
-        method = "generateSphere",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
-            shift = At.Shift.BEFORE))
+    @Inject(method = "generateSphere"
+            , at = @At(value = "INVOKE"
+                , target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"
+            , shift = At.Shift.BEFORE))
     public void generateSphere(CallbackInfo ci) {
         ShaderUtils.enableFullBrightness();
     }
 
-    @Inject(
-        method = "generateSphere",
+    @Inject(method = "generateSphere",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
@@ -43,22 +38,18 @@ public class MixinRenderMachineForceField {
         ShaderUtils.disableFullBrightness();
     }
 
-    @Inject(
-        method = "generateSphere2",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
-            shift = At.Shift.BEFORE))
+    @Inject(method = "generateSphere2"
+            , at = @At(value = "INVOKE"
+                , target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"
+                , shift = At.Shift.BEFORE))
     public void generateSphere2(CallbackInfo ci) {
         ShaderUtils.enableFullBrightness();
     }
 
-    @Inject(
-        method = "generateSphere2",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-            shift = At.Shift.AFTER))
+    @Inject(method = "generateSphere2"
+            , at = @At(value = "INVOKE"
+                , target = "Lnet/minecraft/client/renderer/Tessellator;draw()I"
+                , shift = At.Shift.AFTER))
     public void generateSphere222(CallbackInfo ci) {
         ShaderUtils.disableFullBrightness();
     }

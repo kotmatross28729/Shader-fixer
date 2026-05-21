@@ -13,6 +13,14 @@ import com.kotmatross.shaderfixer.shrimp.Vibe;
 public class NTMUtils_WRAPPER {
 
     // Don't even ask, I don't give a fuck what that means
+    public static boolean checkVibe() {
+        ItemStack toRender = Minecraft.getMinecraft().entityRenderer.itemRenderer.itemToRender;
+        if (toRender != null) {
+            return MinecraftForgeClient.getItemRenderer(toRender, IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON) instanceof Vibe;
+        }
+        return false;
+    }
+    
     public static boolean checkVibe(IItemRenderer.ItemRenderType renderType) {
         ItemStack toRender = null;
 

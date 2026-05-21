@@ -7,14 +7,13 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 import com.fiskmods.heroes.client.render.entity.projectile.RenderEnergyBolt;
 import com.kotmatross.shaderfixer.utils.AngelicaUtils_WRAPPER;
 
-@Mixin(value = RenderEnergyBolt.class, priority = 999)
+@Mixin(value = RenderEnergyBolt.class, priority = 999, remap = false)
 public class MixinRenderEnergyBolt {
 
-    @ModifyArg(
-        method = "renderBolt",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glColor4d(DDDD)V"),
-        index = 3,
-        remap = false)
+    @ModifyArg(method = "renderBolt"
+            , at = @At(value = "INVOKE"
+                , target = "Lorg/lwjgl/opengl/GL11;glColor4d(DDDD)V")
+            , index = 3)
     private double alphaFix(double alpha) {
         return AngelicaUtils_WRAPPER.isShaderEnabled() ? Math.max(alpha, 0.1) : alpha;
     }

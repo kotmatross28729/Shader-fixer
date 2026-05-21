@@ -23,10 +23,12 @@ import com.kotmatross.shaderfixer.shrimp.Vibe;
  * @author kotmatross
  */
 
-@Mixin(value = ForgeHooksClient.class, priority = 1003)
+@Mixin(value = ForgeHooksClient.class, priority = 1003, remap = false)
 public class MixinForgeHooksClient {
 
-    @Inject(method = "renderEquippedItem", at = @At("HEAD"), cancellable = true, remap = false)
+    @Inject(method = "renderEquippedItem"
+            , at = @At("HEAD")
+            , cancellable = true)
     private static void onRenderEquippedItem(IItemRenderer.ItemRenderType type, IItemRenderer customRenderer,
         RenderBlocks renderBlocks, EntityLivingBase entity, ItemStack item, CallbackInfo ci) {
         if (customRenderer instanceof Vibe) {

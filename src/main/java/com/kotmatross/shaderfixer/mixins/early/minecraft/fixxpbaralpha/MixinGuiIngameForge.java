@@ -8,12 +8,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = GuiIngameForge.class, priority = 1009)
+@Mixin(value = GuiIngameForge.class, priority = 1009, remap = false)
 public class MixinGuiIngameForge {
 
-    @Inject(method = "renderExperience", at = @At("HEAD"), remap = false)
+    @Inject(method = "renderExperience"
+            , at = @At("HEAD"))
     private void enableAlphaTest(CallbackInfo ci) {
-        GL11.glEnable(GL11.GL_ALPHA_TEST); // Peak mjoang coding v3
+        // Peak mjoang coding v3
+        GL11.glEnable(GL11.GL_ALPHA_TEST);
     }
 
 }

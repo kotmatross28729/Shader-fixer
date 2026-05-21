@@ -15,10 +15,10 @@ import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-@Mixin(value = CustomTileEntitySignRenderer.class, priority = 999)
+@Mixin(value = CustomTileEntitySignRenderer.class, priority = 999, remap = false)
 public class MixinCustomTileEntitySignRenderer extends TileEntitySignRenderer {
 
-    @WrapMethod(method = "renderSignPictureBase", remap = false)
+    @WrapMethod(method = "renderSignPictureBase")
     private void dontCastShadow(TileEntitySign tile, double x, double y, double z, float partialTicks, float opacity,
         Operation<Void> original) {
         if (!AngelicaUtils_WRAPPER.isShadowPass()) {
@@ -26,29 +26,26 @@ public class MixinCustomTileEntitySignRenderer extends TileEntitySignRenderer {
         }
     }
 
-    @Inject(method = "renderSignPictureBase", at = @At(value = "HEAD"), remap = false)
+    @Inject(method = "renderSignPictureBase"
+            , at = @At(value = "HEAD"))
     private void renderSignPictureBase(CallbackInfo ci) {
-        /// Saves: GL_LIGHTING | GL_BLEND | GL_TEXTURE_2D
         GL11.glPushAttrib(GL11.GL_LIGHTING_BIT | GL11.GL_ENABLE_BIT | GL11.GL_MAP2_INDEX);
     }
 
-    @Inject(method = "renderSignPictureBase", at = @At(value = "TAIL"), remap = false)
+    @Inject(method = "renderSignPictureBase"
+            , at = @At(value = "TAIL"))
     private void renderSignPictureBase2(CallbackInfo ci) {
-        /// Restores: GL_LIGHTING | GL_BLEND | GL_TEXTURE_2D
         GL11.glPopAttrib();
     }
 
-    @WrapOperation(
-        method = "renderSignPictureBase",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/tileentity/TileEntitySignRenderer;renderTileEntityAt(Lnet/minecraft/tileentity/TileEntitySign;DDDF)V"))
+    @WrapOperation(method = "renderSignPictureBase"
+            , at = @At(value = "INVOKE"
+                , target = "Lnet/minecraft/client/renderer/tileentity/TileEntitySignRenderer;renderTileEntityAt(Lnet/minecraft/tileentity/TileEntitySign;DDDF)V"
+                , remap = true))
     private void wrapRenderTileEntityAt(CustomTileEntitySignRenderer instance, TileEntitySign tile, double x, double y,
         double z, float interp, Operation<Void> original) {
-        /// Saves: GL_LIGHTING | GL_BLEND | GL_TEXTURE_2D
         GL11.glPushAttrib(GL11.GL_LIGHTING_BIT | GL11.GL_ENABLE_BIT | GL11.GL_MAP2_INDEX);
         original.call(instance, tile, x, y, z, interp);
-        /// Restores: GL_LIGHTING | GL_BLEND | GL_TEXTURE_2D
         GL11.glPopAttrib();
     }
 

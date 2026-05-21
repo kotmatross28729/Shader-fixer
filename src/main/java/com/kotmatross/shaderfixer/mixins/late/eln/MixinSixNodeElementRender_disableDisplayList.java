@@ -8,16 +8,16 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
 import mods.eln.node.six.SixNodeElementRender;
 
-@Mixin(value = SixNodeElementRender.class, priority = 999)
+@Mixin(value = SixNodeElementRender.class, priority = 999, remap = false)
 public class MixinSixNodeElementRender_disableDisplayList {
 
-    @Shadow(remap = false)
+    @Shadow
     public void glListDraw() {}
 
     /**
      * Forces ELN to not use display lists
      */
-    @WrapMethod(method = "glListCall", remap = false)
+    @WrapMethod(method = "glListCall")
     private void glListCall(Operation<Void> original) {
         this.glListDraw();
     }

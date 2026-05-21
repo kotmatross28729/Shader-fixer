@@ -23,11 +23,7 @@ public class ShaderUtils {
     public static void fix() {
         Minecraft.getMinecraft().renderEngine.bindTexture(shader_fix);
     }
-
-    public static void fix(TextureManager renderEngine) {
-        renderEngine.bindTexture(shader_fix);
-    }
-
+    
     public static int getCurrentTextureID() {
         return GL11.glGetInteger(GL11.GL_TEXTURE_BINDING_2D);
     }

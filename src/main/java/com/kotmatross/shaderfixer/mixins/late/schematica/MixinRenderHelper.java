@@ -10,30 +10,34 @@ import com.kotmatross.shaderfixer.utils.ShaderUtils;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 
-@Mixin(value = RenderHelper.class, priority = 999)
+@Mixin(value = RenderHelper.class, priority = 999, remap = false)
 public class MixinRenderHelper {
 
-    @Inject(method = "drawCuboidSurface", at = @At(value = "HEAD"), remap = false)
+    @Inject(method = "drawCuboidSurface"
+            , at = @At(value = "HEAD"))
     private static void drawCuboidSurface$programS(CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
         shader_fixer$program.set(ShaderUtils.getCurrentProgram());
         ShaderUtils.useDefaultProgram();
     }
 
-    @Inject(method = "drawCuboidSurface", at = @At(value = "TAIL"), remap = false)
+    @Inject(method = "drawCuboidSurface"
+            , at = @At(value = "TAIL"))
     private static void drawCuboidSurface$programE(CallbackInfo ci,
         @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
         ShaderUtils.useProgram(shader_fixer$program.get());
     }
 
-    @Inject(method = "drawCuboidOutline", at = @At(value = "HEAD"), remap = false)
+    @Inject(method = "drawCuboidOutline"
+            , at = @At(value = "HEAD"))
     private static void drawCuboidOutline$programS(CallbackInfo ci,
         @Share("shader_fixer$program2") LocalIntRef shader_fixer$program2) {
         shader_fixer$program2.set(ShaderUtils.getCurrentProgram());
         ShaderUtils.useDefaultProgram();
     }
 
-    @Inject(method = "drawCuboidOutline", at = @At(value = "TAIL"), remap = false)
+    @Inject(method = "drawCuboidOutline"
+            , at = @At(value = "TAIL"))
     private static void drawCuboidOutline$programE(CallbackInfo ci,
         @Share("shader_fixer$program2") LocalIntRef shader_fixer$program2) {
         ShaderUtils.useProgram(shader_fixer$program2.get());

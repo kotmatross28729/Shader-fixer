@@ -12,22 +12,18 @@ import com.kotmatross.shaderfixer.utils.ShaderUtils;
 @Mixin(value = ShapeFormatCircles.class, priority = 999)
 public abstract class MixinShapeFormatCircles implements IShapeFormat {
 
-    @Inject(
-        method = "render",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V",
-            shift = At.Shift.BEFORE))
+    @Inject(method = "render"
+            , at = @At(value = "INVOKE"
+                , target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"
+                , shift = At.Shift.BEFORE))
     public void render(CallbackInfo ci) {
         ShaderUtils.enableFullBrightness();
     }
 
-    @Inject(
-        method = "render",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/Tessellator;draw()I",
-            shift = At.Shift.AFTER))
+    @Inject(method = "render"
+            , at = @At(value = "INVOKE"
+                , target = "Lnet/minecraft/client/renderer/Tessellator;draw()I"
+                , shift = At.Shift.AFTER))
     public void render2(CallbackInfo ci) {
         ShaderUtils.disableFullBrightness();
     }

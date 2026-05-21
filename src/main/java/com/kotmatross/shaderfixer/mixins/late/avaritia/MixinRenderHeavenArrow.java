@@ -12,12 +12,14 @@ import fox.spiteful.avaritia.render.RenderHeavenArrow;
 @Mixin(value = RenderHeavenArrow.class, priority = 999)
 public class MixinRenderHeavenArrow {
 
-    @Inject(method = "doRender", at = @At(value = "HEAD"))
+    @Inject(method = "doRender"
+            , at = @At(value = "HEAD"))
     private void doRender(CallbackInfo ci) {
         ShaderUtils.enableFullBrightness();
     }
 
-    @Inject(method = "doRender", at = @At(value = "TAIL"))
+    @Inject(method = "doRender"
+            , at = @At(value = "TAIL"))
     private void doRender_E(CallbackInfo ci) {
         ShaderUtils.disableFullBrightness();
     }

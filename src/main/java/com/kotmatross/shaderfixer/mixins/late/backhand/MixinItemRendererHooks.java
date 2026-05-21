@@ -11,10 +11,12 @@ import com.kotmatross.shaderfixer.utils.ntm.NTMUtils_WRAPPER;
 
 import xonin.backhand.client.hooks.ItemRendererHooks;
 
-@Mixin(value = ItemRendererHooks.class, priority = 999)
+@Mixin(value = ItemRendererHooks.class, priority = 999, remap = false)
 public class MixinItemRendererHooks {
 
-    @Inject(method = "renderOffhandReturn", at = @At(value = "HEAD"), cancellable = true, remap = false)
+    @Inject(method = "renderOffhandReturn"
+            , at = @At(value = "HEAD")
+            , cancellable = true)
     private static void renderOffhandReturn(CallbackInfo ci) {
         if (NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) {
             ci.cancel();

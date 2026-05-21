@@ -10,16 +10,18 @@ import com.kotmatross.shaderfixer.utils.ShaderUtils;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 
-@Mixin(value = RendererSchematicGlobal.class, priority = 999)
+@Mixin(value = RendererSchematicGlobal.class, priority = 999, remap = false)
 public class MixinRendererSchematicGlobal {
 
-    @Inject(method = "render", at = @At(value = "HEAD"), remap = false)
+    @Inject(method = "render"
+            , at = @At(value = "HEAD"))
     public void render$programS(CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
         shader_fixer$program.set(ShaderUtils.getCurrentProgram());
         ShaderUtils.useDefaultProgram();
     }
 
-    @Inject(method = "render", at = @At(value = "TAIL"), remap = false)
+    @Inject(method = "render"
+            , at = @At(value = "TAIL"))
     public void render$programE(CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
         ShaderUtils.useProgram(shader_fixer$program.get());
     }

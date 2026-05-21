@@ -18,7 +18,8 @@ public class MixinRenderPlayer {
     @Shadow
     public ModelBiped modelBipedMain;
 
-    @Inject(method = "renderFirstPersonArm", at = @At(value = "HEAD"))
+    @Inject(method = "renderFirstPersonArm"
+            , at = @At(value = "HEAD"))
     protected void renderFirstPersonArm(EntityPlayer player, CallbackInfo ci) {
         // Peak mjoang coding
         if (ShaderFixerConfig.V_RIDING_HAND_ROTATION_FIX == 1) {

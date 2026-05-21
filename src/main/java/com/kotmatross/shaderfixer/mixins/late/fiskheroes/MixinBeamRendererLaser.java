@@ -12,30 +12,29 @@ import com.kotmatross.shaderfixer.utils.AngelicaUtils_WRAPPER;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 
-@Mixin(value = BeamRendererLaser.class, priority = 999)
+@Mixin(value = BeamRendererLaser.class, priority = 999, remap = false)
 public class MixinBeamRendererLaser {
 
-    /**
+    /*
      * Soooo, it turns out Complementary has the opposite problem with alpha than BSL:
      * If alpha < ~0.1, then in BSL it's displayed with an alpha of 1.0,
      * but in Complementary, somehow, if alpha < ~0.1, then it's displayed with an alpha of... 0.0
      */
 
-    @Shadow(remap = false)
+    @Shadow
     private Bloom bloom;
 
-    @Inject(
-        method = "render",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/util/Vec3;distanceTo(Lnet/minecraft/util/Vec3;)D",
-            shift = At.Shift.AFTER))
-    public void fixAlpha(CallbackInfo ci, @Local(ordinal = 11) LocalFloatRef alpha) {
+    @Inject(method = "render"
+            , at = @At(value = "INVOKE"
+                , target = "Lnet/minecraft/util/Vec3;distanceTo(Lnet/minecraft/util/Vec3;)D"
+                , remap = true
+                , shift = At.Shift.AFTER))
+    public void fixAlpha(CallbackInfo ci, @Local(name = "alpha") LocalFloatRef alpha) {
         if (AngelicaUtils_WRAPPER.isShaderEnabled()) {
             if (this.bloom != null) {
-                // Looks like something dense, high alpha
+                /* Dense - high alpha */
                 if (1.0F / this.bloom.getStrength() > 1.5F) alpha.set(0.4F);
-                // Looks like something NOT dense, low alpha
+                /* Not dense - low alpha */
                 if (1.0F / this.bloom.getStrength() < 1.5F) alpha.set(0.2F);
             }
         }

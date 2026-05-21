@@ -11,14 +11,12 @@ import techguns.blocks.BlockTGChest;
 import techguns.client.renderer.tileentity.RenderTGChest;
 import techguns.tileentities.TGChestTileEnt;
 
-@Mixin(value = RenderTGChest.class, priority = 999)
+@Mixin(value = RenderTGChest.class, priority = 999, remap = false)
 public class MixinRenderTGChest {
 
-    @Inject(
-        method = "renderTileEntityAt(Ltechguns/tileentities/TGChestTileEnt;DDDF)V",
-        at = @At(value = "HEAD"),
-        cancellable = true,
-        remap = false)
+    @Inject(method = "renderTileEntityAt(Ltechguns/tileentities/TGChestTileEnt;DDDF)V"
+            , at = @At(value = "HEAD")
+            , cancellable = true)
     public void renderTileEntityAt(CallbackInfo ci, @Local(argsOnly = true) TGChestTileEnt chestTileEnt) {
         if (!(chestTileEnt.getBlockType() instanceof BlockTGChest)) {
             ci.cancel();

@@ -8,10 +8,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import com.hbm.render.anim.HbmAnimations;
 import com.hbm.util.Clock;
 
-@Mixin(value = HbmAnimations.class, priority = 999)
+@Mixin(value = HbmAnimations.class, priority = 999, remap = false)
 public class MixinHbmAnimations {
 
-    @Inject(method = "getRelevantTransformation(Ljava/lang/String;I)[D", at = @At(value = "HEAD"), remap = false)
+    @Inject(method = "getRelevantTransformation(Ljava/lang/String;I)[D"
+            , at = @At(value = "HEAD"))
     private static void getRelevantTransformation(CallbackInfoReturnable<double[]> cir) {
         Clock.update();
     }

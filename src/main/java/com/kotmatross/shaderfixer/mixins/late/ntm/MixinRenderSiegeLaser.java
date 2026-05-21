@@ -8,15 +8,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.hbm.render.entity.projectile.RenderSiegeLaser;
 import com.kotmatross.shaderfixer.utils.ShaderUtils;
 
-@Mixin(value = RenderSiegeLaser.class, priority = 999)
+@Mixin(value = RenderSiegeLaser.class, priority = 999, remap = false)
 public class MixinRenderSiegeLaser {
 
-    @Inject(method = "renderDart", at = @At(value = "HEAD"), remap = false)
+    @Inject(method = "renderDart"
+            , at = @At(value = "HEAD"))
     private void renderDart(CallbackInfo ci) {
         ShaderUtils.enableFullBrightness();
     }
 
-    @Inject(method = "renderDart", at = @At(value = "TAIL"), remap = false)
+    @Inject(method = "renderDart"
+            , at = @At(value = "TAIL"))
     private void renderDar2(CallbackInfo ci) {
         ShaderUtils.disableFullBrightness();
     }

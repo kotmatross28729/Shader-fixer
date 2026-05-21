@@ -28,7 +28,8 @@ public class MixinRenderBiped {
     /**
      * Allows non-player mobs to render akimbo weapons in their hands
      */
-    @Inject(method = "renderEquippedItems(Lnet/minecraft/entity/EntityLiving;F)V", at = @At(value = "HEAD"))
+    @Inject(method = "renderEquippedItems(Lnet/minecraft/entity/EntityLiving;F)V"
+            , at = @At(value = "HEAD"))
     public void renderAkimbo(CallbackInfo ci, @Local(argsOnly = true) EntityLiving entity) {
         if (ShaderFixer.IS_HBM_NTM_PRESENT) {
             ItemStack held = entity.getHeldItem();
