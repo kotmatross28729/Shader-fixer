@@ -9,7 +9,7 @@ import net.minecraftforge.client.event.RenderItemInFrameEvent;
 import org.lwjgl.opengl.GL11;
 
 import com.kotmatross.shaderfixer.Tags;
-import com.kotmatross.shaderfixer.utils.AngelicaUtils_WRAPPER;
+import com.kotmatross.shaderfixer.utils.angelica.AngelicaUtils_WRAPPER;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 

@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 import com.hbm.render.tileentity.RenderSolarBoiler;
-import com.kotmatross.shaderfixer.utils.AngelicaUtils_WRAPPER;
+import com.kotmatross.shaderfixer.utils.angelica.AngelicaUtils_WRAPPER;
 
 @Mixin(value = RenderSolarBoiler.class, priority = 999)
 public class MixinRenderSolarBoiler {

@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.hbm.render.tileentity.RenderSmallReactor;
-import com.kotmatross.shaderfixer.utils.AngelicaUtils_WRAPPER;
+import com.kotmatross.shaderfixer.utils.angelica.AngelicaUtils_WRAPPER;
 import com.kotmatross.shaderfixer.utils.ShaderUtils;
 
 @Mixin(value = RenderSmallReactor.class, priority = 999)

@@ -3,6 +3,7 @@ package com.kotmatross.shaderfixer;
 import java.time.LocalDate;
 import java.time.Month;
 
+import com.kotmatross.shaderfixer.utils.ntm.ModelsSelfShadowingFix;
 import net.minecraftforge.common.MinecraftForge;
 
 import org.apache.logging.log4j.LogManager;
@@ -66,7 +67,6 @@ public class ShaderFixer {
         if (Loader.isModLoaded("hbm")) {
             IS_HBM_NTM_PRESENT = true;
         }
-
         if (event.getSide() == Side.CLIENT) {
             if (IS_HBM_NTM_PRESENT) {
                 applyTextureFix(ShaderFixerConfig.NTM_TEXTURE_FIX, "NTM_FIX", "NTM_TEXTURE_FIX");
@@ -74,6 +74,17 @@ public class ShaderFixer {
             if (Loader.isModLoaded("Techguns")) {
                 applyTextureFix(ShaderFixerConfig.TECHGUNS_TEXTURE_FIX, "TECHGUNS_FIX", "TECHGUNS_TEXTURE_FIX");
             }
+            //! TODO: CONFIG
+            //! TODO: CONFIG
+            //! TODO: CONFIG
+            //! TODO: CONFIG
+            //! TODO: CONFIG
+            ModelsSelfShadowingFix.init();
+            //! TODO: CONFIG
+            //! TODO: CONFIG
+            //! TODO: CONFIG
+            //! TODO: CONFIG
+            //! TODO: CONFIG
             LocalDate date = LocalDate.now();
             if (date.getMonth() == Month.APRIL && date.getDayOfMonth() == 1) {
                 BratvaAndTheRing SenyaGanjubas = new BratvaAndTheRing();

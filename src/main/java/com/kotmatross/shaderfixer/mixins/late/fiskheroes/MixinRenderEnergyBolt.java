@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 import com.fiskmods.heroes.client.render.entity.projectile.RenderEnergyBolt;
-import com.kotmatross.shaderfixer.utils.AngelicaUtils_WRAPPER;
+import com.kotmatross.shaderfixer.utils.angelica.AngelicaUtils_WRAPPER;
 
 @Mixin(value = RenderEnergyBolt.class, priority = 999, remap = false)
 public class MixinRenderEnergyBolt {

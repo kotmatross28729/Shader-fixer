@@ -34,7 +34,6 @@ import cpw.mods.fml.relauncher.ReflectionHelper;
  * Taken (and slightly modified) from <a href="https://github.com/Roadhog360/Et-Futurum-Requiem">Et Futurum Requiem</a>
  * [LGPL v3.0]
  */
-
 public abstract class BuiltInResourcePack extends AbstractResourcePack {
 
     private static final Splitter entryNameSplitter = Splitter.on('/')

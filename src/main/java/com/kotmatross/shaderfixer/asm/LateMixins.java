@@ -77,13 +77,13 @@ public enum LateMixins implements IMixins {
                 , "ntm.MixinRenderSpear"
                 , "ntm.MixinRenderTorex"
                 , "ntm.MixinModEventHandlerClient"
-                // TODO: T-E-S-T
-                // Actually move to separate cat.
-                , "ntm.selfshadowing.MixinRenderChimneyBrick"
-                , "ntm.selfshadowing.MixinRenderChimneyIndustrial"
-                , "ntm.selfshadowing.MixinRenderCoker"
-                , "ntm.selfshadowing.MixinRenderCatalyticCracker"
-                , "ntm.selfshadowing.MixinRenderFrackingTower"
+                //! TODO: CONFIG
+                //! TODO: CONFIG
+                //! TODO: CONFIG
+                , "ntm.selfshadowing.SelfShadowingUberMixin"
+                //! TODO: CONFIG
+                //! TODO: CONFIG
+                //! TODO: CONFIG
         )
         .setApplyIf(() -> ShaderFixerConfig.NTM_MAIN_FIX)),
 
