@@ -14,5 +14,12 @@ public class ModelsSelfShadowingFix {
         new ResourceLocation(Tags.MODID, "models/ntm_selfshadowing_fix/chimney_industrial.obj")).asVBO();
     public static final IModelCustom coker = new HFRWavefrontObject(
         new ResourceLocation(Tags.MODID, "models/ntm_selfshadowing_fix/coker.obj")).asVBO();
+    
+    public static final IModelCustom cracking_tower = new HFRWavefrontObject(
+            new ResourceLocation(Tags.MODID, "models/ntm_selfshadowing_fix/cracking_tower.obj")).asVBO();
+    
+    public static final IModelCustom fracking_tower = new HFRWavefrontObject(
+            new ResourceLocation(Tags.MODID, "models/ntm_selfshadowing_fix/fracking_tower.obj")).asVBO();
+
 
 }

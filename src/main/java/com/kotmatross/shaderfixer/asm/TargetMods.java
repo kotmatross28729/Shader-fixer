@@ -15,7 +15,6 @@ public enum TargetMods implements ITargetMod {
     FISKHEROES("fiskheroes", "com.fiskmods.heroes.asm.SHLoadingPlugin"),
     NTM("hbm"),
     NTM_SPACE("com.hbm.dim.SolarSystem", true),
-    JOURNEYMAP("journeymap"),
     OPENCOMPUTERS("OpenComputers"),
     SCHEMATICA("Schematica"),
     SIGNPIC("signpic"),

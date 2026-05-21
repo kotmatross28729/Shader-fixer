@@ -1,5 +1,6 @@
 package com.kotmatross.shaderfixer.utils;
 
+import com.kotmatross.shaderfixer.mixins.late.angelica.AccessorDeferredWorldRenderingPipeline;
 import net.coderbot.iris.Iris;
 import net.irisshaders.iris.api.v0.IrisApi;
 
@@ -24,6 +25,16 @@ class AngelicaUtils {
     protected static boolean isShadowPass() {
         return IrisApi.getInstance()
             .isRenderingShadowPass();
+    }
+    
+    protected static int getShadowMapResolution() {
+        if (!isShaderEnabled()) {
+            return 0;
+        }
+        return Iris.getPipelineManager().getPipeline()
+                .map(pipe -> ((AccessorDeferredWorldRenderingPipeline) pipe)
+                        .getShadowMapResolution())
+                .orElse(0);
     }
 
 }

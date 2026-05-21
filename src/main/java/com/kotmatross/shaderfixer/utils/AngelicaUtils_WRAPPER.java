@@ -24,5 +24,12 @@ public class AngelicaUtils_WRAPPER {
         }
         return AngelicaUtils.isShadowPass();
     }
+    
+    protected static int getShadowMapResolution() {
+        if (!ShaderFixer.IS_ANGELICA_PRESENT) {
+            return 0;
+        }
+        return AngelicaUtils.getShadowMapResolution();
+    }
 
 }

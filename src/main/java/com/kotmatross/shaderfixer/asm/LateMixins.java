@@ -8,7 +8,11 @@ import com.kotmatross.shaderfixer.config.ShaderFixerConfig;
 
 @SuppressWarnings("unused")
 public enum LateMixins implements IMixins {
-
+    
+    ANGELICA(new MixinBuilder()
+            .addRequiredMod(TargetMods.ANGELICA)
+            .addClientMixins("angelica.AccessorDeferredWorldRenderingPipeline")),
+    
     ANGELICA_NTM_GUNFIX_COMPAT(new MixinBuilder("Patches HandRenderer to work correctly with HBM's NTM gunfix")
         .addRequiredMod(TargetMods.ANGELICA)
         .addRequiredMod(TargetMods.NTM)
@@ -83,6 +87,8 @@ public enum LateMixins implements IMixins {
             "ntm.selfshadowing.MixinRenderChimneyBrick",
             "ntm.selfshadowing.MixinRenderChimneyIndustrial",
             "ntm.selfshadowing.MixinRenderCoker",
+                "ntm.selfshadowing.MixinRenderCatalyticCracker",
+                "ntm.selfshadowing.MixinRenderFrackingTower",
 
             "ntm.MixinModEventHandlerClient"
 
