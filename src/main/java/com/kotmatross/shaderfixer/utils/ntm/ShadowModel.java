@@ -6,6 +6,8 @@ import com.hbm.render.tileentity.RenderChimneyBrick;
 import com.hbm.render.tileentity.RenderChimneyIndustrial;
 import com.hbm.render.tileentity.RenderCoker;
 import com.hbm.render.tileentity.RenderFrackingTower;
+import com.hbm.render.tileentity.RenderLargeTower;
+import com.hbm.render.tileentity.RenderSmallTower;
 import com.kotmatross.shaderfixer.Tags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModelCustom;
@@ -18,17 +20,16 @@ public enum ShadowModel {
 	CHIMNEY_BRICK("chimney_brick", RenderChimneyBrick.class),
 	CHIMNEY_INDUSTRIAL("chimney_industrial", RenderChimneyIndustrial.class),
 	COKER("coker", RenderCoker.class),
-	CRACKING_TOWER("cracking_tower", RenderCatalyticCracker.class),
-	FRACKING_TOWER("fracking_tower", RenderFrackingTower.class)
-			
+	CATALYTIC_CRACKER("catalytic_cracker", RenderCatalyticCracker.class),
+	FRACKING_TOWER("fracking_tower", RenderFrackingTower.class),
+	TOWER_LARGE("tower_large", RenderLargeTower.class),
+	TOWER_SMALL("tower_small", RenderSmallTower.class),
+	
 	;
 	
 	private final String name;
 	private final Class<?> targetClass;
-	
-	private IModelCustom s2048;
-	private IModelCustom s4096;
-	private IModelCustom s8192;
+	private IModelCustom model;
 	
 	ShadowModel(String name, Class<?> targetClass) {
 		this.name = name;
@@ -48,22 +49,13 @@ public enum ShadowModel {
 	}
 	
 	public void init() {
-		this.s2048 = loadModel(2048);
-		this.s4096 = loadModel(4096);
-		this.s8192 = loadModel(8192);
-	}
-	
-	private IModelCustom loadModel(int res) {
 		ResourceLocation loc = new ResourceLocation(
-				Tags.MODID, "models/ntm_selfshadowing_fix/" + res + "/" + this.name + ".obj");
-		return new HFRWavefrontObject(loc).asVBO();
+				Tags.MODID, "models/ntm_selfshadowing_fix/" + this.name + ".obj");
+		this.model = new HFRWavefrontObject(loc).asVBO();
 	}
-	
-	public IModelCustom getModel(int shadowRes, IModelCustom defInstance) {
-		if (shadowRes <= 2048) return this.s2048;
-		if (shadowRes <= 4096) return this.s4096;
-		if (shadowRes <= 8192) return this.s8192;
-		return defInstance;
+
+	public IModelCustom getModel() {
+		return this.model;
 	}
 	
 }
