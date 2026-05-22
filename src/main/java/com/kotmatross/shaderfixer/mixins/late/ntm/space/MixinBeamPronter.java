@@ -18,14 +18,13 @@ import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
 @SPEKJORK
-@Mixin(value = BeamPronter.class, priority = 999)
-public class MixinBeamPronter_SPACE {
+@Mixin(value = BeamPronter.class, priority = 999, remap = false)
+public class MixinBeamPronter {
 
     @Unique
     private static final String prontBeamDescSpace = "prontBeam(Lnet/minecraft/util/Vec3;Lcom/hbm/render/util/BeamPronter$EnumWaveType;Lcom/hbm/render/util/BeamPronter$EnumBeamType;IIIIFIFF)V";
 
-    @WrapMethod(method = prontBeamDescSpace
-            , remap = false)
+    @WrapMethod(method = prontBeamDescSpace)
     private static void dontCastShadow(Vec3 skeleton, BeamPronter.EnumWaveType wave, BeamPronter.EnumBeamType beam,
         int outerColor, int innerColor, int start, int segments, float size, int layers, float thickness, float alpha,
         Operation<Void> original) {
@@ -36,15 +35,13 @@ public class MixinBeamPronter_SPACE {
     }
 
     @Inject(method = prontBeamDescSpace
-            , at = @At(value = "HEAD")
-            , remap = false)
+            , at = @At(value = "HEAD"))
     private static void prontBeam(CallbackInfo ci) {
         ShaderUtils.enableFullBrightness();
     }
 
     @Inject(method = prontBeamDescSpace
-            , at = @At(value = "TAIL")
-            , remap = false)
+            , at = @At(value = "TAIL"))
     private static void prontBeam2(CallbackInfo ci) {
         ShaderUtils.disableFullBrightness();
     }
@@ -53,8 +50,7 @@ public class MixinBeamPronter_SPACE {
     // For some reason, James put 256 (and 0.5) as the alpha value
     @Redirect(method = "setColorWithAlpha"
             , at = @At(value = "INVOKE"
-                    , target = "org/lwjgl/opengl/GL11.glColor4f(FFFF)V")
-            , remap = false)
+                    , target = "org/lwjgl/opengl/GL11.glColor4f(FFFF)V"))
     private static void transformGLColor(float r, float g, float b, float a) {
         GL11.glColor4f(r, g, b, 1F);
     }

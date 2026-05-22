@@ -101,8 +101,7 @@ public enum LateMixins implements IMixins {
         .setApplyIf(() -> ShaderFixerConfig.NTM_MAIN_FIX)),
 
     NTM_SPACE(new MixinBuilder().addRequiredMod(TargetMods.NTM_SPACE)
-        .addClientMixins("ntm.space.MixinBeamPronter_SPACE"
-                , "ntm.space.MixinMissilePronter")
+        .addClientMixins("ntm.space.MixinBeamPronter")
         .setApplyIf(() -> ShaderFixerConfig.NTM_MAIN_FIX)),
 
     OPENCOMPUTERS_DL_DISABLE(new MixinBuilder().addRequiredMod(TargetMods.OPENCOMPUTERS)
