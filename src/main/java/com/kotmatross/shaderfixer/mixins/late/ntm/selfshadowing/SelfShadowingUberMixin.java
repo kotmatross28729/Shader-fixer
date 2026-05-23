@@ -16,13 +16,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(value = {
-		  RenderChimneyBrick.class
-		, RenderChimneyIndustrial.class
-		, RenderCoker.class
-		, RenderCatalyticCracker.class
-		, RenderFrackingTower.class
-		, RenderLargeTower.class
-		, RenderSmallTower.class
+		  RenderChimneyBrick.class // 4/3420 -> 5/?
+		, RenderChimneyIndustrial.class //4/6396 -> 5/?
+		, RenderCoker.class //??? -> ^
+		, RenderCatalyticCracker.class //??? -> ^
+		, RenderFrackingTower.class //??? -> 👍 
+		, RenderLargeTower.class // 2/2508 -> ^(^)
+		, RenderSmallTower.class // 2/4/6612 -> 👍
 }
 		, priority = 999)
 public class SelfShadowingUberMixin {

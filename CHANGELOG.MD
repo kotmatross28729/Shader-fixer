@@ -1,3 +1,8 @@
+# 5.4
+*yet another formatting/code rework*
+
+* **[Main]** Removed placeholder fixes (journeymap / `glClipPlane` in NTM), as these are now fixed properly in angelica
+
 # 5.3
 * **[Minecraft]** Fixed particles rendering during shadow pass
 * **[Hbm's NTM]** Fixed crash with X5634+
