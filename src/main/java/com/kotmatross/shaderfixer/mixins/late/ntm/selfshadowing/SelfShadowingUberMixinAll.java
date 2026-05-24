@@ -22,15 +22,15 @@ import org.spongepowered.asm.mixin.injection.At;
 		, RenderFrackingTower.class
 		, RenderLargeTower.class
 		, RenderSmallTower.class
-}
+	}
 		, priority = 999)
-public class SelfShadowingUberMixin {
+public class SelfShadowingUberMixinAll {
 	
 	@ModifyReceiver(method = "renderTileEntityAt"
 			, at = @At(value = "INVOKE"
 				, target = "Lnet/minecraftforge/client/model/IModelCustom;renderAll()V"
 				, remap = false))
-	private IModelCustom fixModel(IModelCustom instance) {
+	private IModelCustom fixModelAll(IModelCustom instance) {
 		if (AngelicaUtils_WRAPPER.isShadowPass()) {
 			return ModelsSelfShadowingFix.getByClass(this.getClass());
 		}

@@ -14,6 +14,7 @@ import net.minecraftforge.client.model.IModelCustom;
 
 import java.util.HashMap;
 import java.util.Map;
+
 public class ModelsSelfShadowingFix {
     
     // === U B E R ===
@@ -30,7 +31,6 @@ public class ModelsSelfShadowingFix {
     public static IModelCustom soyuz_launcher_support;
     public static IModelCustom soyuz_launcher_table;
     public static IModelCustom soyuz_launcher_tower;
-    
     
     public static void init() {
         chimney_brick = constructModel("chimney_brick", RenderChimneyBrick.class);

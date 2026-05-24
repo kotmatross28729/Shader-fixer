@@ -1,9 +1,12 @@
 package com.kotmatross.shaderfixer;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
 
 import com.kotmatross.shaderfixer.utils.ntm.ModelsSelfShadowingFix;
+import com.kotmatross.shaderfixer.utils.ntm.ModelsSelfShadowingFixSpace;
+import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.common.MinecraftForge;
 
 import org.apache.logging.log4j.LogManager;
@@ -36,6 +39,7 @@ public class ShaderFixer {
     public static final Logger logger = LogManager.getLogger("SHADER_FIXER");
     public static boolean IS_ANGELICA_PRESENT = false;
     public static boolean IS_HBM_NTM_PRESENT = false;
+    public static boolean IS_HBM_NTM_SPACE_PRESENT = false;
 
     @SidedProxy(
         clientSide = "com.kotmatross.shaderfixer.proxy.ClientProxy",
@@ -61,22 +65,30 @@ public class ShaderFixer {
         event.getModMetadata().authorList.clear();
         event.getModMetadata().authorList.add("§1§lK§1§lo§9§lt§b§lm§f§la§1§lt§1§lr§9§lo§b§ls§f§ls");
 
-        if (Loader.isModLoaded("angelica")) {
+        if (Loader.isModLoaded("angelica")) 
             IS_ANGELICA_PRESENT = true;
-        }
-        if (Loader.isModLoaded("hbm")) {
+        if (Loader.isModLoaded("hbm"))
             IS_HBM_NTM_PRESENT = true;
-        }
+        try {
+            if (Launch.classLoader.getClassBytes("com.hbm.dim.SolarSystem") != null) {
+                IS_HBM_NTM_SPACE_PRESENT = true;
+            }
+        } catch (IOException ignored) {}
+        
         if (event.getSide() == Side.CLIENT) {
-            if (IS_HBM_NTM_PRESENT) {
+            
+            if (IS_HBM_NTM_PRESENT)
                 applyTextureFix(ShaderFixerConfig.NTM_TEXTURE_FIX, "NTM_FIX", "NTM_TEXTURE_FIX");
-            }
-            if (Loader.isModLoaded("Techguns")) {
+            if (Loader.isModLoaded("Techguns"))
                 applyTextureFix(ShaderFixerConfig.TECHGUNS_TEXTURE_FIX, "TECHGUNS_FIX", "TECHGUNS_TEXTURE_FIX");
-            }
+            
             if(ShaderFixerConfig.NTM_SHADOW_FIX) {
-                ModelsSelfShadowingFix.init();
+                if(IS_HBM_NTM_PRESENT)
+                    ModelsSelfShadowingFix.init();
+                if(IS_HBM_NTM_SPACE_PRESENT)
+                    ModelsSelfShadowingFixSpace.init();
             }
+            
             LocalDate date = LocalDate.now();
             if (date.getMonth() == Month.APRIL && date.getDayOfMonth() == 1) {
                 BratvaAndTheRing SenyaGanjubas = new BratvaAndTheRing();

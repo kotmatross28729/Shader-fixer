@@ -1,6 +1,7 @@
 # 5.4
 *yet another formatting/code rework*
 
+* **[Hbm's NTM / NTM:Space]** Fixed a long-standing issue with shadow distortion / self-shadowing on large machines
 * **[Main]** Removed placeholder fixes (journeymap / `glClipPlane` in NTM), as these are now fixed properly in angelica
 
 # 5.3
