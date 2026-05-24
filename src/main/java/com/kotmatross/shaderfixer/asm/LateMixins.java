@@ -9,8 +9,12 @@ import com.kotmatross.shaderfixer.config.ShaderFixerConfig;
 @SuppressWarnings("unused")
 public enum LateMixins implements IMixins {
     
-    ANGELICA(new MixinBuilder().addRequiredMod(TargetMods.ANGELICA)
-            .addClientMixins("angelica.AccessorDeferredWorldRenderingPipeline")),
+    ANGELICA_ACCESSOR(new MixinBuilder().addRequiredMod(TargetMods.ANGELICA)
+        .addClientMixins("angelica.AccessorDeferredWorldRenderingPipeline")),
+    
+    ANGELICA_SHADOW_OFFSET_TE(new MixinBuilder().addRequiredMod(TargetMods.ANGELICA)
+        .addClientMixins("angelica.MixinShadowRenderer")
+        .setApplyIf(() -> ShaderFixerConfig.ANGELICA_TE_SHADOW_OFFSET_FACTOR > 0.0F)),
     
     ANGELICA_NTM_GUNFIX_COMPAT(new MixinBuilder()
         .addRequiredMod(TargetMods.ANGELICA)
@@ -81,6 +85,7 @@ public enum LateMixins implements IMixins {
                 //! TODO: CONFIG
                 //! TODO: CONFIG
                 , "ntm.selfshadowing.SelfShadowingUberMixin"
+                , "ntm.selfshadowing.MixinSoyuzLauncherPronter"
                 //! TODO: CONFIG
                 //! TODO: CONFIG
                 //! TODO: CONFIG

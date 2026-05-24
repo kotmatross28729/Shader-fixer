@@ -26,6 +26,7 @@ public class ShaderFixerConfig {
     public static int V_MAIN_MENU_FPS_BYPASS_VALUE;
     public static int V_RIDING_HAND_ROTATION_FIX;
     public static boolean V_MODERN_RIDING_LEG_POS;
+    public static float ANGELICA_TE_SHADOW_OFFSET_FACTOR;
     public static boolean NTM_MAIN_FIX;
     public static boolean NTM_GUN_FIX;
     public static boolean NTM_ARMOR_FIX;
@@ -95,7 +96,15 @@ public class ShaderFixerConfig {
             CAT_VANILLA,
             true,
             "Changes the position of the legs when riding, in accordance with modern versions (fixes legs passing through boat/minecart)");
-
+        
+        ANGELICA_TE_SHADOW_OFFSET_FACTOR = config.getFloat(
+                "ANGELICA_TE_SHADOW_OFFSET_FACTOR",
+                CAT_ANGELICA,
+                2.0F,
+                0.0F,
+                256.0F,
+                "Tile entity shadow offset value. A higher value means less self-shadowing (shadow acne), but some TE elements may stop casting shadows at all");
+        
         NTM_MAIN_FIX = config.getBoolean("NTM_MAIN_FIX", CAT_NTM, true, "Main NTM patch. See README");
 
         NTM_GUN_FIX = config
