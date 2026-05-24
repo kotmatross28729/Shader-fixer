@@ -65,6 +65,7 @@ public class MixinItemRenderer {
     @WrapOperation(method = "renderItemInFirstPerson"
             , at = @At(value = "INVOKE"
                 , target = "Lorg/lwjgl/opengl/GL11;glRotatef(FFFF)V"
+                , remap = false
                 , ordinal = 2))
     private void modifyPitchRotation(float angle, float x, float y, float z, Operation<Void> original) {
         if (NTMUtils_WRAPPER.checkVibe())
@@ -77,6 +78,7 @@ public class MixinItemRenderer {
     @WrapOperation(method = "renderItemInFirstPerson"
             , at = @At(value = "INVOKE"
                 , target = "Lorg/lwjgl/opengl/GL11;glRotatef(FFFF)V"
+                , remap = false
                 , ordinal = 3))
     private void modifyYawRotation(float angle, float x, float y, float z, Operation<Void> original) {
         if (NTMUtils_WRAPPER.checkVibe())
@@ -119,7 +121,8 @@ public class MixinItemRenderer {
     @Inject(method = "renderItemInFirstPerson"
             , at = @At(value = "INVOKE"
                 , target = "Lnet/minecraft/client/renderer/ItemRenderer;renderItem(Lnet/minecraft/entity/EntityLivingBase;Lnet/minecraft/item/ItemStack;ILnet/minecraftforge/client/IItemRenderer$ItemRenderType;)V"
-                , shift = At.Shift.BEFORE))
+                , shift = At.Shift.BEFORE
+                , remap = false))
     private void addGlRotated(float interp, CallbackInfo ci) {
         if (NTMUtils_WRAPPER.checkVibe()) {
             GL11.glRotated(180, 0, 1, 0);
@@ -130,7 +133,8 @@ public class MixinItemRenderer {
     @Inject(method = "renderItemInFirstPerson"
             , at = @At(value = "INVOKE"
                 , target = "Lnet/minecraft/client/renderer/ItemRenderer;renderItem(Lnet/minecraft/entity/EntityLivingBase;Lnet/minecraft/item/ItemStack;ILnet/minecraftforge/client/IItemRenderer$ItemRenderType;)V"
-                , shift = At.Shift.BEFORE))
+                , shift = At.Shift.BEFORE
+                , remap = false))
     private void addFinalPreRenderStuff(float interp, CallbackInfo ci) {
         if (NTMUtils_WRAPPER.checkVibe()) {
             if (mc.renderViewEntity instanceof EntityPlayer entityplayer) {

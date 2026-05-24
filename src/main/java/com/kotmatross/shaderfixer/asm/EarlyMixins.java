@@ -20,16 +20,16 @@ public enum EarlyMixins implements IMixins {
             .setApplyIf(() -> ShaderFixerConfig.V_XP_BAR_ALPHA_FIX)),
     VANILLA_MAIN_MENU_FPS_BYPASS(new MixinBuilder()
             .addClientMixins("minecraft.fpsbypass.MixinMinecraft")
-            .setApplyIf(() -> ShaderFixerConfig.V_MAIN_MENU_FPS_BYPASS)),
+            .setApplyIf(() -> ShaderFixerConfig.V_MAIN_MENU_FPS_BYPASS > -1)),
     VANILLA_GUI_BLEND_FIX(new MixinBuilder()
             .addClientMixins("minecraft.guiblendfix.MixinInventoryEffectRenderer")
             .setApplyIf(() -> ShaderFixerConfig.V_GUI_BLEND_FIX)),
     VANILLA_RIDING_HAND_ROTATION(new MixinBuilder()
             .addClientMixins("minecraft.riding.MixinRenderPlayer")
-            .setApplyIf(() -> ShaderFixerConfig.V_RIDING_HAND_ROTATION_FIX > 0)),
+            .setApplyIf(() -> ShaderFixerConfig.V_RIDING_HAND_ROTATION > 0)),
     VANILLA_MODERN_RIDING_LEG_POS(new MixinBuilder()
             .addClientMixins("minecraft.riding.MixinModelBiped")
-            .setApplyIf(() -> ShaderFixerConfig.V_MODERN_RIDING_LEG_POS)),
+            .setApplyIf(() -> ShaderFixerConfig.V_RIDING_LEG_POS)),
 
     SEDNA(new MixinBuilder()
             .addClientMixins("ntm.gunfix.MixinEntityRenderer"

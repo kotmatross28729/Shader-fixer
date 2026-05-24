@@ -29,7 +29,7 @@ public class ShaderFixerEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoa
     public List<String> getMixins(Set<String> loadedCoreMods) {
         ShaderFixer.logger.info("Starting Shaderfixer engine...");
 
-        String configFolder = "config" + File.separator + Tags.MODID + File.separator;
+        String configFolder = "config" + File.separator;
         ShaderFixerConfig.loadMixinConfig(new File(Launch.minecraftHome, configFolder + "ShaderFixerConfig.cfg"));
 
         return IMixins.getEarlyMixins(EarlyMixins.class, loadedCoreMods);

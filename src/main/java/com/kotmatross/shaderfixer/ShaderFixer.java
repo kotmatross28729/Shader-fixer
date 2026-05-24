@@ -74,17 +74,9 @@ public class ShaderFixer {
             if (Loader.isModLoaded("Techguns")) {
                 applyTextureFix(ShaderFixerConfig.TECHGUNS_TEXTURE_FIX, "TECHGUNS_FIX", "TECHGUNS_TEXTURE_FIX");
             }
-            //! TODO: CONFIG
-            //! TODO: CONFIG
-            //! TODO: CONFIG
-            //! TODO: CONFIG
-            //! TODO: CONFIG
-            ModelsSelfShadowingFix.init();
-            //! TODO: CONFIG
-            //! TODO: CONFIG
-            //! TODO: CONFIG
-            //! TODO: CONFIG
-            //! TODO: CONFIG
+            if(ShaderFixerConfig.NTM_SHADOW_FIX) {
+                ModelsSelfShadowingFix.init();
+            }
             LocalDate date = LocalDate.now();
             if (date.getMonth() == Month.APRIL && date.getDayOfMonth() == 1) {
                 BratvaAndTheRing SenyaGanjubas = new BratvaAndTheRing();

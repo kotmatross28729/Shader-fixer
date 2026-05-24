@@ -14,9 +14,10 @@ public class MixinMinecraft {
     @ModifyConstant(method = "getLimitFramerate"
             , constant = @Constant(intValue = 30))
     public int getLimitFramerate(int fpsLimit) {
-        return ShaderFixerConfig.V_MAIN_MENU_FPS_BYPASS_VALUE == 0
-            ? Minecraft.getMinecraft().gameSettings.limitFramerate
-            : ShaderFixerConfig.V_MAIN_MENU_FPS_BYPASS_VALUE;
+        if(ShaderFixerConfig.V_MAIN_MENU_FPS_BYPASS == -1) return fpsLimit;
+        return ShaderFixerConfig.V_MAIN_MENU_FPS_BYPASS == 0 
+                ? Minecraft.getMinecraft().gameSettings.limitFramerate 
+                : ShaderFixerConfig.V_MAIN_MENU_FPS_BYPASS;
     }
 
 }

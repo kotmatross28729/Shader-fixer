@@ -42,7 +42,7 @@ A **set of patches** for various mods, fixes **some** issues with Angelica / Ang
 **HBM's NTM [`NTM_MAIN_FIX`]**
   - [Shaders] Fixed holding guns causing various issues (water/clouds visible through blocks, incorrect lighting, etc.) | `NTM_GUN_FIX`
   - [Shaders] Fixed some particles have a black background | `NTM_TEXTURE_FIX`
-  - [Shaders] todo (new shadow map horrible workaround here)
+  - [Shaders] Fixed heavy shadow distortion / self-shadowing on particularly large machines | `NTM_SHADOW_FIX`
   - [Shaders] Fixed M1TTY suit lamps on helmet not glowing
   - [Shaders] Fixed fire diamond (NFPA 704) on barrels brightness
   - Fixed meteorite sword render breaking entity lighting in 3rd person view

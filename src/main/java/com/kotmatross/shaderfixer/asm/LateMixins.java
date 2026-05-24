@@ -11,11 +11,7 @@ public enum LateMixins implements IMixins {
     
     ANGELICA_ACCESSOR(new MixinBuilder().addRequiredMod(TargetMods.ANGELICA)
         .addClientMixins("angelica.AccessorDeferredWorldRenderingPipeline")),
-    
-    ANGELICA_SHADOW_OFFSET_TE(new MixinBuilder().addRequiredMod(TargetMods.ANGELICA)
-        .addClientMixins("angelica.MixinShadowRenderer")
-        .setApplyIf(() -> ShaderFixerConfig.ANGELICA_TE_SHADOW_OFFSET_FACTOR > 0.0F)),
-    
+
     ANGELICA_NTM_GUNFIX_COMPAT(new MixinBuilder()
         .addRequiredMod(TargetMods.ANGELICA)
         .addRequiredMod(TargetMods.NTM)
@@ -80,18 +76,14 @@ public enum LateMixins implements IMixins {
                 , "ntm.MixinRenderSparks"
                 , "ntm.MixinRenderSpear"
                 , "ntm.MixinRenderTorex"
-                , "ntm.MixinModEventHandlerClient"
-                //! TODO: CONFIG
-                //! TODO: CONFIG
-                //! TODO: CONFIG
-                , "ntm.selfshadowing.SelfShadowingUberMixin"
-                , "ntm.selfshadowing.MixinSoyuzLauncherPronter"
-                //! TODO: CONFIG
-                //! TODO: CONFIG
-                //! TODO: CONFIG
-        )
+                , "ntm.MixinModEventHandlerClient")
         .setApplyIf(() -> ShaderFixerConfig.NTM_MAIN_FIX)),
-
+    
+    NTM_SHADOWFIX(new MixinBuilder().addRequiredMod(TargetMods.NTM)
+        .addClientMixins("ntm.selfshadowing.SelfShadowingUberMixin"
+                , "ntm.selfshadowing.MixinSoyuzLauncherPronter")
+        .setApplyIf(() -> ShaderFixerConfig.NTM_SHADOW_FIX)),
+    
     NTM_GUNFIX(new MixinBuilder().addRequiredMod(TargetMods.NTM)
         .addClientMixins("ntm.sedna.AccessorItemRenderWeaponBase"
                 , "ntm.sedna.MixinHbmAnimations"
