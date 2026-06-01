@@ -25,8 +25,8 @@ public class MixinRenderDoorGeneric {
 	
 	@WrapOperation(method = "renderTileEntityAt"
 			, at = @At(value = "INVOKE"
-				, target = "Lcom/hbm/tileentity/DoorDecl;getAnimatedModel()Lcom/hbm/animloader/AnimatedModel;")
-	)
+				, target = "Lcom/hbm/tileentity/DoorDecl;getAnimatedModel()Lcom/hbm/animloader/AnimatedModel;"
+				, remap = false))
 	private static AnimatedModel renderTileEntityAt(DoorDecl instance, Operation<AnimatedModel> original) {
 		AnimatedModel orig = original.call(instance);
 		if(orig == ResourceManager.transition_seal && AngelicaUtils_WRAPPER.isShadowPass()) {

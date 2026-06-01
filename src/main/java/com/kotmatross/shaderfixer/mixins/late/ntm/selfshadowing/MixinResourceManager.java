@@ -9,14 +9,13 @@ import net.minecraftforge.client.model.IModelCustom;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(value = ResourceManager.class, priority = 999)
+@Mixin(value = ResourceManager.class, priority = 999, remap = false)
 public class MixinResourceManager {
 	
 	/// Bob, what the hell?
 	@WrapOperation(method = "<clinit>"
 			, at = @At(value = "INVOKE"
-					, target = "Lnet/minecraftforge/client/model/AdvancedModelLoader;loadModel(Lnet/minecraft/util/ResourceLocation;)Lnet/minecraftforge/client/model/IModelCustom;")
-	)
+					, target = "Lnet/minecraftforge/client/model/AdvancedModelLoader;loadModel(Lnet/minecraft/util/ResourceLocation;)Lnet/minecraftforge/client/model/IModelCustom;"))
 	private static IModelCustom clinit(ResourceLocation resource, Operation<IModelCustom> original) {
 		return new HFRWavefrontObject(resource);
 	}

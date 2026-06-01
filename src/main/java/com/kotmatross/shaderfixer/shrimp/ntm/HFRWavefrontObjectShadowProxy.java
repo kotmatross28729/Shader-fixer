@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.hbm.render.loader.HFRWavefrontObject;
 import com.hbm.render.loader.IModelCustomNamed;
 import com.hbm.render.loader.S_Face;
 import com.hbm.render.loader.S_GroupObject;
@@ -67,6 +68,12 @@ public class HFRWavefrontObjectShadowProxy implements IModelCustomNamed {
 	 * Useful for ISBRHs which access vertices manually, allowing the quad to tri trick without forcing the entire model to be redundant tris. */
 	public void mixedMode() { 
 		this.allowMixedMode = true;
+	}
+	
+	/// Dummy constructor, doesn't load model
+	public HFRWavefrontObjectShadowProxy(ResourceLocation resource, int dummy) {
+		this.resource = resource;
+		this.fileName = resource.toString();
 	}
 	
 	public HFRWavefrontObjectShadowProxy(ResourceLocation resource) throws ModelFormatException {
