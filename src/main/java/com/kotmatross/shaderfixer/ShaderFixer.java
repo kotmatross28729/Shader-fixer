@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
 
-import com.kotmatross.shaderfixer.utils.ntm.ModelsSelfShadowingFix;
-import com.kotmatross.shaderfixer.utils.ntm.ModelsSelfShadowingFixSpace;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -81,13 +79,6 @@ public class ShaderFixer {
                 applyTextureFix(ShaderFixerConfig.NTM_TEXTURE_FIX, "NTM_FIX", "NTM_TEXTURE_FIX");
             if (Loader.isModLoaded("Techguns"))
                 applyTextureFix(ShaderFixerConfig.TECHGUNS_TEXTURE_FIX, "TECHGUNS_FIX", "TECHGUNS_TEXTURE_FIX");
-            
-            if(ShaderFixerConfig.NTM_SHADOW_FIX) {
-                if(IS_HBM_NTM_PRESENT)
-                    ModelsSelfShadowingFix.init();
-                if(IS_HBM_NTM_SPACE_PRESENT)
-                    ModelsSelfShadowingFixSpace.init();
-            }
             
             LocalDate date = LocalDate.now();
             if (date.getMonth() == Month.APRIL && date.getDayOfMonth() == 1) {

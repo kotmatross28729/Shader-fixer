@@ -95,7 +95,7 @@ public class ShaderFixerConfig {
         NTM_SHADOW_FIX = config.getBoolean("NTM_SHADOW_FIX"
             , CAT_NTM
             , true
-            , "Replaces the models of some machines with tessellated ones during shadow pass. Fixes shadow distortion and self-shadowing on them");
+            , "Redirects the loading of all models to tessellated ones during the shadow pass. Fixes shadow distortion and self-shadowing on them");
         
         NTM_GUN_FIX = config.getBoolean("NTM_GUN_FIX"
             , CAT_NTM

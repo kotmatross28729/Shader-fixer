@@ -85,15 +85,10 @@ public enum LateMixins implements IMixins {
     
     NTM_SHADOWFIX(new MixinBuilder().addRequiredMod(TargetMods.NTM)
         .addClientMixins(
-                  "ntm.selfshadowing.MixinSoyuzLauncherPronter"
-                , "ntm.selfshadowing.SelfShadowingUberMixinAll"
-                //, "ntm.selfshadowing.SelfShadowingUberMixinPart"
-        ).setApplyIf(() -> ShaderFixerConfig.NTM_SHADOW_FIX)),
-    
-    NTM_SHADOWFIX_SPACE(new MixinBuilder().addRequiredMod(TargetMods.NTM_SPACE)
-        .addClientMixins(
-                //  "ntm.space.selfshadowing.SelfShadowingUberMixinAll",
-                "ntm.space.selfshadowing.SelfShadowingUberMixinPart"
+                "ntm.selfshadowing.MixinHFRWavefrontObject"
+                , "ntm.selfshadowing.MixinHFRWavefrontObjectVBO"
+                , "ntm.selfshadowing.MixinResourceManager"
+                , "ntm.selfshadowing.MixinRenderDoorGeneric"
         ).setApplyIf(() -> ShaderFixerConfig.NTM_SHADOW_FIX)),
     
     NTM_GUNFIX(new MixinBuilder().addRequiredMod(TargetMods.NTM)
